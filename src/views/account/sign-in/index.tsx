@@ -5,7 +5,6 @@ import {LockOutlined, UserOutlined} from "@ant-design/icons";
 const SignInView = () => {
     const [form] = Form.useForm()
 
-
     return <div className={styles.signInView}>
         <div className={styles.signInViewFormLoginContainer}>
             <div className={styles.signInViewFormLoginContainerMain}>

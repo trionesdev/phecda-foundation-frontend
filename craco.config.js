@@ -34,7 +34,8 @@ module.exports = {
         alias: {
             "@": resolve("src"),
             "@apis": resolve("src/apis"),
-            "@moensun/antd-react-ext": resolve("src/components")
+            "@views": resolve("src/views"),
+            "@components": resolve("src/components")
         },
     },
     devServer: {
