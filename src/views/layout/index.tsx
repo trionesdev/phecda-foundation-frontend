@@ -1,6 +1,7 @@
 import {AppToolbar, HPanel, VPanel} from "@moensun/antd-react-ext";
 import {Menu, MenuProps} from "antd";
 import {Outlet, useNavigate} from "react-router-dom";
+import styles from "./layout.module.less"
 
 const MainLayoutView = () => {
     const navigate = useNavigate()
@@ -17,11 +18,11 @@ const MainLayoutView = () => {
     }]
 
     const appBar = <AppToolbar title={`物联网`}/>
-    const sider = <div style={{borderRight: '1px solid #d9d9d9', height: '100%'}}>
+    const sider = <div className={styles.layoutViewSider}>
         <Menu style={{minWidth: 250}} mode={`inline`} items={menuItems}/>
     </div>
-    return <VPanel header={appBar}>
-        <HPanel left={sider}>
+    return <VPanel className={styles.layoutView} header={appBar}>
+        <HPanel className={styles.layoutViewContent} left={sider}>
             <Outlet/>
         </HPanel>
     </VPanel>
