@@ -51,7 +51,7 @@ const ProductsView = () => {
     ]
 
     const header = <TableToolbar
-        tools={[<ProductFormBtn key={`create-product`} type={`primary`}>新建产品</ProductFormBtn>]}/>
+        extra={[<ProductFormBtn key={`create-product`} type={`primary`}>新建产品</ProductFormBtn>]}/>
 
     return <VPanel header={header}>
         <GridTable size={`small`} columns={columns} dataSource={products} loading={loading}/>
