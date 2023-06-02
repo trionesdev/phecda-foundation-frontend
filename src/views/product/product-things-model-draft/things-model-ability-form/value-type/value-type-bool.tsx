@@ -4,7 +4,7 @@ const ValueTypeBool = () => {
     return <>
         <Form.Item label={`布尔值`} required={true}>
             <Row wrap={false} gutter={4}>
-                <Col flex={"none"}>0 -
+                <Col flex={"30px"}>0 -
                     <Form.Item hidden={true} noStyle={true} name={[0, `value`]}>
                         <Input value={0}/>
                     </Form.Item>
@@ -16,7 +16,7 @@ const ValueTypeBool = () => {
                 </Col>
             </Row>
             <Row wrap={false} gutter={4}>
-                <Col flex={"none"}>1 -
+                <Col flex={"30px"}>1 -
                     <Form.Item hidden={true} noStyle={true} name={[1, `value`]}>
                         <Input value={1}/>
                     </Form.Item>

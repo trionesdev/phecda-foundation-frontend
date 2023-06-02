@@ -6,6 +6,7 @@ import {deviceApi} from "@apis";
 import {ProductPageRep, ProductRep} from "../../../apis/device/device.rep";
 import {useNavigate} from "react-router-dom";
 import {RoutesConstants} from "../../../router/routes.constants";
+import styles from "./products.module.less"
 
 const ProductsView = () => {
     const navigate = useNavigate()
@@ -50,11 +51,13 @@ const ProductsView = () => {
         }
     ]
 
-    const header = <TableToolbar
+    const tableBar = <TableToolbar
         extra={[<ProductFormBtn key={`create-product`} type={`primary`}>新建产品</ProductFormBtn>]}/>
 
-    return <VPanel header={header}>
-        <GridTable size={`small`} columns={columns} dataSource={products} loading={loading}/>
+    return <VPanel className={styles.productsView}>
+        <GridTable style={{backgroundColor: 'white'}} toolbar={tableBar} size={`small`} columns={columns}
+                   dataSource={products}
+                   loading={loading}/>
     </VPanel>
 }
 export default ProductsView

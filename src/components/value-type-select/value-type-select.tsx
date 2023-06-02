@@ -2,21 +2,28 @@ import {Select, SelectProps} from "antd";
 import {FC, useEffect, useState} from "react";
 import {deviceApi} from "@apis";
 
-type  ValueTypeSelectProps = {} & Omit<SelectProps, 'options'>
+type  ValueTypeSelectProps = {
+    defaultFirstOption?: boolean
+} & Omit<SelectProps, 'options'>
 const ValueTypeSelect: FC<ValueTypeSelectProps> = ({
+                                                       defaultFirstOption = true,
                                                        ...rest
                                                    }) => {
-
+    const [defaultValue, setDefaultValue] = useState(rest.defaultValue)
     const [options, setOptions] = useState([])
 
     const handleQueryOptions = () => {
         deviceApi.valueTypeOptions().then((res: any) => {
-            setOptions(res)
+            setOptions(res || [])
+            // debugger
+            // if (defaultFirstOption && !defaultValue) {
+            //     setDefaultValue(_.get(res, [0, 'value']))
+            // }
         })
     }
     useEffect(() => {
         handleQueryOptions()
     }, [])
-    return <Select options={options} {...rest}/>
+    return <Select defaultValue={'INT'} options={options} {...rest}/>
 }
 export default ValueTypeSelect

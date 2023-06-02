@@ -1,6 +1,6 @@
 import {Col, Form, Input, Row} from "antd";
 
-const ValueTypeFloat = () => {
+const ValueTypeDouble = () => {
     return <>
         <Form.Item label={`取值范围`}>
             <Row wrap={false} gutter={4}>
@@ -20,4 +20,4 @@ const ValueTypeFloat = () => {
         </Form.Item>
     </>
 }
-export default ValueTypeFloat
+export default ValueTypeDouble
