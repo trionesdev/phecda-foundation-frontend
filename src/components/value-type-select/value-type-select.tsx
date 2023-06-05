@@ -1,10 +1,11 @@
 import {Select, SelectProps} from "antd";
 import {FC, useEffect, useState} from "react";
 import {deviceApi} from "@apis";
+import {ValueTypeEnum} from "../../views/product/product-things-model-draft/things-model-ability-form/value-type";
 
 type  ValueTypeSelectProps = {
     defaultFirstOption?: boolean
-} & Omit<SelectProps, 'options'>
+} & Omit<SelectProps, 'options|defaultValue'>
 const ValueTypeSelect: FC<ValueTypeSelectProps> = ({
                                                        defaultFirstOption = true,
                                                        ...rest
@@ -15,15 +16,11 @@ const ValueTypeSelect: FC<ValueTypeSelectProps> = ({
     const handleQueryOptions = () => {
         deviceApi.valueTypeOptions().then((res: any) => {
             setOptions(res || [])
-            // debugger
-            // if (defaultFirstOption && !defaultValue) {
-            //     setDefaultValue(_.get(res, [0, 'value']))
-            // }
         })
     }
     useEffect(() => {
         handleQueryOptions()
     }, [])
-    return <Select defaultValue={'INT'} options={options} {...rest}/>
+    return <Select defaultValue={ValueTypeEnum.INT} options={options} {...rest}/>
 }
 export default ValueTypeSelect

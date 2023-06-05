@@ -24,4 +24,8 @@ export default class DeviceApi extends BaseApi {
         return this.request.get(`${this.baseUri}/products/page`, {params})
     }
 
+    upsertThingModelDraft(productId: string, data: {}) {
+        return this.request.put(`${this.baseUri}/products/${productId}/thing-model/upsert`, data)
+    }
+
 }
