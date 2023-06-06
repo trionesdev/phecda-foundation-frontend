@@ -23,7 +23,6 @@ request.interceptors.response.use(function (response) {
     return response.data;
 }, function (error) {
     console.log(error);
-
     if (!error || !error.response) {
         notification.error({message: '服务器异常，请稍后再试'})
         throw new Exception(500, "服务器异常，请稍后再试")
@@ -42,5 +41,6 @@ request.interceptors.response.use(function (response) {
         notification.error({message: (error.response.data || '系统异常，请稍后再试')})
         throw error.response.data || new Exception(status, "系统异常，请稍后再试");
     }
+    return Promise.reject(error.response.data)
 });
 export default request;

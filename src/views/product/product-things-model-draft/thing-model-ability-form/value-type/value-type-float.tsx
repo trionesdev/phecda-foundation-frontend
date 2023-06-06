@@ -3,10 +3,10 @@ import {FC} from "react";
 import {ValueTypeEnum, ValueTypeProps} from "./index";
 import _ from "lodash";
 
-const ValueTypeDouble: FC<ValueTypeProps> = ({group}) => {
+const ValueTypeFloat: FC<ValueTypeProps> = ({group}) => {
     return <>
         <Form.Item label={`取值范围`}>
-            <Form.Item hidden={true} name={`valueType`} initialValue={ValueTypeEnum.DOUBLE}>
+            <Form.Item hidden={true} name={_.concat(group, `valueType`)} initialValue={ValueTypeEnum.FLOAT}>
                 <input hidden={true}/>
             </Form.Item>
             <Row wrap={false} gutter={4}>
@@ -26,4 +26,4 @@ const ValueTypeDouble: FC<ValueTypeProps> = ({group}) => {
         </Form.Item>
     </>
 }
-export default ValueTypeDouble
+export default ValueTypeFloat

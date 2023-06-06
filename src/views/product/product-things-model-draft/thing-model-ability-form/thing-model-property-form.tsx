@@ -3,13 +3,13 @@ import {FC} from "react";
 import ValueType from "./value-type";
 
 type ThingsModelPropertyFormProps = {}
-const ThingsModelPropertyForm: FC<ThingsModelPropertyFormProps> = ({}) => {
+const ThingModelPropertyForm: FC<ThingsModelPropertyFormProps> = ({}) => {
     const ability = 'property'
     return <>
-        <Form.Item label={`功能名称`} name={[ability, `name`]}>
+        <Form.Item label={`功能名称`} name={[ability, `name`]} required={true}>
             <Input/>
         </Form.Item>
-        <Form.Item label={`标识符`} name={[ability, `identifier`]}>
+        <Form.Item label={`标识符`} name={[ability, `identifier`]} required={true}>
             <Input/>
         </Form.Item>
         <ValueType group={ability}/>
@@ -19,9 +19,9 @@ const ThingsModelPropertyForm: FC<ThingsModelPropertyFormProps> = ({}) => {
                 <Radio value={`R`}>只读</Radio>
             </Radio.Group>
         </Form.Item>
-        <Form.Item label={`描述`} name={[ability, `description`]}>
+        <Form.Item label={`描述`} name={[ability, `description`]} initialValue={''}>
             <Input.TextArea/>
         </Form.Item>
     </>
 }
-export default ThingsModelPropertyForm
+export default ThingModelPropertyForm

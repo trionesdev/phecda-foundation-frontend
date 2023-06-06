@@ -1,7 +1,7 @@
 import {Select, SelectProps} from "antd";
 import {FC, useEffect, useState} from "react";
 import {deviceApi} from "@apis";
-import {ValueTypeEnum} from "../../views/product/product-things-model-draft/things-model-ability-form/value-type";
+import {ValueTypeEnum} from "../../views/product/product-things-model-draft/thing-model-ability-form/value-type";
 
 type  ValueTypeSelectProps = {
     defaultFirstOption?: boolean
