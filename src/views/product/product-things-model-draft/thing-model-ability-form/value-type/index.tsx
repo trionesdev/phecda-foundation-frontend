@@ -27,7 +27,8 @@ const ValueType: FC<ValueTypeProps> = ({
                                        }) => {
     const [valueType, setValueType] = useState(ValueTypeEnum.INT)
     return <>
-        <Form.Item label={`数据类型`} name={[`valueType`]} initialValue={ValueTypeEnum.INT} required={true}>
+        <Form.Item label={`数据类型`} name={_.concat(group, `valueType`)} initialValue={ValueTypeEnum.INT}
+                   required={true}>
             <ValueTypeSelect onChange={(value) => setValueType(value)}/>
         </Form.Item>
         {_.isEqual(ValueTypeEnum.INT, valueType) && <ValueTypeInt group={[group, `valueSpec`]}/>}

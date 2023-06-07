@@ -55,8 +55,8 @@ const ProductsView = () => {
         extra={[<ProductFormBtn key={`create-product`} type={`primary`}>新建产品</ProductFormBtn>]}/>
 
     return <VPanel className={styles.productsView}>
-        <GridTable style={{backgroundColor: 'white'}} toolbar={tableBar} size={`small`} columns={columns}
-                   dataSource={products}
+        <GridTable style={{backgroundColor: 'white',padding:'8px'}} toolbar={tableBar} size={`small`} columns={columns}
+                   dataSource={products} rowKey={`id`}
                    loading={loading}/>
     </VPanel>
 }

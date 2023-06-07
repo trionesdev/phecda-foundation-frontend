@@ -47,8 +47,8 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
     }
 
     const handleQueryThingModel = () => {
-        deviceApi.queryProductThingModel(productId).then((res: any) => {
-            const ability: any = _.values(_.get(res, 'thingModel')).reduce((prev, cur) => _.concat(prev, cur)).find((ability: any) => {
+        deviceApi.queryProductThingModelDraft(productId).then((res: any) => {
+            const ability: any = _.values(_.get(res, 'thingModel')).reduce((prev, cur) => _.concat(prev, cur),[]).find((ability: any) => {
                 return _.isEqual(ability.identifier, identifier)
             })
             let typeAbility = {}

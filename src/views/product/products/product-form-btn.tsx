@@ -2,6 +2,8 @@ import {DrawerForm} from "@moensun/antd-react-ext";
 import {FC} from "react";
 import {Button, ButtonProps, Form, Input, notification, Radio} from "antd";
 import {deviceApi} from "@apis";
+import {DeviceNodeType} from "../support/device.constants";
+import _ from "lodash";
 
 type ProductFormBtnProps = {
     id?: string
@@ -30,9 +32,7 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
         </Form.Item>
         <Form.Item label={`节点类型`} name={`nodeType`}>
             <Radio.Group>
-                <Radio.Button value="DIRECT">直连设备</Radio.Button>
-                <Radio.Button value="GATEWAY">网关设备</Radio.Button>
-                <Radio.Button value="GATEWAY_SUB">网关子设备</Radio.Button>
+                {_.map(DeviceNodeType, (value, key) => <Radio.Button value={key}>{value}</Radio.Button>)}
             </Radio.Group>
         </Form.Item>
     </DrawerForm>
