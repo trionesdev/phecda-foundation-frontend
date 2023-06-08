@@ -2,6 +2,7 @@ import {AppToolbar, HPanel, VPanel} from "@moensun/antd-react-ext";
 import {Menu, MenuProps} from "antd";
 import {Outlet, useNavigate} from "react-router-dom";
 import styles from "./layout.module.less"
+import {RoutesConstants} from "../../router/routes.constants";
 
 const MainLayoutView = () => {
     const navigate = useNavigate()
@@ -10,9 +11,14 @@ const MainLayoutView = () => {
         label: '设备管理',
         children: [
             {
-                key: 'product',
+                key: RoutesConstants.PRODUCTS.key,
                 label: '产品',
-                onClick: () => navigate("/products")
+                onClick: () => navigate(RoutesConstants.PRODUCTS.path())
+            },
+            {
+                key: RoutesConstants.DEVICES.key,
+                label: `设备`,
+                onClick: () => navigate(RoutesConstants.DEVICES.path())
             }
         ]
     }]

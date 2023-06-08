@@ -38,7 +38,7 @@ request.interceptors.response.use(function (response) {
         notification.error({message: '请求参数错误'})
         throw new Exception(400, "请求参数错误")
     } else {
-        notification.error({message: (error.response.data || '系统异常，请稍后再试')})
+        notification.error({message: (error.response.data.message || '系统异常，请稍后再试')})
         throw error.response.data || new Exception(status, "系统异常，请稍后再试");
     }
     return Promise.reject(error.response.data)

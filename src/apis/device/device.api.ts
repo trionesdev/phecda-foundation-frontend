@@ -20,6 +20,10 @@ export default class DeviceApi extends BaseApi {
         return this.request.get(`${this.baseUri}/products/${id}`)
     }
 
+    queryProductList(params?: {}) {
+        return this.request.get(`${this.baseUri}/products`, {params})
+    }
+
     queryProductPage(params: { pageNum: number, pageSize: number }): Promise<ProductPageRep> {
         return this.request.get(`${this.baseUri}/products/page`, {params})
     }
@@ -44,4 +48,13 @@ export default class DeviceApi extends BaseApi {
         return this.request.get(`${this.baseUri}/products/${productId}/thing-model`, {params: {version}})
     }
 
+    createDevice(data: {}) {
+        return this.request.post(`${this.baseUri}/devices`, data)
+    }
+
+    queryDevicesExtPage(params: {
+        pageNum: number, pageSize: number
+    }) {
+        return this.request.get(`${this.baseUri}/devices/ext/page`, {params})
+    }
 }

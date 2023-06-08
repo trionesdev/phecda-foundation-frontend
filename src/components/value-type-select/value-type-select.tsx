@@ -10,7 +10,6 @@ const ValueTypeSelect: FC<ValueTypeSelectProps> = ({
                                                        defaultFirstOption = true,
                                                        ...rest
                                                    }) => {
-    const [defaultValue, setDefaultValue] = useState(rest.defaultValue)
     const [options, setOptions] = useState([])
 
     const handleQueryOptions = () => {

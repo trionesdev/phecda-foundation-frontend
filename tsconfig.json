@@ -23,8 +23,14 @@
       "@apis": [
         "src/apis"
       ],
+      "@apis/*": [
+        "src/apis/*"
+      ],
       "@components": [
         "src/components"
+      ],
+      "@components/*": [
+        "src/components/*"
       ],
       "@views": [
         "src/views"

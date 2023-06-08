@@ -32,7 +32,7 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
         </Form.Item>
         <Form.Item label={`节点类型`} name={`nodeType`}>
             <Radio.Group>
-                {_.map(DeviceNodeType, (value, key) => <Radio.Button value={key}>{value}</Radio.Button>)}
+                {_.map(DeviceNodeType, (value, key) => <Radio.Button key={key} value={key}>{value}</Radio.Button>)}
             </Radio.Group>
         </Form.Item>
     </DrawerForm>
