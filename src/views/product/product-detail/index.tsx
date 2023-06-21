@@ -7,6 +7,7 @@ import ThingModelTab from "./thing-model-tab";
 import {deviceApi} from "@apis";
 import {ProductRep} from "../../../apis/device/device.rep";
 import InfoTab from "./info-tab";
+import ProtocolTab from "./protocol-tab";
 
 const ProductDetailView = () => {
     const {id} = useParams()
@@ -47,6 +48,11 @@ const ProductDetailView = () => {
             key: 'thing-model',
             label: `功能定义`,
             children: <ThingModelTab product={product}/>,
+        },
+        {
+            key: `protocol`,
+            label: `协议`,
+            children: <ProtocolTab product={product}/>
         }
     ];
     return <VPanel className={styles.productDetailView} header={header}>

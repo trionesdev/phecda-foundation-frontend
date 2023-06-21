@@ -1,12 +1,15 @@
 import {TableToolbar, VPanel} from "@moensun/antd-react-ext";
 import styles from "./device.module.less"
 import {useEffect, useState} from "react";
-import {Button} from "antd";
+import {Button, Divider, notification, Popconfirm, Space, Switch} from "antd";
 import DeviceForm from "./device-form";
 import {deviceApi} from "@apis";
 import GridTable from "@components/grid-table";
+import {Link} from "react-router-dom";
+import {RoutesConstants} from "../../../router/routes.constants";
 
 const DevicesView = () => {
+    const [querySeq, setQuerySeq] = useState(0)
     const [loading, setLoading] = useState(false)
     const [pageNum, setPageNum] = useState(1)
     const [pageSize, setPageSize] = useState(10)
@@ -27,9 +30,26 @@ const DevicesView = () => {
         })
     }
 
+    const handleDeleteById = (id: string) => {
+        deviceApi.deleteDeviceById(id).then(() => {
+            handleRefresh()
+            notification.success({message: '操作成功'})
+        })
+    }
+
+    const handleUpdateDeviceEnabled = (id: string, enabled: boolean) => {
+        deviceApi.updateDeviceEnabled(id, enabled).then(() => {
+            handleRefresh()
+        })
+    }
+
+    const handleRefresh = () => {
+        setQuerySeq(querySeq + 1)
+    }
+
     useEffect(() => {
         handleQueryDevices()
-    }, [pageNum, pageSize])
+    }, [querySeq, pageNum, pageSize])
 
     const columns = [
         {
@@ -38,24 +58,46 @@ const DevicesView = () => {
         },
         {
             title: `设备所属产品`,
-            dataIndex: ['product','name']
+            dataIndex: ['product', 'name'],
+            width: 120
         },
         {
             title: '节点类型',
-            dataIndex: ['product','nodeType']
+            dataIndex: ['product', 'nodeTypeLabel'],
+            width: 100
+        },
+        {
+            title: `启用/禁用`,
+            dataIndex: 'enabled',
+            width: 100,
+            render: (text: boolean, record: any) => {
+                return <Switch defaultChecked={text}
+                               onChange={(checked) => handleUpdateDeviceEnabled(record.id, checked)}/>
+            }
         },
         {
             title: '操作',
-            dataIndex: 'id'
+            dataIndex: 'id',
+            width: 150,
+            render: (text: string, record: any) => {
+                return <Space split={<Divider type={`vertical`}/>}>
+                    <Button key={`view-btn`} size={`small`} type={`link`}><Link
+                        to={RoutesConstants.DEVICE_DETAIL.path(text)}>查看</Link></Button>
+                    <Popconfirm key={`del-btn`} title={`确定删除设备 ${record.name}？`}
+                                onConfirm={() => handleDeleteById(text)}>
+                        <Button size={`small`} type={`link`} danger={true}>删除</Button>
+                    </Popconfirm>
+                </Space>
+            }
         }
     ]
 
     const tableBar = <TableToolbar extra={[
-        <DeviceForm type={`primary`}>新建设备</DeviceForm>
+        <DeviceForm key={`create-btn`} type={`primary`} onSuccess={handleRefresh}>新建设备</DeviceForm>
     ]}/>
     return <VPanel className={styles.deviceView}>
-        <GridTable style={{padding: '8px', backgroundColor: 'white'}} size={`small`} toolbar={tableBar}
-                   columns={columns} scroll={{y:'max-content'}}
+        <GridTable style={{padding: '8px', backgroundColor: 'white'}} fit={true} size={`small`} toolbar={tableBar}
+                   columns={columns} scroll={{y: 'max-content'}}
                    dataSource={devices} rowKey={`id`} loading={loading}/>
     </VPanel>
 }

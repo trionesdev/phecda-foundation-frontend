@@ -29,6 +29,10 @@ const ProductsView = () => {
         })
     }
 
+    const handleRefresh = () => {
+        setQuerySeq(querySeq + 1)
+    }
+
     useEffect(() => {
         handleQueryProductPage()
     }, [querySeq, pageNum, pageSize])
@@ -52,10 +56,12 @@ const ProductsView = () => {
     ]
 
     const tableBar = <TableToolbar
-        extra={[<ProductFormBtn key={`create-product`} type={`primary`}>新建产品</ProductFormBtn>]}/>
+        extra={[<ProductFormBtn key={`create-product`} type={`primary`}
+                                onSuccess={handleRefresh}>新建产品</ProductFormBtn>]}/>
 
     return <VPanel className={styles.productsView}>
-        <GridTable style={{backgroundColor: 'white',padding:'8px'}} toolbar={tableBar} size={`small`} columns={columns}
+        <GridTable style={{backgroundColor: 'white', padding: '8px'}} toolbar={tableBar} size={`small`}
+                   columns={columns}
                    dataSource={products} rowKey={`id`}
                    loading={loading}/>
     </VPanel>

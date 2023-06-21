@@ -8,5 +8,8 @@ export const RoutesConstants = {
         key: 'PRODUCT_THINGS_MODEL_DRAFT',
         path: (id?: string) => `/products/${id ? id : ':id'}/things-model/draft`
     },
-    "DEVICES":{key:"DEVICES",path:()=>`/devices`}
+    "DEVICES": {key: "DEVICES", path: () => `/devices`},
+    "DEVICE_DETAIL": {
+        key: "DEVICE_DETAIL", path: (id?: string) => `/devices/${id ? id : ':id'}/detail`
+    }
 }
