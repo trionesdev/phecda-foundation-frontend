@@ -1,61 +1,73 @@
 {
-  "name": "triones-frontend-react-antd",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@ant-design/icons": "^5.1.4",
-    "@craco/craco": "^7.1.0",
-    "@moensun/antd-icons-react-ext": "latest",
-    "@moensun/antd-react-ext": "latest",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^14.0.0",
-    "@testing-library/user-event": "^14.4.3",
-    "@types/jest": "^29.5.0",
-    "@types/node": "^18.15.5",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "add": "^2.0.6",
-    "antd": "^5.6.0",
-    "axios": "^1.3.4",
-    "craco-less": "^2.0.0",
-    "js-cookie": "^3.0.5",
-    "lodash": "^4.17.21",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.9.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^5.0.2",
-    "web-vitals": "^3.3.0",
-    "yarn": "^1.22.19"
-  },
-  "devDependencies": {
-    "@ant-design/cssinjs": "^1.6.1",
-    "@types/js-cookie": "^3.0.3",
-    "@types/lodash": "^4.14.191"
-  },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject",
-    "check:types": "tsc --project tsconfig.json --noEmit"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "triones-frontend-react-antd",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@ant-design/icons": "^5.1.4",
+        "@craco/craco": "^7.1.0",
+        "@moensun/antd-icons-react-ext": "latest",
+        "@moensun/antd-react-ext": "latest",
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^14.0.0",
+        "@testing-library/user-event": "^14.4.3",
+        "@types/jest": "^29.5.0",
+        "@types/node": "^18.15.5",
+        "@types/react": "^18.0.28",
+        "@types/react-dom": "^18.0.11",
+        "add": "^2.0.6",
+        "antd": "^5.6.0",
+        "axios": "^1.3.4",
+        "craco-less": "^2.0.0",
+        "js-cookie": "^3.0.5",
+        "lodash": "^4.17.21",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.9.0",
+        "react-scripts": "5.0.1",
+        "typescript": "^5.0.2",
+        "web-vitals": "^3.3.0",
+        "yarn": "^1.22.19"
+    },
+    "devDependencies": {
+        "@ant-design/cssinjs": "^1.6.1",
+        "@commitlint/cli": "^17.6.6",
+        "@commitlint/config-conventional": "^17.6.6",
+        "@types/js-cookie": "^3.0.3",
+        "@types/lodash": "^4.14.191",
+        "eslint-config-prettier": "^8.8.0",
+        "husky": "^8.0.3",
+        "lint-staged": ">=10",
+        "prettier": "^2.8.0"
+    },
+    "scripts": {
+        "start": "craco start",
+        "build": "craco build",
+        "test": "craco test",
+        "eject": "react-scripts eject",
+        "check:types": "tsc --project tsconfig.json --noEmit",
+        "format": "prettier --write \"**/*.{ts,tsx,js,json,css,less}\"",
+        "prepare": "husky install"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest",
+            "prettier"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "lint-staged": {
+        "*.{ts,tsx,js,json,css,less}": "prettier --write"
+    }
 }
