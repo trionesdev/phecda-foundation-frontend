@@ -14,6 +14,8 @@ $ yarn start
 $ yarn build
 # 检查ts类型规范
 $ yarn check:types
+# 对全局文件执行prettier
+$ yarn format
 ```
 
 ###提交
