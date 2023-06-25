@@ -1,8 +1,7 @@
-
-import dayjs from "dayjs"
-import * as _ from "lodash"
-import relativeTime from "dayjs/plugin/relativeTime";
-dayjs.locale('zh-cn');
+import dayjs from 'dayjs'
+import * as _ from 'lodash'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.locale('zh-cn')
 dayjs.extend(relativeTime)
 
 export const formatDate = (date?: number | undefined) => {
@@ -11,7 +10,7 @@ export const formatDate = (date?: number | undefined) => {
     }
 }
 
-export const formatDateTime = (date?: number| undefined) => {
+export const formatDateTime = (date?: number | undefined) => {
     if (date) {
         return dayjs(date).format('YYYY-MM-DD HH:mm')
     }
@@ -25,19 +24,19 @@ export const format = (date: number, format: string) => {
 
 export const fromNow = (date: number) => {
     if (!date) {
-        return '';
+        return ''
     }
     return dayjs(date).fromNow()
 }
 
 export const chatsLine = (date: number) => {
     if (date) {
-        let diffMinute = dayjs().diff(date, 'minute');
+        let diffMinute = dayjs().diff(date, 'minute')
         if (diffMinute < 5) {
-            return "刚刚";
+            return '刚刚'
         }
         if (dayjs().isSame(date, 'date')) {
-            return dayjs(date).format('HH:mm');
+            return dayjs(date).format('HH:mm')
         }
         return dayjs(date).format('YYYY-MM-DD HH:mm')
     }
@@ -67,4 +66,3 @@ export const dateParse = (date: any) => {
     }
     return res
 }
-
