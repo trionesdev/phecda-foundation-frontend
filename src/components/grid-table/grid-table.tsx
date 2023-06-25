@@ -1,12 +1,12 @@
-import {CSSInterpolation, useStyleRegister} from '@ant-design/cssinjs';
-import {GlobalToken, Table, TableProps, theme} from 'antd';
-import classNames from 'classnames';
-import React, {FC} from 'react';
+import { CSSInterpolation, useStyleRegister } from '@ant-design/cssinjs'
+import { GlobalToken, Table, TableProps, theme } from 'antd'
+import classNames from 'classnames'
+import React, { FC } from 'react'
 
-const {useToken} = theme;
+const { useToken } = theme
 const genGridTableStyle = (
     prefixCls: string,
-    token: GlobalToken,
+    token: GlobalToken
 ): CSSInterpolation => {
     return {
         [`.${prefixCls}`]: {
@@ -25,9 +25,9 @@ const genGridTableStyle = (
                             display: 'flex',
                             flexDirection: 'column',
                             flex: '1 auto',
-                            '.ant-table-header':{
-                                overflow:'inherit'
-                            }
+                            '.ant-table-header': {
+                                overflow: 'inherit',
+                            },
                         },
                     },
                     '.ant-table': {
@@ -40,10 +40,9 @@ const genGridTableStyle = (
                     },
                 },
             },
-
         },
-    };
-};
+    }
+}
 
 interface GridTableProps extends TableProps<any> {
     /**
@@ -55,34 +54,34 @@ interface GridTableProps extends TableProps<any> {
      * @description 是否展示返回icon
      * @default
      */
-    toolbar?: React.ReactNode;
+    toolbar?: React.ReactNode
 }
 
-const GridTable: FC<GridTableProps> = ({
-                                           fit,
-                                           toolbar,
-                                           style,
-                                           ...props
-                                       },
-                                       context,
+const GridTable: FC<GridTableProps> = (
+    { fit, toolbar, style, ...props },
+    context
 ) => {
-    const prefixCls = 'ant-grid-table';
-    const {theme, token, hashId} = useToken();
+    const prefixCls = 'ant-grid-table'
+    const { theme, token, hashId } = useToken()
     const wrapSSR = useStyleRegister(
-        {theme, token, hashId, path: [prefixCls]},
-        () => [genGridTableStyle(prefixCls, token)],
-    );
+        { theme, token, hashId, path: [prefixCls] },
+        () => [genGridTableStyle(prefixCls, token)]
+    )
 
     return wrapSSR(
         <div
             style={style}
-            className={classNames(prefixCls, hashId, fit ? 'ant-table-fill' : null)}
+            className={classNames(
+                prefixCls,
+                hashId,
+                fit ? 'ant-table-fill' : null
+            )}
         >
             <>
                 {toolbar}
                 <Table {...props} />
             </>
-        </div>,
-    );
-};
-export default GridTable;
+        </div>
+    )
+}
+export default GridTable

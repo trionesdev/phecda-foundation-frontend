@@ -1,8 +1,8 @@
-const CracoLessPlugin = require("craco-less");
+const CracoLessPlugin = require('craco-less')
 
-const path = require("path");
+const path = require('path')
 const fs = require('fs')
-const resolve = dir => path.resolve(__dirname, dir);
+const resolve = (dir) => path.resolve(__dirname, dir)
 
 module.exports = {
     plugins: [
@@ -22,20 +22,20 @@ module.exports = {
                 lessLoaderOptions: {
                     lessOptions: {
                         modifyVars: {
-                            'layout-header-background': '#333'
+                            'layout-header-background': '#333',
                         },
                         javascriptEnabled: true,
                     },
-                }
-            }
+                },
+            },
         },
     ],
     webpack: {
         alias: {
-            "@": resolve("src"),
-            "@apis": resolve("src/apis"),
-            "@views": resolve("src/views"),
-            "@components": resolve("src/components")
+            '@': resolve('src'),
+            '@apis': resolve('src/apis'),
+            '@views': resolve('src/views'),
+            '@components': resolve('src/components'),
         },
     },
     devServer: {
@@ -43,15 +43,15 @@ module.exports = {
         // noInfo: false,
         // port:3100,
         proxy: {
-            "/api/*": {
-                target: "http://localhost:8080/",
+            '/api/*': {
+                target: 'http://localhost:8080/',
                 // target: "http://dubhe-gateway.moensun.cn/",
                 changeOrigin: true,
                 secure: false,
             },
-        }
+        },
     },
     babel: {
-        plugins: []
+        plugins: [],
     },
 }
