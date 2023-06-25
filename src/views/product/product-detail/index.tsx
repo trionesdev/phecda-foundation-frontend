@@ -35,7 +35,7 @@ const ProductDetailView = () => {
     }, [searchParams])
 
     const header = <div className={styles.productDetailViewHeader}>
-        <PageHeader breadcrumb={{items: [{title: '设备管理'}]}} title={`流量计`}
+        <PageHeader breadcrumb={{items: [{title: '设备管理'}]}} title={product?.name}
                     extra={[<Button key={`publish-btn`} type={`primary`}>发布</Button>]}/>
     </div>
     const items: TabsProps['items'] = [

@@ -5,6 +5,8 @@ import {useEffect, useState} from "react";
 import {deviceApi} from "@apis";
 import {useParams} from "react-router-dom";
 import styles from "./device-detail.module.less"
+import Index from "./thing-model-tab";
+import _ from "lodash";
 
 
 const DeviceDetailView = () => {
@@ -23,13 +25,21 @@ const DeviceDetailView = () => {
         }
     }, [id])
 
-    const items: TabsProps['items'] = [
+    const items: TabsProps['items'] = _.concat([
         {
             key: 'info',
             label: `设备信息`,
             children: <InfoTab device={device}/>,
         },
-    ];
+        {
+            key: `thing-model-data`,
+            label: `物模型数据`,
+            children: <Index device={device}/>
+        }
+    ], _.eq("GATEWAY", device?.product?.nodeType) ? {
+        key: `sub-device`,
+        label: `子设备`,
+    } : []);
 
     const pageHelper = <PageHeader title={device?.name}/>
     return <VPanel className={styles.deviceDetailView} header={pageHelper}>

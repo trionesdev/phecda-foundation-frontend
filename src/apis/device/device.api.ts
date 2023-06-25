@@ -60,9 +60,10 @@ export default class DeviceApi extends BaseApi {
         return this.request.delete(`${this.baseUri}/devices/${id}`)
     }
 
-    queryDeviceExtById(id:string){
+    queryDeviceExtById(id: string) {
         return this.request.get(`${this.baseUri}/devices/ext/${id}`)
     }
+
     queryDevicesExtPage(params: {
         pageNum: number, pageSize: number
     }) {
@@ -72,4 +73,17 @@ export default class DeviceApi extends BaseApi {
     updateDeviceEnabled(id: string, enabled: boolean) {
         return this.request.put(`${this.baseUri}/devices/${id}/enabled`, {enabled})
     }
+
+    queryDevicePropertiesData(deviceId: string) {
+        return this.request.get(`${this.baseUri}/devices/${deviceId}/properties-data`)
+    }
+
+    queryDeviceEventsData(deviceId: string) {
+        return this.request.get(`${this.baseUri}/devices/${deviceId}/events-data`)
+    }
+
+    queryDeviceServicesData(deviceId: string) {
+        return this.request.get(`${this.baseUri}/devices/${deviceId}/services-data`)
+    }
+
 }
