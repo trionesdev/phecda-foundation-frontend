@@ -44,7 +44,8 @@ module.exports = {
         // port:3100,
         proxy: {
             '/api/*': {
-                target: 'http://localhost:8080/',
+                // target: 'http://localhost:8080/',
+                target: 'http://192.168.10.202:82/',
                 // target: "http://dubhe-gateway.moensun.cn/",
                 changeOrigin: true,
                 secure: false,

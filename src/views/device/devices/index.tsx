@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react'
 import { Button, Divider, notification, Popconfirm, Space, Switch } from 'antd'
 import DeviceForm from './device-form'
 import { deviceApi } from '@apis'
-import GridTable from '@components/grid-table'
 import { Link } from 'react-router-dom'
 import { RoutesConstants } from '../../../router/routes.constants'
+import GridTable from '@components/grid-table'
 
 const DevicesView = () => {
     const [querySeq, setQuerySeq] = useState(0)
