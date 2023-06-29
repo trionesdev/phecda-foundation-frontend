@@ -7,14 +7,12 @@ import { deviceApi } from '@apis'
 import { Link } from 'react-router-dom'
 import { RoutesConstants } from '../../../router/routes.constants'
 import GridTable from '@components/grid-table'
-
 const DevicesView = () => {
     const [querySeq, setQuerySeq] = useState(0)
     const [loading, setLoading] = useState(false)
     const [pageNum, setPageNum] = useState(1)
     const [pageSize, setPageSize] = useState(10)
     const [devices, setDevices] = useState([])
-
     const handleQueryDevices = () => {
         let params = {
             pageNum,
@@ -24,6 +22,7 @@ const DevicesView = () => {
         deviceApi
             .queryDevicesExtPage(params)
             .then((res: any) => {
+                console.log(res)
                 if (res) {
                     setDevices(res.rows || [])
                 }
