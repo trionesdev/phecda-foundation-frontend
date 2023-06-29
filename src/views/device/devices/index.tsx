@@ -113,15 +113,15 @@ const DevicesView = () => {
 
     const tableBar = (
         <TableToolbar
-            extra={[
+            extra={
                 <DeviceForm
                     key={`create-btn`}
                     type={`primary`}
                     onSuccess={handleRefresh}
                 >
                     新建设备
-                </DeviceForm>,
-            ]}
+                </DeviceForm>
+            }
         />
     )
     return (
