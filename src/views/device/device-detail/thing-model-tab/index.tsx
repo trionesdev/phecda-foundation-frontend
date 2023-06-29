@@ -1,16 +1,14 @@
-import {FC, useEffect, useState} from "react";
-import styles from "../device-detail.module.less"
-import {Tabs, TabsProps} from "antd";
-import ThingModelDataPropertiesTab from "./thing-model-data-properties-tab";
-import {deviceApi} from "@apis";
-import _ from "lodash";
+import { FC, useEffect, useState } from 'react'
+import styles from '../device-detail.module.less'
+import { Tabs, TabsProps } from 'antd'
+import ThingModelDataPropertiesTab from './thing-model-data-properties-tab'
+import { deviceApi } from '@apis'
+import _ from 'lodash'
 
 type ThingModelDataTabProps = {
     device: any
 }
-const ThingModelDataTab: FC<ThingModelDataTabProps> = ({
-                                                           device
-                                                       }) => {
+const ThingModelDataTab: FC<ThingModelDataTabProps> = ({ device }) => {
     const [properties, setProperties] = useState([])
     const [events, setEvents] = useState([])
     const [services, setServices] = useState([])
@@ -35,7 +33,12 @@ const ThingModelDataTab: FC<ThingModelDataTabProps> = ({
         {
             key: 'properties',
             label: `运行状态`,
-            children: <ThingModelDataPropertiesTab device={device} properties={properties}/>
+            children: (
+                <ThingModelDataPropertiesTab
+                    device={device}
+                    properties={properties}
+                />
+            ),
         },
         {
             key: 'events',
@@ -44,10 +47,12 @@ const ThingModelDataTab: FC<ThingModelDataTabProps> = ({
         {
             key: 'services',
             label: `服务调用`,
-        }
+        },
     ]
-    return <div className={styles.thingModelDataTab}>
-        <Tabs size={`small`} items={items}/>
-    </div>
+    return (
+        <div className={styles.thingModelDataTab}>
+            <Tabs size={`small`} items={items} />
+        </div>
+    )
 }
 export default ThingModelDataTab
