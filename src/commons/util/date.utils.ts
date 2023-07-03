@@ -4,16 +4,18 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 dayjs.locale('zh-cn')
 dayjs.extend(relativeTime)
 
-export const formatDate = (date?: number | undefined) => {
+export const formatDate = (date?: number) => {
     if (date) {
         return dayjs(date).format('YYYY-MM-DD')
     }
+    return '--'
 }
 
-export const formatDateTime = (date?: number | undefined) => {
+export const formatDateTime = (date?: number) => {
     if (date) {
         return dayjs(date).format('YYYY-MM-DD HH:mm')
     }
+    return '--'
 }
 
 export const format = (date: number, format: string) => {

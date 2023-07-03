@@ -1,21 +1,32 @@
 import React, { useState } from 'react'
 import styles from './index.module.less'
-import { TableToolbar, VPanel } from '@moensun/antd-react-ext'
+import { DrawerForm, TableToolbar, VPanel } from '@moensun/antd-react-ext'
 import GridTable from '@components/grid-table'
 import { TableParams } from 'src/@types'
 import { formatDateTime } from '@/commons/util/date.utils'
 import { useRequest } from 'ahooks'
 import { assetsApi } from '@/apis'
-import { Button, Divider, Popconfirm, Space } from 'antd'
-import { Link } from 'react-router-dom'
-import AccessoryTypeForm from './accessory-type-form'
-// import ProductionDeviceTypeForm from './production-device-type-form'
+import {
+    Button,
+    Divider,
+    Form,
+    Input,
+    Popconfirm,
+    Select,
+    Space,
+    Switch,
+} from 'antd'
 
 const AccessoryType: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
         pageNum: 1,
     })
+    const [drawerFormeValue, setDrawerFormeValue] = useState<
+        Record<string, any>
+    >({})
+    const [drawerOpen, setDrawerOpen] = useState(false)
+
     const {
         data: tableData,
         loading,
@@ -68,15 +79,23 @@ const AccessoryType: React.FC = () => {
             title: '操作',
             dataIndex: 'id',
             width: 150,
-            render: (text: string, record: any) => {
+            render: (text: string, record: Record<string, any>) => {
                 return (
                     <Space split={<Divider type={`vertical`} />}>
-                        <Button key={`view-btn`} size={`small`} type={`link`}>
-                            {/* <Link to={RoutesConstants.DEVICE_DETAIL.path(text)}> */}
-                            <Link to={''}>编辑</Link>
+                        <Button
+                            size="small"
+                            type="link"
+                            onClick={() => {
+                                setDrawerFormeValue({
+                                    ...drawerFormeValue,
+                                    name: record?.name,
+                                })
+                                setDrawerOpen(true)
+                            }}
+                        >
+                            编辑
                         </Button>
                         <Popconfirm
-                            key={`del-btn`}
                             title={`确定删除设备 ${record.name}？`}
                             // onConfirm={() => handleDeleteById(text)}
                         >
@@ -96,12 +115,14 @@ const AccessoryType: React.FC = () => {
                 toolbar={
                     <TableToolbar
                         extra={
-                            <AccessoryTypeForm
-                                key={`create-btn`}
-                                type={`primary`}
+                            <Button
+                                type="primary"
+                                onClick={() => {
+                                    setDrawerOpen(true)
+                                }}
                             >
-                                配件类型
-                            </AccessoryTypeForm>
+                                新增配件类型
+                            </Button>
                         }
                     />
                 }
@@ -117,6 +138,36 @@ const AccessoryType: React.FC = () => {
                     onChange: handlePageChange,
                 }}
             />
+
+            <DrawerForm
+                open={drawerOpen}
+                trigger={<Button />}
+                title={`产品`}
+                layout="vertical"
+                onOpenChange={(op) => setDrawerOpen(op)}
+                initialValues={drawerFormeValue}
+                onSubmit={(value) => {
+                    console.log(value)
+                }}
+                formValues={drawerFormeValue}
+                //    onSubmit={handleSubmit}
+            >
+                <Form.Item name="name" label="配件类型名称">
+                    <Input />
+                </Form.Item>
+                <Form.Item label="配件类型编号">
+                    <Input />
+                </Form.Item>
+                <Form.Item label="所属生产设备">
+                    <Select />
+                </Form.Item>
+                <Form.Item label="状态">
+                    <Switch />
+                </Form.Item>
+                <Form.Item label="备注">
+                    <Input.TextArea />
+                </Form.Item>
+            </DrawerForm>
         </VPanel>
     )
 }

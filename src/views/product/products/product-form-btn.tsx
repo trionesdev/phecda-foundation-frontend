@@ -41,7 +41,11 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
             initialValues={{ nodeType: 'DIRECT' }}
             onSubmit={handleSubmit}
         >
-            <Form.Item label={`名称`} name={`name`}>
+            <Form.Item
+                rules={[{ required: true }]}
+                label={`名称`}
+                name={`name`}
+            >
                 <Input />
             </Form.Item>
             <Form.Item label={`节点类型`} name={`nodeType`}>
