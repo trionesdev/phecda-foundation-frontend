@@ -29,6 +29,10 @@ export const RoutesConstants: RoutesConstantsProps = {
         key: 'PRODUCTION_DEVICE',
         path: () => `/production-device`,
     }, //生产设备
+    PRODUCTION_DEVICE_DETAIL: {
+        key: 'PRODUCTION_DEVICE_DETAIL',
+        path: (id?: string) => `/production-device/${id ? id : ':id'}/detail`,
+    }, //生产设备详情
     PRODUCTION_DEVICE_TYPE: {
         key: 'PRODUCTION_DEVICE_TYPE',
         path: () => `/production-device-type`,

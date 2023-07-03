@@ -16,6 +16,7 @@ import AlarmRules from 'src/views/alarm/alarm-rules'
 import MonitorTrends from 'src/views/alarm/monitor-trends'
 import DeviceData from 'src/views/alarm/device-data'
 import MonitorView from 'src/views/alarm/monitor-view'
+import ProductionDeviceDetail from '@/views/assets/production-device/detail'
 
 export const routes: RouteObject[] = [
     { path: '/sign-in', element: <SignInView /> },
@@ -48,6 +49,10 @@ export const routes: RouteObject[] = [
             {
                 path: RoutesConstants.PRODUCTION_DEVICE.path(),
                 element: <ProductionDevice />, //生产设备
+            },
+            {
+                path: RoutesConstants.PRODUCTION_DEVICE_DETAIL.path(),
+                element: <ProductionDeviceDetail />, //生产设备详情
             },
             {
                 path: RoutesConstants.PRODUCTION_DEVICE_TYPE.path(),
