@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import styles from './index.module.less'
 import { TableToolbar, VPanel } from '@moensun/antd-react-ext'
 import GridTable from '@components/grid-table'
-import { TableParams } from 'src/@types'
 import { formatDateTime } from '@/commons/util/date.utils'
 import { useRequest } from 'ahooks'
 import { assetsApi } from '@/apis'
 import { Button, Divider, Popconfirm, Space } from 'antd'
 import { Link } from 'react-router-dom'
 import ProductionDeviceTypeForm from './production-device-type-form'
+import { TableParams } from '@/constants/types'
 
 const ProductionDeviceType: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({

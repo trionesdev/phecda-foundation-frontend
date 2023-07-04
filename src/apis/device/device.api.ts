@@ -112,4 +112,8 @@ export default class DeviceApi extends BaseApi {
             `${this.baseUri}/devices/${deviceId}/services-data`
         )
     }
+    /** 获取所有设备 */
+    queryDeviceAll(): Promise<any> {
+        return this.request.get(`${this.baseUri}/devices/all`)
+    }
 }

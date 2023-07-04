@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styles from './index.module.less'
 import { DrawerForm, TableToolbar, VPanel } from '@moensun/antd-react-ext'
 import GridTable from '@components/grid-table'
-import { TableParams } from 'src/@types'
 import { formatDateTime } from '@/commons/util/date.utils'
 import { useRequest } from 'ahooks'
 import { assetsApi } from '@/apis'
@@ -16,6 +15,7 @@ import {
     Space,
     Switch,
 } from 'antd'
+import { TableParams } from '@/constants/types'
 
 const AccessoryType: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
