@@ -45,7 +45,8 @@ module.exports = {
         proxy: {
             '/api/*': {
                 // target: 'http://localhost:8080/',
-                target: 'http://192.168.10.202:82/',
+                // target: 'http://192.168.10.202:82/',//测试站ip
+                target: 'http://192.168.10.73:8080/', //戎宇ip
                 // target: "http://dubhe-gateway.moensun.cn/",
                 changeOrigin: true,
                 secure: false,

@@ -1,14 +1,27 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import styles from './index.module.less'
-import { DrawerForm, TableToolbar, VPanel } from '@moensun/antd-react-ext'
+import { DrawerForm, VPanel } from '@moensun/antd-react-ext'
 import GridTable from '@components/grid-table'
-import { TableParams } from 'src/@types'
 import { useRequest } from 'ahooks'
 import { assetsApi } from '@/apis'
-import { Button, Divider, Form, Input, Popconfirm, Select, Space } from 'antd'
+import {
+    Button,
+    Divider,
+    Form,
+    Input,
+    Popconfirm,
+    Select,
+    Space,
+    Upload,
+    message,
+} from 'antd'
 import { Link } from 'react-router-dom'
 import { RoutesConstants } from '@/router/routes.constants'
 import SearchToolbar from '@/components/SearchToolbar'
+import { TableParams } from '@/constants/types'
+import { AssetsStatesConfig, AssetsStatesOptions } from '@/constants/consts'
+import useQueryDeviceAll from '@/hooks/useQueryDeviceAll'
+import { ASSETS_STATES } from '@/constants/enums'
 
 const ProductionDevice: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
@@ -18,41 +31,85 @@ const ProductionDevice: React.FC = () => {
     const [drawerOpen, setDrawerOpen] = useState(false)
 
     const [drawerFormeValue, setDrawerFormeValue] = useState<
-        Record<string, any>
+        Record<string, any> | undefined
     >({})
+    const { allDeviceDataOptions } = useQueryDeviceAll()
+    /** 请求表格 */
     const {
         data: tableData,
-        loading,
+        loading: tableDataLoading,
         run: fetchTableData,
-    } = useRequest((tableParams: TableParams) => {
-        return assetsApi.queryTableDataDemo(tableParams)
-    })
-    const handlePageChange = (pageNum: number, pageSize: number) => {
-        setTableParams({ pageNum, pageSize })
-        fetchTableData({ pageNum, pageSize })
+        refresh: refreshFetchTableData,
+    } = useRequest(
+        (tableParams: TableParams) => assetsApi.queryAssetsPage(tableParams),
+        { manual: true }
+    )
+    const afterSubmitForm = () => {
+        setDrawerFormeValue(undefined)
+        setDrawerOpen(false)
+        message.success('操作成功')
+        refreshFetchTableData()
     }
-
+    /** 添加设备 */
+    const { run: addAssets } = useRequest(
+        (params) => assetsApi.addAssets(params),
+        {
+            manual: true,
+            onSuccess() {
+                afterSubmitForm()
+            },
+        }
+    )
+    /** 修改设备 */
+    const { run: editAssets } = useRequest(
+        (id, params) => assetsApi.editAssetsById(id, params),
+        {
+            manual: true,
+            onSuccess() {
+                afterSubmitForm()
+            },
+        }
+    )
+    /** 删除设备 */
+    const { run: deleteAsset } = useRequest(
+        (id) => assetsApi.deleteAssetsById(id),
+        {
+            manual: true,
+            onSuccess() {
+                afterSubmitForm()
+            },
+        }
+    )
+    const handlePageChange = (pageNum: number, pageSize: number) => {
+        setTableParams({ ...tableParams, pageNum, pageSize })
+    }
+    useEffect(() => {
+        fetchTableData(tableParams)
+    }, [fetchTableData, tableParams])
     const columns = [
         {
             title: '编号',
-            dataIndex: 'code',
+            dataIndex: 'sn',
         },
         {
             title: `生产设备名称`,
-            dataIndex: 'specification',
+            dataIndex: 'name',
         },
         {
             title: '生产设备类型',
-            dataIndex: 'type_code',
+            dataIndex: 'typeCode',
         },
 
         {
             title: `区域`,
-            dataIndex: 'location_code',
+            dataIndex: 'locationCode',
         },
         {
             title: '当前状态',
             dataIndex: 'state',
+            render: (state: ASSETS_STATES) => {
+                return AssetsStatesConfig?.[state]
+            },
         },
 
         {
@@ -61,12 +118,12 @@ const ProductionDevice: React.FC = () => {
         },
         {
             title: `岗位`,
-            dataIndex: 'specification',
+            dataIndex: 'postCode',
         },
         {
             title: '操作',
             dataIndex: 'id',
-            width: 150,
+            width: 225,
             render: (id: string, record: any) => {
                 return (
                     <Space split={<Divider type={`vertical`} />}>
@@ -78,12 +135,22 @@ const ProductionDevice: React.FC = () => {
                             >
                                 查看
                             </Link>
-                            {/* <Link to={''}>查看</Link> */}
+                        </Button>
+                        <Button
+                            key={`edit-btn`}
+                            size={`small`}
+                            type={`link`}
+                            onClick={() => {
+                                setDrawerFormeValue({ ...record })
+                                setDrawerOpen(true)
+                            }}
+                        >
+                            编辑
                         </Button>
                         <Popconfirm
                             key={`del-btn`}
                             title={`确定删除设备 ${record.name}？`}
-                            // onConfirm={() => handleDeleteById(text)}
+                            onConfirm={() => deleteAsset(record?.id)}
                         >
                             <Button size={`small`} type={`link`} danger={true}>
                                 删除
@@ -94,31 +161,26 @@ const ProductionDevice: React.FC = () => {
             },
         },
     ]
-    const formItems = useMemo(
+    const tableParamsFormItems = useMemo(
         () => (
             <>
-                <Form.Item name={`energyType`} label={`生产设备类型`}>
+                <Form.Item name="typeCode" label={`生产设备类型`}>
                     <Select
                         allowClear={true}
                         placeholder="请选择"
                         style={{ width: 230 }}
-                        options={[{ value: '', label: '全部' }]}
+                        options={[{ value: '', label: '类型' }]}
                     />
                 </Form.Item>
-                <Form.Item name={`unitArea`} label={`区域`}>
-                    <Select
-                        allowClear={true}
-                        placeholder="请选择"
-                        style={{ width: 230 }}
-                        options={[{ value: '', label: '全部' }]}
-                    />
+                <Form.Item name="locationCode" label={`区域`}>
+                    <Input />
                 </Form.Item>
-                <Form.Item name={`product`} label={`当前状态`}>
+                <Form.Item name="state" label={`当前状态`}>
                     <Select
                         allowClear={true}
                         placeholder="请选择"
                         style={{ width: 230 }}
-                        options={[{ value: '', label: '全部' }]}
+                        options={AssetsStatesOptions}
                     />
                 </Form.Item>
             </>
@@ -132,14 +194,19 @@ const ProductionDevice: React.FC = () => {
                 toolbar={
                     <>
                         <SearchToolbar
-                            formItems={formItems}
+                            formItems={tableParamsFormItems}
                             onSearch={(v) => {
-                                console.log(v)
+                                setTableParams({
+                                    pageNum: 1,
+                                    pageSize: 10,
+                                    ...v,
+                                })
                             }}
                             addButtons={
                                 <Button
                                     type="primary"
                                     onClick={() => {
+                                        setDrawerFormeValue(undefined)
                                         setDrawerOpen(true)
                                     }}
                                 >
@@ -155,7 +222,7 @@ const ProductionDevice: React.FC = () => {
                 rowKey="id"
                 columns={columns}
                 dataSource={tableData?.rows}
-                loading={loading}
+                loading={tableDataLoading}
                 pagination={{
                     ...tableParams,
                     onChange: handlePageChange,
@@ -164,16 +231,16 @@ const ProductionDevice: React.FC = () => {
 
             <DrawerForm
                 open={drawerOpen}
-                trigger={<Button />}
-                title={`产品`}
+                title={`${drawerFormeValue?.id ? '编辑' : '新建'}生产设备`}
                 layout="vertical"
                 onOpenChange={(op) => setDrawerOpen(op)}
-                initialValues={drawerFormeValue}
-                onSubmit={(value) => {
-                    console.log(value)
+                onSubmit={(value, from) => {
+                    drawerFormeValue?.id
+                        ? editAssets(drawerFormeValue.id, value)
+                        : addAssets(value)
+                    from?.resetFields()
                 }}
                 formValues={drawerFormeValue}
-                //    onSubmit={handleSubmit}
             >
                 <Form.Item
                     rules={[{ required: true }]}
@@ -184,40 +251,57 @@ const ProductionDevice: React.FC = () => {
                 </Form.Item>
                 <Form.Item
                     rules={[{ required: true }]}
-                    name="type"
+                    name="sn"
+                    label="生产设备编号"
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item name="deviceNames" label="关联设备">
+                    <Select mode="multiple" options={allDeviceDataOptions} />
+                </Form.Item>
+                <Form.Item
+                    rules={[{ required: true }]}
+                    name="specification"
                     label="规格型号"
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
                     rules={[{ required: true }]}
-                    name="name"
+                    name="locationCode"
                     label="区域位置"
                 >
-                    <Select />
+                    <Input />
                 </Form.Item>
                 <Form.Item
                     rules={[{ required: true }]}
-                    name="name"
+                    name="typeCode"
                     label="设备类型"
                 >
-                    <Select />
+                    <Select options={[{ label: '类型', value: '类型' }]} />
                 </Form.Item>
                 <Form.Item
                     rules={[{ required: true }]}
-                    name="name"
+                    name="state"
                     label="当前状态"
                 >
-                    <Select />
+                    <Select options={AssetsStatesOptions} />
                 </Form.Item>
                 <Form.Item
                     rules={[{ required: true }]}
-                    name="name"
+                    name="departmentCode"
+                    label="部门名称"
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    rules={[{ required: true }]}
+                    name="postCode"
                     label="负责岗位"
                 >
-                    <Select />
+                    <Input />
                 </Form.Item>
-                <Form.Item label="备注">
+                <Form.Item name="remark" label="备注">
                     <Input.TextArea />
                 </Form.Item>
             </DrawerForm>
