@@ -66,7 +66,7 @@ export default class AssetsApi extends BaseApi {
         return this.request.delete(`${this.baseUri}/${id}`)
     }
     /** 根据id查询生产设备 */
-    getAssetById(id: string) {
+    getAssetById(id: string): Promise<any> {
         return this.request.get(`${this.baseUri}/${id}`)
     }
 }

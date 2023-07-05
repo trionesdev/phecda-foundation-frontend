@@ -5,14 +5,29 @@ import _ from 'lodash'
 import { Tabs, TabsProps, Image } from 'antd'
 import FormInfo from '@/components/form-info'
 import { formatDateTime } from '@/commons/util/date.utils'
+import { useRequest } from 'ahooks'
+import { assetsApi } from '@/apis'
+import { useEffect } from 'react'
+import { AssetsStatesConfig } from '@/constants/consts'
+import { ASSETS_STATES } from '@/constants/enums'
 
 const ProductionDeviceDetail = () => {
     const { id } = useParams()
     const navigate = useNavigate()
-
+    /** 查询设备信息 */
+    const { data, run: getAssetById } = useRequest(
+        (id) => assetsApi.getAssetById(id),
+        {
+            manual: true,
+        }
+    )
+    useEffect(() => {
+        getAssetById(id)
+    }, [getAssetById, id])
+    console.log(data)
     const pageHelper = (
         <PageHeader
-            title="title"
+            title={data?.name}
             onBack={() => {
                 navigate(-1)
             }}
@@ -29,23 +44,23 @@ const ProductionDeviceDetail = () => {
                         data={[
                             {
                                 label: '设备名称',
-                                value: 'k2-1带',
+                                value: data?.name,
                             },
                             {
                                 label: '规格型号',
-                                value: '1400*300',
+                                value: data?.specification,
                             },
                             {
                                 label: '区域位置',
-                                value: '高炉',
+                                value: data?.locationCode,
                             },
                             {
                                 label: '设备类型',
-                                value: '皮带机',
+                                value: data?.typeCode,
                             },
                             {
                                 label: '备注',
-                                value: 'sas',
+                                value: data?.remark,
                             },
                         ]}
                     />
@@ -54,19 +69,21 @@ const ProductionDeviceDetail = () => {
                         data={[
                             {
                                 label: '当前状态',
-                                value: '正常启用',
+                                value: AssetsStatesConfig?.[
+                                    data?.state as ASSETS_STATES
+                                ],
                             },
                             {
                                 label: '使用部门',
-                                value: '炼钢',
+                                value: data?.departmentCode,
                             },
                             {
                                 label: '负责岗位',
-                                value: 'xx',
+                                value: data?.postCode,
                             },
                             {
                                 label: '启用日期',
-                                value: formatDateTime(888888),
+                                value: formatDateTime(data?.createdAt),
                             },
                         ]}
                     />
