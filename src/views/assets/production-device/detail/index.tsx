@@ -1,7 +1,6 @@
 import { PageHeader, VPanel } from '@moensun/antd-react-ext'
 import { useNavigate, useParams } from 'react-router-dom'
 import styles from './index.module.less'
-import _ from 'lodash'
 import { Tabs, TabsProps, Image } from 'antd'
 import FormInfo from '@/components/form-info'
 import { formatDateTime } from '@/commons/util/date.utils'
@@ -88,19 +87,31 @@ const ProductionDeviceDetail = () => {
                     />
                     <FormInfo
                         title="其他信息"
+                        column={1}
                         data={[
                             {
                                 label: '设备图片',
-                                value: (
-                                    <Image
-                                        width={200}
-                                        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-                                    />
-                                ),
+                                value: data?.images?.map((item: any) => {
+                                    return (
+                                        <Image
+                                            width={200}
+                                            key={item?.uid}
+                                            src={item?.url}
+                                        />
+                                    )
+                                }),
                             },
                             {
                                 label: '相关文档',
-                                value: '',
+                                value: data?.images?.map((item: any) => {
+                                    return (
+                                        <Image
+                                            width={200}
+                                            key={item?.uid}
+                                            src={item?.url}
+                                        />
+                                    )
+                                }),
                             },
                         ]}
                     />

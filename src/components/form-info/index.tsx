@@ -9,11 +9,12 @@ export type FormInfoDataType = {
 export type FormInfoType = {
     title: string
     data?: FormInfoDataType[]
+    column?: number
 }
-const FormInfo: React.FC<FormInfoType> = ({ title, data }) => {
+const FormInfo: React.FC<FormInfoType> = ({ title, data, column }) => {
     return (
         <div className={styles.wrapper}>
-            <Descriptions title={title}>
+            <Descriptions title={title} column={column}>
                 {data?.map((item) => {
                     return (
                         <Descriptions.Item key={item?.label} label={item.label}>
