@@ -24,7 +24,6 @@ const ProductionDeviceDetail = () => {
     useEffect(() => {
         getAssetById(id)
     }, [getAssetById, id])
-    console.log(data)
     const pageHelper = (
         <PageHeader
             title={data?.name}

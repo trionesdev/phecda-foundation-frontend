@@ -12,7 +12,6 @@ import {
     Popconfirm,
     Select,
     Space,
-    Upload,
     message,
 } from 'antd'
 import { Link } from 'react-router-dom'
@@ -22,6 +21,7 @@ import { TableParams } from '@/constants/types'
 import { AssetsStatesConfig, AssetsStatesOptions } from '@/constants/consts'
 import useQueryDeviceAll from '@/hooks/useQueryDeviceAll'
 import { ASSETS_STATES } from '@/constants/enums'
+import UploadImage from '@/components/upload/UploadImage'
 
 const ProductionDevice: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
@@ -303,6 +303,9 @@ const ProductionDevice: React.FC = () => {
                 </Form.Item>
                 <Form.Item name="remark" label="备注">
                     <Input.TextArea />
+                </Form.Item>
+                <Form.Item name="images" label="备注" valuePropName="fileList">
+                    <UploadImage />
                 </Form.Item>
             </DrawerForm>
         </VPanel>
