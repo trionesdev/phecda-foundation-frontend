@@ -1,4 +1,4 @@
-# Customer Experience Platform
+# 皮带管家
 
 这个前端项目使用 CRA 构建，可以阅读 [Create React App](https://github.com/facebook/create-react-app).
 以及[craco](https://craco.js.org/).
