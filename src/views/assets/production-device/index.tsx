@@ -16,7 +16,7 @@ import {
 } from 'antd'
 import { Link } from 'react-router-dom'
 import { RoutesConstants } from '@/router/routes.constants'
-import SearchToolbar from '@/components/SearchToolbar'
+import SearchToolbar from '@/components/search-toolbar'
 import { TableParams } from '@/constants/types'
 import { AssetsStatesConfig, AssetsStatesOptions } from '@/constants/consts'
 import useQueryDeviceAll from '@/hooks/useQueryDeviceAll'
