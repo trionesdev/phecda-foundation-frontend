@@ -84,6 +84,18 @@ const MainLayoutView = () => {
                 },
             ],
         },
+        {
+            key: 'system-setting',
+            label: '系统设置',
+            children: [
+                {
+                    key: RoutesConstants.DICTIONARY_TYPE.key,
+                    label: `字典类型`,
+                    onClick: () =>
+                        navigate(RoutesConstants.DICTIONARY_TYPE.path()),
+                },
+            ],
+        },
     ]
 
     const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
