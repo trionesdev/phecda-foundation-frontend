@@ -3,27 +3,16 @@ import styles from './index.module.less'
 import { DrawerForm, VPanel } from '@moensun/antd-react-ext'
 import GridTable from '@components/grid-table'
 import { useRequest } from 'ahooks'
-import { assetsApi } from '@/apis'
-import {
-    Button,
-    Divider,
-    Form,
-    Input,
-    Popconfirm,
-    Select,
-    Space,
-    message,
-} from 'antd'
-import { Link } from 'react-router-dom'
-import { RoutesConstants } from '@/router/routes.constants'
+import { systemApi } from '@/apis'
+import { Button, Divider, Form, Input, Popconfirm, Space, message } from 'antd'
 import SearchToolbar from '@/components/search-toolbar'
 import { TableParams } from '@/constants/types'
-import { AssetsStatesConfig, AssetsStatesOptions } from '@/constants/consts'
-import useQueryDeviceAll from '@/hooks/useQueryDeviceAll'
-import { ASSETS_STATES } from '@/constants/enums'
-import UploadImage from '@/components/upload/UploadImage'
+import { formatDateTime } from '@/commons/util/date.utils'
+import { Link } from 'react-router-dom'
+import { RoutesConstants } from '@/router/routes.constants'
+import qs from 'qs'
 
-const ProductionDevice: React.FC = () => {
+const DictionaryType: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
         pageNum: 1,
@@ -33,7 +22,6 @@ const ProductionDevice: React.FC = () => {
     const [drawerFormeValue, setDrawerFormeValue] = useState<
         Record<string, any> | undefined
     >({})
-    const { allDeviceDataOptions } = useQueryDeviceAll()
     /** 请求表格 */
     const {
         data: tableData,
@@ -41,7 +29,8 @@ const ProductionDevice: React.FC = () => {
         run: fetchTableData,
         refresh: refreshFetchTableData,
     } = useRequest(
-        (tableParams: TableParams) => assetsApi.queryAssetsPage(tableParams),
+        (tableParams: TableParams) =>
+            systemApi.queryDictionaryTypesPage(tableParams),
         { manual: true }
     )
     const afterSubmitForm = () => {
@@ -50,9 +39,9 @@ const ProductionDevice: React.FC = () => {
         message.success('操作成功')
         refreshFetchTableData()
     }
-    /** 添加设备 */
-    const { run: addAssets } = useRequest(
-        (params) => assetsApi.addAssets(params),
+    /** 添加配件 */
+    const { run: addDictionaryType } = useRequest(
+        (params) => systemApi.addDictionaryType(params),
         {
             manual: true,
             onSuccess() {
@@ -60,9 +49,9 @@ const ProductionDevice: React.FC = () => {
             },
         }
     )
-    /** 修改设备 */
-    const { run: editAssets } = useRequest(
-        (id, params) => assetsApi.editAssetsById(id, params),
+    /** 修改配件 */
+    const { run: editDictionaryType } = useRequest(
+        (id, params) => systemApi.editDictionaryTypeById(id, params),
         {
             manual: true,
             onSuccess() {
@@ -71,8 +60,8 @@ const ProductionDevice: React.FC = () => {
         }
     )
     /** 删除设备 */
-    const { run: deleteAsset } = useRequest(
-        (id) => assetsApi.deleteAssetsById(id),
+    const { run: deleteDictionaryType } = useRequest(
+        (id) => systemApi.deleteDictionaryTypeById(id),
         {
             manual: true,
             onSuccess() {
@@ -88,37 +77,31 @@ const ProductionDevice: React.FC = () => {
     }, [fetchTableData, tableParams])
     const columns = [
         {
-            title: '编号',
-            dataIndex: 'sn',
+            title: '字典类型编号',
+            dataIndex: 'code',
         },
         {
-            title: `生产设备名称`,
+            title: '字典类型名称',
             dataIndex: 'name',
         },
-        {
-            title: '生产设备类型',
-            dataIndex: 'typeCode',
-        },
 
         {
-            title: `区域`,
-            dataIndex: 'locationCode',
+            title: `备注`,
+            dataIndex: 'remark',
         },
         {
-            title: '当前状态',
-            dataIndex: 'state',
-            render: (state: ASSETS_STATES) => {
-                return AssetsStatesConfig?.[state]
+            title: '创建时间',
+            dataIndex: 'createdAt',
+            render: (value: number) => {
+                return formatDateTime(value)
             },
         },
-
         {
-            title: `设备规格`,
-            dataIndex: 'specification',
-        },
-        {
-            title: `岗位`,
-            dataIndex: 'postCode',
+            title: '更新时间',
+            dataIndex: 'updatedAt',
+            render: (value: number) => {
+                return formatDateTime(value)
+            },
         },
         {
             title: '操作',
@@ -129,9 +112,14 @@ const ProductionDevice: React.FC = () => {
                     <Space split={<Divider type={`vertical`} />}>
                         <Button key={`view-btn`} size={`small`} type={`link`}>
                             <Link
-                                to={RoutesConstants.PRODUCTION_DEVICE_DETAIL.path(
-                                    id
-                                )}
+                                to={{
+                                    pathname: RoutesConstants.DICTIONARY.path(
+                                        record?.code
+                                    ),
+                                    search: qs.stringify({
+                                        name: record?.name,
+                                    }),
+                                }}
                             >
                                 查看
                             </Link>
@@ -149,8 +137,8 @@ const ProductionDevice: React.FC = () => {
                         </Button>
                         <Popconfirm
                             key={`del-btn`}
-                            title={`确定删除设备 ${record.name}？`}
-                            onConfirm={() => deleteAsset(record?.id)}
+                            title={`确定删除 ${record.name}？`}
+                            onConfirm={() => deleteDictionaryType(record?.id)}
                         >
                             <Button size={`small`} type={`link`} danger={true}>
                                 删除
@@ -164,24 +152,11 @@ const ProductionDevice: React.FC = () => {
     const tableParamsFormItems = useMemo(
         () => (
             <>
-                <Form.Item name="typeCode" label={`生产设备类型`}>
-                    <Select
-                        allowClear={true}
-                        placeholder="请选择"
-                        style={{ width: 230 }}
-                        options={[{ value: '', label: '类型' }]}
-                    />
-                </Form.Item>
-                <Form.Item name="locationCode" label={`区域`}>
+                <Form.Item name="code" label={`字典类型编号`}>
                     <Input />
                 </Form.Item>
-                <Form.Item name="state" label={`当前状态`}>
-                    <Select
-                        allowClear={true}
-                        placeholder="请选择"
-                        style={{ width: 230 }}
-                        options={AssetsStatesOptions}
-                    />
+                <Form.Item name="name" label={`字典类型名称`}>
+                    <Input />
                 </Form.Item>
             </>
         ),
@@ -210,7 +185,7 @@ const ProductionDevice: React.FC = () => {
                                         setDrawerOpen(true)
                                     }}
                                 >
-                                    新建生产设备
+                                    新建字典类型
                                 </Button>
                             }
                         />
@@ -231,85 +206,38 @@ const ProductionDevice: React.FC = () => {
 
             <DrawerForm
                 open={drawerOpen}
-                title={`${drawerFormeValue?.id ? '编辑' : '新建'}生产设备`}
+                title={`${drawerFormeValue?.id ? '编辑' : '新建'}字典类型`}
                 layout="vertical"
                 onOpenChange={(op) => setDrawerOpen(op)}
                 onSubmit={(value, from) => {
                     drawerFormeValue?.id
-                        ? editAssets(drawerFormeValue.id, value)
-                        : addAssets(value)
+                        ? editDictionaryType(drawerFormeValue.id, value)
+                        : addDictionaryType(value)
                     from?.resetFields()
                 }}
                 formValues={drawerFormeValue}
             >
                 <Form.Item
-                    rules={[{ required: true }]}
                     name="name"
-                    label="生产设备名称"
+                    label="字典类型名称"
+                    rules={[{ required: true }]}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
+                    name="code"
+                    label="字典类型编号"
                     rules={[{ required: true }]}
-                    name="sn"
-                    label="生产设备编号"
                 >
                     <Input />
                 </Form.Item>
-                <Form.Item name="deviceNames" label="关联设备">
-                    <Select mode="multiple" options={allDeviceDataOptions} />
-                </Form.Item>
-                <Form.Item
-                    rules={[{ required: true }]}
-                    name="specification"
-                    label="规格型号"
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    rules={[{ required: true }]}
-                    name="locationCode"
-                    label="区域位置"
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    rules={[{ required: true }]}
-                    name="typeCode"
-                    label="设备类型"
-                >
-                    <Select options={[{ label: '类型', value: '类型' }]} />
-                </Form.Item>
-                <Form.Item
-                    rules={[{ required: true }]}
-                    name="state"
-                    label="当前状态"
-                >
-                    <Select options={AssetsStatesOptions} />
-                </Form.Item>
-                <Form.Item
-                    rules={[{ required: true }]}
-                    name="departmentCode"
-                    label="部门名称"
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    rules={[{ required: true }]}
-                    name="postCode"
-                    label="负责岗位"
-                >
-                    <Input />
-                </Form.Item>
+
                 <Form.Item name="remark" label="备注">
                     <Input.TextArea />
-                </Form.Item>
-                <Form.Item name="images" label="图片" valuePropName="fileList">
-                    <UploadImage />
                 </Form.Item>
             </DrawerForm>
         </VPanel>
     )
 }
 
-export default ProductionDevice
+export default DictionaryType

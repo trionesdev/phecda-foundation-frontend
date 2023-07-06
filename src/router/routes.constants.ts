@@ -61,4 +61,15 @@ export const RoutesConstants: RoutesConstantsProps = {
         path: (id?: string) =>
             `/device-management/devices/${id ? id : ':id'}/detail`,
     },
+    /** ---系统设置---- */
+
+    DICTIONARY_TYPE: {
+        key: 'dictionary-type',
+        path: () => `/system-setting/dictionary-type`,
+    }, //字典类型
+    DICTIONARY: {
+        key: 'dictionary-type',
+        path: (id?: string) =>
+            `/system-setting/dictionary-type/${id ?? ':id'}/dictionary`,
+    }, //字典
 }

@@ -48,7 +48,7 @@ export default class AssetsApi extends BaseApi {
     //生产设备
     /** 根据id查询生产设备 */
     getAssetById(id: string): Promise<any> {
-        return this.request.get(`${this.baseUri}/${id}`)
+        return this.request.get(`${this.baseUri}/assets/${id}`)
     }
     /** 所有生产设备table */
     queryAssetsPage(params: {
