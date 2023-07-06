@@ -15,7 +15,7 @@ import {
     Switch,
     message,
 } from 'antd'
-import SearchToolbar from '@/components/SearchToolbar'
+import SearchToolbar from '@/components/search-toolbar'
 import { TableParams } from '@/constants/types'
 import { AssetsStatesOptions } from '@/constants/consts'
 import useQueryDeviceAll from '@/hooks/useQueryDeviceAll'
