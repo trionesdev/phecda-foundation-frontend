@@ -22,6 +22,7 @@ import { AssetsStatesConfig, AssetsStatesOptions } from '@/constants/consts'
 import useQueryDeviceAll from '@/hooks/useQueryDeviceAll'
 import { ASSETS_STATES } from '@/constants/enums'
 import UploadImage from '@/components/upload/UploadImage'
+import UploadMyFile from '@/components/upload/UploadFile'
 
 const ProductionDevice: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
@@ -304,8 +305,19 @@ const ProductionDevice: React.FC = () => {
                 <Form.Item name="remark" label="备注">
                     <Input.TextArea />
                 </Form.Item>
-                <Form.Item name="images" label="图片" valuePropName="fileList">
+                <Form.Item
+                    name="images"
+                    label="上传图片"
+                    valuePropName="fileList"
+                >
                     <UploadImage />
+                </Form.Item>
+                <Form.Item
+                    name="files"
+                    label="上传文件"
+                    valuePropName="fileList"
+                >
+                    <UploadMyFile />
                 </Form.Item>
             </DrawerForm>
         </VPanel>
