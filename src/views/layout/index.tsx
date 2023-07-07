@@ -54,12 +54,13 @@ const MainLayoutView = () => {
                     onClick: () =>
                         navigate(RoutesConstants.PRODUCTION_DEVICE.path()),
                 },
-                {
-                    key: RoutesConstants.PRODUCTION_DEVICE_TYPE.key,
-                    label: `生产设备类型`,
-                    onClick: () =>
-                        navigate(RoutesConstants.PRODUCTION_DEVICE_TYPE.path()),
-                },
+                // 因为采用字典方式，暂不需要
+                // {
+                //     key: RoutesConstants.PRODUCTION_DEVICE_TYPE.key,
+                //     label: `生产设备类型`,
+                //     onClick: () =>
+                //         navigate(RoutesConstants.PRODUCTION_DEVICE_TYPE.path()),
+                // },
                 {
                     key: RoutesConstants.ACCESSORY_TYPE.key,
                     label: `配件类型`,

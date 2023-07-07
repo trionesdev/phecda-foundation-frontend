@@ -18,7 +18,6 @@ const UploadImage: React.FC<{
     onChange?: (fileList: UploadFile[]) => void //由Form自动塞下来的onChange
     fileList?: UploadFile[] //由Form自动塞下来的fileList
 }> = ({ onChange, fileList: initFileList }) => {
-    console.log(initFileList)
     const [previewOpen, setPreviewOpen] = useState(false)
     const [previewImage, setPreviewImage] = useState('')
     const [previewTitle, setPreviewTitle] = useState('')
@@ -83,7 +82,7 @@ const UploadImage: React.FC<{
     return (
         <>
             <Upload
-                action="api/be/oss/image/upload"
+                action="api/be/oss/file/upload"
                 data={{ scene: 'assets' }}
                 listType="picture-card"
                 beforeUpload={handleBeforeUpload}
