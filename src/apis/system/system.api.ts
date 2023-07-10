@@ -73,4 +73,12 @@ export default class SystemApi extends BaseApi {
     deleteDictionaryTypeById(id: string) {
         return this.request.delete(`${this.baseUri}/dict/dictionaryType/${id}`)
     }
+
+    /** 获取指定typeCode字典options */
+    queryDictionariesOptions(params: { typeCode: string }): Promise<any> {
+        return this.request.get(
+            `${this.baseUri}/dictionary/dictionaries/list`,
+            { params }
+        )
+    }
 }
