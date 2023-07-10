@@ -19,6 +19,8 @@ import MonitorView from 'src/views/alarm/monitor-view'
 import ProductionDeviceDetail from '@/views/assets/production-device/detail'
 import Dictionary from '@/views/system-setting/dictionary'
 import DictionaryType from '@/views/system-setting/dictionary-type'
+import EventResponse from '@/views/monitoring-operations/event-response'
+import SceneDetail from '@/views/monitoring-operations/event-response/detail'
 
 export const routes: RouteObject[] = [
     { path: '/sign-in', element: <SignInView /> },
@@ -82,8 +84,16 @@ export const routes: RouteObject[] = [
                 path: RoutesConstants.DEVICE_DETAIL.path(),
                 element: <DeviceDetailView />,
             },
+            //------监控运维------
+            {
+                path: RoutesConstants.MONITORING_OPERATIONS.path(),
+                element: <EventResponse />, //事件响应
+            },
+            {
+                path: RoutesConstants.SCENE_DETAIL.path(),
+                element: <SceneDetail />, //场景详情
+            },
             //------系统设置------
-
             {
                 path: RoutesConstants.DICTIONARY_TYPE.path(),
                 element: <DictionaryType />, //字典类型

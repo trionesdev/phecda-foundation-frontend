@@ -1,6 +1,10 @@
 type RoutesConstantsProps = {
     [key: string]: { key: string; path: (text?: string) => string }
 }
+/**
+ * @description
+ *  注意：key的名字要与path路径中的名称相对应，才能保证菜单栏的menu准确显示展开状态(src/views/layout/index.tsx:119)
+ */
 export const RoutesConstants: RoutesConstantsProps = {
     /** --------告警管理------- */
     ALARM_RULES: {
@@ -61,6 +65,19 @@ export const RoutesConstants: RoutesConstantsProps = {
         path: (id?: string) =>
             `/device-management/devices/${id ? id : ':id'}/detail`,
     },
+    /** ---监控运维---- */
+
+    MONITORING_OPERATIONS: {
+        key: 'event-response',
+        path: () => `/monitoring-operations/event-response`,
+    }, //事件响应
+    SCENE_DETAIL: {
+        key: 'event-response',
+        path: (id?: string) =>
+            `/monitoring-operations/event-response/${
+                id ? id : ':id'
+            }/scene-detail`,
+    }, //场景详情
     /** ---系统设置---- */
 
     DICTIONARY_TYPE: {

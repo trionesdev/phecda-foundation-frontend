@@ -86,6 +86,18 @@ const MainLayoutView = () => {
             ],
         },
         {
+            key: 'monitoring-operations',
+            label: '监控运维',
+            children: [
+                {
+                    key: RoutesConstants.MONITORING_OPERATIONS.key,
+                    label: `事件响应`,
+                    onClick: () =>
+                        navigate(RoutesConstants.MONITORING_OPERATIONS.path()),
+                },
+            ],
+        },
+        {
             key: 'system-setting',
             label: '系统设置',
             children: [
