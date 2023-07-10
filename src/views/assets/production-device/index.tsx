@@ -23,6 +23,8 @@ import useQueryDeviceAll from '@/hooks/useQueryDeviceAll'
 import { ASSETS_STATES } from '@/constants/enums'
 import UploadImage from '@/components/upload/UploadImage'
 import UploadMyFile from '@/components/upload/UploadFile'
+import useQueryDictionaryOptions from '@/hooks/useQueryDictionaryOptions'
+import _ from 'lodash'
 
 const ProductionDevice: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
@@ -30,7 +32,10 @@ const ProductionDevice: React.FC = () => {
         pageNum: 1,
     })
     const [drawerOpen, setDrawerOpen] = useState(false)
-
+    const { typeCodeOptions: assetsTypeOptions } =
+        useQueryDictionaryOptions('assets_type')
+    const { typeCodeOptions: locationCodeOptions } =
+        useQueryDictionaryOptions('location_code')
     const [drawerFormeValue, setDrawerFormeValue] = useState<
         Record<string, any> | undefined
     >({})
@@ -99,11 +104,23 @@ const ProductionDevice: React.FC = () => {
         {
             title: '生产设备类型',
             dataIndex: 'typeCode',
+            render: (typeCode: string) => {
+                return (
+                    _.find(assetsTypeOptions, { value: typeCode })?.label ??
+                    typeCode
+                )
+            },
         },
 
         {
             title: `区域`,
             dataIndex: 'locationCode',
+            render: (typeCode: string) => {
+                return (
+                    _.find(assetsTypeOptions, { value: typeCode })?.label ??
+                    typeCode
+                )
+            },
         },
         {
             title: '当前状态',
@@ -170,7 +187,7 @@ const ProductionDevice: React.FC = () => {
                         allowClear={true}
                         placeholder="请选择"
                         style={{ width: 230 }}
-                        options={[{ value: '', label: '类型' }]}
+                        options={assetsTypeOptions}
                     />
                 </Form.Item>
                 <Form.Item name="locationCode" label={`区域`}>
@@ -186,6 +203,7 @@ const ProductionDevice: React.FC = () => {
                 </Form.Item>
             </>
         ),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         []
     )
     return (
@@ -272,14 +290,14 @@ const ProductionDevice: React.FC = () => {
                     name="locationCode"
                     label="区域位置"
                 >
-                    <Input />
+                    <Select options={locationCodeOptions} />
                 </Form.Item>
                 <Form.Item
                     rules={[{ required: true }]}
                     name="typeCode"
-                    label="设备类型"
+                    label="生产设备类型"
                 >
-                    <Select options={[{ label: '类型', value: '类型' }]} />
+                    <Select options={assetsTypeOptions} />
                 </Form.Item>
                 <Form.Item
                     rules={[{ required: true }]}
