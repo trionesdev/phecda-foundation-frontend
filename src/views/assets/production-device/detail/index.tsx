@@ -124,11 +124,9 @@ const ProductionDeviceDetail = () => {
         },
     ]
     return (
-        <Spin spinning={loading}>
-            <VPanel className={styles.wrapper} header={pageHelper}>
-                <Tabs items={items} />
-            </VPanel>
-        </Spin>
+        <VPanel className={styles.wrapper} header={pageHelper}>
+            <Tabs items={items} />
+        </VPanel>
     )
 }
 export default ProductionDeviceDetail
