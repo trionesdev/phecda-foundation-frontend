@@ -1,9 +1,9 @@
-import { Button, Form, Input } from 'antd'
-import styles from './index.module.less'
-import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { Button, Form, Input } from 'antd';
+import styles from './index.module.less';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 const SignInView = () => {
-    const [form] = Form.useForm()
+    const [form] = Form.useForm();
 
     return (
         <div className={styles.signInView}>
@@ -35,6 +35,6 @@ const SignInView = () => {
                 <div>power by moensun</div>
             </footer>
         </div>
-    )
-}
-export default SignInView
+    );
+};
+export default SignInView;

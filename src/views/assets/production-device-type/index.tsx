@@ -1,31 +1,31 @@
-import React, { useState } from 'react'
-import styles from './index.module.less'
-import { TableToolbar, VPanel } from '@moensun/antd-react-ext'
-import GridTable from '@components/grid-table'
-import { formatDateTime } from '@/commons/util/date.utils'
-import { useRequest } from 'ahooks'
-import { assetsApi } from '@/apis'
-import { Button, Divider, Popconfirm, Space } from 'antd'
-import { Link } from 'react-router-dom'
-import ProductionDeviceTypeForm from './production-device-type-form'
-import { TableParams } from '@/constants/types'
+import React, { useState } from 'react';
+import styles from './index.module.less';
+import { TableToolbar, VPanel } from '@moensun/antd-react-ext';
+import GridTable from '@components/grid-table';
+import { formatDateTime } from '@/commons/util/date.utils';
+import { useRequest } from 'ahooks';
+import { assetsApi } from '@/apis';
+import { Button, Divider, Popconfirm, Space } from 'antd';
+import { Link } from 'react-router-dom';
+import ProductionDeviceTypeForm from './production-device-type-form';
+import { TableParams } from '@/constants/types';
 
 const ProductionDeviceType: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
         pageNum: 1,
-    })
+    });
     const {
         data: tableData,
         loading,
         run: fetchTableData,
     } = useRequest((tableParams: TableParams) => {
-        return assetsApi.queryTableDataDemo(tableParams)
-    })
+        return assetsApi.queryTableDataDemo(tableParams);
+    });
     const handlePageChange = (pageNum: number, pageSize: number) => {
-        setTableParams({ pageNum, pageSize })
-        fetchTableData({ pageNum, pageSize })
-    }
+        setTableParams({ pageNum, pageSize });
+        fetchTableData({ pageNum, pageSize });
+    };
 
     const columns = [
         {
@@ -40,21 +40,21 @@ const ProductionDeviceType: React.FC = () => {
             title: '状态',
             dataIndex: 'is_enabled',
             render: (value: boolean) => {
-                return value ? '使用中' : '已禁用'
+                return value ? '使用中' : '已禁用';
             },
         },
         {
             title: '创建时间',
             dataIndex: 'created_at',
             render: (value: number) => {
-                return formatDateTime(value)
+                return formatDateTime(value);
             },
         },
         {
             title: '编辑时间',
             dataIndex: 'update_at',
             render: (value: number) => {
-                return formatDateTime(value)
+                return formatDateTime(value);
             },
         },
         {
@@ -78,10 +78,10 @@ const ProductionDeviceType: React.FC = () => {
                             </Button>
                         </Popconfirm>
                     </Space>
-                )
+                );
             },
         },
-    ]
+    ];
     return (
         <VPanel className={styles.wrapper}>
             <GridTable
@@ -111,7 +111,7 @@ const ProductionDeviceType: React.FC = () => {
                 }}
             />
         </VPanel>
-    )
-}
+    );
+};
 
-export default ProductionDeviceType
+export default ProductionDeviceType;

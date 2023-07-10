@@ -1,26 +1,26 @@
-import React, { lazy, Suspense } from 'react'
-import { useRoutes, RouteObject } from 'react-router-dom'
-import SignInView from '../views/account/sign-in'
-import MainLayoutView from '../views/layout'
-import ProductsView from '../views/product/products'
-import ProductDetailView from '../views/product/product-detail'
-import { RoutesConstants } from './routes.constants'
-import ProductThingsModelDraftView from '../views/product/product-things-model-draft'
-import DevicesView from '../views/device/devices'
-import DeviceDetailView from '../views/device/device-detail'
-import ProductionDevice from '../views/assets/production-device'
-import AccessoryType from '../views/assets/accessory-type'
-import ProductionDeviceType from '../views/assets/production-device-type'
-import AlarmLog from 'src/views/alarm/alarm-log'
-import AlarmRules from 'src/views/alarm/alarm-rules'
-import MonitorTrends from 'src/views/alarm/monitor-trends'
-import DeviceData from 'src/views/alarm/device-data'
-import MonitorView from 'src/views/alarm/monitor-view'
-import ProductionDeviceDetail from '@/views/assets/production-device/detail'
-import Dictionary from '@/views/system-setting/dictionary'
-import DictionaryType from '@/views/system-setting/dictionary-type'
-import EventResponse from '@/views/monitoring-operations/event-response'
-import SceneDetail from '@/views/monitoring-operations/event-response/detail'
+import React, { lazy, Suspense } from 'react';
+import { useRoutes, RouteObject } from 'react-router-dom';
+import SignInView from '../views/account/sign-in';
+import MainLayoutView from '../views/layout';
+import ProductsView from '../views/product/products';
+import ProductDetailView from '../views/product/product-detail';
+import { RoutesConstants } from './routes.constants';
+import ProductThingsModelDraftView from '../views/product/product-things-model-draft';
+import DevicesView from '../views/device/devices';
+import DeviceDetailView from '../views/device/device-detail';
+import ProductionDevice from '../views/assets/production-device';
+import AccessoryType from '../views/assets/accessory-type';
+import ProductionDeviceType from '../views/assets/production-device-type';
+import AlarmLog from 'src/views/alarm/alarm-log';
+import AlarmRules from 'src/views/alarm/alarm-rules';
+import MonitorTrends from 'src/views/alarm/monitor-trends';
+import DeviceData from 'src/views/alarm/device-data';
+import MonitorView from 'src/views/alarm/monitor-view';
+import ProductionDeviceDetail from '@/views/assets/production-device/detail';
+import Dictionary from '@/views/system-setting/dictionary';
+import DictionaryType from '@/views/system-setting/dictionary-type';
+import EventResponse from '@/views/monitoring-operations/event-response';
+import SceneDetail from '@/views/monitoring-operations/event-response/detail';
 
 export const routes: RouteObject[] = [
     { path: '/sign-in', element: <SignInView /> },
@@ -104,11 +104,11 @@ export const routes: RouteObject[] = [
             },
         ],
     },
-]
+];
 
 // 生成路由
 const AppRoutes = () => {
-    return useRoutes(routes)
-}
+    return useRoutes(routes);
+};
 
-export default AppRoutes
+export default AppRoutes;

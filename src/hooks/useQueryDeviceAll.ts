@@ -1,22 +1,22 @@
-import { deviceApi } from '@/apis'
-import { useRequest } from 'ahooks'
-import { useMemo } from 'react'
+import { deviceApi } from '@/apis';
+import { useRequest } from 'ahooks';
+import { useMemo } from 'react';
 
 const useQueryDeviceAll = () => {
-    const { data, loading } = useRequest(() => deviceApi.queryDeviceAll())
+    const { data, loading } = useRequest(() => deviceApi.queryDeviceAll());
     const allDeviceDataOptions = useMemo(() => {
         return data?.map((item: any) => {
             return {
                 label: item.remarkName,
                 value: item?.name,
                 ...item,
-            }
-        })
-    }, [data])
+            };
+        });
+    }, [data]);
     return {
         allDeviceData: data,
         queryDeviceAllLoading: loading,
         allDeviceDataOptions,
-    }
-}
-export default useQueryDeviceAll
+    };
+};
+export default useQueryDeviceAll;

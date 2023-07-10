@@ -1,10 +1,10 @@
-import { AxiosInstance } from 'axios'
-import ajax from '../commons/lib/asiox.lib'
+import { AxiosInstance } from 'axios';
+import ajax from '../commons/lib/asiox.lib';
 
 class BaseApi {
-    protected request: AxiosInstance
+    protected request: AxiosInstance;
     constructor() {
-        this.request = ajax
+        this.request = ajax;
     }
 }
-export default BaseApi
+export default BaseApi;

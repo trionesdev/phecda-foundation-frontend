@@ -1,1 +1,1 @@
-import { PageRep } from '../base.rep'
+import { PageRep } from '../base.rep';

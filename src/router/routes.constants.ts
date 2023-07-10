@@ -1,6 +1,6 @@
 type RoutesConstantsProps = {
-    [key: string]: { key: string; path: (text?: string) => string }
-}
+    [key: string]: { key: string; path: (text?: string) => string };
+};
 /**
  * @description
  *  注意：key的名字要与path路径中的名称相对应，才能保证菜单栏的menu准确显示展开状态(src/views/layout/index.tsx:119)
@@ -89,4 +89,4 @@ export const RoutesConstants: RoutesConstantsProps = {
         path: (id?: string) =>
             `/system-setting/dictionary-type/${id ?? ':id'}/dictionary`,
     }, //字典
-}
+};

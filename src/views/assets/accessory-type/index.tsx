@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import styles from './index.module.less'
-import { DrawerForm, VPanel } from '@moensun/antd-react-ext'
-import GridTable from '@components/grid-table'
-import { useRequest } from 'ahooks'
-import { assetsApi } from '@/apis'
+import React, { useEffect, useMemo, useState } from 'react';
+import styles from './index.module.less';
+import { DrawerForm, VPanel } from '@moensun/antd-react-ext';
+import GridTable from '@components/grid-table';
+import { useRequest } from 'ahooks';
+import { assetsApi } from '@/apis';
 import {
     Button,
     Divider,
@@ -14,27 +14,27 @@ import {
     Space,
     Switch,
     message,
-} from 'antd'
-import SearchToolbar from '@/components/search-toolbar'
-import { TableParams } from '@/constants/types'
-import { AssetsStatesOptions } from '@/constants/consts'
-import useQueryDeviceAll from '@/hooks/useQueryDeviceAll'
-import { formatDateTime } from '@/commons/util/date.utils'
-import useQueryAssetsAll from '@/hooks/useQueryAssetsAll'
-import _ from 'lodash'
+} from 'antd';
+import SearchToolbar from '@/components/search-toolbar';
+import { TableParams } from '@/constants/types';
+import { AssetsStatesOptions } from '@/constants/consts';
+import useQueryDeviceAll from '@/hooks/useQueryDeviceAll';
+import { formatDateTime } from '@/commons/util/date.utils';
+import useQueryAssetsAll from '@/hooks/useQueryAssetsAll';
+import _ from 'lodash';
 
 const AccessoryType: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
         pageNum: 1,
-    })
-    const [drawerOpen, setDrawerOpen] = useState(false)
+    });
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
     const [drawerFormeValue, setDrawerFormeValue] = useState<
         Record<string, any> | undefined
-    >({})
-    const { allDeviceDataOptions } = useQueryDeviceAll()
-    const { allAssetsOptions } = useQueryAssetsAll()
+    >({});
+    const { allDeviceDataOptions } = useQueryDeviceAll();
+    const { allAssetsOptions } = useQueryAssetsAll();
     /** 请求表格 */
     const {
         data: tableData,
@@ -45,49 +45,49 @@ const AccessoryType: React.FC = () => {
         (tableParams: TableParams) =>
             assetsApi.querySpacePartsPage(tableParams),
         { manual: true }
-    )
+    );
     const afterSubmitForm = () => {
-        setDrawerFormeValue(undefined)
-        setDrawerOpen(false)
-        message.success('操作成功')
-        refreshFetchTableData()
-    }
+        setDrawerFormeValue(undefined);
+        setDrawerOpen(false);
+        message.success('操作成功');
+        refreshFetchTableData();
+    };
     /** 添加配件 */
     const { run: addSpacePart } = useRequest(
         (params) => assetsApi.addSpacePart(params),
         {
             manual: true,
             onSuccess() {
-                afterSubmitForm()
+                afterSubmitForm();
             },
         }
-    )
+    );
     /** 修改配件 */
     const { run: editSpacePart } = useRequest(
         (id, params) => assetsApi.editSpacePartById(id, params),
         {
             manual: true,
             onSuccess() {
-                afterSubmitForm()
+                afterSubmitForm();
             },
         }
-    )
+    );
     /** 删除设备 */
     const { run: deleteSpacePart } = useRequest(
         (id) => assetsApi.deleteSpacePartById(id),
         {
             manual: true,
             onSuccess() {
-                afterSubmitForm()
+                afterSubmitForm();
             },
         }
-    )
+    );
     const handlePageChange = (pageNum: number, pageSize: number) => {
-        setTableParams({ ...tableParams, pageNum, pageSize })
-    }
+        setTableParams({ ...tableParams, pageNum, pageSize });
+    };
     useEffect(() => {
-        fetchTableData(tableParams)
-    }, [fetchTableData, tableParams])
+        fetchTableData(tableParams);
+    }, [fetchTableData, tableParams]);
     const columns = [
         {
             title: `配件类型编号`,
@@ -105,14 +105,14 @@ const AccessoryType: React.FC = () => {
                 return (
                     _.find(allAssetsOptions, { value: assetSn })?.label ??
                     assetSn
-                )
+                );
             },
         },
         {
             title: '状态',
             dataIndex: 'enable',
             render: (enable: boolean) => {
-                return enable ? '开启' : '关闭'
+                return enable ? '开启' : '关闭';
             },
         },
 
@@ -124,7 +124,7 @@ const AccessoryType: React.FC = () => {
             title: '创建时间',
             dataIndex: 'createdAt',
             render: (value: number) => {
-                return formatDateTime(value)
+                return formatDateTime(value);
             },
         },
         {
@@ -139,8 +139,8 @@ const AccessoryType: React.FC = () => {
                             size={`small`}
                             type={`link`}
                             onClick={() => {
-                                setDrawerFormeValue({ ...record })
-                                setDrawerOpen(true)
+                                setDrawerFormeValue({ ...record });
+                                setDrawerOpen(true);
                             }}
                         >
                             编辑
@@ -155,10 +155,10 @@ const AccessoryType: React.FC = () => {
                             </Button>
                         </Popconfirm>
                     </Space>
-                )
+                );
             },
         },
-    ]
+    ];
     const tableParamsFormItems = useMemo(
         () => (
             <>
@@ -181,7 +181,7 @@ const AccessoryType: React.FC = () => {
             </>
         ),
         []
-    )
+    );
     return (
         <VPanel className={styles.wrapper}>
             <GridTable
@@ -195,14 +195,14 @@ const AccessoryType: React.FC = () => {
                                     pageNum: 1,
                                     pageSize: 10,
                                     ...v,
-                                })
+                                });
                             }}
                             addButtons={
                                 <Button
                                     type="primary"
                                     onClick={() => {
-                                        setDrawerFormeValue(undefined)
-                                        setDrawerOpen(true)
+                                        setDrawerFormeValue(undefined);
+                                        setDrawerOpen(true);
                                     }}
                                 >
                                     新建配件类型
@@ -232,8 +232,8 @@ const AccessoryType: React.FC = () => {
                 onSubmit={(value, from) => {
                     drawerFormeValue?.id
                         ? editSpacePart(drawerFormeValue.id, value)
-                        : addSpacePart(value)
-                    from?.resetFields()
+                        : addSpacePart(value);
+                    from?.resetFields();
                 }}
                 formValues={drawerFormeValue}
             >
@@ -271,7 +271,7 @@ const AccessoryType: React.FC = () => {
                 </Form.Item>
             </DrawerForm>
         </VPanel>
-    )
-}
+    );
+};
 
-export default AccessoryType
+export default AccessoryType;

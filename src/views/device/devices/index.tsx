@@ -1,57 +1,57 @@
-import { TableToolbar, VPanel } from '@moensun/antd-react-ext'
-import styles from './device.module.less'
-import { useEffect, useState } from 'react'
-import { Button, Divider, notification, Popconfirm, Space, Switch } from 'antd'
-import DeviceForm from './device-form'
-import { deviceApi } from '@apis'
-import { Link } from 'react-router-dom'
-import { RoutesConstants } from '../../../router/routes.constants'
-import GridTable from '@components/grid-table'
+import { TableToolbar, VPanel } from '@moensun/antd-react-ext';
+import styles from './device.module.less';
+import { useEffect, useState } from 'react';
+import { Button, Divider, notification, Popconfirm, Space, Switch } from 'antd';
+import DeviceForm from './device-form';
+import { deviceApi } from '@apis';
+import { Link } from 'react-router-dom';
+import { RoutesConstants } from '../../../router/routes.constants';
+import GridTable from '@components/grid-table';
 const DevicesView = () => {
-    const [querySeq, setQuerySeq] = useState(0)
-    const [loading, setLoading] = useState(false)
-    const [pageNum, setPageNum] = useState(1)
-    const [pageSize, setPageSize] = useState(10)
-    const [devices, setDevices] = useState([])
+    const [querySeq, setQuerySeq] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const [pageNum, setPageNum] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [devices, setDevices] = useState([]);
     const handleQueryDevices = () => {
         let params = {
             pageNum,
             pageSize,
-        }
-        setLoading(true)
+        };
+        setLoading(true);
         deviceApi
             .queryDevicesExtPage(params)
             .then((res: any) => {
-                console.log(res)
+                console.log(res);
                 if (res) {
-                    setDevices(res.rows || [])
+                    setDevices(res.rows || []);
                 }
             })
             .finally(() => {
-                setLoading(false)
-            })
-    }
+                setLoading(false);
+            });
+    };
 
     const handleDeleteById = (id: string) => {
         deviceApi.deleteDeviceById(id).then(() => {
-            handleRefresh()
-            notification.success({ message: '操作成功' })
-        })
-    }
+            handleRefresh();
+            notification.success({ message: '操作成功' });
+        });
+    };
 
     const handleUpdateDeviceEnabled = (id: string, enabled: boolean) => {
         deviceApi.updateDeviceEnabled(id, enabled).then(() => {
-            handleRefresh()
-        })
-    }
+            handleRefresh();
+        });
+    };
 
     const handleRefresh = () => {
-        setQuerySeq(querySeq + 1)
-    }
+        setQuerySeq(querySeq + 1);
+    };
 
     useEffect(() => {
-        handleQueryDevices()
-    }, [querySeq, pageNum, pageSize])
+        handleQueryDevices();
+    }, [querySeq, pageNum, pageSize]);
 
     const columns = [
         {
@@ -80,7 +80,7 @@ const DevicesView = () => {
                             handleUpdateDeviceEnabled(record.id, checked)
                         }
                     />
-                )
+                );
             },
         },
         {
@@ -105,10 +105,10 @@ const DevicesView = () => {
                             </Button>
                         </Popconfirm>
                     </Space>
-                )
+                );
             },
         },
-    ]
+    ];
 
     const tableBar = (
         <TableToolbar
@@ -122,7 +122,7 @@ const DevicesView = () => {
                 </DeviceForm>
             }
         />
-    )
+    );
     return (
         <VPanel className={styles.deviceView}>
             <GridTable
@@ -137,6 +137,6 @@ const DevicesView = () => {
                 loading={loading}
             />
         </VPanel>
-    )
-}
-export default DevicesView
+    );
+};
+export default DevicesView;

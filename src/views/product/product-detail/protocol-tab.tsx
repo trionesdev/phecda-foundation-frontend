@@ -1,41 +1,41 @@
-import { FC, useEffect } from 'react'
-import { Button, Col, Form, Input, notification, Row, Space } from 'antd'
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { PageHeader, VPanel } from '@moensun/antd-react-ext'
-import styles from './product-detail.module.less'
-import { deviceApi } from '@apis'
+import { FC, useEffect } from 'react';
+import { Button, Col, Form, Input, notification, Row, Space } from 'antd';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { PageHeader, VPanel } from '@moensun/antd-react-ext';
+import styles from './product-detail.module.less';
+import { deviceApi } from '@apis';
 
 type ProtocolTabProps = {
-    product: any
-}
+    product: any;
+};
 const ProtocolTab: FC<ProtocolTabProps> = ({ product }) => {
-    const [form] = Form.useForm()
+    const [form] = Form.useForm();
     const handleQueryProtocolProperties = () => {
         deviceApi.queryProductById(product?.id).then((res) => {
             form.setFieldsValue({
                 protocolProperties: res.protocolProperties || [],
-            })
-        })
-    }
+            });
+        });
+    };
 
     const handleSave = () => {
         form.validateFields().then((values) => {
             deviceApi
                 .updateProductProtocolProperties(product.id, values)
                 .then(() => {
-                    notification.success({ message: '保存成功' })
+                    notification.success({ message: '保存成功' });
                 })
                 .catch((ex) => {
-                    notification.error({ message: ex.message })
-                })
-        })
-    }
+                    notification.error({ message: ex.message });
+                });
+        });
+    };
 
     useEffect(() => {
         if (product.id) {
-            handleQueryProtocolProperties()
+            handleQueryProtocolProperties();
         }
-    }, [product])
+    }, [product]);
 
     const tabToolbar = (
         <PageHeader
@@ -47,7 +47,7 @@ const ProtocolTab: FC<ProtocolTabProps> = ({ product }) => {
                 </Button>,
             ]}
         />
-    )
+    );
     return (
         <VPanel className={styles.protocolTab} header={tabToolbar}>
             <div className={styles.protocolTabContentWrapper}>
@@ -92,6 +92,6 @@ const ProtocolTab: FC<ProtocolTabProps> = ({ product }) => {
                 </Form>
             </div>
         </VPanel>
-    )
-}
-export default ProtocolTab
+    );
+};
+export default ProtocolTab;

@@ -1,27 +1,27 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import styles from './index.module.less'
-import { DrawerForm, VPanel } from '@moensun/antd-react-ext'
-import GridTable from '@components/grid-table'
-import { useRequest } from 'ahooks'
-import { operationApi, systemApi } from '@/apis'
-import { Button, Divider, Form, Input, Popconfirm, Space, message } from 'antd'
-import SearchToolbar from '@/components/search-toolbar'
-import { TableParams } from '@/constants/types'
-import { formatDateTime } from '@/commons/util/date.utils'
-import { Link } from 'react-router-dom'
-import { RoutesConstants } from '@/router/routes.constants'
-import qs from 'qs'
+import React, { useEffect, useMemo, useState } from 'react';
+import styles from './index.module.less';
+import { DrawerForm, VPanel } from '@moensun/antd-react-ext';
+import GridTable from '@components/grid-table';
+import { useRequest } from 'ahooks';
+import { operationApi, systemApi } from '@/apis';
+import { Button, Divider, Form, Input, Popconfirm, Space, message } from 'antd';
+import SearchToolbar from '@/components/search-toolbar';
+import { TableParams } from '@/constants/types';
+import { formatDateTime } from '@/commons/util/date.utils';
+import { Link } from 'react-router-dom';
+import { RoutesConstants } from '@/router/routes.constants';
+import qs from 'qs';
 //TODO:接口暂无
 const EventResponse: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
         pageNum: 1,
-    })
-    const [drawerOpen, setDrawerOpen] = useState(false)
+    });
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
     const [drawerFormeValue, setDrawerFormeValue] = useState<
         Record<string, any> | undefined
-    >({})
+    >({});
     /** 请求表格 */
     const {
         data: tableData,
@@ -31,49 +31,49 @@ const EventResponse: React.FC = () => {
     } = useRequest(
         (tableParams: TableParams) => operationApi.queryScenesPage(tableParams),
         { manual: true }
-    )
+    );
     const afterSubmitForm = () => {
-        setDrawerFormeValue(undefined)
-        setDrawerOpen(false)
-        message.success('操作成功')
-        refreshFetchTableData()
-    }
+        setDrawerFormeValue(undefined);
+        setDrawerOpen(false);
+        message.success('操作成功');
+        refreshFetchTableData();
+    };
     /** 新建场景 */
     const { run: addDictionaryType } = useRequest(
         (params) => operationApi.addScenes(params),
         {
             manual: true,
             onSuccess() {
-                afterSubmitForm()
+                afterSubmitForm();
             },
         }
-    )
+    );
     /** 修改配件 */
     const { run: editDictionaryType } = useRequest(
         (id, params) => systemApi.editDictionaryTypeById(id, params),
         {
             manual: true,
             onSuccess() {
-                afterSubmitForm()
+                afterSubmitForm();
             },
         }
-    )
+    );
     /** 删除设备 */
     const { run: deleteDictionaryType } = useRequest(
         (id) => systemApi.deleteDictionaryTypeById(id),
         {
             manual: true,
             onSuccess() {
-                afterSubmitForm()
+                afterSubmitForm();
             },
         }
-    )
+    );
     const handlePageChange = (pageNum: number, pageSize: number) => {
-        setTableParams({ ...tableParams, pageNum, pageSize })
-    }
+        setTableParams({ ...tableParams, pageNum, pageSize });
+    };
     useEffect(() => {
-        fetchTableData(tableParams)
-    }, [fetchTableData, tableParams])
+        fetchTableData(tableParams);
+    }, [fetchTableData, tableParams]);
     const columns = [
         {
             title: '场景名称',
@@ -88,14 +88,14 @@ const EventResponse: React.FC = () => {
             title: '创建时间',
             dataIndex: 'createdAt',
             render: (value: number) => {
-                return formatDateTime(value)
+                return formatDateTime(value);
             },
         },
         {
             title: '运行状态',
             dataIndex: 'status',
             render: (value: number) => {
-                return formatDateTime(value)
+                return formatDateTime(value);
             },
         },
         {
@@ -124,8 +124,8 @@ const EventResponse: React.FC = () => {
                             size={`small`}
                             type={`link`}
                             onClick={() => {
-                                setDrawerFormeValue({ ...record })
-                                setDrawerOpen(true)
+                                setDrawerFormeValue({ ...record });
+                                setDrawerOpen(true);
                             }}
                         >
                             编辑
@@ -140,10 +140,10 @@ const EventResponse: React.FC = () => {
                             </Button>
                         </Popconfirm>
                     </Space>
-                )
+                );
             },
         },
-    ]
+    ];
     const tableParamsFormItems = useMemo(
         () => (
             <>
@@ -153,7 +153,7 @@ const EventResponse: React.FC = () => {
             </>
         ),
         []
-    )
+    );
     return (
         <VPanel className={styles.wrapper}>
             <GridTable
@@ -167,14 +167,14 @@ const EventResponse: React.FC = () => {
                                     pageNum: 1,
                                     pageSize: 10,
                                     ...v,
-                                })
+                                });
                             }}
                             addButtons={
                                 <Button
                                     type="primary"
                                     onClick={() => {
-                                        setDrawerFormeValue(undefined)
-                                        setDrawerOpen(true)
+                                        setDrawerFormeValue(undefined);
+                                        setDrawerOpen(true);
                                     }}
                                 >
                                     新建场景
@@ -204,8 +204,8 @@ const EventResponse: React.FC = () => {
                 onSubmit={(value, from) => {
                     drawerFormeValue?.id
                         ? editDictionaryType(drawerFormeValue.id, value)
-                        : addDictionaryType(value)
-                    from?.resetFields()
+                        : addDictionaryType(value);
+                    from?.resetFields();
                 }}
                 formValues={drawerFormeValue}
             >
@@ -221,7 +221,7 @@ const EventResponse: React.FC = () => {
                 </Form.Item>
             </DrawerForm>
         </VPanel>
-    )
-}
+    );
+};
 
-export default EventResponse
+export default EventResponse;

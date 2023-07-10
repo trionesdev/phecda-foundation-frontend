@@ -3,8 +3,8 @@ import {
     PageHeader,
     TableToolbar,
     VPanel,
-} from '@moensun/antd-react-ext'
-import styles from './product-thing-model-draft.module.less'
+} from '@moensun/antd-react-ext';
+import styles from './product-thing-model-draft.module.less';
 import {
     Alert,
     Button,
@@ -13,23 +13,25 @@ import {
     notification,
     Popconfirm,
     Space,
-} from 'antd'
-import { useEffect, useState } from 'react'
-import ThingsModelAbilityForm, { AbilityType } from './thing-model-ability-form'
-import { useNavigate, useParams } from 'react-router-dom'
-import { deviceApi } from '@apis'
-import _ from 'lodash'
-import { RoutesConstants } from '../../../router/routes.constants'
+} from 'antd';
+import { useEffect, useState } from 'react';
+import ThingsModelAbilityForm, {
+    AbilityType,
+} from './thing-model-ability-form';
+import { useNavigate, useParams } from 'react-router-dom';
+import { deviceApi } from '@apis';
+import _ from 'lodash';
+import { RoutesConstants } from '../../../router/routes.constants';
 
 const ProductThingModelDraftView = () => {
-    const navigate = useNavigate()
-    const { id } = useParams()
-    const [querySeq, setQuerySeq] = useState(0)
-    const [loading, setLoading] = useState(false)
-    const [rows, setRows] = useState([])
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const [querySeq, setQuerySeq] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const [rows, setRows] = useState([]);
 
     const handleQueryThingModel = () => {
-        setLoading(true)
+        setLoading(true);
         deviceApi
             .queryProductThingModelDraft(id!)
             .then((res: any) => {
@@ -42,53 +44,53 @@ const ProductThingModelDraftView = () => {
                                     _.assign(ability, {
                                         abilityType: AbilityType.EVENT,
                                     })
-                                )
+                                );
                             case 'properties':
                                 return _.map(value, (ability) =>
                                     _.assign(ability, {
                                         abilityType: AbilityType.PROPERTY,
                                     })
-                                )
+                                );
                             case 'services':
                                 return _.map(value, (ability) =>
                                     _.assign(ability, {
                                         abilityType: AbilityType.SERVICE,
                                     })
-                                )
+                                );
                             default:
-                                return value
+                                return value;
                         }
                     }
-                )
+                );
                 let abilities = _.values(thingModel)
                     .reduce((prev, cur) => _.concat(prev, cur), [])
-                    .sort()
-                setRows(abilities || [])
+                    .sort();
+                setRows(abilities || []);
             })
             .finally(() => {
-                setLoading(false)
-            })
-    }
+                setLoading(false);
+            });
+    };
 
     const handleDeleteAbility = (identifier: string) => {
         deviceApi.deleteThingModelDraftAbility(id!, identifier).then(() => {
-            setQuerySeq(querySeq + 1)
-        })
-    }
+            setQuerySeq(querySeq + 1);
+        });
+    };
 
     const handleEditSuccess = () => {
-        setQuerySeq(querySeq + 1)
-    }
+        setQuerySeq(querySeq + 1);
+    };
 
     const handlePublishThingModel = () => {
         deviceApi.publishThingModel(id!).then(() => {
-            notification.success({ message: '发布成功' })
-        })
-    }
+            notification.success({ message: '发布成功' });
+        });
+    };
 
     useEffect(() => {
-        handleQueryThingModel()
-    }, [id, querySeq])
+        handleQueryThingModel();
+    }, [id, querySeq]);
 
     const columns = [
         {
@@ -98,11 +100,11 @@ const ProductThingModelDraftView = () => {
             render: (text: string) => {
                 switch (text) {
                     case AbilityType.PROPERTY:
-                        return '属性'
+                        return '属性';
                     case AbilityType.SERVICE:
-                        return '服务'
+                        return '服务';
                     case AbilityType.EVENT:
-                        return '事件'
+                        return '事件';
                 }
             },
         },
@@ -150,12 +152,12 @@ const ProductThingModelDraftView = () => {
                             </Button>
                         </Popconfirm>
                     </Space>
-                )
+                );
             },
         },
-    ]
+    ];
 
-    const breadcrumbItems = [{ title: '设备管理' }]
+    const breadcrumbItems = [{ title: '设备管理' }];
     const header = (
         <PageHeader
             breadcrumb={{ items: breadcrumbItems }}
@@ -176,7 +178,7 @@ const ProductThingModelDraftView = () => {
                 type="info"
             />
         </PageHeader>
-    )
+    );
     const tableToolbar = (
         <TableToolbar
             extra={[
@@ -197,7 +199,7 @@ const ProductThingModelDraftView = () => {
                 </Button>,
             ]}
         />
-    )
+    );
     return (
         <VPanel className={styles.productThingsModelDraftView} header={header}>
             <GridTable
@@ -210,6 +212,6 @@ const ProductThingModelDraftView = () => {
                 rowKey={`identifier`}
             />
         </VPanel>
-    )
-}
-export default ProductThingModelDraftView
+    );
+};
+export default ProductThingModelDraftView;

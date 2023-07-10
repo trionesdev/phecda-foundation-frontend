@@ -1,7 +1,7 @@
-import { Col, Form, Input, Row } from 'antd'
-import _ from 'lodash'
-import { FC } from 'react'
-import { ValueTypeEnum, ValueTypeProps } from './index'
+import { Col, Form, Input, Row } from 'antd';
+import _ from 'lodash';
+import { FC } from 'react';
+import { ValueTypeEnum, ValueTypeProps } from './index';
 
 const ValueTypeInt: FC<ValueTypeProps> = ({ group }) => {
     return (
@@ -38,6 +38,6 @@ const ValueTypeInt: FC<ValueTypeProps> = ({ group }) => {
                 <Input />
             </Form.Item>
         </>
-    )
-}
-export default ValueTypeInt
+    );
+};
+export default ValueTypeInt;

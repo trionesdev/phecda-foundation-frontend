@@ -1,11 +1,11 @@
-import { FC } from 'react'
-import { Descriptions } from 'antd'
-import styles from './device-detail.module.less'
-import { formatDateTime } from '../../../commons/util/date.utils'
+import { FC } from 'react';
+import { Descriptions } from 'antd';
+import styles from './device-detail.module.less';
+import { formatDateTime } from '../../../commons/util/date.utils';
 
 type DeviceInfoTabProps = {
-    device: any
-}
+    device: any;
+};
 const DeviceInfoTab: FC<DeviceInfoTabProps> = ({ device }) => {
     return (
         <div className={styles.infoTab}>
@@ -27,6 +27,6 @@ const DeviceInfoTab: FC<DeviceInfoTabProps> = ({ device }) => {
                 </Descriptions.Item>
             </Descriptions>
         </div>
-    )
-}
-export default DeviceInfoTab
+    );
+};
+export default DeviceInfoTab;

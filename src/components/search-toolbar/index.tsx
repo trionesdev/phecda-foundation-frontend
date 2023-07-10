@@ -1,46 +1,46 @@
-import { Button, Form, Space } from 'antd'
+import { Button, Form, Space } from 'antd';
 import {
     ForwardRefRenderFunction,
     ReactNode,
     forwardRef,
     useCallback,
     useImperativeHandle,
-} from 'react'
+} from 'react';
 
-import styles from './index.module.less'
+import styles from './index.module.less';
 
 type ISearchToolbar = {
-    formItems?: ReactNode
-    hideSearch?: boolean
-    hideReset?: boolean
-    onSearch?: (values: Record<string, any>) => void
-    addButtons?: ReactNode
-}
+    formItems?: ReactNode;
+    hideSearch?: boolean;
+    hideReset?: boolean;
+    onSearch?: (values: Record<string, any>) => void;
+    addButtons?: ReactNode;
+};
 
 const SearchToolbar: ForwardRefRenderFunction<any, ISearchToolbar> = (
     { formItems, hideSearch = false, hideReset = false, onSearch, addButtons },
     ref
 ) => {
-    const [form] = Form.useForm()
+    const [form] = Form.useForm();
 
     const onFinish = useCallback(
         (values: any) => {
-            onSearch?.(values)
+            onSearch?.(values);
         },
         [onSearch]
-    )
+    );
 
     useImperativeHandle(
         ref,
         () => {
             return {
                 setFieldValue: (field: string, value: string) => {
-                    form.setFieldValue(field, value)
+                    form.setFieldValue(field, value);
                 },
-            }
+            };
         },
         [form]
-    )
+    );
 
     return (
         <Form
@@ -61,8 +61,8 @@ const SearchToolbar: ForwardRefRenderFunction<any, ISearchToolbar> = (
                         <Button
                             htmlType="button"
                             onClick={() => {
-                                form.resetFields()
-                                onSearch?.(form.getFieldsValue())
+                                form.resetFields();
+                                onSearch?.(form.getFieldsValue());
                             }}
                         >
                             重置
@@ -72,7 +72,7 @@ const SearchToolbar: ForwardRefRenderFunction<any, ISearchToolbar> = (
                 </Space>
             </Form.Item>
         </Form>
-    )
-}
+    );
+};
 
-export default forwardRef(SearchToolbar)
+export default forwardRef(SearchToolbar);
