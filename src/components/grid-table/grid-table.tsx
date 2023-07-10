@@ -1,9 +1,9 @@
-import { CSSInterpolation, useStyleRegister } from '@ant-design/cssinjs'
-import { GlobalToken, Table, TableProps, theme } from 'antd'
-import classNames from 'classnames'
-import React, { FC } from 'react'
+import { CSSInterpolation, useStyleRegister } from '@ant-design/cssinjs';
+import { GlobalToken, Table, TableProps, theme } from 'antd';
+import classNames from 'classnames';
+import React, { FC } from 'react';
 
-const { useToken } = theme
+const { useToken } = theme;
 const genGridTableStyle = (
     prefixCls: string,
     token: GlobalToken
@@ -41,32 +41,32 @@ const genGridTableStyle = (
                 },
             },
         },
-    }
-}
+    };
+};
 
 interface GridTableProps extends TableProps<any> {
     /**
      * @description 是否撑满外部容器
      * @default
      */
-    fit?: boolean
+    fit?: boolean;
     /**
      * @description 是否展示返回icon
      * @default
      */
-    toolbar?: React.ReactNode
+    toolbar?: React.ReactNode;
 }
 
 const GridTable: FC<GridTableProps> = (
     { fit, toolbar, style, ...props },
     context
 ) => {
-    const prefixCls = 'ant-grid-table'
-    const { theme, token, hashId } = useToken()
+    const prefixCls = 'ant-grid-table';
+    const { theme, token, hashId } = useToken();
     const wrapSSR = useStyleRegister(
         { theme, token, hashId, path: [prefixCls] },
         () => [genGridTableStyle(prefixCls, token)]
-    )
+    );
 
     return wrapSSR(
         <div
@@ -82,6 +82,6 @@ const GridTable: FC<GridTableProps> = (
                 <Table {...props} />
             </>
         </div>
-    )
-}
-export default GridTable
+    );
+};
+export default GridTable;

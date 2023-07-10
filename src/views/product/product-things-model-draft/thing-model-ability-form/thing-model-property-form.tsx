@@ -1,10 +1,10 @@
-import { Form, Input, Radio } from 'antd'
-import { FC } from 'react'
-import ValueType from './value-type'
+import { Form, Input, Radio } from 'antd';
+import { FC } from 'react';
+import ValueType from './value-type';
 
-type ThingsModelPropertyFormProps = {}
+type ThingsModelPropertyFormProps = {};
 const ThingModelPropertyForm: FC<ThingsModelPropertyFormProps> = ({}) => {
-    const ability = 'property'
+    const ability = 'property';
     return (
         <>
             <Form.Item
@@ -41,6 +41,6 @@ const ThingModelPropertyForm: FC<ThingsModelPropertyFormProps> = ({}) => {
                 <Input.TextArea />
             </Form.Item>
         </>
-    )
-}
-export default ThingModelPropertyForm
+    );
+};
+export default ThingModelPropertyForm;

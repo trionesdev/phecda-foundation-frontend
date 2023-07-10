@@ -1,7 +1,7 @@
-import { Col, Form, Input, Row } from 'antd'
-import { FC } from 'react'
-import { ValueTypeEnum, ValueTypeProps } from './index'
-import _ from 'lodash'
+import { Col, Form, Input, Row } from 'antd';
+import { FC } from 'react';
+import { ValueTypeEnum, ValueTypeProps } from './index';
+import _ from 'lodash';
 
 const ValueTypeBool: FC<ValueTypeProps> = ({ group }) => {
     return (
@@ -59,6 +59,6 @@ const ValueTypeBool: FC<ValueTypeProps> = ({ group }) => {
                 </Row>
             </Form.Item>
         </>
-    )
-}
-export default ValueTypeBool
+    );
+};
+export default ValueTypeBool;

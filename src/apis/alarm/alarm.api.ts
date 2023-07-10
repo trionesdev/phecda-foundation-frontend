@@ -1,7 +1,7 @@
-import BaseApi from '../base.api'
+import BaseApi from '../base.api';
 
 export default class AlarmApi extends BaseApi {
-    private baseUri = '/be/assets'
+    private baseUri = '/be/assets';
 
     queryTableDataDemo(params: { pageNum: number; pageSize: number }) {
         // return this.request.get(`${this.baseUri}/page`, { params })
@@ -27,6 +27,6 @@ export default class AlarmApi extends BaseApi {
                     code: '001',
                 },
             ],
-        })
+        });
     }
 }

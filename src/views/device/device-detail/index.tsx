@@ -1,28 +1,28 @@
-import { PageHeader, VPanel } from '@moensun/antd-react-ext'
-import { Tabs, TabsProps } from 'antd'
-import InfoTab from './info-tab'
-import { useEffect, useState } from 'react'
-import { deviceApi } from '@apis'
-import { useParams } from 'react-router-dom'
-import styles from './device-detail.module.less'
-import Index from './thing-model-tab'
-import _ from 'lodash'
+import { PageHeader, VPanel } from '@moensun/antd-react-ext';
+import { Tabs, TabsProps } from 'antd';
+import InfoTab from './info-tab';
+import { useEffect, useState } from 'react';
+import { deviceApi } from '@apis';
+import { useParams } from 'react-router-dom';
+import styles from './device-detail.module.less';
+import Index from './thing-model-tab';
+import _ from 'lodash';
 
 const DeviceDetailView = () => {
-    const { id } = useParams()
-    const [device, setDevice] = useState<any>()
+    const { id } = useParams();
+    const [device, setDevice] = useState<any>();
 
     const handleQueryDevice = () => {
         deviceApi.queryDeviceExtById(id!).then((res: any) => {
-            setDevice(res)
-        })
-    }
+            setDevice(res);
+        });
+    };
 
     useEffect(() => {
         if (id) {
-            handleQueryDevice()
+            handleQueryDevice();
         }
-    }, [id])
+    }, [id]);
 
     const items: TabsProps['items'] = _.concat(
         [
@@ -43,13 +43,13 @@ const DeviceDetailView = () => {
                   label: `子设备`,
               }
             : []
-    )
+    );
 
-    const pageHelper = <PageHeader title={device?.name} />
+    const pageHelper = <PageHeader title={device?.name} />;
     return (
         <VPanel className={styles.deviceDetailView} header={pageHelper}>
             <Tabs items={items} />
         </VPanel>
-    )
-}
-export default DeviceDetailView
+    );
+};
+export default DeviceDetailView;

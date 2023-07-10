@@ -1,15 +1,15 @@
-import { AppToolbar, HPanel, VPanel } from '@moensun/antd-react-ext'
-import { Menu, MenuProps } from 'antd'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import styles from './layout.module.less'
-import { RoutesConstants } from '../../router/routes.constants'
-import { useEffect, useState } from 'react'
+import { AppToolbar, HPanel, VPanel } from '@moensun/antd-react-ext';
+import { Menu, MenuProps } from 'antd';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import styles from './layout.module.less';
+import { RoutesConstants } from '../../router/routes.constants';
+import { useEffect, useState } from 'react';
 
 const MainLayoutView = () => {
-    const navigate = useNavigate()
-    const location = useLocation()
-    const [selectedKeys, setSelectedKeys] = useState<any[]>([])
-    const [openKeys, setOpenKeys] = useState<any[]>([])
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [selectedKeys, setSelectedKeys] = useState<any[]>([]);
+    const [openKeys, setOpenKeys] = useState<any[]>([]);
     const menuItems: MenuProps['items'] = [
         {
             key: 'alarm-management',
@@ -109,21 +109,21 @@ const MainLayoutView = () => {
                 },
             ],
         },
-    ]
+    ];
 
     const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
-        const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1)
-        setOpenKeys(latestOpenKey ? [latestOpenKey] : [])
-    }
+        const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+        setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    };
 
     useEffect(() => {
         if (location && location.pathname) {
-            const keyArr = location.pathname.split('/')
-            setOpenKeys([keyArr?.[1]])
-            setSelectedKeys([keyArr?.[2]])
+            const keyArr = location.pathname.split('/');
+            setOpenKeys([keyArr?.[1]]);
+            setSelectedKeys([keyArr?.[2]]);
         }
-    }, [location])
-    const appBar = <AppToolbar title={`物联网`} />
+    }, [location]);
+    const appBar = <AppToolbar title={`物联网`} />;
     const sider = (
         <div className={styles.layoutViewSider}>
             <Menu
@@ -135,13 +135,13 @@ const MainLayoutView = () => {
                 selectedKeys={selectedKeys}
             />
         </div>
-    )
+    );
     return (
         <VPanel className={styles.layoutView} header={appBar}>
             <HPanel className={styles.layoutViewContent} left={sider}>
                 <Outlet />
             </HPanel>
         </VPanel>
-    )
-}
-export default MainLayoutView
+    );
+};
+export default MainLayoutView;

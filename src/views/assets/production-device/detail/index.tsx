@@ -1,19 +1,19 @@
-import { PageHeader, VPanel } from '@moensun/antd-react-ext'
-import { useNavigate, useParams } from 'react-router-dom'
-import styles from './index.module.less'
-import { Tabs, TabsProps, Image, Spin } from 'antd'
-import FormInfo from '@/components/form-info'
-import { formatDateTime } from '@/commons/util/date.utils'
-import { useRequest } from 'ahooks'
-import { assetsApi } from '@/apis'
-import { useEffect } from 'react'
-import { AssetsStatesConfig } from '@/constants/consts'
-import { ASSETS_STATES } from '@/constants/enums'
-import UploadMyFile from '@/components/upload/UploadFile'
+import { PageHeader, VPanel } from '@moensun/antd-react-ext';
+import { useNavigate, useParams } from 'react-router-dom';
+import styles from './index.module.less';
+import { Tabs, TabsProps, Image, Spin } from 'antd';
+import FormInfo from '@/components/form-info';
+import { formatDateTime } from '@/commons/util/date.utils';
+import { useRequest } from 'ahooks';
+import { assetsApi } from '@/apis';
+import { useEffect } from 'react';
+import { AssetsStatesConfig } from '@/constants/consts';
+import { ASSETS_STATES } from '@/constants/enums';
+import UploadMyFile from '@/components/upload/UploadFile';
 
 const ProductionDeviceDetail = () => {
-    const { id } = useParams()
-    const navigate = useNavigate()
+    const { id } = useParams();
+    const navigate = useNavigate();
     /** 查询设备信息 */
     const {
         loading,
@@ -21,18 +21,18 @@ const ProductionDeviceDetail = () => {
         run: getAssetById,
     } = useRequest((id) => assetsApi.getAssetById(id), {
         manual: true,
-    })
+    });
     useEffect(() => {
-        getAssetById(id)
-    }, [getAssetById, id])
+        getAssetById(id);
+    }, [getAssetById, id]);
     const pageHelper = (
         <PageHeader
             title={data?.name}
             onBack={() => {
-                navigate(-1)
+                navigate(-1);
             }}
         />
-    )
+    );
     const items: TabsProps['items'] = [
         {
             key: '1',
@@ -100,7 +100,7 @@ const ProductionDeviceDetail = () => {
                                             key={item?.uid}
                                             src={item?.url}
                                         />
-                                    )
+                                    );
                                 }),
                             },
                             {
@@ -122,11 +122,11 @@ const ProductionDeviceDetail = () => {
             label: `设备情况`,
             children: <div className={styles.infoWrapper}>设备情况</div>,
         },
-    ]
+    ];
     return (
         <VPanel className={styles.wrapper} header={pageHelper}>
             <Tabs items={items} />
         </VPanel>
-    )
-}
-export default ProductionDeviceDetail
+    );
+};
+export default ProductionDeviceDetail;

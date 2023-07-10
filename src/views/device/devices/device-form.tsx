@@ -1,28 +1,28 @@
-import { Button, ButtonProps, Form, Input, notification } from 'antd'
-import { FC, useState } from 'react'
-import { deviceApi } from '@apis'
-import { ModalForm } from '@moensun/antd-react-ext'
-import ProductSelect from '@components/product-select'
+import { Button, ButtonProps, Form, Input, notification } from 'antd';
+import { FC, useState } from 'react';
+import { deviceApi } from '@apis';
+import { ModalForm } from '@moensun/antd-react-ext';
+import ProductSelect from '@components/product-select';
 
 type DeviceFormProps = {
-    onSuccess?: () => void
-} & ButtonProps
+    onSuccess?: () => void;
+} & ButtonProps;
 const DeviceForm: FC<DeviceFormProps> = ({ onSuccess, ...rest }) => {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
     const handleSubmit = (values: any) => {
         deviceApi
             .createDevice(values)
             .then(() => {
-                setOpen(false)
-                notification.success({ message: '保存成功' })
+                setOpen(false);
+                notification.success({ message: '保存成功' });
                 if (onSuccess) {
-                    onSuccess()
+                    onSuccess();
                 }
             })
             .catch((ex) => {
-                notification.success({ message: ex.message })
-            })
-    }
+                notification.success({ message: ex.message });
+            });
+    };
 
     return (
         <ModalForm
@@ -43,6 +43,6 @@ const DeviceForm: FC<DeviceFormProps> = ({ onSuccess, ...rest }) => {
                 <Input />
             </Form.Item>
         </ModalForm>
-    )
-}
-export default DeviceForm
+    );
+};
+export default DeviceForm;

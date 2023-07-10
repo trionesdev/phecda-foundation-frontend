@@ -1,6 +1,6 @@
 export interface PageRep<T> {
-    rows: T[]
-    pageSize?: number
-    pageNum?: number
-    total?: number
+    rows: T[];
+    pageSize?: number;
+    pageNum?: number;
+    total?: number;
 }

@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import styles from './index.module.less'
-import { DrawerForm, VPanel } from '@moensun/antd-react-ext'
-import GridTable from '@components/grid-table'
-import { useRequest } from 'ahooks'
-import { assetsApi } from '@/apis'
+import React, { useEffect, useMemo, useState } from 'react';
+import styles from './index.module.less';
+import { DrawerForm, VPanel } from '@moensun/antd-react-ext';
+import GridTable from '@components/grid-table';
+import { useRequest } from 'ahooks';
+import { assetsApi } from '@/apis';
 import {
     Button,
     Divider,
@@ -13,33 +13,33 @@ import {
     Select,
     Space,
     message,
-} from 'antd'
-import { Link } from 'react-router-dom'
-import { RoutesConstants } from '@/router/routes.constants'
-import SearchToolbar from '@/components/search-toolbar'
-import { TableParams } from '@/constants/types'
-import { AssetsStatesConfig, AssetsStatesOptions } from '@/constants/consts'
-import useQueryDeviceAll from '@/hooks/useQueryDeviceAll'
-import { ASSETS_STATES } from '@/constants/enums'
-import UploadImage from '@/components/upload/UploadImage'
-import UploadMyFile from '@/components/upload/UploadFile'
-import useQueryDictionaryOptions from '@/hooks/useQueryDictionaryOptions'
-import _ from 'lodash'
+} from 'antd';
+import { Link } from 'react-router-dom';
+import { RoutesConstants } from '@/router/routes.constants';
+import SearchToolbar from '@/components/search-toolbar';
+import { TableParams } from '@/constants/types';
+import { AssetsStatesConfig, AssetsStatesOptions } from '@/constants/consts';
+import useQueryDeviceAll from '@/hooks/useQueryDeviceAll';
+import { ASSETS_STATES } from '@/constants/enums';
+import UploadImage from '@/components/upload/UploadImage';
+import UploadMyFile from '@/components/upload/UploadFile';
+import useQueryDictionaryOptions from '@/hooks/useQueryDictionaryOptions';
+import _ from 'lodash';
 
 const ProductionDevice: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
         pageNum: 1,
-    })
-    const [drawerOpen, setDrawerOpen] = useState(false)
+    });
+    const [drawerOpen, setDrawerOpen] = useState(false);
     const { typeCodeOptions: assetsTypeOptions } =
-        useQueryDictionaryOptions('assets_type')
+        useQueryDictionaryOptions('assets_type');
     const { typeCodeOptions: locationCodeOptions } =
-        useQueryDictionaryOptions('location_code')
+        useQueryDictionaryOptions('location_code');
     const [drawerFormeValue, setDrawerFormeValue] = useState<
         Record<string, any> | undefined
-    >({})
-    const { allDeviceDataOptions } = useQueryDeviceAll()
+    >({});
+    const { allDeviceDataOptions } = useQueryDeviceAll();
     /** 请求表格 */
     const {
         data: tableData,
@@ -49,49 +49,49 @@ const ProductionDevice: React.FC = () => {
     } = useRequest(
         (tableParams: TableParams) => assetsApi.queryAssetsPage(tableParams),
         { manual: true }
-    )
+    );
     const afterSubmitForm = () => {
-        setDrawerFormeValue(undefined)
-        setDrawerOpen(false)
-        message.success('操作成功')
-        refreshFetchTableData()
-    }
+        setDrawerFormeValue(undefined);
+        setDrawerOpen(false);
+        message.success('操作成功');
+        refreshFetchTableData();
+    };
     /** 添加设备 */
     const { run: addAssets } = useRequest(
         (params) => assetsApi.addAssets(params),
         {
             manual: true,
             onSuccess() {
-                afterSubmitForm()
+                afterSubmitForm();
             },
         }
-    )
+    );
     /** 修改设备 */
     const { run: editAssets } = useRequest(
         (id, params) => assetsApi.editAssetsById(id, params),
         {
             manual: true,
             onSuccess() {
-                afterSubmitForm()
+                afterSubmitForm();
             },
         }
-    )
+    );
     /** 删除设备 */
     const { run: deleteAsset } = useRequest(
         (id) => assetsApi.deleteAssetsById(id),
         {
             manual: true,
             onSuccess() {
-                afterSubmitForm()
+                afterSubmitForm();
             },
         }
-    )
+    );
     const handlePageChange = (pageNum: number, pageSize: number) => {
-        setTableParams({ ...tableParams, pageNum, pageSize })
-    }
+        setTableParams({ ...tableParams, pageNum, pageSize });
+    };
     useEffect(() => {
-        fetchTableData(tableParams)
-    }, [fetchTableData, tableParams])
+        fetchTableData(tableParams);
+    }, [fetchTableData, tableParams]);
     const columns = [
         {
             title: '编号',
@@ -108,7 +108,7 @@ const ProductionDevice: React.FC = () => {
                 return (
                     _.find(assetsTypeOptions, { value: typeCode })?.label ??
                     typeCode
-                )
+                );
             },
         },
 
@@ -119,14 +119,14 @@ const ProductionDevice: React.FC = () => {
                 return (
                     _.find(assetsTypeOptions, { value: typeCode })?.label ??
                     typeCode
-                )
+                );
             },
         },
         {
             title: '当前状态',
             dataIndex: 'state',
             render: (state: ASSETS_STATES) => {
-                return AssetsStatesConfig?.[state]
+                return AssetsStatesConfig?.[state];
             },
         },
 
@@ -159,8 +159,8 @@ const ProductionDevice: React.FC = () => {
                             size={`small`}
                             type={`link`}
                             onClick={() => {
-                                setDrawerFormeValue({ ...record })
-                                setDrawerOpen(true)
+                                setDrawerFormeValue({ ...record });
+                                setDrawerOpen(true);
                             }}
                         >
                             编辑
@@ -175,10 +175,10 @@ const ProductionDevice: React.FC = () => {
                             </Button>
                         </Popconfirm>
                     </Space>
-                )
+                );
             },
         },
-    ]
+    ];
     const tableParamsFormItems = useMemo(
         () => (
             <>
@@ -205,7 +205,7 @@ const ProductionDevice: React.FC = () => {
         ),
         // eslint-disable-next-line react-hooks/exhaustive-deps
         []
-    )
+    );
     return (
         <VPanel className={styles.wrapper}>
             <GridTable
@@ -219,14 +219,14 @@ const ProductionDevice: React.FC = () => {
                                     pageNum: 1,
                                     pageSize: 10,
                                     ...v,
-                                })
+                                });
                             }}
                             addButtons={
                                 <Button
                                     type="primary"
                                     onClick={() => {
-                                        setDrawerFormeValue(undefined)
-                                        setDrawerOpen(true)
+                                        setDrawerFormeValue(undefined);
+                                        setDrawerOpen(true);
                                     }}
                                 >
                                     新建生产设备
@@ -256,8 +256,8 @@ const ProductionDevice: React.FC = () => {
                 onSubmit={(value, from) => {
                     drawerFormeValue?.id
                         ? editAssets(drawerFormeValue.id, value)
-                        : addAssets(value)
-                    from?.resetFields()
+                        : addAssets(value);
+                    from?.resetFields();
                 }}
                 formValues={drawerFormeValue}
             >
@@ -339,7 +339,7 @@ const ProductionDevice: React.FC = () => {
                 </Form.Item>
             </DrawerForm>
         </VPanel>
-    )
-}
+    );
+};
 
-export default ProductionDevice
+export default ProductionDevice;

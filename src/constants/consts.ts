@@ -1,4 +1,4 @@
-import { ASSETS_STATES } from './enums'
+import { ASSETS_STATES } from './enums';
 
 export const AssetsStatesConfig = {
     [ASSETS_STATES.SCRAPPED]: '报废',
@@ -6,7 +6,7 @@ export const AssetsStatesConfig = {
     [ASSETS_STATES.SHUTDOWN_FOR_REPAIR]: '停机维修',
     [ASSETS_STATES.OPERATION_WITH_FAULTS]: '带病运行',
     [ASSETS_STATES.NORMAL_OPERATION]: '正常运行',
-}
+};
 export const AssetsStatesOptions = [
     {
         label: '报废',
@@ -28,4 +28,4 @@ export const AssetsStatesOptions = [
         label: '正常运行',
         value: ASSETS_STATES.NORMAL_OPERATION,
     },
-]
+];

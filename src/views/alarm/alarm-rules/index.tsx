@@ -1,8 +1,8 @@
-import React from 'react'
-import styles from './index.module.less'
+import React from 'react';
+import styles from './index.module.less';
 
 const AlarmRules: React.FC = () => {
-    return <>告警配置</>
-}
+    return <>告警配置</>;
+};
 
-export default AlarmRules
+export default AlarmRules;

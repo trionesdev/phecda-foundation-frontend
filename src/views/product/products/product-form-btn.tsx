@@ -1,35 +1,35 @@
-import { DrawerForm } from '@moensun/antd-react-ext'
-import { FC, useState } from 'react'
-import { Button, ButtonProps, Form, Input, notification, Radio } from 'antd'
-import { deviceApi } from '@apis'
-import { DeviceNodeType } from '../support/device.constants'
-import _ from 'lodash'
+import { DrawerForm } from '@moensun/antd-react-ext';
+import { FC, useState } from 'react';
+import { Button, ButtonProps, Form, Input, notification, Radio } from 'antd';
+import { deviceApi } from '@apis';
+import { DeviceNodeType } from '../support/device.constants';
+import _ from 'lodash';
 
 type ProductFormBtnProps = {
-    id?: string
-    onSuccess?: () => void
-} & ButtonProps
+    id?: string;
+    onSuccess?: () => void;
+} & ButtonProps;
 const ProductFormBtn: FC<ProductFormBtnProps> = ({
     id,
     onSuccess,
     ...rest
 }) => {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
     const handleSubmit = (values: any) => {
-        let request: Promise<any>
+        let request: Promise<any>;
         if (id) {
-            request = deviceApi.updateProductById(id, values)
+            request = deviceApi.updateProductById(id, values);
         } else {
-            request = deviceApi.createProduct(values)
+            request = deviceApi.createProduct(values);
         }
         request.then(() => {
-            setOpen(false)
-            notification.success({ message: '操作成功' })
+            setOpen(false);
+            notification.success({ message: '操作成功' });
             if (onSuccess) {
-                onSuccess()
+                onSuccess();
             }
-        })
-    }
+        });
+    };
 
     return (
         <DrawerForm
@@ -58,6 +58,6 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
                 </Radio.Group>
             </Form.Item>
         </DrawerForm>
-    )
-}
-export default ProductFormBtn
+    );
+};
+export default ProductFormBtn;

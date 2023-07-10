@@ -4,47 +4,47 @@ import {
     HPanel,
     TableToolbar,
     VPanel,
-} from '@moensun/antd-react-ext'
-import { Button, Space } from 'antd'
-import { useEffect, useState } from 'react'
-import ProductFormBtn from './product-form-btn'
-import { deviceApi } from '@apis'
-import { ProductPageRep, ProductRep } from '../../../apis/device/device.rep'
-import { useNavigate } from 'react-router-dom'
-import { RoutesConstants } from '../../../router/routes.constants'
-import styles from './products.module.less'
+} from '@moensun/antd-react-ext';
+import { Button, Space } from 'antd';
+import { useEffect, useState } from 'react';
+import ProductFormBtn from './product-form-btn';
+import { deviceApi } from '@apis';
+import { ProductPageRep, ProductRep } from '../../../apis/device/device.rep';
+import { useNavigate } from 'react-router-dom';
+import { RoutesConstants } from '../../../router/routes.constants';
+import styles from './products.module.less';
 
 const ProductsView = () => {
-    const navigate = useNavigate()
-    const [querySeq, setQuerySeq] = useState(0)
-    const [pageNum, setPageNum] = useState(1)
-    const [pageSize, setPageSize] = useState(10)
-    const [loading, setLoading] = useState(false)
-    const [products, setProducts] = useState<ProductRep[]>([])
+    const navigate = useNavigate();
+    const [querySeq, setQuerySeq] = useState(0);
+    const [pageNum, setPageNum] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [loading, setLoading] = useState(false);
+    const [products, setProducts] = useState<ProductRep[]>([]);
 
     const handleQueryProductPage = () => {
         let params = {
             pageNum,
             pageSize,
-        }
-        setLoading(false)
+        };
+        setLoading(false);
         deviceApi
             .queryProductPage(params)
             .then((res: ProductPageRep) => {
-                setProducts(res.rows)
+                setProducts(res.rows);
             })
             .finally(() => {
-                setLoading(false)
-            })
-    }
+                setLoading(false);
+            });
+    };
 
     const handleRefresh = () => {
-        setQuerySeq(querySeq + 1)
-    }
+        setQuerySeq(querySeq + 1);
+    };
 
     useEffect(() => {
-        handleQueryProductPage()
-    }, [querySeq, pageNum, pageSize])
+        handleQueryProductPage();
+    }, [querySeq, pageNum, pageSize]);
 
     const columns = [
         {
@@ -70,10 +70,10 @@ const ProductsView = () => {
                             查看
                         </Button>
                     </Space>
-                )
+                );
             },
         },
-    ]
+    ];
 
     const tableBar = (
         <TableToolbar
@@ -87,7 +87,7 @@ const ProductsView = () => {
                 </ProductFormBtn>,
             ]}
         />
-    )
+    );
 
     return (
         <VPanel className={styles.productsView}>
@@ -101,6 +101,6 @@ const ProductsView = () => {
                 loading={loading}
             />
         </VPanel>
-    )
-}
-export default ProductsView
+    );
+};
+export default ProductsView;

@@ -1,14 +1,14 @@
-import { FC, useEffect, useState } from 'react'
-import { Select, SelectProps } from 'antd'
-import { deviceApi } from '@apis'
-import _ from 'lodash'
-import { all } from 'axios'
+import { FC, useEffect, useState } from 'react';
+import { Select, SelectProps } from 'antd';
+import { deviceApi } from '@apis';
+import _ from 'lodash';
+import { all } from 'axios';
 
 type ProductSelectProps = {
-    allOption?: boolean
-} & SelectProps
+    allOption?: boolean;
+} & SelectProps;
 const ProductSelect: FC<ProductSelectProps> = ({ allOption, ...rest }) => {
-    const [options, setOptions] = useState<any>([])
+    const [options, setOptions] = useState<any>([]);
 
     const handleQuery = () => {
         deviceApi.queryProductList().then((res: any) => {
@@ -17,13 +17,13 @@ const ProductSelect: FC<ProductSelectProps> = ({ allOption, ...rest }) => {
                     allOption ? { value: null, name: '全部产品' } : [],
                     res || []
                 )
-            )
-        })
-    }
+            );
+        });
+    };
 
     useEffect(() => {
-        handleQuery()
-    }, [])
+        handleQuery();
+    }, []);
 
     return (
         <Select
@@ -31,6 +31,6 @@ const ProductSelect: FC<ProductSelectProps> = ({ allOption, ...rest }) => {
             fieldNames={{ value: 'id', label: 'name' }}
             options={options}
         />
-    )
-}
-export default ProductSelect
+    );
+};
+export default ProductSelect;

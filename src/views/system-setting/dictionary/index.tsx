@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import styles from './index.module.less'
-import { DrawerForm, PageHeader, VPanel } from '@moensun/antd-react-ext'
-import GridTable from '@components/grid-table'
-import { useRequest } from 'ahooks'
-import { systemApi } from '@/apis'
+import React, { useEffect, useMemo, useState } from 'react';
+import styles from './index.module.less';
+import { DrawerForm, PageHeader, VPanel } from '@moensun/antd-react-ext';
+import GridTable from '@components/grid-table';
+import { useRequest } from 'ahooks';
+import { systemApi } from '@/apis';
 import {
     Button,
     Divider,
@@ -13,27 +13,27 @@ import {
     Popconfirm,
     Space,
     message,
-} from 'antd'
-import SearchToolbar from '@/components/search-toolbar'
-import { TableParams } from '@/constants/types'
-import { formatDateTime } from '@/commons/util/date.utils'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useGetSearch } from '@/hooks/useSearch'
+} from 'antd';
+import SearchToolbar from '@/components/search-toolbar';
+import { TableParams } from '@/constants/types';
+import { formatDateTime } from '@/commons/util/date.utils';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useGetSearch } from '@/hooks/useSearch';
 
 const Dictionary: React.FC = () => {
-    const { id: typeCode } = useParams()
-    const { name } = useGetSearch<{ name: string }>()
+    const { id: typeCode } = useParams();
+    const { name } = useGetSearch<{ name: string }>();
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
         pageNum: 1,
-    })
-    const [drawerOpen, setDrawerOpen] = useState(false)
+    });
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
     const [drawerFormeValue, setDrawerFormeValue] = useState<
         Record<string, any> | undefined
-    >({})
+    >({});
     /** 请求表格 */
     const {
         data: tableData,
@@ -47,49 +47,49 @@ const Dictionary: React.FC = () => {
                 typeCode,
             }),
         { manual: true }
-    )
+    );
     const afterSubmitForm = () => {
-        setDrawerFormeValue(undefined)
-        setDrawerOpen(false)
-        message.success('操作成功')
-        refreshFetchTableData()
-    }
+        setDrawerFormeValue(undefined);
+        setDrawerOpen(false);
+        message.success('操作成功');
+        refreshFetchTableData();
+    };
     /** 添加配件 */
     const { run: addDictionary } = useRequest(
         (params) => systemApi.addDictionary(params),
         {
             manual: true,
             onSuccess() {
-                afterSubmitForm()
+                afterSubmitForm();
             },
         }
-    )
+    );
     /** 修改配件 */
     const { run: editDictionary } = useRequest(
         (id, params) => systemApi.editDictionaryById(id, params),
         {
             manual: true,
             onSuccess() {
-                afterSubmitForm()
+                afterSubmitForm();
             },
         }
-    )
+    );
     /** 删除设备 */
     const { run: deleteDictionary } = useRequest(
         (id) => systemApi.deleteDictionaryById(id),
         {
             manual: true,
             onSuccess() {
-                afterSubmitForm()
+                afterSubmitForm();
             },
         }
-    )
+    );
     const handlePageChange = (pageNum: number, pageSize: number) => {
-        setTableParams({ ...tableParams, pageNum, pageSize })
-    }
+        setTableParams({ ...tableParams, pageNum, pageSize });
+    };
     useEffect(() => {
-        fetchTableData(tableParams)
-    }, [fetchTableData, tableParams])
+        fetchTableData(tableParams);
+    }, [fetchTableData, tableParams]);
     const columns = [
         {
             title: '字典编号',
@@ -111,14 +111,14 @@ const Dictionary: React.FC = () => {
             title: '创建时间',
             dataIndex: 'createdAt',
             render: (value: number) => {
-                return formatDateTime(value)
+                return formatDateTime(value);
             },
         },
         {
             title: '更新时间',
             dataIndex: 'updatedAt',
             render: (value: number) => {
-                return formatDateTime(value)
+                return formatDateTime(value);
             },
         },
         {
@@ -133,8 +133,8 @@ const Dictionary: React.FC = () => {
                             size={`small`}
                             type={`link`}
                             onClick={() => {
-                                setDrawerFormeValue({ ...record })
-                                setDrawerOpen(true)
+                                setDrawerFormeValue({ ...record });
+                                setDrawerOpen(true);
                             }}
                         >
                             编辑
@@ -149,10 +149,10 @@ const Dictionary: React.FC = () => {
                             </Button>
                         </Popconfirm>
                     </Space>
-                )
+                );
             },
         },
-    ]
+    ];
     const tableParamsFormItems = useMemo(
         () => (
             <>
@@ -165,15 +165,15 @@ const Dictionary: React.FC = () => {
             </>
         ),
         []
-    )
+    );
     const pageHelper = (
         <PageHeader
             title={name}
             onBack={() => {
-                navigate(-1)
+                navigate(-1);
             }}
         />
-    )
+    );
     return (
         <VPanel className={styles.wrapper} header={pageHelper}>
             <GridTable
@@ -187,14 +187,14 @@ const Dictionary: React.FC = () => {
                                     pageNum: 1,
                                     pageSize: 10,
                                     ...v,
-                                })
+                                });
                             }}
                             addButtons={
                                 <Button
                                     type="primary"
                                     onClick={() => {
-                                        setDrawerFormeValue(undefined)
-                                        setDrawerOpen(true)
+                                        setDrawerFormeValue(undefined);
+                                        setDrawerOpen(true);
                                     }}
                                 >
                                     新建字典
@@ -222,11 +222,11 @@ const Dictionary: React.FC = () => {
                 layout="vertical"
                 onOpenChange={(op) => setDrawerOpen(op)}
                 onSubmit={(value, from) => {
-                    const newValue = { ...value, typeCode }
+                    const newValue = { ...value, typeCode };
                     drawerFormeValue?.id
                         ? editDictionary(drawerFormeValue.id, newValue)
-                        : addDictionary(newValue)
-                    from?.resetFields()
+                        : addDictionary(newValue);
+                    from?.resetFields();
                 }}
                 formValues={drawerFormeValue}
             >
@@ -256,7 +256,7 @@ const Dictionary: React.FC = () => {
                 </Form.Item>
             </DrawerForm>
         </VPanel>
-    )
-}
+    );
+};
 
-export default Dictionary
+export default Dictionary;

@@ -1,13 +1,13 @@
-import styles from './product-detail.module.less'
-import { Descriptions } from 'antd'
-import { FC } from 'react'
-import _ from 'lodash'
-import { formatDateTime } from '../../../commons/util/date.utils'
-import { DeviceNodeType } from '../support/device.constants'
+import styles from './product-detail.module.less';
+import { Descriptions } from 'antd';
+import { FC } from 'react';
+import _ from 'lodash';
+import { formatDateTime } from '../../../commons/util/date.utils';
+import { DeviceNodeType } from '../support/device.constants';
 
 type InfoTabProps = {
-    product: any
-}
+    product: any;
+};
 const InfoTab: FC<InfoTabProps> = ({ product }) => {
     return (
         <div className={styles.infoTab}>
@@ -23,6 +23,6 @@ const InfoTab: FC<InfoTabProps> = ({ product }) => {
                 </Descriptions.Item>
             </Descriptions>
         </div>
-    )
-}
-export default InfoTab
+    );
+};
+export default InfoTab;

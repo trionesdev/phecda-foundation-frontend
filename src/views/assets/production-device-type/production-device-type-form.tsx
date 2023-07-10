@@ -1,16 +1,16 @@
-import { Button, ButtonProps, Form, Input, notification } from 'antd'
-import { FC, useState } from 'react'
-import { ModalForm } from '@moensun/antd-react-ext'
+import { Button, ButtonProps, Form, Input, notification } from 'antd';
+import { FC, useState } from 'react';
+import { ModalForm } from '@moensun/antd-react-ext';
 
 type ProductionDeviceTypeFormProps = {
-    onSuccess?: () => void
-} & ButtonProps
+    onSuccess?: () => void;
+} & ButtonProps;
 const ProductionDeviceTypeForm: FC<ProductionDeviceTypeFormProps> = ({
     onSuccess,
     ...rest
 }) => {
-    const [open, setOpen] = useState(false)
-    const handleSubmit = (values: any) => {}
+    const [open, setOpen] = useState(false);
+    const handleSubmit = (values: any) => {};
 
     return (
         <ModalForm
@@ -25,6 +25,6 @@ const ProductionDeviceTypeForm: FC<ProductionDeviceTypeFormProps> = ({
                 <Input />
             </Form.Item>
         </ModalForm>
-    )
-}
-export default ProductionDeviceTypeForm
+    );
+};
+export default ProductionDeviceTypeForm;

@@ -1,7 +1,7 @@
-import { FC } from 'react'
-import { ValueTypeEnum, ValueTypeProps } from './index'
-import { Form, Input } from 'antd'
-import _ from 'lodash'
+import { FC } from 'react';
+import { ValueTypeEnum, ValueTypeProps } from './index';
+import { Form, Input } from 'antd';
+import _ from 'lodash';
 
 const ValueTypeString: FC<ValueTypeProps> = ({ group }) => {
     return (
@@ -22,6 +22,6 @@ const ValueTypeString: FC<ValueTypeProps> = ({ group }) => {
                 <Input addonAfter={`字节`} />
             </Form.Item>
         </>
-    )
-}
-export default ValueTypeString
+    );
+};
+export default ValueTypeString;

@@ -1,5 +1,5 @@
-import { DrawerForm } from '@moensun/antd-react-ext'
-import { FC, useEffect, useState } from 'react'
+import { DrawerForm } from '@moensun/antd-react-ext';
+import { FC, useEffect, useState } from 'react';
 import {
     Button,
     ButtonProps,
@@ -8,12 +8,12 @@ import {
     notification,
     Radio,
     RadioChangeEvent,
-} from 'antd'
-import ThingModelPropertyForm from './thing-model-property-form'
-import _ from 'lodash'
-import { deviceApi } from '@apis'
-import ThingModelServiceForm from './thing-model-service-form'
-import ThingModelEventForm from './thing-model-event-form'
+} from 'antd';
+import ThingModelPropertyForm from './thing-model-property-form';
+import _ from 'lodash';
+import { deviceApi } from '@apis';
+import ThingModelServiceForm from './thing-model-service-form';
+import ThingModelEventForm from './thing-model-event-form';
 
 export enum AbilityType {
     PROPERTY = 'PROPERTY',
@@ -22,11 +22,11 @@ export enum AbilityType {
 }
 
 type ThingsModelAbilityEditBtnProps = {
-    productId: string
-    editAbilityType?: AbilityType
-    identifier?: string
-    onSuccess?: () => void
-} & ButtonProps
+    productId: string;
+    editAbilityType?: AbilityType;
+    identifier?: string;
+    onSuccess?: () => void;
+} & ButtonProps;
 const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
     productId,
     editAbilityType,
@@ -34,62 +34,62 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
     onSuccess,
     ...rest
 }) => {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
     const [abilityType, setAbilityType] = useState(
         editAbilityType || AbilityType.PROPERTY
-    )
-    const [formValues, setFormValues] = useState<any>()
+    );
+    const [formValues, setFormValues] = useState<any>();
 
     const handleAbilityTypeChange = (e: RadioChangeEvent) => {
-        setAbilityType(e.target.value)
-    }
+        setAbilityType(e.target.value);
+    };
 
     const handleSubmit = (values: any) => {
-        console.log(values)
-        let data = _.assign(values, { identifier: identifier })
+        console.log(values);
+        let data = _.assign(values, { identifier: identifier });
         deviceApi
             .upsertThingModelDraft(productId, data)
             .then(() => {
-                notification.success({ message: '保存成功' })
+                notification.success({ message: '保存成功' });
                 if (onSuccess) {
-                    onSuccess()
+                    onSuccess();
                 }
             })
-            .catch(() => {})
-    }
+            .catch(() => {});
+    };
 
     const handleQueryThingModel = () => {
         deviceApi.queryProductThingModelDraft(productId).then((res: any) => {
             const ability: any = _.values(_.get(res, 'thingModel'))
                 .reduce((prev, cur) => _.concat(prev, cur), [])
                 .find((ability: any) => {
-                    return _.isEqual(ability.identifier, identifier)
-                })
-            let typeAbility = {}
+                    return _.isEqual(ability.identifier, identifier);
+                });
+            let typeAbility = {};
             switch (abilityType) {
                 case AbilityType.PROPERTY:
-                    typeAbility = { property: ability }
-                    break
+                    typeAbility = { property: ability };
+                    break;
                 case AbilityType.EVENT:
-                    typeAbility = { event: ability }
-                    break
+                    typeAbility = { event: ability };
+                    break;
                 case AbilityType.SERVICE:
-                    typeAbility = { service: ability }
-                    break
+                    typeAbility = { service: ability };
+                    break;
                 default:
-                    break
+                    break;
             }
             setFormValues(
                 _.assign({}, typeAbility, { abilityType: abilityType })
-            )
-        })
-    }
+            );
+        });
+    };
 
     useEffect(() => {
         if (open && identifier) {
-            handleQueryThingModel()
+            handleQueryThingModel();
         }
-    }, [abilityType, identifier, open])
+    }, [abilityType, identifier, open]);
 
     return (
         <DrawerForm
@@ -126,6 +126,6 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
                 <ThingModelEventForm />
             )}
         </DrawerForm>
-    )
-}
-export default ThingModelAbilityForm
+    );
+};
+export default ThingModelAbilityForm;

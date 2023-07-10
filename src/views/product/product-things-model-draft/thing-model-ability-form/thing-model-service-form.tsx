@@ -1,10 +1,10 @@
-import { FC } from 'react'
-import { Form, Input, Radio } from 'antd'
-import ParamsData from './params-data'
+import { FC } from 'react';
+import { Form, Input, Radio } from 'antd';
+import ParamsData from './params-data';
 
-type ThingsModelServiceFormProps = {}
+type ThingsModelServiceFormProps = {};
 const ThingModelServiceForm: FC<ThingsModelServiceFormProps> = () => {
-    const ability = 'service'
+    const ability = 'service';
     return (
         <>
             <Form.Item
@@ -46,6 +46,6 @@ const ThingModelServiceForm: FC<ThingsModelServiceFormProps> = () => {
                 <Input.TextArea />
             </Form.Item>
         </>
-    )
-}
-export default ThingModelServiceForm
+    );
+};
+export default ThingModelServiceForm;

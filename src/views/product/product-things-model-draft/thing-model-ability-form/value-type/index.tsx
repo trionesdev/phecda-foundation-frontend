@@ -1,12 +1,12 @@
-import { Form, Select } from 'antd'
-import ValueTypeInt from './value-type-int'
-import ValueTypeSelect from '../../../../../components/value-type-select/value-type-select'
-import { FC, useState } from 'react'
-import _ from 'lodash'
-import ValueTypeBool from './value-type-bool'
-import ValueTypeFloat from './value-type-float'
-import ValueTypeDouble from './value-type-double'
-import ValueTypeString from './value-type-string'
+import { Form, Select } from 'antd';
+import ValueTypeInt from './value-type-int';
+import ValueTypeSelect from '../../../../../components/value-type-select/value-type-select';
+import { FC, useState } from 'react';
+import _ from 'lodash';
+import ValueTypeBool from './value-type-bool';
+import ValueTypeFloat from './value-type-float';
+import ValueTypeDouble from './value-type-double';
+import ValueTypeString from './value-type-string';
 
 export enum ValueTypeEnum {
     INT = 'INT',
@@ -19,11 +19,11 @@ export enum ValueTypeEnum {
 }
 
 export type ValueTypeProps = {
-    group?: string | number | any[]
-}
+    group?: string | number | any[];
+};
 
 const ValueType: FC<ValueTypeProps> = ({ group }) => {
-    const [valueType, setValueType] = useState(ValueTypeEnum.INT)
+    const [valueType, setValueType] = useState(ValueTypeEnum.INT);
     return (
         <>
             <Form.Item
@@ -50,6 +50,6 @@ const ValueType: FC<ValueTypeProps> = ({ group }) => {
                 <ValueTypeString group={[group, `valueSpec`]} />
             )}
         </>
-    )
-}
-export default ValueType
+    );
+};
+export default ValueType;

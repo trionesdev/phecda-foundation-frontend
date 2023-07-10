@@ -1,3 +1,3 @@
-import ProductSelect from './product-select'
+import ProductSelect from './product-select';
 
-export default ProductSelect
+export default ProductSelect;
