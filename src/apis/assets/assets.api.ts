@@ -58,6 +58,10 @@ export default class AssetsApi extends BaseApi {
     }): Promise<any> {
         return this.request.get(`${this.baseUri}/assets/page`, { params })
     }
+    /** 获取所有资产*/
+    queryAssetsAll(): Promise<any> {
+        return this.request.get(`${this.baseUri}/assets/all`)
+    }
     /** 新建生产设备 */
     addAssets(params: Record<string, any>): Promise<any> {
         return this.request.post(`${this.baseUri}/assets`, params)

@@ -20,6 +20,8 @@ import { TableParams } from '@/constants/types'
 import { AssetsStatesOptions } from '@/constants/consts'
 import useQueryDeviceAll from '@/hooks/useQueryDeviceAll'
 import { formatDateTime } from '@/commons/util/date.utils'
+import useQueryAssetsAll from '@/hooks/useQueryAssetsAll'
+import _ from 'lodash'
 
 const AccessoryType: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
@@ -32,6 +34,7 @@ const AccessoryType: React.FC = () => {
         Record<string, any> | undefined
     >({})
     const { allDeviceDataOptions } = useQueryDeviceAll()
+    const { allAssetsOptions } = useQueryAssetsAll()
     /** 请求表格 */
     const {
         data: tableData,
@@ -97,7 +100,13 @@ const AccessoryType: React.FC = () => {
 
         {
             title: '所属生产设备',
-            dataIndex: 'typeCode',
+            dataIndex: 'assetSn',
+            render: (assetSn: string) => {
+                return (
+                    _.find(allAssetsOptions, { value: assetSn })?.label ??
+                    assetSn
+                )
+            },
         },
         {
             title: '状态',
@@ -243,7 +252,7 @@ const AccessoryType: React.FC = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item name="assetSn" label="所属生产设备">
-                    <Select />
+                    <Select options={allAssetsOptions} />
                 </Form.Item>
                 <Form.Item name="deviceNames" label="关联设备">
                     <Select mode="multiple" options={allDeviceDataOptions} />
