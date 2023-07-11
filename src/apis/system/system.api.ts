@@ -6,9 +6,7 @@ export default class SystemApi extends BaseApi {
     //字典
     /** 根据id查询字典 */
     getDictionaryById(id: string): Promise<any> {
-        return this.request.get(
-            `${this.baseUri}/dictionary/dictionaries/${id}`
-        );
+        return this.request.get(`${this.baseUri}/dict/dictionaries/${id}`);
     }
     /** 所有字典table */
     queryDictionariesPage(params: {
@@ -16,30 +14,24 @@ export default class SystemApi extends BaseApi {
         pageSize: number;
         [key: string]: any;
     }): Promise<any> {
-        return this.request.get(
-            `${this.baseUri}/dictionary/dictionaries/page`,
-            { params }
-        );
+        return this.request.get(`${this.baseUri}/dict/dictionaries/page`, {
+            params,
+        });
     }
     /** 新建字典 */
     addDictionary(params: Record<string, any>): Promise<any> {
-        return this.request.post(
-            `${this.baseUri}/dictionary/dictionaries`,
-            params
-        );
+        return this.request.post(`${this.baseUri}/dict/dictionaries`, params);
     }
     /** 编辑字典 */
     editDictionaryById(id: string, data: Record<string, any>): Promise<any> {
         return this.request.put(
-            `${this.baseUri}/dictionary/dictionaries/${id}`,
+            `${this.baseUri}/dict/dictionaries/${id}`,
             data
         );
     }
     /** 根据id删除字典 */
     deleteDictionaryById(id: string) {
-        return this.request.delete(
-            `${this.baseUri}/dictionary/dictionaries/${id}`
-        );
+        return this.request.delete(`${this.baseUri}/dict/dictionaries/${id}`);
     }
 
     //字典类型
@@ -78,9 +70,8 @@ export default class SystemApi extends BaseApi {
 
     /** 获取指定typeCode字典options */
     queryDictionariesOptions(params: { typeCode: string }): Promise<any> {
-        return this.request.get(
-            `${this.baseUri}/dictionary/dictionaries/list`,
-            { params }
-        );
+        return this.request.get(`${this.baseUri}/dict/dictionaries/list`, {
+            params,
+        });
     }
 }
