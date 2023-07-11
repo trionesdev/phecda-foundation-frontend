@@ -179,13 +179,11 @@ const ProductionDevice: React.FC = () => {
             },
         },
     ];
-    const tableParamsFormItems = useMemo(
-        () => (
+    const tableParamsFormItems = useMemo(() => {
+        return (
             <>
                 <Form.Item name="typeCode" label={`生产设备类型`}>
                     <Select
-                        allowClear={true}
-                        placeholder="请选择"
                         style={{ width: 230 }}
                         options={assetsTypeOptions}
                     />
@@ -195,17 +193,13 @@ const ProductionDevice: React.FC = () => {
                 </Form.Item>
                 <Form.Item name="state" label={`当前状态`}>
                     <Select
-                        allowClear={true}
-                        placeholder="请选择"
                         style={{ width: 230 }}
                         options={AssetsStatesOptions}
                     />
                 </Form.Item>
             </>
-        ),
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        []
-    );
+        );
+    }, [assetsTypeOptions]);
     return (
         <VPanel className={styles.wrapper}>
             <GridTable
