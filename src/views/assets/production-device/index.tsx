@@ -24,7 +24,7 @@ import { ASSETS_STATES } from '@/constants/enums';
 import UploadImage from '@/components/upload/UploadImage';
 import UploadMyFile from '@/components/upload/UploadFile';
 import useQueryDictionaryOptions from '@/hooks/useQueryDictionaryOptions';
-import _ from 'lodash';
+import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
 
 const ProductionDevice: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
@@ -105,21 +105,15 @@ const ProductionDevice: React.FC = () => {
             title: '生产设备类型',
             dataIndex: 'typeCode',
             render: (typeCode: string) => {
-                return (
-                    _.find(assetsTypeOptions, { value: typeCode })?.label ??
-                    typeCode
-                );
+                return findOptionsLabel(assetsTypeOptions, typeCode);
             },
         },
 
         {
             title: `区域`,
             dataIndex: 'locationCode',
-            render: (typeCode: string) => {
-                return (
-                    _.find(assetsTypeOptions, { value: typeCode })?.label ??
-                    typeCode
-                );
+            render: (locationCode: string) => {
+                return findOptionsLabel(locationCodeOptions, locationCode);
             },
         },
         {

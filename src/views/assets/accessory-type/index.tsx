@@ -21,7 +21,7 @@ import { AssetsStatesOptions } from '@/constants/consts';
 import useQueryDeviceAll from '@/hooks/useQueryDeviceAll';
 import { formatDateTime } from '@/commons/util/date.utils';
 import useQueryAssetsAll from '@/hooks/useQueryAssetsAll';
-import _ from 'lodash';
+import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
 
 const AccessoryType: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
@@ -102,10 +102,7 @@ const AccessoryType: React.FC = () => {
             title: '所属生产设备',
             dataIndex: 'assetSn',
             render: (assetSn: string) => {
-                return (
-                    _.find(allAssetsOptions, { value: assetSn })?.label ??
-                    assetSn
-                );
+                return findOptionsLabel(allAssetsOptions, assetSn);
             },
         },
         {
@@ -180,7 +177,7 @@ const AccessoryType: React.FC = () => {
                 </Form.Item>
             </>
         ),
-        []
+        [allAssetsOptions]
     );
     return (
         <VPanel className={styles.wrapper}>
