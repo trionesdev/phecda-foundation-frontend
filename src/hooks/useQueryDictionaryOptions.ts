@@ -18,7 +18,6 @@ const useQueryDictionaryOptions = (typeCode: string) => {
             return {
                 label: item.label,
                 value: item.code,
-                ...item,
             };
         });
     }, [optionData]);

@@ -92,6 +92,10 @@ const Dictionary: React.FC = () => {
     }, [fetchTableData, tableParams]);
     const columns = [
         {
+            title: '字典排序',
+            dataIndex: 'sort',
+        },
+        {
             title: '字典编号',
             dataIndex: 'code',
         },
@@ -99,10 +103,7 @@ const Dictionary: React.FC = () => {
             title: '字典名称',
             dataIndex: 'label',
         },
-        {
-            title: '字典排序',
-            dataIndex: 'sort',
-        },
+
         {
             title: `备注`,
             dataIndex: 'remark',
@@ -124,10 +125,23 @@ const Dictionary: React.FC = () => {
         {
             title: '操作',
             dataIndex: 'id',
-            width: 150,
+            width: 250,
             render: (id: string, record: any) => {
                 return (
                     <Space split={<Divider type={`vertical`} />}>
+                        <Button
+                            key={`add-btn`}
+                            size={`small`}
+                            type={`link`}
+                            onClick={() => {
+                                setDrawerFormeValue({
+                                    parentCode: record?.code,
+                                });
+                                setDrawerOpen(true);
+                            }}
+                        >
+                            添加子集
+                        </Button>
                         <Button
                             key={`edit-btn`}
                             size={`small`}
@@ -141,7 +155,7 @@ const Dictionary: React.FC = () => {
                         </Button>
                         <Popconfirm
                             key={`del-btn`}
-                            title={`确定删除 ${record.name}？`}
+                            title={`确定删除 ${record.label}？`}
                             onConfirm={() => deleteDictionary(record?.id)}
                         >
                             <Button size={`small`} type={`link`} danger={true}>
@@ -174,6 +188,9 @@ const Dictionary: React.FC = () => {
             }}
         />
     );
+    const isEdit = drawerFormeValue?.id;
+    // const isAddChildren = drawerFormeValue?.parentCode;
+
     return (
         <VPanel className={styles.wrapper} header={pageHelper}>
             <GridTable
@@ -218,18 +235,35 @@ const Dictionary: React.FC = () => {
 
             <DrawerForm
                 open={drawerOpen}
-                title={`${drawerFormeValue?.id ? '编辑' : '新建'}字典`}
+                title={`${isEdit ? '编辑' : '新建'}字典`}
                 layout="vertical"
                 onOpenChange={(op) => setDrawerOpen(op)}
                 onSubmit={(value, from) => {
                     const newValue = { ...value, typeCode };
-                    drawerFormeValue?.id
+                    console.log(newValue);
+                    isEdit
                         ? editDictionary(drawerFormeValue.id, newValue)
                         : addDictionary(newValue);
                     from?.resetFields();
                 }}
                 formValues={drawerFormeValue}
             >
+                <Form.Item noStyle dependencies={['parentCode']}>
+                    {({ getFieldValue }) => {
+                        if (getFieldValue('parentCode')) {
+                            return (
+                                <Form.Item
+                                    name="parentCode"
+                                    label="父级Code"
+                                    rules={[{ required: true }]}
+                                >
+                                    <Input disabled />
+                                </Form.Item>
+                            );
+                        }
+                    }}
+                </Form.Item>
+
                 <Form.Item
                     name="label"
                     label="字典名称"
