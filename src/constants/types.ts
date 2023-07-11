@@ -4,3 +4,9 @@ export type TableParams = {
     total?: number;
     [key: string]: any;
 };
+
+export type OptionsType = {
+    label: React.ReactNode;
+    value: any;
+    [key: string]: any;
+};
