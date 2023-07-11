@@ -162,12 +162,12 @@ const AccessoryType: React.FC = () => {
     const tableParamsFormItems = useMemo(
         () => (
             <>
-                <Form.Item name="typeCode" label={`生产设备`}>
+                <Form.Item name="assetSn" label={`生产设备`}>
                     <Select
                         allowClear={true}
                         placeholder="请选择"
                         style={{ width: 230 }}
-                        options={[{ value: '', label: '生产设备' }]}
+                        options={allAssetsOptions}
                     />
                 </Form.Item>
                 <Form.Item name="state" label={`当前状态`}>
