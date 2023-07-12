@@ -9,6 +9,7 @@ import { TableParams } from '@/constants/types';
 import { formatDate, formatDateTime } from '@/commons/util/date.utils';
 import { useForm } from 'antd/es/form/Form';
 import useQueryAssetsAll from '@/hooks/useQueryAssetsAll';
+import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
 const MonitorTrends: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
@@ -56,7 +57,10 @@ const MonitorTrends: React.FC = () => {
         },
         {
             title: '设备名称',
-            dataIndex: '-',
+            dataIndex: 'assetSn',
+            render: (assetSn: string) => {
+                return findOptionsLabel(allAssetsOptions, assetSn);
+            },
         },
         {
             title: '设备编号',
