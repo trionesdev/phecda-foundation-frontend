@@ -8,12 +8,15 @@ import { Button, DatePicker, Form, Select, Space } from 'antd';
 import { TableParams } from '@/constants/types';
 import { formatDate, formatDateTime } from '@/commons/util/date.utils';
 import { useForm } from 'antd/es/form/Form';
+import useQueryAssetsAll from '@/hooks/useQueryAssetsAll';
 const MonitorTrends: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
         pageNum: 1,
     });
     const [form] = useForm();
+    const { allAssetsOptions } = useQueryAssetsAll();
+
     /** 请求表格（TODO） */
     const {
         data: tableData,
@@ -77,14 +80,17 @@ const MonitorTrends: React.FC = () => {
                                     allowClear={false}
                                 />
                             </Form.Item>
-                            <Form.Item name="--" label="生产设备">
-                                <Select style={{ width: 230 }} />
+                            <Form.Item name="assetSn" label="生产设备">
+                                <Select
+                                    options={allAssetsOptions}
+                                    style={{ width: 230 }}
+                                />
                             </Form.Item>
 
                             <Form.Item name="--" label="监控指标">
                                 <Select style={{ width: 230 }} />
                             </Form.Item>
-                            <Form.Item className={styles['buttons']}>
+                            <Form.Item className={styles.buttons}>
                                 <Space>
                                     <Button
                                         type="primary"
@@ -92,6 +98,16 @@ const MonitorTrends: React.FC = () => {
                                         onClick={() => {
                                             const value =
                                                 form.getFieldsValue(true);
+                                            const [start, end] = value.date ?? [
+                                                undefined,
+                                                undefined,
+                                            ];
+                                            const newValue = {
+                                                startTime: start,
+                                                endTime: end,
+                                                assetSn: value?.assetSn,
+                                                //...
+                                            };
                                             //TODO:查询
                                         }}
                                     >
