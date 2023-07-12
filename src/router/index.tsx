@@ -10,7 +10,6 @@ import DevicesView from '../views/device/devices';
 import DeviceDetailView from '../views/device/device-detail';
 import ProductionDevice from '../views/assets/production-device';
 import AccessoryType from '../views/assets/accessory-type';
-import ProductionDeviceType from '../views/assets/production-device-type';
 import AlarmLog from 'src/views/alarm/alarm-log';
 import AlarmRules from 'src/views/alarm/alarm-rules';
 import MonitorTrends from 'src/views/alarm/monitor-trends';
@@ -58,10 +57,7 @@ export const routes: RouteObject[] = [
                 path: RoutesConstants.PRODUCTION_DEVICE_DETAIL.path(),
                 element: <ProductionDeviceDetail />, //生产设备详情
             },
-            {
-                path: RoutesConstants.PRODUCTION_DEVICE_TYPE.path(),
-                element: <ProductionDeviceType />, //生产设备类型
-            },
+
             {
                 path: RoutesConstants.ACCESSORY_TYPE.path(),
                 element: <AccessoryType />, //配件类型
