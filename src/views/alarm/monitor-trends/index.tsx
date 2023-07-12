@@ -7,7 +7,6 @@ import { systemApi } from '@/apis';
 import { Button, DatePicker, Form, Select, Space } from 'antd';
 import { TableParams } from '@/constants/types';
 import { formatDate, formatDateTime } from '@/commons/util/date.utils';
-import { useForm } from 'antd/es/form/Form';
 import useQueryAssetsAll from '@/hooks/useQueryAssetsAll';
 import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
 const MonitorTrends: React.FC = () => {
@@ -15,7 +14,7 @@ const MonitorTrends: React.FC = () => {
         pageSize: 10,
         pageNum: 1,
     });
-    const [form] = useForm();
+    const [form] = Form.useForm();
     const { allAssetsOptions } = useQueryAssetsAll();
 
     /** 请求表格（TODO） */
