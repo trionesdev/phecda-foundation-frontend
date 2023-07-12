@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './index.module.less';
 
 const MonitorView: React.FC = () => {
-    return <>监控视图</>;
+    return <>TODO://监控画面</>;
 };
 
 export default MonitorView;
