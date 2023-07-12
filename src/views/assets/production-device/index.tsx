@@ -182,8 +182,11 @@ const ProductionDevice: React.FC = () => {
                         options={assetsTypeOptions}
                     />
                 </Form.Item>
-                <Form.Item name="locationCode" label={`区域`}>
-                    <Input />
+                <Form.Item name="locationCode" label="区域位置">
+                    <Select
+                        style={{ width: 230 }}
+                        options={locationCodeOptions}
+                    />
                 </Form.Item>
                 <Form.Item name="state" label={`当前状态`}>
                     <Select
@@ -193,7 +196,7 @@ const ProductionDevice: React.FC = () => {
                 </Form.Item>
             </>
         );
-    }, [assetsTypeOptions]);
+    }, [assetsTypeOptions, locationCodeOptions]);
     return (
         <VPanel className={styles.wrapper}>
             <GridTable
