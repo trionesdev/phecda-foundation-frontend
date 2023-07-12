@@ -1,4 +1,28 @@
 .wrapper {
     padding: 8px;
     gap: 8px;
+    height: 100%;
+    .headerWrapper {
+        .formWrapper {
+            background-color: white;
+            padding: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 20px;
+
+            :global {
+                .ant-form-item {
+                    margin-bottom: 0;
+                }
+            }
+        }
+        .chartWrapper {
+            min-height: 200px;
+            background-color: white;
+            padding: 8px;
+        }
+    }
 }
