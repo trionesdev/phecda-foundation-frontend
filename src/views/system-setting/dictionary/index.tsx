@@ -194,7 +194,7 @@ const Dictionary: React.FC = () => {
     return (
         <VPanel className={styles.wrapper} header={pageHelper}>
             <GridTable
-                style={{ padding: '8px', backgroundColor: 'white' }}
+                style={{ backgroundColor: 'white' }}
                 toolbar={
                     <>
                         <SearchToolbar
