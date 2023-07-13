@@ -7,7 +7,7 @@ export type FormInfoDataType = {
     value?: React.ReactNode;
 };
 export type FormInfoType = {
-    title: string;
+    title?: string;
     data?: FormInfoDataType[];
     column?: number;
 };
