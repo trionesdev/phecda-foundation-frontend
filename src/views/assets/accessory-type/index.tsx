@@ -22,6 +22,7 @@ import useQueryDeviceAll from '@/hooks/useQueryDeviceAll';
 import { formatDateTime } from '@/commons/util/date.utils';
 import useQueryAssetsAll from '@/hooks/useQueryAssetsAll';
 import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
+import useQueryDeviceNoRelation from '@/hooks/useQueryDeviceNoRelation';
 
 const AccessoryType: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
@@ -33,7 +34,7 @@ const AccessoryType: React.FC = () => {
     const [drawerFormeValue, setDrawerFormeValue] = useState<
         Record<string, any> | undefined
     >({});
-    const { allDeviceDataOptions } = useQueryDeviceAll();
+    const { deviceOptions } = useQueryDeviceNoRelation(drawerFormeValue?.sn);
     const { allAssetsOptions } = useQueryAssetsAll();
     /** 请求表格 */
     const {
@@ -252,7 +253,7 @@ const AccessoryType: React.FC = () => {
                     <Select options={allAssetsOptions} />
                 </Form.Item>
                 <Form.Item name="deviceNames" label="关联设备">
-                    <Select mode="multiple" options={allDeviceDataOptions} />
+                    <Select mode="multiple" options={deviceOptions} />
                 </Form.Item>
                 <Form.Item
                     name="enable"
