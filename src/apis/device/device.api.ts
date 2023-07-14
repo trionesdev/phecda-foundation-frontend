@@ -116,4 +116,24 @@ export default class DeviceApi extends BaseApi {
     queryDeviceAll(): Promise<any> {
         return this.request.get(`${this.baseUri}/devices/all`);
     }
+
+    /** 获取未关联资产的设备 */
+    queryDeviceNoRelation(assetSn?: string): Promise<any> {
+        return this.request.get(
+            `${this.baseUri}/devices/${assetSn}/no-relation`
+        );
+    }
+
+    /** 获取关联资产的设备 */
+    queryDeviceRelatedByAsset(assetSn?: string): Promise<any> {
+        return this.request.get(
+            `${this.baseUri}/devices/${assetSn}/related-asset`
+        );
+    }
+
+    queryDeviceProperties(deviceName?: string): Promise<any> {
+        return this.request.get(
+            `${this.baseUri}/devices/${deviceName}/properties`
+        );
+    }
 }

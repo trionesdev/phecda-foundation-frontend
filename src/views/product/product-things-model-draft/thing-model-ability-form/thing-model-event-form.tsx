@@ -33,8 +33,8 @@ const ThingModelEventForm: FC<ThingsModelEventFormProps> = () => {
                     <Radio value={'ERROR'}>故障</Radio>
                 </Radio.Group>
             </Form.Item>
-            <Form.Item label={`输出参数`} name={`outputData`}>
-                <ParamsData />
+            <Form.Item label={`输出参数`}>
+                <ParamsData name={`outputData`} />
             </Form.Item>
             <Form.Item
                 label={`描述`}

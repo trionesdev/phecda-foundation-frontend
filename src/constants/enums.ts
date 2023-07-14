@@ -13,3 +13,31 @@ export enum ASSETS_STATES {
     /** 正常运行 */
     NORMAL_OPERATION = 'NORMAL_OPERATION',
 }
+
+/** 报警图片类型 */
+export enum ALARM_IMAGE_TYPE {
+    /**报警图片 */
+    ALARM = 'ALARM',
+    /** 处理图片 */
+    DEAL = 'DEAL',
+}
+
+/** 报警状态 */
+export enum DEAL_STATUS {
+    /**已处理 */
+    PROCESSED = 'PROCESSED',
+    /** 误报警 */
+    FALSE_ALARM = 'FALSE_ALARM',
+    /** 待处理 */
+    PENDING = 'PENDING',
+}
+
+/** 报警等级 */
+export enum ALARM_LEVEL {
+    /**紧急 */
+    FIRST_LEVEL = 'FIRST_LEVEL',
+    /** 重要 */
+    SECOND_LEVEL = 'SECOND_LEVEL',
+    /** 一般 */
+    THIRD_LEVEL = 'THIRD_LEVEL',
+}

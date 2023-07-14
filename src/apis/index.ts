@@ -4,6 +4,7 @@ import DeviceApi from './device/device.api';
 import OperationApi from './operation/operation.api';
 import OssApi from './oss/oss.api';
 import SystemApi from './system/system.api';
+import DeviceDataApi from '@apis/alarm/device-data.api';
 
 /** 设备管理 */
 export const deviceApi = new DeviceApi();
@@ -17,3 +18,5 @@ export const ossApi = new OssApi();
 export const systemApi = new SystemApi();
 /** 监控运维 */
 export const operationApi = new OperationApi();
+/** 设备数据 */
+export const deviceDataApi = new DeviceDataApi();
