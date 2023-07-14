@@ -14,12 +14,13 @@ export default class DeviceDataApi extends BaseApi {
         });
     }
 
+    /** 查询设备数据分页 */
     queryDeviceDatasPage(params: {
         pageNum: number;
         pageSize: number;
         [key: string]: any;
     }): Promise<DeviceDataTableType> {
-        return this.request.get(`${this.baseUri}/device-datas/list`, {
+        return this.request.get(`${this.baseUri}/device-datas/page`, {
             params,
         });
     }

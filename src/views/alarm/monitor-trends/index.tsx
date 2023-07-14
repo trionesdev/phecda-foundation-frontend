@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
 import { VPanel } from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
 import { useRequest, useUpdateEffect } from 'ahooks';
 import { deviceDataApi } from '@/apis';
-import { Button, DatePicker, Empty, Form, Select, Space } from 'antd';
+import { Button, DatePicker, Empty, Form, Select, Space, Tag } from 'antd';
 import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
 import useQueryAssetsAll from '@/hooks/useQueryAssetsAll';
 import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
 import dayjs from 'dayjs';
-import _, { values } from 'lodash';
+import _ from 'lodash';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';
 import { Area, AreaConfig } from '@ant-design/charts';
 import useQueryDeviceRelatedByAsset from '@/hooks/useQueryDeviceRelatedByAsset';
@@ -20,7 +20,6 @@ const MonitorTrends: React.FC = () => {
         pageSize: 10,
         pageNum: 1,
     });
-    const [areaParams, setAreaParams] = useState<any>();
     const [form] = Form.useForm();
     const [assetSn, setAssetSn] = useState<string>();
     const [deviceId, setDeviceId] = useState<string>();
@@ -60,38 +59,49 @@ const MonitorTrends: React.FC = () => {
         const [start, end] = value.date ?? [undefined, undefined];
         const dataIsEmpty = isNilEmpty(value.date);
 
-        const lineValue = _.assign(value, {
+        const areaValue = {
             startTime: dataIsEmpty ? undefined : dayjs(start).valueOf(),
             endTime: dataIsEmpty ? undefined : dayjs(end).valueOf(),
-            date: undefined,
-        });
-        const tableValue = _.assign(lineValue, {
+            ...value,
+        };
+        _.unset(areaValue, 'date');
+        const tableValue = {
+            ...areaValue,
             pageSize: 10,
             pageNum: 1,
-        });
-
-        setAreaParams(lineValue);
+        };
+        fetchAreaData(areaValue);
         setTableParams(tableValue);
     };
 
     useUpdateEffect(() => {
         fetchTableData(tableParams);
-        fetchAreaData(areaParams);
-    }, [fetchTableData, tableParams, fetchAreaData, areaParams]);
+    }, [fetchTableData, tableParams]);
 
     const handleAssetChange = (value: string) => {
         setAssetSn(value);
+        form.resetFields(['deviceName', 'field']);
     };
 
     const handleDeviceChange = (value: string) => {
         setDeviceId(value);
+        form.resetFields(['field']);
     };
 
-    const areaConfig: AreaConfig = {
-        data: areaData,
-        xField: 'time',
-        yField: 'value',
-    };
+    const areaConfig: AreaConfig = useMemo(() => {
+        return {
+            data: areaData,
+            xField: 'time',
+            yField: 'value',
+            xAxis: {
+                label: {
+                    formatter: (time) => {
+                        return formatDateTime(Number(time));
+                    },
+                },
+            },
+        };
+    }, [areaData]);
 
     const columns = [
         {
@@ -104,6 +114,13 @@ const MonitorTrends: React.FC = () => {
         {
             title: '监控指标',
             dataIndex: 'field',
+            render: (field: string) => {
+                return (
+                    <Tag key={field}>
+                        {findOptionsLabel(devicePropertiesOptions, field)}
+                    </Tag>
+                );
+            },
         },
         {
             title: '设备名称',
@@ -123,15 +140,16 @@ const MonitorTrends: React.FC = () => {
     ];
 
     return (
-        <Form form={form} className={styles.wrapper}>
+        <Form
+            form={form}
+            className={styles.wrapper}
+            initialValues={{ date: [startTime, endTime] }}
+        >
             <VPanel
                 header={
                     <div className={styles.headerWrapper}>
                         <div className={styles.formWrapper}>
-                            <Form.Item
-                                name="date"
-                                initialValue={[startTime, endTime]}
-                            >
+                            <Form.Item name="date">
                                 <DatePicker.RangePicker
                                     showTime
                                     allowClear={false}
@@ -162,15 +180,17 @@ const MonitorTrends: React.FC = () => {
                                 <Space>
                                     <Button
                                         type="primary"
-                                        htmlType="submit"
                                         onClick={() => handleSearch()}
                                     >
                                         查询
                                     </Button>
                                     <Button
-                                        htmlType="button"
                                         onClick={() => {
                                             form.resetFields();
+                                            form.setFieldValue(
+                                                ['date'],
+                                                [startTime, endTime]
+                                            );
                                         }}
                                     >
                                         重置
