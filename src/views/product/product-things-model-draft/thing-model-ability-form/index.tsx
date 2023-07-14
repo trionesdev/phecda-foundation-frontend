@@ -27,6 +27,13 @@ type ThingsModelAbilityEditBtnProps = {
     identifier?: string;
     onSuccess?: () => void;
 } & ButtonProps;
+
+const ABILITY_TYPE_CONFIG = {
+    [AbilityType.PROPERTY]: <ThingModelPropertyForm />,
+    [AbilityType.SERVICE]: <ThingModelServiceForm />,
+    [AbilityType.EVENT]: <ThingModelEventForm />,
+};
+
 const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
     productId,
     editAbilityType,
@@ -46,6 +53,7 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
 
     const handleSubmit = (values: any) => {
         console.log(values);
+        return;
         let data = _.assign(values, { identifier: identifier });
         deviceApi
             .upsertThingModelDraft(productId, data)
@@ -116,7 +124,17 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
                     <Radio.Button value={AbilityType.EVENT}>事件</Radio.Button>
                 </Radio.Group>
             </Form.Item>
-            {_.isEqual(AbilityType.PROPERTY, abilityType) && (
+
+            <Form.Item noStyle dependencies={['abilityType']}>
+                {({ getFieldValue }) => {
+                    const abilityType = getFieldValue(
+                        'abilityType'
+                    ) as AbilityType;
+                    return ABILITY_TYPE_CONFIG?.[abilityType];
+                }}
+            </Form.Item>
+
+            {/* {_.isEqual(AbilityType.PROPERTY, abilityType) && (
                 <ThingModelPropertyForm />
             )}
             {_.isEqual(AbilityType.SERVICE, abilityType) && (
@@ -124,7 +142,7 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
             )}
             {_.isEqual(AbilityType.EVENT, abilityType) && (
                 <ThingModelEventForm />
-            )}
+            )} */}
         </DrawerForm>
     );
 };

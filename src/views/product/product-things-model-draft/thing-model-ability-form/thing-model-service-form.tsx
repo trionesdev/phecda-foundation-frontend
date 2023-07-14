@@ -32,11 +32,11 @@ const ThingModelServiceForm: FC<ThingsModelServiceFormProps> = () => {
                     <Radio value={'SYNC'}>同步</Radio>
                 </Radio.Group>
             </Form.Item>
-            <Form.Item label={`输入参数`} name={`inputData`}>
-                <ParamsData />
+            <Form.Item label={`输入参数`}>
+                <ParamsData name="inputData" />
             </Form.Item>
-            <Form.Item label={`输出参数`} name={`outputData`}>
-                <ParamsData />
+            <Form.Item label={`输出参数`}>
+                <ParamsData name={`outputData`} />
             </Form.Item>
             <Form.Item
                 label={`描述`}
