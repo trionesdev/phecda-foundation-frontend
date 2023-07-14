@@ -3,13 +3,12 @@ import styles from './index.module.less';
 import { VPanel } from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
 import { useRequest } from 'ahooks';
-import { systemApi } from '@/apis';
+import { alarmApi } from '@/apis';
 import {
     Button,
     DatePicker,
     Divider,
     Form,
-    Input,
     Popconfirm,
     Select,
     Space,
@@ -19,25 +18,44 @@ import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
 import dayjs from 'dayjs';
 import AlarmLogOverview from '../compoents/alarm-log-overview';
-import _ from 'lodash';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';
+import {
+    AlarmLevelConfig,
+    DealStatusConfig,
+    DealStatusOptions,
+} from '@/constants/consts';
+import { ALARM_LEVEL, DEAL_STATUS } from '@/constants/enums';
+import AlarmModal from './AlarmModal';
 const AlarmLog: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
         pageNum: 1,
     });
+    const [modalOpen, setModalOpen] = useState(false);
+    const [currentData, setCurrentData] = useState();
 
     /** 请求表格 */
     const {
         data: tableData,
         loading: tableDataLoading,
         run: fetchTableData,
+        refresh: refreshFetchTableData,
     } = useRequest(
-        (tableParams: TableParams) =>
-            systemApi.queryDictionaryTypesPage(tableParams),
+        (tableParams: TableParams) => alarmApi.queryAlarmLogsPage(tableParams),
         { manual: true }
     );
 
+    /** 删除设备 */
+    const { run: deleteAlarmLogData } = useRequest(
+        (id) => alarmApi.deleteAlarmLogById(id),
+        {
+            manual: true,
+            onSuccess() {
+                // afterSubmitForm();
+                refreshFetchTableData();
+            },
+        }
+    );
     const handlePageChange = (pageNum: number, pageSize: number) => {
         setTableParams({ ...tableParams, pageNum, pageSize });
     };
@@ -46,40 +64,35 @@ const AlarmLog: React.FC = () => {
     }, [fetchTableData, tableParams]);
     const columns = [
         {
-            title: '序号',
-            dataIndex: 'code',
-        },
-
-        {
             title: `告警名称`,
-            dataIndex: 'name',
+            dataIndex: 'title',
         },
         {
             title: `告警等级`,
-            dataIndex: 'remark',
+            dataIndex: 'level',
+            render: (level: ALARM_LEVEL) => {
+                return AlarmLevelConfig?.[level];
+            },
         },
         {
             title: `告警设备`,
-            dataIndex: 'remark',
+            dataIndex: 'deviceName',
         },
-        {
-            title: `设备编号`,
-            dataIndex: 'remark',
-        },
+
         {
             title: '告警时间',
-            dataIndex: 'createdAt',
+            dataIndex: 'alarmTime',
             render: (value: number) => {
                 return formatDateTime(value);
             },
         },
-        {
-            title: `负责岗位`,
-            dataIndex: 'remark',
-        },
+
         {
             title: `告警状态`,
-            dataIndex: 'remark',
+            dataIndex: 'dealStatus',
+            render: (dealStatus: DEAL_STATUS) => {
+                return DealStatusConfig?.[dealStatus];
+            },
         },
         {
             title: '操作',
@@ -87,13 +100,23 @@ const AlarmLog: React.FC = () => {
             render: (id: string, record: any) => {
                 return (
                     <Space split={<Divider type={`vertical`} />}>
-                        <Button key={`view-btn`} size={`small`} type={`link`}>
-                            处理
+                        <Button
+                            size={`small`}
+                            type={`link`}
+                            onClick={() => {
+                                setModalOpen(true);
+                                setCurrentData(record);
+                            }}
+                        >
+                            {record.dealStatus === DEAL_STATUS.PENDING
+                                ? '处理'
+                                : '查看处理结果'}
                         </Button>
                         <Popconfirm
-                            key={`del-btn`}
-                            title={`确定删除 ${record.name}？`}
-                            onConfirm={() => {}}
+                            title={`确定删除 ${record.title}？`}
+                            onConfirm={() => {
+                                deleteAlarmLogData(id);
+                            }}
                         >
                             <Button size={`small`} type={`link`} danger={true}>
                                 删除
@@ -110,8 +133,11 @@ const AlarmLog: React.FC = () => {
                 <Form.Item name="date">
                     <DatePicker.RangePicker showTime allowClear={false} />
                 </Form.Item>
-                <Form.Item name="name" label={`告警状态`}>
-                    <Select style={{ width: 230 }} />
+                <Form.Item name="dealStatus" label={`告警状态`}>
+                    <Select
+                        options={DealStatusOptions}
+                        style={{ width: 230 }}
+                    />
                 </Form.Item>
             </>
         ),
@@ -127,7 +153,7 @@ const AlarmLog: React.FC = () => {
                         <SearchToolbar
                             formItems={tableParamsFormItems}
                             onSearch={(values) => {
-                                const [start, end] = values.date ?? [
+                                const [start, end] = values?.date ?? [
                                     undefined,
                                     undefined,
                                 ];
@@ -141,7 +167,7 @@ const AlarmLog: React.FC = () => {
                                     endTime: dataIsEmpty
                                         ? undefined
                                         : dayjs(end).valueOf(),
-                                    // ...v,
+                                    dealStatus: values?.dealStatus,
                                 });
                             }}
                         />
@@ -157,6 +183,16 @@ const AlarmLog: React.FC = () => {
                 pagination={{
                     ...tableParams,
                     onChange: handlePageChange,
+                }}
+            />
+            <AlarmModal
+                modalOpen={modalOpen}
+                setModalOpen={(op) => {
+                    setModalOpen(op);
+                }}
+                currentData={currentData}
+                onSuccess={() => {
+                    refreshFetchTableData();
                 }}
             />
         </VPanel>

@@ -17,7 +17,8 @@ const getBase64 = (file: RcFile): Promise<string> =>
 const UploadImage: React.FC<{
     onChange?: (fileList: UploadFile[]) => void; //由Form自动塞下来的onChange
     fileList?: UploadFile[]; //由Form自动塞下来的fileList
-}> = ({ onChange, fileList: initFileList }) => {
+    disabled?: boolean;
+}> = ({ onChange, fileList: initFileList, disabled }) => {
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
@@ -90,8 +91,9 @@ const UploadImage: React.FC<{
                 onPreview={handlePreview}
                 onChange={handleChange}
                 accept="image/jpg, image/jpeg"
+                disabled={disabled}
             >
-                {fileList.length >= 3 ? null : uploadButton}
+                {fileList.length >= 3 || disabled ? null : uploadButton}
             </Upload>
             <Modal
                 open={previewOpen}
