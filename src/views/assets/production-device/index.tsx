@@ -25,6 +25,7 @@ import UploadImage from '@/components/upload/UploadImage';
 import UploadMyFile from '@/components/upload/UploadFile';
 import useQueryDictionaryOptions from '@/hooks/useQueryDictionaryOptions';
 import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
+import useQueryDeviceNoRelation from '@/hooks/useQueryDeviceNoRelation';
 
 const ProductionDevice: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
@@ -39,7 +40,7 @@ const ProductionDevice: React.FC = () => {
     const [drawerFormeValue, setDrawerFormeValue] = useState<
         Record<string, any> | undefined
     >({});
-    const { allDeviceDataOptions } = useQueryDeviceAll();
+    const { deviceOptions } = useQueryDeviceNoRelation(drawerFormeValue?.sn);
     /** 请求表格 */
     const {
         data: tableData,
@@ -267,7 +268,7 @@ const ProductionDevice: React.FC = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item name="deviceNames" label="关联设备">
-                    <Select mode="multiple" options={allDeviceDataOptions} />
+                    <Select mode="multiple" options={deviceOptions} />
                 </Form.Item>
                 <Form.Item
                     rules={[{ required: true }]}
