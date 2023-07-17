@@ -53,7 +53,7 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
 
     const handleSubmit = (values: any) => {
         console.log(values);
-        return;
+        // return;
         let data = _.assign(values, { identifier: identifier });
         deviceApi
             .upsertThingModelDraft(productId, data)
