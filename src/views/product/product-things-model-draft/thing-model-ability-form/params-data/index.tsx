@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Form } from 'antd';
+import { Button, Form, FormInstance } from 'antd';
 import { NamePath } from 'antd/es/form/interface';
 import { FC } from 'react';
 import ParamsModalForm from './params-modal-form';
@@ -22,18 +22,33 @@ const ParamsData: FC<ParamsDataProps> = ({
                         {fields?.map((field, index) => {
                             return (
                                 <div key={field.key}>
-                                    <ParamsModalForm
-                                        namePath={field.name}
-                                        parentNamePath={
-                                            _.isArray(name) ? name : [name]
-                                        }
-                                        remove={() => {
-                                            remove(index);
+                                    <Form.Item shouldUpdate noStyle>
+                                        {(form) => {
+                                            const namePath = _.concat(
+                                                name,
+                                                field.name
+                                            );
+                                            return (
+                                                <ParamsModalForm
+                                                    remove={() => {
+                                                        remove(index);
+                                                    }}
+                                                    add={() => {
+                                                        add();
+                                                    }}
+                                                    onChange={(value) => {
+                                                        form.setFieldValue(
+                                                            namePath,
+                                                            value
+                                                        );
+                                                    }}
+                                                    value={form.getFieldValue(
+                                                        namePath
+                                                    )}
+                                                />
+                                            );
                                         }}
-                                        add={() => {
-                                            add();
-                                        }}
-                                    />
+                                    </Form.Item>
                                 </div>
                             );
                         })}
