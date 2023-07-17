@@ -1,8 +1,8 @@
 import { Button, ButtonProps, Form, Input, notification } from 'antd';
 import { FC, useState } from 'react';
 import { deviceApi } from '@apis';
-import { ModalForm } from '@moensun/antd-react-ext';
 import ProductSelect from '@components/product-select';
+import ModalForm from '@/components/modal-form';
 
 type DeviceFormProps = {
     onSuccess?: () => void;

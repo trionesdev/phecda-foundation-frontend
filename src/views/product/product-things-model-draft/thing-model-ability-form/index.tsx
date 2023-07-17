@@ -1,4 +1,3 @@
-import { DrawerForm } from '@moensun/antd-react-ext';
 import { FC, useEffect, useState } from 'react';
 import {
     Button,
@@ -14,6 +13,7 @@ import _ from 'lodash';
 import { deviceApi } from '@apis';
 import ThingModelServiceForm from './thing-model-service-form';
 import ThingModelEventForm from './thing-model-event-form';
+import DrawerForm from '@/components/drawer-form';
 
 export enum AbilityType {
     PROPERTY = 'PROPERTY',
