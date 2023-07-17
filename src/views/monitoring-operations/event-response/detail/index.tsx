@@ -5,7 +5,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Form, Input, Space } from 'antd';
 import { operationApi } from '@/apis';
 import { useRequest } from 'ahooks';
-import { isNilEmpty } from '@/commons/util/isNilEmpty';
 import ModalForm from '@/components/modal-form';
 
 const SceneDetail: React.FC = () => {
