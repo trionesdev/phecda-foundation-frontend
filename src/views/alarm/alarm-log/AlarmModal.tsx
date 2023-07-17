@@ -44,7 +44,6 @@ const AlarmModal: React.FC<AlarmModalType> = ({
     );
 
     useEffect(() => {
-        console.log(currentData?.images);
         modalOpen &&
             form.setFieldsValue({
                 images: getImagesByType(ALARM_IMAGE_TYPE.DEAL),
@@ -52,7 +51,6 @@ const AlarmModal: React.FC<AlarmModalType> = ({
                 dealRemark: currentData?.dealRemark,
             });
     }, [currentData, form, getImagesByType, modalOpen]);
-    console.log(currentData);
     return (
         <Modal
             getContainer={false}

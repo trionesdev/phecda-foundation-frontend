@@ -28,4 +28,8 @@ export default class AlarmApi extends BaseApi {
     queryAlarmLogsList(): Promise<any> {
         return this.request.get(`${this.baseUri}/alarm-logs/list`);
     }
+    /** 查询报警统计 */
+    queryAlarmLogsStatistics(): Promise<any> {
+        return this.request.get(`${this.baseUri}/alarm-logs/statistics`);
+    }
 }

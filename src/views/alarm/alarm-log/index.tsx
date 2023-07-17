@@ -44,7 +44,11 @@ const AlarmLog: React.FC = () => {
         (tableParams: TableParams) => alarmApi.queryAlarmLogsPage(tableParams),
         { manual: true }
     );
-
+    /** 查询报警统计 */
+    const { data: statisticsData, refresh: refreshQueryAlarmLogsStatistics } =
+        useRequest(() => {
+            return alarmApi.queryAlarmLogsStatistics();
+        });
     /** 删除设备 */
     const { run: deleteAlarmLogData } = useRequest(
         (id) => alarmApi.deleteAlarmLogById(id),
@@ -53,12 +57,14 @@ const AlarmLog: React.FC = () => {
             onSuccess() {
                 // afterSubmitForm();
                 refreshFetchTableData();
+                refreshQueryAlarmLogsStatistics();
             },
         }
     );
     const handlePageChange = (pageNum: number, pageSize: number) => {
         setTableParams({ ...tableParams, pageNum, pageSize });
     };
+
     useEffect(() => {
         fetchTableData(tableParams);
     }, [fetchTableData, tableParams]);
@@ -149,7 +155,7 @@ const AlarmLog: React.FC = () => {
                 style={{ padding: '8px', backgroundColor: 'white' }}
                 toolbar={
                     <>
-                        <AlarmLogOverview />
+                        <AlarmLogOverview statisticsData={statisticsData} />
                         <SearchToolbar
                             formItems={tableParamsFormItems}
                             onSearch={(values) => {
@@ -193,6 +199,7 @@ const AlarmLog: React.FC = () => {
                 currentData={currentData}
                 onSuccess={() => {
                     refreshFetchTableData();
+                    refreshQueryAlarmLogsStatistics();
                 }}
             />
         </VPanel>
