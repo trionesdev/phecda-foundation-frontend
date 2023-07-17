@@ -1,17 +1,27 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
-import { DrawerForm, VPanel } from '@moensun/antd-react-ext';
+import { VPanel } from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
 import { useRequest } from 'ahooks';
-import { operationApi, systemApi } from '@/apis';
-import { Button, Divider, Form, Input, Popconfirm, Space, message } from 'antd';
+import { operationApi } from '@/apis';
+import {
+    Button,
+    Divider,
+    Form,
+    Input,
+    Popconfirm,
+    Space,
+    Switch,
+    message,
+} from 'antd';
 import SearchToolbar from '@/components/search-toolbar';
 import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
 import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import qs from 'qs';
-//TODO:接口暂无
+import DrawerForm from '@/components/drawer-form';
+const { TextArea } = Input;
 const EventResponse: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
@@ -48,9 +58,9 @@ const EventResponse: React.FC = () => {
             },
         }
     );
-    /** 修改配件 */
-    const { run: editDictionaryType } = useRequest(
-        (id, params) => systemApi.editDictionaryTypeById(id, params),
+    /** 修改场景 */
+    const { run: editScenes } = useRequest(
+        (id, params) => operationApi.editScenesById(id, params),
         {
             manual: true,
             onSuccess() {
@@ -58,9 +68,19 @@ const EventResponse: React.FC = () => {
             },
         }
     );
-    /** 删除设备 */
+    /** 修改场景状态 */
+    const { run: editScenesStatus } = useRequest(
+        (id, params) => operationApi.editScenesStatusById(id, params),
+        {
+            manual: true,
+            onSuccess() {
+                afterSubmitForm();
+            },
+        }
+    );
+    /** 删除场景 */
     const { run: deleteDictionaryType } = useRequest(
-        (id) => systemApi.deleteDictionaryTypeById(id),
+        (id) => operationApi.deleteScenesById(id),
         {
             manual: true,
             onSuccess() {
@@ -92,10 +112,18 @@ const EventResponse: React.FC = () => {
             },
         },
         {
-            title: '运行状态',
-            dataIndex: 'status',
-            render: (value: number) => {
-                return formatDateTime(value);
+            title: `启用/禁用`,
+            dataIndex: 'enabled',
+            width: 100,
+            render: (text: boolean, record: any) => {
+                return (
+                    <Switch
+                        defaultChecked={text}
+                        onChange={(checked) =>
+                            editScenesStatus(record.id, checked)
+                        }
+                    />
+                );
             },
         },
         {
@@ -109,7 +137,7 @@ const EventResponse: React.FC = () => {
                             <Link
                                 to={{
                                     pathname: RoutesConstants.SCENE_DETAIL.path(
-                                        record?.code
+                                        record?.id
                                     ),
                                     search: qs.stringify({
                                         name: record?.name,
@@ -173,7 +201,7 @@ const EventResponse: React.FC = () => {
                                 <Button
                                     type="primary"
                                     onClick={() => {
-                                        setDrawerFormeValue(undefined);
+                                        // setDrawerFormeValue(undefined);
                                         setDrawerOpen(true);
                                     }}
                                 >
@@ -203,7 +231,7 @@ const EventResponse: React.FC = () => {
                 onOpenChange={(op) => setDrawerOpen(op)}
                 onSubmit={(value, from) => {
                     drawerFormeValue?.id
-                        ? editDictionaryType(drawerFormeValue.id, value)
+                        ? editScenes(drawerFormeValue.id, value)
                         : addDictionaryType(value);
                     from?.resetFields();
                 }}
@@ -217,7 +245,7 @@ const EventResponse: React.FC = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item name="description" label="场景描述">
-                    <Input.TextArea />
+                    <TextArea />
                 </Form.Item>
             </DrawerForm>
         </VPanel>

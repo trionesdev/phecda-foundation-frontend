@@ -1,9 +1,9 @@
-import { DrawerForm } from '@moensun/antd-react-ext';
 import { FC, useState } from 'react';
 import { Button, ButtonProps, Form, Input, notification, Radio } from 'antd';
 import { deviceApi } from '@apis';
 import { DeviceNodeType } from '../support/device.constants';
 import _ from 'lodash';
+import DrawerForm from '@/components/drawer-form';
 
 type ProductFormBtnProps = {
     id?: string;

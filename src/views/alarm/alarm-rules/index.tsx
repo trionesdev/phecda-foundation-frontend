@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
-import { DrawerForm, VPanel } from '@moensun/antd-react-ext';
+import { VPanel } from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
 import { useRequest } from 'ahooks';
 import { systemApi } from '@/apis';
@@ -20,6 +20,7 @@ import { formatDateTime } from '@/commons/util/date.utils';
 import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import qs from 'qs';
+import DrawerForm from '@/components/drawer-form';
 
 const AlarmRules: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({

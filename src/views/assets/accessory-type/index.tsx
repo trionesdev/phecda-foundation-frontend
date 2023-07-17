@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
-import { DrawerForm, VPanel } from '@moensun/antd-react-ext';
+import { VPanel } from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
 import { useRequest } from 'ahooks';
 import { assetsApi } from '@/apis';
@@ -23,6 +23,7 @@ import { formatDateTime } from '@/commons/util/date.utils';
 import useQueryAssetsAll from '@/hooks/useQueryAssetsAll';
 import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
 import useQueryDeviceNoRelation from '@/hooks/useQueryDeviceNoRelation';
+import DrawerForm from '@/components/drawer-form';
 
 const AccessoryType: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({

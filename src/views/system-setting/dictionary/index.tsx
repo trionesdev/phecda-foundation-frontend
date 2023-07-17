@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
-import { DrawerForm, PageHeader, VPanel } from '@moensun/antd-react-ext';
+import { PageHeader, VPanel } from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
 import { useRequest } from 'ahooks';
 import { systemApi } from '@/apis';
@@ -19,6 +19,7 @@ import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetSearch } from '@/hooks/useSearch';
+import DrawerForm from '@/components/drawer-form';
 
 const Dictionary: React.FC = () => {
     const { id: typeCode } = useParams();

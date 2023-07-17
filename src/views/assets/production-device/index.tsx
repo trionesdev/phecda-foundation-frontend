@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
-import { DrawerForm, VPanel } from '@moensun/antd-react-ext';
+import { VPanel } from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
 import { useRequest } from 'ahooks';
 import { assetsApi } from '@/apis';
@@ -26,6 +26,7 @@ import UploadMyFile from '@/components/upload/UploadFile';
 import useQueryDictionaryOptions from '@/hooks/useQueryDictionaryOptions';
 import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
 import useQueryDeviceNoRelation from '@/hooks/useQueryDeviceNoRelation';
+import DrawerForm from '@/components/drawer-form';
 
 const ProductionDevice: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({

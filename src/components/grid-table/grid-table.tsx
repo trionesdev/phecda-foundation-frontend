@@ -2,6 +2,7 @@ import { CSSInterpolation, useStyleRegister } from '@ant-design/cssinjs';
 import { GlobalToken, Table, TableProps, theme } from 'antd';
 import classNames from 'classnames';
 import React, { FC } from 'react';
+import _, { rest } from 'lodash';
 
 const { useToken } = theme;
 const genGridTableStyle = (
@@ -26,7 +27,7 @@ const genGridTableStyle = (
                             flexDirection: 'column',
                             flex: '1 auto',
                             '.ant-table-header': {
-                                overflow: 'inherit',
+                                overflow: 'inherit!important',
                             },
                         },
                     },
@@ -79,9 +80,19 @@ const GridTable: FC<GridTableProps> = (
         >
             <>
                 {toolbar}
-                <Table {...props} />
+                <Table
+                    {...props}
+                    scroll={
+                        fit
+                            ? _.assign({}, props.scroll, { y: 'max-content' })
+                            : props.scroll
+                    }
+                />
             </>
         </div>
     );
 };
-export default GridTable;
+export default Object.assign(GridTable, {
+    Column: Table.Column,
+    ColumnGroup: Table.ColumnGroup,
+});
