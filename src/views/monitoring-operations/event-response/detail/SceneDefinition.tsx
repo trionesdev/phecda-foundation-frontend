@@ -55,7 +55,7 @@ const SceneDefinition: React.FC<SceneDefinitionType> = () => {
                     <Input />
                 </Form.Item>
             </Space>
-            <Divider />
+            {/* <Divider /> */}
             {/* 满足条件 conditions */}
             <ConditionsFormList />
             <Divider />

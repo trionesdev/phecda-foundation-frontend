@@ -45,7 +45,7 @@ const ParamsModalForm: FC<ParamsModalFormProps> = ({
             </div>
             <Modal
                 open={modalOpen}
-                title="处理报警"
+                title="参数设置"
                 onCancel={() => {
                     setModalOpen(false);
                 }}
