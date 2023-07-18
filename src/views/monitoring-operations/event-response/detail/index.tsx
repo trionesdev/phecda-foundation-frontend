@@ -6,6 +6,8 @@ import { Button, Form, Input, Space } from 'antd';
 import { operationApi } from '@/apis';
 import { useRequest } from 'ahooks';
 import DrawerForm from '@/components/drawer-form';
+import SceneDefinition from './SceneDefinition';
+import { SceneContextProvider } from '../components/SceneProvider';
 
 const SceneDetail: React.FC = () => {
     const { id } = useParams();
@@ -63,7 +65,16 @@ const SceneDetail: React.FC = () => {
                     >
                         {scenesData?.enabled ? '禁用' : '启用'}
                     </Button>
-                    <Button type="primary">确定</Button>
+                    <Button
+                        type="primary"
+                        onClick={async () => {
+                            await form.validateFields();
+                            const values = form.getFieldsValue(true);
+                            console.log(values);
+                        }}
+                    >
+                        确定
+                    </Button>
                     <Button
                         type="primary"
                         onClick={() => {
@@ -82,33 +93,41 @@ const SceneDetail: React.FC = () => {
     );
     return (
         <Form form={form} className={styles.wrapper}>
-            <VPanel header={pageHelper}>
-                <div className={styles.contentWrapper}>场景详情</div>
-            </VPanel>
-            <DrawerForm
-                open={open}
-                title={`编辑${scenesData?.name}`}
-                onOpenChange={(op) => {
-                    setOpen(op);
+            <SceneContextProvider
+                value={{
+                    sceneForm: form,
                 }}
-                layout="vertical"
-                onSubmit={(v) => {
-                    editScenes(id, v);
-                    setOpen(false);
-                }}
-                formValues={modalFormeValue}
             >
-                <Form.Item
-                    name="name"
-                    label="场景名称"
-                    rules={[{ required: true }]}
+                <VPanel header={pageHelper}>
+                    <div className={styles.contentWrapper}>
+                        <SceneDefinition />
+                    </div>
+                </VPanel>
+                <DrawerForm
+                    open={open}
+                    title={`编辑${scenesData?.name}`}
+                    onOpenChange={(op) => {
+                        setOpen(op);
+                    }}
+                    layout="vertical"
+                    onSubmit={(v) => {
+                        editScenes(id, v);
+                        setOpen(false);
+                    }}
+                    formValues={modalFormeValue}
                 >
-                    <Input />
-                </Form.Item>
-                <Form.Item name="description" label="场景描述">
-                    <Input.TextArea />
-                </Form.Item>
-            </DrawerForm>
+                    <Form.Item
+                        name="name"
+                        label="场景名称"
+                        rules={[{ required: true }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item name="description" label="场景描述">
+                        <Input.TextArea />
+                    </Form.Item>
+                </DrawerForm>
+            </SceneContextProvider>
         </Form>
     );
 };
