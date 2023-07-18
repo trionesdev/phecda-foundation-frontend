@@ -47,13 +47,29 @@ const ConditionsAndFormList: React.FC<ConditionsAndFormListType> = ({
                                                     <Input />
                                                 </Form.Item>
                                                 <Form.Item>
-                                                    <Button
-                                                        type="link"
-                                                        onClick={() => add()}
-                                                        icon={<PlusOutlined />}
-                                                    >
-                                                        添加且条件
-                                                    </Button>
+                                                    <Space size={1}>
+                                                        <Button
+                                                            type="link"
+                                                            onClick={() =>
+                                                                add()
+                                                            }
+                                                            size="small"
+                                                        >
+                                                            添加"且"条件
+                                                        </Button>
+                                                        <Button
+                                                            type="link"
+                                                            danger
+                                                            size="small"
+                                                            onClick={() =>
+                                                                remove(
+                                                                    conditionsFieldsName
+                                                                )
+                                                            }
+                                                        >
+                                                            删除
+                                                        </Button>
+                                                    </Space>
                                                 </Form.Item>
                                             </Space>
                                         </div>
