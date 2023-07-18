@@ -6,8 +6,8 @@ import { Button, Form, Input, Space } from 'antd';
 import { operationApi } from '@/apis';
 import { useRequest } from 'ahooks';
 import DrawerForm from '@/components/drawer-form';
-import SceneDefinition from './SceneDefinition';
 import { SceneContextProvider } from '../components/SceneProvider';
+import SceneDefinition from '../components/SceneDefinition';
 
 const SceneDetail: React.FC = () => {
     const { id } = useParams();

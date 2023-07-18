@@ -1,5 +1,4 @@
 import React from 'react';
-// import styles from './index.module.less';
 import { Button, Form, Input, Space, Typography } from 'antd';
 import { NamePath } from 'antd/es/form/interface';
 import _ from 'lodash';

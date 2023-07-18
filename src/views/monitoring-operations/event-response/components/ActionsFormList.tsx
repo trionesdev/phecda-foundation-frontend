@@ -1,9 +1,8 @@
 import React from 'react';
-// import styles from './index.module.less';
 import { Button, Form, Input, Select, Space, Typography } from 'antd';
 import { NamePath } from 'antd/es/form/interface';
 import _ from 'lodash';
-import { useSceneContext } from '../components/SceneProvider';
+import { useSceneContext } from './SceneProvider';
 import { PlusOutlined } from '@ant-design/icons';
 
 type ActionsFormListType = {
@@ -11,11 +10,10 @@ type ActionsFormListType = {
 };
 const ActionsFormList: React.FC<ActionsFormListType> = () => {
     const { sceneForm } = useSceneContext();
-    const getActionsNamePath = (name: NamePath): NamePath => {
-        return _.concat('actions', name);
-    };
+
     return (
         <div>
+            <Typography.Title level={3}>场景动作</Typography.Title>
             <Form.List name="actions" initialValue={[{}]}>
                 {(conditionsFields, { add, remove }) => {
                     return (
