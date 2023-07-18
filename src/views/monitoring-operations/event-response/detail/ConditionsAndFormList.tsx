@@ -17,10 +17,10 @@ const ConditionsAndFormList: React.FC<ConditionsAndFormListType> = ({
     return (
         <div>
             <Form.List name={name} initialValue={[{}]}>
-                {(conditionsFields, { add, remove }) => {
+                {(conditionsListFields, { add, remove }) => {
                     return (
                         <>
-                            {conditionsFields?.map(
+                            {conditionsListFields?.map(
                                 ({ key, name: conditionsFieldsName }) => {
                                     return (
                                         <div key={key}>
@@ -49,6 +49,13 @@ const ConditionsAndFormList: React.FC<ConditionsAndFormListType> = ({
                                                 <Form.Item>
                                                     <Space size={1}>
                                                         <Button
+                                                            disabled={
+                                                                conditionsListFields.length !==
+                                                                    conditionsFieldsName +
+                                                                        1 ||
+                                                                conditionsListFields.length >=
+                                                                    3
+                                                            }
                                                             type="link"
                                                             onClick={() =>
                                                                 add()

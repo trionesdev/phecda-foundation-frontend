@@ -33,7 +33,8 @@ const ConditionsFormList: React.FC<ConditionsFormListType> = () => {
                                                     ? '且'
                                                     : '或'}
                                                 满足以下条件
-                                                {conditionsName !== 0 && (
+                                                {conditionsFields.length >
+                                                    1 && (
                                                     <MinusCircleOutlined
                                                         style={{
                                                             marginLeft: 10,
@@ -56,6 +57,7 @@ const ConditionsFormList: React.FC<ConditionsFormListType> = () => {
                             )}
                             <Form.Item>
                                 <Button
+                                    disabled={conditionsFields.length >= 3}
                                     type="link"
                                     onClick={() => add()}
                                     icon={<PlusOutlined />}
