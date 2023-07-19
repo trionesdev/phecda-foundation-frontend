@@ -35,34 +35,24 @@ const ProductThingModelDraftView = () => {
         deviceApi
             .queryProductThingModelDraft(id!)
             .then((res: any) => {
-                let thingModel = _.mapKeys(
-                    _.get(res, 'thingModel'),
-                    (value, key) => {
-                        switch (key) {
-                            case 'events':
-                                return _.map(value, (ability) =>
-                                    _.assign(ability, {
-                                        abilityType: AbilityType.EVENT,
-                                    })
-                                );
-                            case 'properties':
-                                return _.map(value, (ability) =>
-                                    _.assign(ability, {
-                                        abilityType: AbilityType.PROPERTY,
-                                    })
-                                );
-                            case 'services':
-                                return _.map(value, (ability) =>
-                                    _.assign(ability, {
-                                        abilityType: AbilityType.SERVICE,
-                                    })
-                                );
-                            default:
-                                return value;
-                        }
-                    }
-                );
-                let abilities = _.values(thingModel)
+                const thingModelData = _.cloneDeep(_.get(res, 'thingModel'));
+                _.get(thingModelData, 'events')?.map((ability: any) => {
+                    _.assign(ability, {
+                        abilityType: AbilityType.EVENT,
+                    });
+                });
+                _.get(thingModelData, 'properties')?.map((ability: any) => {
+                    _.assign(ability, {
+                        abilityType: AbilityType.PROPERTY,
+                    });
+                });
+                _.get(thingModelData, 'services')?.map((ability: any) => {
+                    _.assign(ability, {
+                        abilityType: AbilityType.SERVICE,
+                    });
+                });
+
+                let abilities = _.values(thingModelData)
                     .reduce((prev, cur) => _.concat(prev, cur), [])
                     .sort();
                 setRows(abilities || []);
@@ -210,6 +200,7 @@ const ProductThingModelDraftView = () => {
                 dataSource={rows}
                 loading={loading}
                 rowKey={`identifier`}
+                pagination={false}
             />
         </VPanel>
     );

@@ -21,7 +21,7 @@ const ValueTypeSelect: FC<ValueTypeSelectProps> = ({
         handleQueryOptions();
     }, []);
     return (
-        <Select defaultValue={ValueTypeEnum.INT} options={options} {...rest} />
+        <Select defaultValue={ValueTypeEnum.INT!} options={options} {...rest} />
     );
 };
 export default ValueTypeSelect;

@@ -1,4 +1,4 @@
-import { Form, Select } from 'antd';
+import { Form } from 'antd';
 import ValueTypeInt from './value-type-int';
 import ValueTypeSelect from '../../../../../components/value-type-select/value-type-select';
 import { FC, useState } from 'react';
@@ -7,6 +7,7 @@ import ValueTypeBool from './value-type-bool';
 import ValueTypeFloat from './value-type-float';
 import ValueTypeDouble from './value-type-double';
 import ValueTypeString from './value-type-string';
+import ValueTypeStruct from './value-type-struct';
 
 export enum ValueTypeEnum {
     INT = 'INT',
@@ -20,19 +21,30 @@ export enum ValueTypeEnum {
 
 export type ValueTypeProps = {
     group?: string | number | any[];
+    isChild?: boolean;
 };
 
-const ValueType: FC<ValueTypeProps> = ({ group }) => {
+const ValueType: FC<ValueTypeProps> = ({ group, isChild = false }) => {
     const [valueType, setValueType] = useState(ValueTypeEnum.INT);
+    const form = Form.useFormInstance();
+
+    const handleValueTypesOnChange = (value: any) => {
+        setValueType(value);
+        form.setFieldValue(_.concat(group, `valueSpec`, `valueType`), value);
+        form.setFieldValue(_.concat(group, `valueSpecs`), []);
+    };
+
     return (
         <>
             <Form.Item
                 label={`数据类型`}
-                name={_.concat(group, `valueType`)}
+                name={_.concat(group, isChild ? `childValueType` : `valueType`)}
                 initialValue={ValueTypeEnum.INT}
                 required={true}
             >
-                <ValueTypeSelect onChange={(value) => setValueType(value)} />
+                <ValueTypeSelect
+                    onChange={(value) => handleValueTypesOnChange(value)}
+                />
             </Form.Item>
             {_.isEqual(ValueTypeEnum.INT, valueType) && (
                 <ValueTypeInt group={[group, `valueSpec`]} />
@@ -48,6 +60,9 @@ const ValueType: FC<ValueTypeProps> = ({ group }) => {
             )}
             {_.isEqual(ValueTypeEnum.STRING, valueType) && (
                 <ValueTypeString group={[group, `valueSpec`]} />
+            )}
+            {_.isEqual(ValueTypeEnum.STRUCT, valueType) && (
+                <ValueTypeStruct group={[group, `valueSpecs`]} />
             )}
         </>
     );

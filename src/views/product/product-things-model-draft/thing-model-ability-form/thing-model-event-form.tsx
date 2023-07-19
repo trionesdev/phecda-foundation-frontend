@@ -4,7 +4,7 @@ import ParamsData from './params-data';
 
 type ThingsModelEventFormProps = {};
 const ThingModelEventForm: FC<ThingsModelEventFormProps> = () => {
-    const ability = 'service';
+    const ability = 'event';
     return (
         <>
             <Form.Item
@@ -34,7 +34,7 @@ const ThingModelEventForm: FC<ThingsModelEventFormProps> = () => {
                 </Radio.Group>
             </Form.Item>
             <Form.Item label={`输出参数`}>
-                <ParamsData name={`outputData`} />
+                <ParamsData name={[ability, `outParams`]} />
             </Form.Item>
             <Form.Item
                 label={`描述`}

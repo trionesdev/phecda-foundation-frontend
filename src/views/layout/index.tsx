@@ -15,11 +15,11 @@ const MainLayoutView = () => {
             key: 'alarm-management',
             label: '告警管理',
             children: [
-                {
+                /*{
                     key: RoutesConstants.ALARM_RULES.key,
                     label: `告警配置`,
                     onClick: () => navigate(RoutesConstants.ALARM_RULES.path()),
-                },
+                },*/
                 {
                     key: RoutesConstants.ALARM_LOG.key,
                     label: '告警日志',
@@ -31,7 +31,7 @@ const MainLayoutView = () => {
                     onClick: () =>
                         navigate(RoutesConstants.MONITOR_TRENDS.path()),
                 },
-                {
+                /*{
                     key: RoutesConstants.DEVICE_DATA.key,
                     label: `设备数据`,
                     onClick: () => navigate(RoutesConstants.DEVICE_DATA.path()),
@@ -41,7 +41,7 @@ const MainLayoutView = () => {
                     label: `监控画面`,
                     onClick: () =>
                         navigate(RoutesConstants.MONITOR_VIEW.path()),
-                },
+                },*/
             ],
         },
         {

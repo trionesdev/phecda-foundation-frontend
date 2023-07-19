@@ -3,16 +3,19 @@ import { FC, useState } from 'react';
 import _ from 'lodash';
 import styles from './params-modal-form.module.less';
 import ValueType from '../value-type';
+
 type ParamsModalFormProps = {
     value?: any;
     onChange?: (value: any) => void;
     remove?: () => void;
     add?: () => void;
+    isChild?: boolean;
 };
 const ParamsModalForm: FC<ParamsModalFormProps> = ({
     value,
     onChange,
     remove,
+    isChild,
 }) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [form] = Form.useForm();
@@ -20,7 +23,7 @@ const ParamsModalForm: FC<ParamsModalFormProps> = ({
     return (
         <>
             <div className={styles.nameWrapper}>
-                <div>参数名称：{value?.paramName ?? '--'}</div>
+                <div>参数名称：{value?.name ?? '--'}</div>
 
                 <div className={styles.buttonWrapper}>
                     <Button
@@ -45,7 +48,7 @@ const ParamsModalForm: FC<ParamsModalFormProps> = ({
             </div>
             <Modal
                 open={modalOpen}
-                title="参数设置"
+                title="参数配置"
                 onCancel={() => {
                     setModalOpen(false);
                 }}
@@ -76,13 +79,13 @@ const ParamsModalForm: FC<ParamsModalFormProps> = ({
                         },
                     }}
                 >
-                    <Form.Item name="paramName" label="参数名称">
+                    <Form.Item name="name" label="参数名称" required={true}>
                         <Input />
                     </Form.Item>
-                    <Form.Item label="标识符" name="identifier">
+                    <Form.Item name="identifier" label="标识符" required={true}>
                         <Input />
                     </Form.Item>
-                    <ValueType group={'valueTypeGroup'} />
+                    <ValueType group={'valueTypeGroup'} isChild={isChild!} />
                 </Form>
             </Modal>
         </>

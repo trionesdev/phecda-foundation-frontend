@@ -33,10 +33,10 @@ const ThingModelServiceForm: FC<ThingsModelServiceFormProps> = () => {
                 </Radio.Group>
             </Form.Item>
             <Form.Item label={`输入参数`}>
-                <ParamsData name="inputData" />
+                <ParamsData name={[ability, `inputParams`]} />
             </Form.Item>
             <Form.Item label={`输出参数`}>
-                <ParamsData name={`outputData`} />
+                <ParamsData name={[ability, `outputParams`]} />
             </Form.Item>
             <Form.Item
                 label={`描述`}

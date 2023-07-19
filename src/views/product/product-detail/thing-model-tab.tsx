@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import styles from './product-detail.module.less';
 import { FC, useEffect, useState } from 'react';
 import { RoutesConstants } from '../../../router/routes.constants';
-import { GridTable, VPanel } from '@moensun/antd-react-ext';
+import { VPanel } from '@moensun/antd-react-ext';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
 import { AbilityType } from '../product-things-model-draft/thing-model-ability-form';
+import GridTable from '@components/grid-table';
 
 type ThingsModelTabProps = {
     product: any;
@@ -20,34 +21,23 @@ const ThingModelTab: FC<ThingsModelTabProps> = ({ product }) => {
         deviceApi
             .queryThingModel(product.id)
             .then((res: any) => {
-                let thingModel = _.mapKeys(
-                    _.get(res, 'thingModel'),
-                    (value, key) => {
-                        switch (key) {
-                            case 'events':
-                                return _.map(value, (ability) =>
-                                    _.assign(ability, {
-                                        abilityType: AbilityType.EVENT,
-                                    })
-                                );
-                            case 'properties':
-                                return _.map(value, (ability) =>
-                                    _.assign(ability, {
-                                        abilityType: AbilityType.PROPERTY,
-                                    })
-                                );
-                            case 'services':
-                                return _.map(value, (ability) =>
-                                    _.assign(ability, {
-                                        abilityType: AbilityType.SERVICE,
-                                    })
-                                );
-                            default:
-                                return value;
-                        }
-                    }
-                );
-                let abilities = _.values(thingModel)
+                const thingModelData = _.cloneDeep(_.get(res, 'thingModel'));
+                _.get(thingModelData, 'events')?.map((ability: any) => {
+                    _.assign(ability, {
+                        abilityType: AbilityType.EVENT,
+                    });
+                });
+                _.get(thingModelData, 'properties')?.map((ability: any) => {
+                    _.assign(ability, {
+                        abilityType: AbilityType.PROPERTY,
+                    });
+                });
+                _.get(thingModelData, 'services')?.map((ability: any) => {
+                    _.assign(ability, {
+                        abilityType: AbilityType.SERVICE,
+                    });
+                });
+                let abilities = _.values(thingModelData)
                     .reduce((prev, cur) => _.concat(prev, cur), [])
                     .sort();
                 setRows(abilities || []);
@@ -114,6 +104,7 @@ const ThingModelTab: FC<ThingsModelTabProps> = ({ product }) => {
                 dataSource={rows}
                 loading={loading}
                 rowKey={`identifier`}
+                pagination={false}
             />
         </VPanel>
     );
