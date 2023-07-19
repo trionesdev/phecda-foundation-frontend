@@ -19,8 +19,8 @@ export default class DeviceApi extends BaseApi {
     queryProductById(id: string): Promise<ProductRep> {
         return this.request.get(`${this.baseUri}/products/${id}`);
     }
-
-    queryProductList(params?: {}) {
+    /** 获取产品列表 */
+    queryProductList(params?: {}): Promise<ProductRep[]> {
         return this.request.get(`${this.baseUri}/products`, { params });
     }
 

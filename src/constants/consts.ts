@@ -1,4 +1,9 @@
-import { ALARM_LEVEL, ASSETS_STATES, DEAL_STATUS } from './enums';
+import {
+    ALARM_LEVEL,
+    ASSETS_STATES,
+    DEAL_STATUS,
+    SCENE_EVENT_TYPE,
+} from './enums';
 
 export const AssetsStatesConfig = {
     [ASSETS_STATES.SCRAPPED]: '报废',
@@ -54,5 +59,12 @@ export const DealStatusOptions = [
     {
         label: '待处理',
         value: DEAL_STATUS.PENDING,
+    },
+];
+
+export const SceneEventOptions = [
+    {
+        label: '物模型属性上报',
+        value: SCENE_EVENT_TYPE.THING_MODEL_PROPERTY_EXPORT,
     },
 ];

@@ -41,3 +41,9 @@ export enum ALARM_LEVEL {
     /** 一般 */
     THIRD_LEVEL = 'THIRD_LEVEL',
 }
+
+/** 场景事件类型 */
+export enum SCENE_EVENT_TYPE {
+    /** 物模型属性上报 */
+    THING_MODEL_PROPERTY_EXPORT = 'THING_MODEL_PROPERTY_EXPORT',
+}

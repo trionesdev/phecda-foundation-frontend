@@ -23,7 +23,7 @@ const ConditionsAndFormList: React.FC<ConditionsAndFormListType> = ({
                                     return (
                                         <div key={key}>
                                             <Typography.Text strong>
-                                                条件{conditionsFieldsName}
+                                                条件{conditionsFieldsName + 1}
                                             </Typography.Text>
                                             <Space>
                                                 <Form.Item
