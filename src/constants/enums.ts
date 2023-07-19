@@ -47,3 +47,21 @@ export enum SCENE_EVENT_TYPE {
     /** 物模型属性上报 */
     THING_MODEL_PROPERTY_EXPORT = 'THING_MODEL_PROPERTY_EXPORT',
 }
+
+/** 运算符 */
+export enum OPERATOR {
+    /** 等于 */
+    EQUAL_TO = 'EQUAL_TO',
+    /** 大于 */
+    GREATER_THAN = 'GREATER_THAN',
+    /** 大于等于 */
+    GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO',
+    /**小于 */
+    LESS_THAN = 'LESS_THAN',
+    /** 小于等于*/
+    LESS_THAN_OR_EQUAL_TO = 'LESS_THAN_OR_EQUAL_TO',
+    /**闭区间[a,b] */
+    CLOSED_INTERVAL = 'CLOSED_INTERVAL',
+    /** 开区间(a,b)*/
+    OPEN_INTERVAL = 'OPEN_INTERVAL',
+}

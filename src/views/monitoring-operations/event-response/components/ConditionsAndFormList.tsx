@@ -3,6 +3,7 @@ import { Button, Form, Input, Space, Typography } from 'antd';
 import { NamePath } from 'antd/es/form/interface';
 import _ from 'lodash';
 import ProductDeviceFormItem from './ProductDeviceFormItem';
+import OperatorFormItemItem from './OperatorFormItem';
 
 type ConditionsAndFormListType = {
     namePath: NamePath;
@@ -35,30 +36,25 @@ const ConditionsAndFormList: React.FC<ConditionsAndFormListType> = ({
                                                 >
                                                     <Input />
                                                 </Form.Item>
-                                                <Form.Item
-                                                    name={conditionsFieldsName}
-                                                    noStyle
-                                                >
-                                                    <ProductDeviceFormItem
-                                                        namePath={
-                                                            conditionsFieldsName
-                                                        }
-                                                        fullNamePath={_.concat(
-                                                            fullNamePath,
-                                                            conditionsFieldsName
-                                                        )}
-                                                    />
-                                                </Form.Item>
+                                                <ProductDeviceFormItem
+                                                    namePath={
+                                                        conditionsFieldsName
+                                                    }
+                                                    fullNamePath={_.concat(
+                                                        fullNamePath,
+                                                        conditionsFieldsName
+                                                    )}
+                                                />
+                                                <OperatorFormItemItem
+                                                    namePath={
+                                                        conditionsFieldsName
+                                                    }
+                                                    fullNamePath={_.concat(
+                                                        fullNamePath,
+                                                        conditionsFieldsName
+                                                    )}
+                                                />
 
-                                                {/* <Form.Item
-                                                    name={[
-                                                        conditionsFieldsName,
-                                                        'product',
-                                                    ]}
-                                                    label="产品"
-                                                >
-                                                    <Input />
-                                                </Form.Item> */}
                                                 <Form.Item>
                                                     <Space size={1}>
                                                         <Button

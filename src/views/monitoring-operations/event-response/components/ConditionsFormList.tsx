@@ -11,6 +11,7 @@ const ConditionsFormList: React.FC<ConditionsFormListType> = () => {
         <div>
             <Form.List name="conditions" initialValue={[[{}]]}>
                 {(conditionsFields, { add, remove }) => {
+                    console.log(conditionsFields);
                     return (
                         <>
                             {conditionsFields?.map(
@@ -41,7 +42,7 @@ const ConditionsFormList: React.FC<ConditionsFormListType> = () => {
                                             </Typography.Title>
 
                                             <ConditionsAndFormList
-                                                namePath={conditionsName}
+                                                namePath={[conditionsName]}
                                                 fullNamePath={[
                                                     'conditions',
                                                     conditionsName,
