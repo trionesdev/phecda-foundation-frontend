@@ -28,8 +28,13 @@ export default class OperationApi extends BaseApi {
     editScenesStatusById(id: string, data: boolean): Promise<any> {
         return this.request.put(`${this.baseUri}/${id}/enabled`, data);
     }
-    /** 根据id删除字典 */
+    /** 根据id删除场景 */
     deleteScenesById(id: string) {
         return this.request.delete(`${this.baseUri}/${id}`);
+    }
+
+    /** 编辑场景联动规则 */
+    editScenesRulesById(id: string, data: Record<string, any>): Promise<any> {
+        return this.request.put(`${this.baseUri}/${id}/rules`, data);
     }
 }

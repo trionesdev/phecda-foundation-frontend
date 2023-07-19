@@ -1,8 +1,5 @@
 import React from 'react';
-import { Button, Form, Input, Select, Space, Typography } from 'antd';
-import { NamePath } from 'antd/es/form/interface';
-import _ from 'lodash';
-import { useSceneContext } from './SceneProvider';
+import { Button, Form, Select, Space, Typography } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { sceneActionOptions } from '@/constants/consts';
 
@@ -10,8 +7,6 @@ type ActionsFormListType = {
     // name: NamePath;
 };
 const ActionsFormList: React.FC<ActionsFormListType> = () => {
-    const { sceneForm } = useSceneContext();
-
     return (
         <div>
             <Typography.Title level={3}>场景动作</Typography.Title>
