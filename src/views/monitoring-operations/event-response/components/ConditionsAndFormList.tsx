@@ -2,19 +2,19 @@ import React from 'react';
 import { Button, Form, Input, Space, Typography } from 'antd';
 import { NamePath } from 'antd/es/form/interface';
 import _ from 'lodash';
-import { useSceneContext } from '../components/SceneProvider';
+import ProductDeviceFormItem from './ProductDeviceFormItem';
 
 type ConditionsAndFormListType = {
-    name: NamePath;
+    namePath: NamePath;
+    fullNamePath: NamePath;
 };
 const ConditionsAndFormList: React.FC<ConditionsAndFormListType> = ({
-    name,
+    namePath,
+    fullNamePath = namePath,
 }) => {
-    const { sceneForm } = useSceneContext();
-
     return (
         <div>
-            <Form.List name={name} initialValue={[{}]}>
+            <Form.List name={namePath} initialValue={[{}]}>
                 {(conditionsListFields, { add, remove }) => {
                     return (
                         <>
@@ -36,6 +36,21 @@ const ConditionsAndFormList: React.FC<ConditionsAndFormListType> = ({
                                                     <Input />
                                                 </Form.Item>
                                                 <Form.Item
+                                                    name={conditionsFieldsName}
+                                                    noStyle
+                                                >
+                                                    <ProductDeviceFormItem
+                                                        namePath={
+                                                            conditionsFieldsName
+                                                        }
+                                                        fullNamePath={_.concat(
+                                                            fullNamePath,
+                                                            conditionsFieldsName
+                                                        )}
+                                                    />
+                                                </Form.Item>
+
+                                                {/* <Form.Item
                                                     name={[
                                                         conditionsFieldsName,
                                                         'product',
@@ -43,7 +58,7 @@ const ConditionsAndFormList: React.FC<ConditionsAndFormListType> = ({
                                                     label="产品"
                                                 >
                                                     <Input />
-                                                </Form.Item>
+                                                </Form.Item> */}
                                                 <Form.Item>
                                                     <Space size={1}>
                                                         <Button

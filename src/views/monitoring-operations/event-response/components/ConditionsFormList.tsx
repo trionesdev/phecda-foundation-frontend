@@ -1,8 +1,5 @@
 import React from 'react';
-import { Button, Form, Input, Space, Typography } from 'antd';
-import { NamePath } from 'antd/es/form/interface';
-import _ from 'lodash';
-import { useSceneContext } from '../components/SceneProvider';
+import { Button, Form, Typography } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import ConditionsAndFormList from './ConditionsAndFormList';
 
@@ -10,10 +7,6 @@ type ConditionsFormListType = {
     // name: NamePath;
 };
 const ConditionsFormList: React.FC<ConditionsFormListType> = () => {
-    const { sceneForm } = useSceneContext();
-    const getConditionsNamePath = (name: NamePath): NamePath => {
-        return _.concat('conditions', name);
-    };
     return (
         <div>
             <Form.List name="conditions" initialValue={[[{}]]}>
@@ -48,7 +41,11 @@ const ConditionsFormList: React.FC<ConditionsFormListType> = () => {
                                             </Typography.Title>
 
                                             <ConditionsAndFormList
-                                                name={conditionsName}
+                                                namePath={conditionsName}
+                                                fullNamePath={[
+                                                    'conditions',
+                                                    conditionsName,
+                                                ]}
                                             />
                                         </div>
                                     );

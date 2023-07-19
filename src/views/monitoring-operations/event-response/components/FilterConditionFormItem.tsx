@@ -2,18 +2,18 @@ import React from 'react';
 import { Form, Input, Select, Space, Typography } from 'antd';
 import { NamePath } from 'antd/es/form/interface';
 import _ from 'lodash';
-import { useSceneContext } from '../components/SceneProvider';
 import { SceneEventOptions } from '@/constants/consts';
-import useQueryProductsList from '@/hooks/useOptions/useQueryProductsList';
+import useQueryDeviceByParams from '@/hooks/useOptions/useQueryDeviceByParams';
+import ProductDeviceFormItem from './ProductDeviceFormItem';
 type FilterConditionFormItemType = {
     // name: NamePath;
 };
 const FilterConditionFormItem: React.FC<FilterConditionFormItemType> = () => {
-    const { sceneForm } = useSceneContext();
-    const { productOptions } = useQueryProductsList();
+    const { deviceDataOptions } = useQueryDeviceByParams();
     const getFilterConditionNamePath = (name: NamePath): NamePath => {
         return _.concat('filterCondition', name);
     };
+    console.log(deviceDataOptions);
     return (
         <div>
             <Typography.Title level={3}>场景定义</Typography.Title>
@@ -28,18 +28,7 @@ const FilterConditionFormItem: React.FC<FilterConditionFormItemType> = () => {
                         options={SceneEventOptions}
                     />
                 </Form.Item>
-                <Form.Item
-                    label="产品"
-                    name={getFilterConditionNamePath('product')}
-                >
-                    <Select style={{ width: 180 }} options={productOptions} />
-                </Form.Item>
-                <Form.Item
-                    label="设备"
-                    name={getFilterConditionNamePath('deviceName')}
-                >
-                    <Select style={{ width: 180 }} />
-                </Form.Item>
+                <ProductDeviceFormItem namePath="filterCondition" />
                 <Form.Item
                     label="运算符"
                     name={getFilterConditionNamePath('operator')}
