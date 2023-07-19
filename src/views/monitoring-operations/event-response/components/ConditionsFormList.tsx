@@ -11,7 +11,6 @@ const ConditionsFormList: React.FC<ConditionsFormListType> = () => {
         <div>
             <Form.List name="conditions" initialValue={[[{}]]}>
                 {(conditionsFields, { add, remove }) => {
-                    console.log(conditionsFields);
                     return (
                         <>
                             {conditionsFields?.map(

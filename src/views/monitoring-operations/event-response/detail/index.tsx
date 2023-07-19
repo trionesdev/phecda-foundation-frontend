@@ -8,6 +8,7 @@ import { useRequest } from 'ahooks';
 import DrawerForm from '@/components/drawer-form';
 import { SceneContextProvider } from '../components/SceneProvider';
 import SceneDefinition from '../components/SceneDefinition';
+import { filterEmptyData } from '@/commons/util/fliterEmptyData';
 
 const SceneDetail: React.FC = () => {
     const { id } = useParams();
@@ -34,6 +35,17 @@ const SceneDetail: React.FC = () => {
             },
         }
     );
+    /** 修改场景规则 */
+    const { run: editScenesRules } = useRequest(
+        (id, params) => operationApi.editScenesRulesById(id, params),
+        {
+            manual: true,
+            onSuccess() {
+                refreshQueryScenes();
+            },
+        }
+    );
+
     /** 修改场景 */
     const { run: editScenes } = useRequest(
         (id, params) => operationApi.editScenesById(id, params),
@@ -70,7 +82,10 @@ const SceneDetail: React.FC = () => {
                         onClick={async () => {
                             await form.validateFields();
                             const values = form.getFieldsValue(true);
+                            // editScenesRules(id, values);
+                            const filteredData = filterEmptyData(values);
                             console.log(values);
+                            console.log(filteredData);
                         }}
                     >
                         确定
