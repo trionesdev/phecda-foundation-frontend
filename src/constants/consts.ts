@@ -3,6 +3,7 @@ import {
     ASSETS_STATES,
     DEAL_STATUS,
     OPERATOR,
+    SCENE_ACTION,
     SCENE_EVENT_TYPE,
 } from './enums';
 
@@ -97,5 +98,12 @@ export const operatorOptions = [
     {
         label: '开区间[a,b]',
         value: OPERATOR.OPEN_INTERVAL,
+    },
+];
+
+export const sceneActionOptions = [
+    {
+        label: '警告',
+        value: SCENE_ACTION.ALARM,
     },
 ];

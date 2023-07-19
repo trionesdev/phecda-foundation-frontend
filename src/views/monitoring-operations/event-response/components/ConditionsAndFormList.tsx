@@ -26,7 +26,7 @@ const ConditionsAndFormList: React.FC<ConditionsAndFormListType> = ({
                                             <Typography.Text strong>
                                                 条件{conditionsFieldsName + 1}
                                             </Typography.Text>
-                                            <Space>
+                                            <Space wrap>
                                                 <Form.Item
                                                     name={[
                                                         conditionsFieldsName,

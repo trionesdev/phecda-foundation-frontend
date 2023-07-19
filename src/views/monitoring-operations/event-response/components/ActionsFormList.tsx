@@ -4,6 +4,7 @@ import { NamePath } from 'antd/es/form/interface';
 import _ from 'lodash';
 import { useSceneContext } from './SceneProvider';
 import { PlusOutlined } from '@ant-design/icons';
+import { sceneActionOptions } from '@/constants/consts';
 
 type ActionsFormListType = {
     // name: NamePath;
@@ -29,10 +30,10 @@ const ActionsFormList: React.FC<ActionsFormListType> = () => {
                                                 name={[name, 'type']}
                                                 label="场景动作类型"
                                             >
-                                                {/* <Select
+                                                <Select
                                                     style={{ width: 180 }}
-                                                /> */}
-                                                <Input />
+                                                    options={sceneActionOptions}
+                                                />
                                             </Form.Item>
                                             <Form.Item>
                                                 <Button
