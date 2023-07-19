@@ -65,3 +65,8 @@ export enum OPERATOR {
     /** 开区间(a,b)*/
     OPEN_INTERVAL = 'OPEN_INTERVAL',
 }
+
+/** 场景动作 */
+export enum SCENE_ACTION {
+    ALARM = 'ALARM',
+}
