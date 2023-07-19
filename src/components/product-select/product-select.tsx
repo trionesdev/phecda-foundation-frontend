@@ -24,7 +24,7 @@ const ProductSelect: FC<ProductSelectProps> = ({ allOption, ...rest }) => {
     useEffect(() => {
         handleQuery();
     }, []);
-
+    console.log(options);
     return (
         <Select
             {...rest}
