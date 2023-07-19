@@ -26,12 +26,13 @@ const ActionsFormList: React.FC<ActionsFormListType> = () => {
                                         </Typography.Text>
                                         <Space wrap>
                                             <Form.Item
-                                                name="type"
+                                                name={[name, 'type']}
                                                 label="场景动作类型"
                                             >
-                                                <Select
+                                                {/* <Select
                                                     style={{ width: 180 }}
-                                                />
+                                                /> */}
+                                                <Input />
                                             </Form.Item>
                                             <Form.Item>
                                                 <Button

@@ -2,6 +2,7 @@ import {
     ALARM_LEVEL,
     ASSETS_STATES,
     DEAL_STATUS,
+    OPERATOR,
     SCENE_EVENT_TYPE,
 } from './enums';
 
@@ -66,5 +67,35 @@ export const SceneEventOptions = [
     {
         label: '物模型属性上报',
         value: SCENE_EVENT_TYPE.THING_MODEL_PROPERTY_EXPORT,
+    },
+];
+export const operatorOptions = [
+    {
+        label: '等于',
+        value: OPERATOR.EQUAL_TO,
+    },
+    {
+        label: '大于',
+        value: OPERATOR.GREATER_THAN,
+    },
+    {
+        label: '大于等于',
+        value: OPERATOR.GREATER_THAN_OR_EQUAL_TO,
+    },
+    {
+        label: '小于',
+        value: OPERATOR.LESS_THAN,
+    },
+    {
+        label: '小于等于',
+        value: OPERATOR.LESS_THAN_OR_EQUAL_TO,
+    },
+    {
+        label: '闭区间[a,b]',
+        value: OPERATOR.CLOSED_INTERVAL,
+    },
+    {
+        label: '开区间[a,b]',
+        value: OPERATOR.OPEN_INTERVAL,
     },
 ];

@@ -1,16 +1,14 @@
 import React from 'react';
-import { Form, Input, Select, Space, Typography } from 'antd';
+import { Form, Select, Space, Typography } from 'antd';
 import { NamePath } from 'antd/es/form/interface';
 import _ from 'lodash';
-import { useSceneContext } from '../components/SceneProvider';
 import { SceneEventOptions } from '@/constants/consts';
-import useQueryProductsList from '@/hooks/useOptions/useQueryProductsList';
+import ProductDeviceFormItem from './ProductDeviceFormItem';
+import OperatorFormItemItem from './OperatorFormItem';
 type FilterConditionFormItemType = {
     // name: NamePath;
 };
 const FilterConditionFormItem: React.FC<FilterConditionFormItemType> = () => {
-    const { sceneForm } = useSceneContext();
-    const { productOptions } = useQueryProductsList();
     const getFilterConditionNamePath = (name: NamePath): NamePath => {
         return _.concat('filterCondition', name);
     };
@@ -28,30 +26,8 @@ const FilterConditionFormItem: React.FC<FilterConditionFormItemType> = () => {
                         options={SceneEventOptions}
                     />
                 </Form.Item>
-                <Form.Item
-                    label="产品"
-                    name={getFilterConditionNamePath('product')}
-                >
-                    <Select style={{ width: 180 }} options={productOptions} />
-                </Form.Item>
-                <Form.Item
-                    label="设备"
-                    name={getFilterConditionNamePath('deviceName')}
-                >
-                    <Select style={{ width: 180 }} />
-                </Form.Item>
-                <Form.Item
-                    label="运算符"
-                    name={getFilterConditionNamePath('operator')}
-                >
-                    <Select style={{ width: 180 }} />
-                </Form.Item>
-                <Form.Item
-                    label="参数"
-                    name={getFilterConditionNamePath('params')}
-                >
-                    <Input />
-                </Form.Item>
+                <ProductDeviceFormItem namePath="filterCondition" />
+                <OperatorFormItemItem namePath="filterCondition" />
             </Space>
         </div>
     );
