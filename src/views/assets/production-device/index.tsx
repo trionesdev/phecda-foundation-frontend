@@ -19,14 +19,13 @@ import { RoutesConstants } from '@/router/routes.constants';
 import SearchToolbar from '@/components/search-toolbar';
 import { TableParams } from '@/constants/types';
 import { AssetsStatesConfig, AssetsStatesOptions } from '@/constants/consts';
-import useQueryDeviceAll from '@/hooks/useQueryDeviceAll';
 import { ASSETS_STATES } from '@/constants/enums';
 import UploadImage from '@/components/upload/UploadImage';
 import UploadMyFile from '@/components/upload/UploadFile';
-import useQueryDictionaryOptions from '@/hooks/useQueryDictionaryOptions';
+import useQueryDictionaryOptions from '@/hooks/useOptions/useQueryDictionaryOptions';
 import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
-import useQueryDeviceNoRelation from '@/hooks/useQueryDeviceNoRelation';
 import DrawerForm from '@/components/drawer-form';
+import useQueryDeviceNoRelation from '@/hooks/useOptions/useQueryDeviceNoRelation';
 
 const ProductionDevice: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
