@@ -7,8 +7,8 @@ import { assetsApi } from '@/apis';
 import { useEffect } from 'react';
 import BasicInfo from './BasicInfo';
 import DeviceInfo from './DeviceInfo';
-import useQueryDeviceAll from '@/hooks/useQueryDeviceAll';
-import useQueryDictionaryOptions from '@/hooks/useQueryDictionaryOptions';
+import useQueryDictionaryOptions from '@/hooks/useOptions/useQueryDictionaryOptions';
+import useQueryDeviceAll from '@/hooks/useOptions/useQueryDeviceAll';
 
 const ProductionDeviceDetail = () => {
     const { id } = useParams();

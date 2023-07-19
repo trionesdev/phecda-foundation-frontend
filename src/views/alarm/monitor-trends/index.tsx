@@ -7,14 +7,15 @@ import { deviceDataApi } from '@/apis';
 import { Button, DatePicker, Empty, Form, Select, Space, Tag } from 'antd';
 import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
-import useQueryAssetsAll from '@/hooks/useQueryAssetsAll';
 import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
 import dayjs from 'dayjs';
 import _ from 'lodash';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';
 import { Area, AreaConfig } from '@ant-design/charts';
-import useQueryDeviceRelatedByAsset from '@/hooks/useQueryDeviceRelatedByAsset';
-import useQueryDevicePropertiesData from '@/hooks/useQueryDevicePropertiesData';
+import useQueryDeviceRelatedByAsset from '@/hooks/useOptions/useQueryDeviceRelatedByAsset';
+import useQueryDevicePropertiesData from '@/hooks/useOptions/useQueryDevicePropertiesData';
+import useQueryAssetsAll from '@/hooks/useOptions/useQueryAssetsAll';
+
 const MonitorTrends: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,

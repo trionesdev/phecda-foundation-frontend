@@ -18,12 +18,11 @@ import {
 import SearchToolbar from '@/components/search-toolbar';
 import { TableParams } from '@/constants/types';
 import { AssetsStatesOptions } from '@/constants/consts';
-import useQueryDeviceAll from '@/hooks/useQueryDeviceAll';
 import { formatDateTime } from '@/commons/util/date.utils';
-import useQueryAssetsAll from '@/hooks/useQueryAssetsAll';
 import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
-import useQueryDeviceNoRelation from '@/hooks/useQueryDeviceNoRelation';
 import DrawerForm from '@/components/drawer-form';
+import useQueryDeviceNoRelation from '@/hooks/useOptions/useQueryDeviceNoRelation';
+import useQueryAssetsAll from '@/hooks/useOptions/useQueryAssetsAll';
 
 const AccessoryType: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
