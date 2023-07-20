@@ -19,7 +19,6 @@ const ParamsModalForm: FC<ParamsModalFormProps> = ({
 }) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [form] = Form.useForm();
-
     return (
         <>
             <div className={styles.nameWrapper}>
@@ -71,7 +70,7 @@ const ParamsModalForm: FC<ParamsModalFormProps> = ({
                     form={form}
                     layout="vertical"
                     initialValues={{
-                        paramName: value?.paramName,
+                        name: value?.name,
                         identifier: value?.identifier,
                         valueTypeGroup: {
                             valueSpec: value?.valueSpec,

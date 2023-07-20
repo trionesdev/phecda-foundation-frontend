@@ -5,10 +5,10 @@ import { ValueTypeEnum, ValueTypeProps } from './index';
 import ParamsModalForm from '@views/product/product-things-model-draft/thing-model-ability-form/params-data/params-modal-form';
 import { PlusOutlined } from '@ant-design/icons';
 
-const ValueTypeStruct: FC<ValueTypeProps> = ({ group }) => {
+const ValueTypeStruct: FC<ValueTypeProps> = ({ group = 'valueSpecs' }) => {
     return (
         <>
-            <Form.List name={group!}>
+            <Form.List name={group}>
                 {(fields, { add, remove }, { errors }) => {
                     return (
                         <>
@@ -41,9 +41,6 @@ const ValueTypeStruct: FC<ValueTypeProps> = ({ group }) => {
                                                             remove={() => {
                                                                 remove(index);
                                                             }}
-                                                            add={() => {
-                                                                add();
-                                                            }}
                                                             onChange={(
                                                                 value
                                                             ) => {
@@ -66,8 +63,10 @@ const ValueTypeStruct: FC<ValueTypeProps> = ({ group }) => {
                             })}
                             <Button
                                 type="dashed"
-                                onClick={() => add()}
-                                style={{ width: '50%' }}
+                                onClick={() => {
+                                    add();
+                                }}
+                                style={{ width: '50%', marginBottom: 24 }}
                                 icon={<PlusOutlined />}
                             >
                                 添加参数
