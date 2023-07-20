@@ -1,7 +1,7 @@
 import { Form } from 'antd';
 import ValueTypeInt from './value-type-int';
 import ValueTypeSelect from '../../../../../components/value-type-select/value-type-select';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import _ from 'lodash';
 import ValueTypeBool from './value-type-bool';
 import ValueTypeFloat from './value-type-float';
@@ -25,11 +25,9 @@ export type ValueTypeProps = {
 };
 
 const ValueType: FC<ValueTypeProps> = ({ group, isChild = false }) => {
-    const [valueType, setValueType] = useState(ValueTypeEnum.INT);
     const form = Form.useFormInstance();
 
     const handleValueTypesOnChange = (value: any) => {
-        setValueType(value);
         form.setFieldValue(_.concat(group, `valueSpec`, `valueType`), value);
         form.setFieldValue(_.concat(group, `valueSpecs`), []);
     };
@@ -41,11 +39,15 @@ const ValueType: FC<ValueTypeProps> = ({ group, isChild = false }) => {
         [ValueTypeEnum.STRING]: ValueTypeString,
         [ValueTypeEnum.STRUCT]: ValueTypeStruct,
     };
+    const valueTypeNamePath = _.concat(
+        group,
+        isChild ? `childValueType` : `valueType`
+    );
     return (
         <>
             <Form.Item
                 label={`数据类型`}
-                name={_.concat(group, isChild ? `childValueType` : `valueType`)}
+                name={valueTypeNamePath}
                 initialValue={ValueTypeEnum.INT}
                 required={true}
             >
@@ -53,20 +55,24 @@ const ValueType: FC<ValueTypeProps> = ({ group, isChild = false }) => {
                     onChange={(value) => handleValueTypesOnChange(value)}
                 />
             </Form.Item>
-            <Form.Item
-                dependencies={[_.concat(group, `valueSpec`, `valueType`)]}
-                noStyle
-            >
+            <Form.Item dependencies={[valueTypeNamePath]} noStyle>
                 {(form) => {
                     const valueType: Exclude<
                         ValueTypeEnum,
                         ValueTypeEnum.ARRAY
-                    > = form.getFieldValue(
-                        _.concat(group, `valueSpec`, `valueType`)
-                    );
+                    > = form.getFieldValue(valueTypeNamePath);
                     const Component = ValueTypeEnumConfig?.[valueType];
                     if (Component) {
-                        return <Component group={[group, `valueSpec`]} />;
+                        return (
+                            <Component
+                                group={[
+                                    group,
+                                    valueType === ValueTypeEnum.STRUCT
+                                        ? 'valueSpecs'
+                                        : `valueSpec`,
+                                ]}
+                            />
+                        );
                     }
                     return null;
                 }}

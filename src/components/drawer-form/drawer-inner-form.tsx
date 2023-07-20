@@ -9,22 +9,20 @@ type DrawerInnerFormProps = {
     children?: React.ReactElement | React.ReactNode;
     formValues?: any;
     onSubmit?: (values: any, form?: FormInstance<any>) => Promise<any> | void;
+    scopeOpen?: boolean;
 } & FormProps;
 export const DrawerInnerForm = forwardRef<
     DrawerInnerFormHandle,
     DrawerInnerFormProps
->(({ children, formValues, onSubmit, ...rest }, componentRef) => {
+>(({ children, formValues, onSubmit, scopeOpen, ...rest }, componentRef) => {
     const [form] = Form.useForm();
-    /**支持自己传入form，外部传入form的话使用外部传入的form */
-    const trueFrom = rest.form ? rest.form : form;
     useImperativeHandle(componentRef, () => {
         return {
             submit: () => {
-                trueFrom
-                    .validateFields()
+                form.validateFields()
                     .then((values: any) => {
                         if (onSubmit) {
-                            return onSubmit(values, trueFrom);
+                            return onSubmit(values, form);
                         } else {
                             return Promise.resolve();
                         }
@@ -38,14 +36,18 @@ export const DrawerInnerForm = forwardRef<
 
     useEffect(() => {
         if (formValues) {
-            trueFrom.setFieldsValue(formValues);
+            form.setFieldsValue(formValues);
         } else {
-            trueFrom.resetFields();
+            form.resetFields();
         }
-    }, [formValues]);
-
+    }, [form, formValues]);
+    useEffect(() => {
+        if (!scopeOpen) {
+            form.resetFields();
+        }
+    }, [form, scopeOpen]);
     return (
-        <Form form={trueFrom} {...rest}>
+        <Form form={form} {...rest}>
             {children}
         </Form>
     );

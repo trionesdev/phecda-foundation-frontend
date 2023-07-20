@@ -82,7 +82,6 @@ const DrawerForm: FC<DrawerFormProps> = ({
     const formRef = useRef({} as DrawerInnerFormHandle);
     const [scopeOpen, setScopeOpen] = useState(false);
     const [scopeTrigger, setScopeTrigger] = useState(trigger);
-
     const handleSubmit = () => {
         formRef.current.submit();
     };
@@ -124,6 +123,7 @@ const DrawerForm: FC<DrawerFormProps> = ({
             </Space>
         </div>
     );
+
     return (
         <>
             {scopeTrigger}
@@ -139,6 +139,7 @@ const DrawerForm: FC<DrawerFormProps> = ({
                 footer={footer}
             >
                 <DrawerInnerForm
+                    scopeOpen={scopeOpen}
                     ref={formRef}
                     onSubmit={onSubmit}
                     formValues={formValues}
