@@ -33,7 +33,14 @@ const ValueType: FC<ValueTypeProps> = ({ group, isChild = false }) => {
         form.setFieldValue(_.concat(group, `valueSpec`, `valueType`), value);
         form.setFieldValue(_.concat(group, `valueSpecs`), []);
     };
-
+    const ValueTypeEnumConfig = {
+        [ValueTypeEnum.INT]: ValueTypeInt,
+        [ValueTypeEnum.FLOAT]: ValueTypeFloat,
+        [ValueTypeEnum.DOUBLE]: ValueTypeDouble,
+        [ValueTypeEnum.BOOL]: ValueTypeBool,
+        [ValueTypeEnum.STRING]: ValueTypeString,
+        [ValueTypeEnum.STRUCT]: ValueTypeStruct,
+    };
     return (
         <>
             <Form.Item
@@ -46,24 +53,24 @@ const ValueType: FC<ValueTypeProps> = ({ group, isChild = false }) => {
                     onChange={(value) => handleValueTypesOnChange(value)}
                 />
             </Form.Item>
-            {_.isEqual(ValueTypeEnum.INT, valueType) && (
-                <ValueTypeInt group={[group, `valueSpec`]} />
-            )}
-            {_.isEqual(ValueTypeEnum.FLOAT, valueType) && (
-                <ValueTypeFloat group={[group, `valueSpec`]} />
-            )}
-            {_.isEqual(ValueTypeEnum.DOUBLE, valueType) && (
-                <ValueTypeDouble group={[group, `valueSpec`]} />
-            )}
-            {_.isEqual(ValueTypeEnum.BOOL, valueType) && (
-                <ValueTypeBool group={[group, `valueSpecs`]} />
-            )}
-            {_.isEqual(ValueTypeEnum.STRING, valueType) && (
-                <ValueTypeString group={[group, `valueSpec`]} />
-            )}
-            {_.isEqual(ValueTypeEnum.STRUCT, valueType) && (
-                <ValueTypeStruct group={[group, `valueSpecs`]} />
-            )}
+            <Form.Item
+                dependencies={[_.concat(group, `valueSpec`, `valueType`)]}
+                noStyle
+            >
+                {(form) => {
+                    const valueType: Exclude<
+                        ValueTypeEnum,
+                        ValueTypeEnum.ARRAY
+                    > = form.getFieldValue(
+                        _.concat(group, `valueSpec`, `valueType`)
+                    );
+                    const Component = ValueTypeEnumConfig?.[valueType];
+                    if (Component) {
+                        return <Component group={[group, `valueSpec`]} />;
+                    }
+                    return null;
+                }}
+            </Form.Item>
         </>
     );
 };
