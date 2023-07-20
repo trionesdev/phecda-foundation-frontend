@@ -7,15 +7,18 @@ import {
 import { Breadcrumb, Button, Space, Tabs, TabsProps } from 'antd';
 import { useEffect, useState } from 'react';
 import styles from './product-detail.module.less';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import ThingModelTab from './thing-model-tab';
 import { deviceApi } from '@apis';
 import { ProductRep } from '../../../apis/device/device.rep';
 import InfoTab from './info-tab';
 import ProtocolTab from './protocol-tab';
+import { RoutesConstants } from '@/router/routes.constants';
 
 const ProductDetailView = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
+
     const [searchParams, setSearchParams] = useSearchParams();
     const [activeTab, setActiveTab] = useState<any>('info');
     const [product, setProduct] = useState<ProductRep>();
@@ -48,6 +51,11 @@ const ProductDetailView = () => {
                         发布
                     </Button>,
                 ]}
+                onBack={() => {
+                    navigate(RoutesConstants.PRODUCTS.path(), {
+                        replace: true,
+                    });
+                }}
             />
         </div>
     );
