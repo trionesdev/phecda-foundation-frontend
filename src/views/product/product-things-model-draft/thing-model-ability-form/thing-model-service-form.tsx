@@ -10,21 +10,21 @@ const ThingModelServiceForm: FC<ThingsModelServiceFormProps> = () => {
             <Form.Item
                 label={`功能名称`}
                 name={[ability, `name`]}
-                required={true}
+                rules={[{ required: true }]}
             >
                 <Input />
             </Form.Item>
             <Form.Item
                 label={`标识符`}
                 name={[ability, `identifier`]}
-                required={true}
+                rules={[{ required: true }]}
             >
                 <Input />
             </Form.Item>
             <Form.Item
                 label={`调用方式`}
                 name={[ability, 'callType']}
-                required={true}
+                rules={[{ required: true }]}
                 initialValue={`ASYNC`}
             >
                 <Radio.Group>

@@ -16,7 +16,7 @@ const ValueTypeString: FC<ValueTypeProps> = ({ group }) => {
             <Form.Item
                 label={`数据长度`}
                 name={_.concat(group, `length`)}
-                required={true}
+                rules={[{ required: true }]}
                 initialValue={10240}
             >
                 <Input addonAfter={`字节`} />

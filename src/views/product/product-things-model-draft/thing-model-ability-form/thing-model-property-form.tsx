@@ -10,14 +10,14 @@ const ThingModelPropertyForm: FC<ThingsModelPropertyFormProps> = ({}) => {
             <Form.Item
                 label={`功能名称`}
                 name={[ability, `name`]}
-                required={true}
+                rules={[{ required: true }]}
             >
                 <Input />
             </Form.Item>
             <Form.Item
                 label={`标识符`}
                 name={[ability, `identifier`]}
-                required={true}
+                rules={[{ required: true }]}
             >
                 <Input />
             </Form.Item>
@@ -25,7 +25,7 @@ const ThingModelPropertyForm: FC<ThingsModelPropertyFormProps> = ({}) => {
             <Form.Item
                 label={`读写类型`}
                 name={[ability, `rw`]}
-                required={true}
+                rules={[{ required: true }]}
                 initialValue={`RW`}
             >
                 <Radio.Group>

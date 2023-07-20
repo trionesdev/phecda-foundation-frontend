@@ -108,7 +108,11 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
             formValues={formValues}
             onSubmit={handleSubmit}
         >
-            <Form.Item label={`功能类型`} name={`abilityType`} required={true}>
+            <Form.Item
+                label={`功能类型`}
+                name={`abilityType`}
+                rules={[{ required: true }]}
+            >
                 <Radio.Group
                     onChange={handleAbilityTypeChange}
                     disabled={Boolean(identifier)}
@@ -123,7 +127,11 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
                 </Radio.Group>
             </Form.Item>
 
-            <Form.Item noStyle dependencies={['abilityType']}>
+            <Form.Item
+                noStyle
+                dependencies={['abilityType']}
+                rules={[{ required: true }]}
+            >
                 {({ getFieldValue }) => {
                     const abilityType = getFieldValue(
                         'abilityType'

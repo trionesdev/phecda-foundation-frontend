@@ -49,7 +49,7 @@ const ValueType: FC<ValueTypeProps> = ({ group, isChild = false }) => {
                 label={`数据类型`}
                 name={valueTypeNamePath}
                 initialValue={ValueTypeEnum.INT}
-                required={true}
+                rules={[{ required: true }]}
             >
                 <ValueTypeSelect
                     onChange={(value) => handleValueTypesOnChange(value)}
