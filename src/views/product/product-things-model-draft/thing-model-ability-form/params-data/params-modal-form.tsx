@@ -78,10 +78,18 @@ const ParamsModalForm: FC<ParamsModalFormProps> = ({
                         },
                     }}
                 >
-                    <Form.Item name="name" label="参数名称" required={true}>
+                    <Form.Item
+                        name="name"
+                        label="参数名称"
+                        rules={[{ required: true }]}
+                    >
                         <Input />
                     </Form.Item>
-                    <Form.Item name="identifier" label="标识符" required={true}>
+                    <Form.Item
+                        name="identifier"
+                        label="标识符"
+                        rules={[{ required: true }]}
+                    >
                         <Input />
                     </Form.Item>
                     <ValueType group={'valueTypeGroup'} isChild={isChild!} />

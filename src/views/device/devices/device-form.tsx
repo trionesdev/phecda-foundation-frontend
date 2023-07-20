@@ -33,10 +33,18 @@ const DeviceForm: FC<DeviceFormProps> = ({ onSuccess, ...rest }) => {
             onOpenChange={(op) => setOpen(op)}
             onSubmit={handleSubmit}
         >
-            <Form.Item label={`产品`} name={`productId`}>
+            <Form.Item
+                label={`产品`}
+                name={`productId`}
+                rules={[{ required: true }]}
+            >
                 <ProductSelect />
             </Form.Item>
-            <Form.Item label={`DeviceName/设备名称`} name={`name`}>
+            <Form.Item
+                label={`DeviceName/设备名称`}
+                name={`name`}
+                rules={[{ required: true }]}
+            >
                 <Input />
             </Form.Item>
             <Form.Item label={`备注名称`} name={`remarkName`}>

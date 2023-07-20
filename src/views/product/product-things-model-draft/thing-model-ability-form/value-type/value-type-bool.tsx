@@ -6,7 +6,7 @@ import _ from 'lodash';
 const ValueTypeBool: FC<ValueTypeProps> = ({ group }) => {
     return (
         <>
-            <Form.Item label={`布尔值`} required={true}>
+            <Form.Item label={`布尔值`} rules={[{ required: true }]}>
                 <Row wrap={false} gutter={4}>
                     <Col flex={'30px'}>0 -</Col>
                     <Col flex={`auto`}>
