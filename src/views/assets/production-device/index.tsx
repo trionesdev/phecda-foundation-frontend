@@ -7,6 +7,7 @@ import { assetsApi } from '@/apis';
 import {
     Button,
     Divider,
+    Empty,
     Form,
     Input,
     Popconfirm,
@@ -26,6 +27,7 @@ import useQueryDictionaryOptions from '@/hooks/useOptions/useQueryDictionaryOpti
 import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
 import DrawerForm from '@/components/drawer-form';
 import useQueryDeviceNoRelation from '@/hooks/useOptions/useQueryDeviceNoRelation';
+import { isNilEmpty } from '@/commons/util/isNilEmpty';
 
 const ProductionDevice: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
@@ -268,7 +270,14 @@ const ProductionDevice: React.FC = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item name="deviceNames" label="关联设备">
-                    <Select mode="multiple" options={deviceOptions} />
+                    <Select
+                        mode="multiple"
+                        options={deviceOptions}
+                        placeholder={
+                            isNilEmpty(deviceOptions) && '暂无可用关联设备'
+                        }
+                        disabled={isNilEmpty(deviceOptions)}
+                    />
                 </Form.Item>
                 <Form.Item
                     rules={[{ required: true }]}
