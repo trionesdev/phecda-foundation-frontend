@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Button, ButtonProps, Form, Input, notification, Radio } from 'antd';
+import { Button, ButtonProps, Form, Input, message, Radio } from 'antd';
 import { deviceApi } from '@apis';
 import { DeviceNodeType } from '../support/device.constants';
 import _ from 'lodash';
@@ -24,7 +24,7 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
         }
         request.then(() => {
             setOpen(false);
-            notification.success({ message: '操作成功' });
+            message.success('操作成功');
             if (onSuccess) {
                 onSuccess();
             }

@@ -1,7 +1,7 @@
 import { TableToolbar, VPanel } from '@moensun/antd-react-ext';
 import styles from './device.module.less';
 import { useEffect, useState } from 'react';
-import { Button, Divider, notification, Popconfirm, Space, Switch } from 'antd';
+import { Button, Divider, message, Popconfirm, Space, Switch } from 'antd';
 import DeviceForm from './device-form';
 import { deviceApi } from '@apis';
 import { Link } from 'react-router-dom';
@@ -35,7 +35,7 @@ const DevicesView = () => {
     const handleDeleteById = (id: string) => {
         deviceApi.deleteDeviceById(id).then(() => {
             handleRefresh();
-            notification.success({ message: '操作成功' });
+            message.success('操作成功');
         });
     };
 

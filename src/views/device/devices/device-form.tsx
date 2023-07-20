@@ -1,4 +1,4 @@
-import { Button, ButtonProps, Form, Input, notification } from 'antd';
+import { Button, ButtonProps, Form, Input, message } from 'antd';
 import { FC, useState } from 'react';
 import { deviceApi } from '@apis';
 import ProductSelect from '@components/product-select';
@@ -14,13 +14,13 @@ const DeviceForm: FC<DeviceFormProps> = ({ onSuccess, ...rest }) => {
             .createDevice(values)
             .then(() => {
                 setOpen(false);
-                notification.success({ message: '保存成功' });
+                message.success('保存成功');
                 if (onSuccess) {
                     onSuccess();
                 }
             })
             .catch((ex) => {
-                notification.success({ message: ex.message });
+                message.error(ex.message);
             });
     };
 

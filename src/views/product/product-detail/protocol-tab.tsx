@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { Button, Col, Form, Input, notification, Row, Space } from 'antd';
+import { Button, Form, Input, message, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageHeader, VPanel } from '@moensun/antd-react-ext';
 import styles from './product-detail.module.less';
@@ -23,10 +23,10 @@ const ProtocolTab: FC<ProtocolTabProps> = ({ product }) => {
             deviceApi
                 .updateProductProtocolProperties(product.id, values)
                 .then(() => {
-                    notification.success({ message: '保存成功' });
+                    message.success('保存成功');
                 })
                 .catch((ex) => {
-                    notification.error({ message: ex.message });
+                    message.error(ex.message);
                 });
         });
     };
