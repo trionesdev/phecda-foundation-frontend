@@ -72,6 +72,16 @@ export default class DeviceApi extends BaseApi {
             data
         );
     }
+    /** TODO:// 设置物模型的协议 */
+    updateDeviceProtocolProperties(
+        productId: string,
+        data: Record<string, any>
+    ) {
+        return this.request.put(
+            `${this.baseUri}/products/${productId}/protocol-properties`,
+            data
+        );
+    }
 
     createDevice(data: {}) {
         return this.request.post(`${this.baseUri}/devices`, data);
