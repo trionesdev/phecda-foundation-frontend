@@ -29,6 +29,7 @@ const ProductSelect: FC<ProductSelectProps> = ({ allOption, ...rest }) => {
         <Select
             {...rest}
             fieldNames={{ value: 'id', label: 'name' }}
+            placeholder={`请选择产品`}
             options={options}
         />
     );

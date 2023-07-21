@@ -139,4 +139,20 @@ export default class DeviceApi extends BaseApi {
             `${this.baseUri}/devices/${deviceName}/properties`
         );
     }
+
+    addChildDevice(parentDeviceId: string, childDeviceIds: string[]) {
+        return this.request.post(
+            `${
+                this.baseUri
+            }/devices/${parentDeviceId}/children/${childDeviceIds.join(',')}`
+        );
+    }
+
+    removeChildDevice(parentDeviceId: string, childDeviceIds: string[]) {
+        return this.request.delete(
+            `${
+                this.baseUri
+            }/devices/${parentDeviceId}/children/${childDeviceIds.join(',')}`
+        );
+    }
 }

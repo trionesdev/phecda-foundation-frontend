@@ -7,6 +7,7 @@ import ModalForm from '@/components/modal-form';
 type DeviceFormProps = {
     onSuccess?: () => void;
 } & ButtonProps;
+
 const DeviceForm: FC<DeviceFormProps> = ({ onSuccess, ...rest }) => {
     const [open, setOpen] = useState(false);
     const handleSubmit = (values: any) => {
