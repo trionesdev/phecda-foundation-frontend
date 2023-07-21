@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styles from './device-detail.module.less';
 import Index from './thing-model-tab';
 import _ from 'lodash';
+import ProtocolTab from './protocol-tab';
 
 const DeviceDetailView = () => {
     const { id } = useParams();
@@ -36,6 +37,11 @@ const DeviceDetailView = () => {
                 key: `thing-model-data`,
                 label: `物模型数据`,
                 children: <Index device={device} />,
+            },
+            {
+                key: `protocol`,
+                label: `协议`,
+                children: <ProtocolTab device={device} />,
             },
         ],
         _.eq('GATEWAY', device?.product?.nodeType)
