@@ -1,13 +1,18 @@
-import { TableToolbar, VPanel } from '@moensun/antd-react-ext';
-import styles from './device.module.less';
-import { useEffect, useState } from 'react';
-import { Button, Divider, message, Popconfirm, Space, Switch } from 'antd';
-import DeviceForm from './device-form';
+import { FC, useEffect, useState } from 'react';
 import { deviceApi } from '@apis';
+import { Button, Divider, notification, Popconfirm, Space, Switch } from 'antd';
 import { Link } from 'react-router-dom';
-import { RoutesConstants } from '../../../router/routes.constants';
+import { RoutesConstants } from '@/router/routes.constants';
+import { TableToolbar, VPanel } from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
-const DevicesView = () => {
+import _ from 'lodash';
+import ChildDeviceForm from '@views/device/device-detail/child-device-form';
+
+type ChildDeviceTabProps = {
+    device: any;
+};
+
+const ChildDeviceTab: FC<ChildDeviceTabProps> = ({ device }) => {
     const [querySeq, setQuerySeq] = useState(0);
     const [loading, setLoading] = useState(false);
     const [pageNum, setPageNum] = useState(1);
@@ -15,6 +20,7 @@ const DevicesView = () => {
     const [devices, setDevices] = useState([]);
     const handleQueryDevices = () => {
         let params = {
+            gatewayDeviceId: _.get(device, 'id'),
             pageNum,
             pageSize,
         };
@@ -22,7 +28,6 @@ const DevicesView = () => {
         deviceApi
             .queryDevicesExtPage(params)
             .then((res: any) => {
-                console.log(res);
                 if (res) {
                     setDevices(res.rows || []);
                 }
@@ -32,11 +37,16 @@ const DevicesView = () => {
             });
     };
 
-    const handleDeleteById = (id: string) => {
-        deviceApi.deleteDeviceById(id).then(() => {
-            handleRefresh();
-            message.success('操作成功');
-        });
+    const handleRemoveChildDevice = (id: string) => {
+        deviceApi
+            .removeChildDevice(device.id, [id])
+            .then(() => {
+                handleRefresh();
+                notification.success({ message: '子设备删除成功' });
+            })
+            .catch((e) => {
+                notification.error({ message: `${e.message}` });
+            });
     };
 
     const handleUpdateDeviceEnabled = (id: string, enabled: boolean) => {
@@ -65,12 +75,11 @@ const DevicesView = () => {
         {
             title: `设备所属产品`,
             dataIndex: ['product', 'name'],
-            width: 120,
         },
         {
             title: '节点类型',
             dataIndex: ['product', 'nodeTypeLabel'],
-            width: 100,
+            width: 120,
         },
         {
             title: `启用/禁用`,
@@ -101,8 +110,8 @@ const DevicesView = () => {
                         </Button>
                         <Popconfirm
                             key={`del-btn`}
-                            title={`确定删除设备 ${record.name}？`}
-                            onConfirm={() => handleDeleteById(text)}
+                            title={`确定删除设备"${record.remarkName}"？`}
+                            onConfirm={() => handleRemoveChildDevice(text)}
                         >
                             <Button size={`small`} type={`link`} danger={true}>
                                 删除
@@ -117,30 +126,35 @@ const DevicesView = () => {
     const tableBar = (
         <TableToolbar
             extra={
-                <DeviceForm
-                    key={`create-btn`}
+                <ChildDeviceForm
+                    key={`add-child-device-btn`}
                     type={`primary`}
                     onSuccess={handleRefresh}
+                    parentDeviceId={device.id}
                 >
-                    新建设备
-                </DeviceForm>
+                    添加子设备
+                </ChildDeviceForm>
             }
         />
     );
+
     return (
-        <VPanel className={styles.deviceView}>
-            <GridTable
-                style={{ padding: '8px', backgroundColor: 'white' }}
-                fit={true}
-                size={`small`}
-                toolbar={tableBar}
-                columns={columns}
-                scroll={{ y: 'max-content' }}
-                dataSource={devices}
-                rowKey={`id`}
-                loading={loading}
-            />
-        </VPanel>
+        <>
+            <VPanel>
+                <GridTable
+                    style={{ padding: '8px', backgroundColor: 'white' }}
+                    fit={true}
+                    size={`small`}
+                    toolbar={tableBar}
+                    columns={columns}
+                    scroll={{ y: 'max-content' }}
+                    dataSource={devices}
+                    rowKey={`id`}
+                    loading={loading}
+                />
+            </VPanel>
+        </>
     );
 };
-export default DevicesView;
+
+export default ChildDeviceTab;

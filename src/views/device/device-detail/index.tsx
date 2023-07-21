@@ -8,6 +8,7 @@ import styles from './device-detail.module.less';
 import Index from './thing-model-tab';
 import _ from 'lodash';
 import ProtocolTab from './protocol-tab';
+import ChildDeviceTab from '@views/device/device-detail/child-device-tab';
 
 const DeviceDetailView = () => {
     const { id } = useParams();
@@ -48,6 +49,7 @@ const DeviceDetailView = () => {
             ? {
                   key: `sub-device`,
                   label: `子设备`,
+                  children: <ChildDeviceTab device={device} />,
               }
             : []
     );
