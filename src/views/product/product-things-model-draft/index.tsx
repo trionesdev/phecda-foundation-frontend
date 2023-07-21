@@ -10,9 +10,9 @@ import {
     Button,
     Descriptions,
     Divider,
-    notification,
     Popconfirm,
     Space,
+    message,
 } from 'antd';
 import { useEffect, useState } from 'react';
 import ThingsModelAbilityForm, {
@@ -74,7 +74,7 @@ const ProductThingModelDraftView = () => {
 
     const handlePublishThingModel = () => {
         deviceApi.publishThingModel(id!).then(() => {
-            notification.success({ message: '发布成功' });
+            message.success('发布成功');
         });
     };
 

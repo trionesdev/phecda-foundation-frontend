@@ -10,21 +10,21 @@ const ThingModelEventForm: FC<ThingsModelEventFormProps> = () => {
             <Form.Item
                 label={`功能名称`}
                 name={[ability, `name`]}
-                required={true}
+                rules={[{ required: true }]}
             >
                 <Input />
             </Form.Item>
             <Form.Item
                 label={`标识符`}
                 name={[ability, `identifier`]}
-                required={true}
+                rules={[{ required: true }]}
             >
                 <Input />
             </Form.Item>
             <Form.Item
                 label={`事件类型`}
                 name={[ability, 'type']}
-                required={true}
+                rules={[{ required: true }]}
                 initialValue={`INFO`}
             >
                 <Radio.Group>

@@ -3,10 +3,10 @@ import {
     Button,
     ButtonProps,
     Form,
-    Input,
-    notification,
+    FormInstance,
     Radio,
     RadioChangeEvent,
+    message,
 } from 'antd';
 import ThingModelPropertyForm from './thing-model-property-form';
 import _ from 'lodash';
@@ -52,16 +52,13 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
     };
 
     const handleSubmit = (values: any) => {
-        console.log(values);
-        // return;
         let data = _.assign(values, { identifier: identifier });
         deviceApi
             .upsertThingModelDraft(productId, data)
             .then(() => {
-                notification.success({ message: '保存成功' });
-                if (onSuccess) {
-                    onSuccess();
-                }
+                setOpen(false);
+                onSuccess?.();
+                message.success('保存成功');
             })
             .catch(() => {});
     };
@@ -97,6 +94,7 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
         if (open && identifier) {
             handleQueryThingModel();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [abilityType, identifier, open]);
 
     return (
@@ -110,7 +108,11 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
             formValues={formValues}
             onSubmit={handleSubmit}
         >
-            <Form.Item label={`功能类型`} name={`abilityType`} required={true}>
+            <Form.Item
+                label={`功能类型`}
+                name={`abilityType`}
+                rules={[{ required: true }]}
+            >
                 <Radio.Group
                     onChange={handleAbilityTypeChange}
                     disabled={Boolean(identifier)}
@@ -125,7 +127,11 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
                 </Radio.Group>
             </Form.Item>
 
-            <Form.Item noStyle dependencies={['abilityType']}>
+            <Form.Item
+                noStyle
+                dependencies={['abilityType']}
+                rules={[{ required: true }]}
+            >
                 {({ getFieldValue }) => {
                     const abilityType = getFieldValue(
                         'abilityType'

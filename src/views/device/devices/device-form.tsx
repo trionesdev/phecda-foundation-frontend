@@ -1,4 +1,4 @@
-import { Button, ButtonProps, Form, Input, notification } from 'antd';
+import { Button, ButtonProps, Form, Input, message } from 'antd';
 import { FC, useState } from 'react';
 import { deviceApi } from '@apis';
 import ProductSelect from '@components/product-select';
@@ -15,13 +15,13 @@ const DeviceForm: FC<DeviceFormProps> = ({ onSuccess, ...rest }) => {
             .createDevice(values)
             .then(() => {
                 setOpen(false);
-                notification.success({ message: '保存成功' });
+                message.success('保存成功');
                 if (onSuccess) {
                     onSuccess();
                 }
             })
             .catch((ex) => {
-                notification.success({ message: ex.message });
+                message.error(ex.message);
             });
     };
 
@@ -34,10 +34,18 @@ const DeviceForm: FC<DeviceFormProps> = ({ onSuccess, ...rest }) => {
             onOpenChange={(op) => setOpen(op)}
             onSubmit={handleSubmit}
         >
-            <Form.Item label={`产品`} name={`productId`}>
+            <Form.Item
+                label={`产品`}
+                name={`productId`}
+                rules={[{ required: true }]}
+            >
                 <ProductSelect />
             </Form.Item>
-            <Form.Item label={`DeviceName/设备名称`} name={`name`}>
+            <Form.Item
+                label={`DeviceName/设备名称`}
+                name={`name`}
+                rules={[{ required: true }]}
+            >
                 <Input />
             </Form.Item>
             <Form.Item label={`备注名称`} name={`remarkName`}>
