@@ -72,13 +72,13 @@ export default class DeviceApi extends BaseApi {
             data
         );
     }
-    /** TODO:// 设置物模型的协议 */
+    /** 设置物模型的协议 */
     updateDeviceProtocolProperties(
         productId: string,
         data: Record<string, any>
     ) {
         return this.request.put(
-            `${this.baseUri}/products/${productId}/protocol-properties`,
+            `${this.baseUri}/devices/${productId}/protocol`,
             data
         );
     }
@@ -91,7 +91,7 @@ export default class DeviceApi extends BaseApi {
         return this.request.delete(`${this.baseUri}/devices/${id}`);
     }
 
-    queryDeviceExtById(id: string) {
+    queryDeviceExtById(id: string): Promise<any> {
         return this.request.get(`${this.baseUri}/devices/ext/${id}`);
     }
 
