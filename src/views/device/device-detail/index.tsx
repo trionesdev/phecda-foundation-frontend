@@ -10,23 +10,24 @@ import _ from 'lodash';
 import ProtocolTab from './protocol-tab';
 import ChildDeviceTab from '@views/device/device-detail/child-device-tab';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';
+import { useRequest } from 'ahooks';
 
 const DeviceDetailView = () => {
     const { id } = useParams();
-    const [device, setDevice] = useState<any>();
     const navigate = useNavigate();
-
-    const handleQueryDevice = () => {
-        deviceApi.queryDeviceExtById(id!).then((res: any) => {
-            setDevice(res);
-        });
-    };
-
+    const {
+        data: device,
+        run: queryDeviceExtById,
+        refresh: refreshQueryDeviceExtById,
+    } = useRequest(
+        (id) => {
+            return deviceApi.queryDeviceExtById(id);
+        },
+        { manual: true }
+    );
     useEffect(() => {
-        if (id) {
-            handleQueryDevice();
-        }
-    }, [id]);
+        id && queryDeviceExtById(id);
+    }, [id, queryDeviceExtById]);
 
     const items: TabsProps['items'] = _.concat(
         [
@@ -46,7 +47,12 @@ const DeviceDetailView = () => {
                   {
                       key: `protocol`,
                       label: `协议`,
-                      children: <ProtocolTab device={device} />,
+                      children: (
+                          <ProtocolTab
+                              device={device}
+                              afterChange={refreshQueryDeviceExtById}
+                          />
+                      ),
                   },
               ]
             : [],
