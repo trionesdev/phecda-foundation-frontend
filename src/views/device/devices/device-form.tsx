@@ -5,10 +5,17 @@ import ProductSelect from '@components/product-select';
 import ModalForm from '@/components/modal-form';
 
 type DeviceFormProps = {
+    isEdit?: boolean;
     onSuccess?: () => void;
+    initValue?: Record<string, any>;
 } & ButtonProps;
 
-const DeviceForm: FC<DeviceFormProps> = ({ onSuccess, ...rest }) => {
+const DeviceForm: FC<DeviceFormProps> = ({
+    onSuccess,
+    isEdit,
+    initValue,
+    ...rest
+}) => {
     const [open, setOpen] = useState(false);
     const handleSubmit = (values: any) => {
         deviceApi
@@ -24,7 +31,6 @@ const DeviceForm: FC<DeviceFormProps> = ({ onSuccess, ...rest }) => {
                 message.error(ex.message);
             });
     };
-
     return (
         <ModalForm
             open={open}
@@ -32,7 +38,20 @@ const DeviceForm: FC<DeviceFormProps> = ({ onSuccess, ...rest }) => {
             trigger={<Button {...rest} />}
             layout={`vertical`}
             onOpenChange={(op) => setOpen(op)}
-            onSubmit={handleSubmit}
+            onSubmit={(values) => {
+                !isEdit && handleSubmit(values);
+                //TODO:编辑
+                isEdit && message.error('TODO');
+            }}
+            initialValues={
+                isEdit
+                    ? {
+                          productId: initValue?.productId,
+                          name: initValue?.name,
+                          remarkName: initValue?.remarkName,
+                      }
+                    : undefined
+            }
         >
             <Form.Item
                 label={`产品`}

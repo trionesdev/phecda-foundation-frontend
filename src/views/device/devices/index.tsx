@@ -90,10 +90,20 @@ const DevicesView = () => {
         {
             title: '操作',
             dataIndex: 'id',
-            width: 150,
+            width: 225,
             render: (text: string, record: any) => {
                 return (
                     <Space split={<Divider type={`vertical`} />}>
+                        <DeviceForm
+                            key={`edit-btn`}
+                            type="link"
+                            size={`small`}
+                            isEdit
+                            initValue={record}
+                            onSuccess={handleRefresh}
+                        >
+                            编辑
+                        </DeviceForm>
                         <Button key={`view-btn`} size={`small`} type={`link`}>
                             <Link to={RoutesConstants.DEVICE_DETAIL.path(text)}>
                                 查看
