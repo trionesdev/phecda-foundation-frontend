@@ -82,10 +82,9 @@ const SceneDetail: React.FC = () => {
                         onClick={async () => {
                             await form.validateFields();
                             const values = form.getFieldsValue(true);
-                            // editScenesRules(id, values);
                             const filteredData = filterEmptyData(values);
-                            console.log(values);
                             console.log(filteredData);
+                            editScenesRules(id, filteredData);
                         }}
                     >
                         确定
