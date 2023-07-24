@@ -9,6 +9,7 @@ import Index from './thing-model-tab';
 import _ from 'lodash';
 import ProtocolTab from './protocol-tab';
 import ChildDeviceTab from '@views/device/device-detail/child-device-tab';
+import { isNilEmpty } from '@/commons/util/isNilEmpty';
 
 const DeviceDetailView = () => {
     const { id } = useParams();
@@ -39,12 +40,16 @@ const DeviceDetailView = () => {
                 label: `物模型数据`,
                 children: <Index device={device} />,
             },
-            {
-                key: `protocol`,
-                label: `协议`,
-                children: <ProtocolTab device={device} />,
-            },
         ],
+        !isNilEmpty(device?.product?.protocolProperties)
+            ? [
+                  {
+                      key: `protocol`,
+                      label: `协议`,
+                      children: <ProtocolTab device={device} />,
+                  },
+              ]
+            : [],
         _.eq('GATEWAY', device?.product?.nodeType)
             ? {
                   key: `sub-device`,

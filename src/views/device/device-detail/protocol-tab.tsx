@@ -13,7 +13,6 @@ const ProtocolTab: FC<ProtocolTabProps> = ({ device }) => {
     const [form] = Form.useForm();
     const protocolProperties = device?.product?.protocolProperties;
     console.log(device);
-    console.log(protocolProperties);
     const { run: updateDeviceProtocolProperties } = useRequest(
         (id, data) => {
             return deviceApi.updateDeviceProtocolProperties(id, data);
