@@ -37,4 +37,8 @@ export default class OperationApi extends BaseApi {
     editScenesRulesById(id: string, data: Record<string, any>): Promise<any> {
         return this.request.put(`${this.baseUri}/${id}/rules`, data);
     }
+    /** 获取场景联动规则 */
+    getScenesRulesById(id: string): Promise<any> {
+        return this.request.get(`${this.baseUri}/${id}`);
+    }
 }
