@@ -42,10 +42,18 @@ const SceneDetail: React.FC = () => {
             manual: true,
             onSuccess() {
                 refreshQueryScenes();
+                refreshGetScenesRules();
             },
         }
     );
-
+    /** 获取场景规则 */
+    const {
+        run: getScenesRules,
+        data: rulesData,
+        refresh: refreshGetScenesRules,
+    } = useRequest((id) => operationApi.getScenesRulesById(id), {
+        manual: true,
+    });
     /** 修改场景 */
     const { run: editScenes } = useRequest(
         (id, params) => operationApi.editScenesById(id, params),
@@ -59,7 +67,12 @@ const SceneDetail: React.FC = () => {
     );
     useEffect(() => {
         queryScenes(id);
-    }, [id, queryScenes]);
+        getScenesRules(id);
+    }, [getScenesRules, id, queryScenes]);
+
+    useEffect(() => {
+        form.setFieldsValue({ ...rulesData });
+    }, [form, rulesData]);
 
     const pageHelper = (
         <PageHeader
@@ -82,10 +95,9 @@ const SceneDetail: React.FC = () => {
                         onClick={async () => {
                             await form.validateFields();
                             const values = form.getFieldsValue(true);
-                            // editScenesRules(id, values);
                             const filteredData = filterEmptyData(values);
-                            console.log(values);
                             console.log(filteredData);
+                            editScenesRules(id, filteredData);
                         }}
                     >
                         确定
