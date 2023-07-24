@@ -7,11 +7,15 @@ import DrawerForm from '@/components/drawer-form';
 
 type ProductFormBtnProps = {
     id?: string;
+    isEdit?: boolean;
+    initValue?: Record<string, any>;
     onSuccess?: () => void;
 } & ButtonProps;
 const ProductFormBtn: FC<ProductFormBtnProps> = ({
     id,
     onSuccess,
+    isEdit,
+    initValue,
     ...rest
 }) => {
     const [open, setOpen] = useState(false);
@@ -35,10 +39,10 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
         <DrawerForm
             open={open}
             trigger={<Button {...rest} />}
-            title={`${id ? '编辑' : '新建'}产品`}
+            title={`${isEdit ? '编辑' : '新建'}产品`}
             layout={`vertical`}
             onOpenChange={(op) => setOpen(op)}
-            initialValues={{ nodeType: 'DIRECT' }}
+            initialValues={isEdit ? { ...initValue } : { nodeType: 'DIRECT' }}
             onSubmit={handleSubmit}
         >
             <Form.Item
