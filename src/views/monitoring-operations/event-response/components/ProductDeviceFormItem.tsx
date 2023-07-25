@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Form, Select, Space } from 'antd';
 import { NamePath } from 'antd/es/form/interface';
 import _ from 'lodash';
-import { useSceneContext } from './SceneProvider';
 import useQueryProductsList from '@/hooks/useOptions/useQueryProductsList';
 import useQueryDeviceByParams from '@/hooks/useOptions/useQueryDeviceByParams';
 import useQueryProductProperty from '@/hooks/useOptions/useQueryProductProperty';
@@ -14,7 +13,8 @@ const ProductDeviceFormItem: React.FC<ProductDeviceFormItemType> = ({
     namePath,
     fullNamePath = namePath,
 }) => {
-    const { sceneForm } = useSceneContext();
+    const form = Form.useFormInstance();
+    const productId = Form.useWatch(_.concat(fullNamePath, 'product'), form);
     const { productOptions } = useQueryProductsList();
     const { deviceDataOptions, queryDeviceList } = useQueryDeviceByParams();
     const { propertyOptions, queryProductThingMode } =
@@ -23,14 +23,13 @@ const ProductDeviceFormItem: React.FC<ProductDeviceFormItemType> = ({
         return _.concat(namePath, name);
     };
     useEffect(() => {
-        const id = sceneForm.getFieldValue(_.concat(fullNamePath, 'product'));
-        if (id) {
+        if (productId) {
             queryDeviceList({
-                productId: id,
+                productId: productId,
             });
-            queryProductThingMode(id);
+            queryProductThingMode(productId);
         }
-    }, [fullNamePath, queryDeviceList, queryProductThingMode, sceneForm]);
+    }, [productId, queryDeviceList, queryProductThingMode]);
     return (
         <Space>
             <Form.Item name={getNamePath('product')}>
@@ -39,15 +38,11 @@ const ProductDeviceFormItem: React.FC<ProductDeviceFormItemType> = ({
                     options={productOptions}
                     placeholder="产品"
                     onChange={(v) => {
-                        queryDeviceList({
-                            productId: v,
-                        });
-                        queryProductThingMode(v);
-                        sceneForm.setFieldValue(
+                        form.setFieldValue(
                             _.concat(fullNamePath, 'deviceName'),
                             undefined
                         );
-                        sceneForm.setFieldValue(
+                        form.setFieldValue(
                             _.concat(fullNamePath, 'property'),
                             undefined
                         );
