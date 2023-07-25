@@ -4,6 +4,7 @@ import {
     DEAL_STATUS,
     OPERATOR,
     SCENE_ACTION,
+    SCENE_CONDITION_TYPE,
     SCENE_EVENT_TYPE,
 } from './enums';
 
@@ -70,25 +71,33 @@ export const SceneEventOptions = [
         value: SCENE_EVENT_TYPE.THING_MODEL_PROPERTY_EXPORT,
     },
 ];
+
+export const SceneConditionOptions = [
+    {
+        label: '物模型属性上报',
+        value: SCENE_CONDITION_TYPE.THING_MODEL_PROPERTY,
+    },
+];
+
 export const operatorOptions = [
     {
-        label: '等于',
+        label: '=',
         value: OPERATOR.EQUAL_TO,
     },
     {
-        label: '大于',
+        label: '>',
         value: OPERATOR.GREATER_THAN,
     },
     {
-        label: '大于等于',
+        label: '>=',
         value: OPERATOR.GREATER_THAN_OR_EQUAL_TO,
     },
     {
-        label: '小于',
+        label: '<',
         value: OPERATOR.LESS_THAN,
     },
     {
-        label: '小于等于',
+        label: '<=',
         value: OPERATOR.LESS_THAN_OR_EQUAL_TO,
     },
     {

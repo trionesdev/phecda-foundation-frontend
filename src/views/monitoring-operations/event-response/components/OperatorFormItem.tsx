@@ -23,7 +23,7 @@ const OperatorFormItemItem: React.FC<OperatorFormItemItemType> = ({
         <Space>
             <Form.Item name={getNamePath('operator')}>
                 <Select
-                    style={{ width: 180 }}
+                    style={{ width: 120 }}
                     options={operatorOptions}
                     placeholder="运算符"
                     onChange={(v) => {
