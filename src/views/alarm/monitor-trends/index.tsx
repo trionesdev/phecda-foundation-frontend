@@ -6,7 +6,7 @@ import { useRequest, useUpdateEffect } from 'ahooks';
 import { deviceDataApi } from '@/apis';
 import { Button, DatePicker, Empty, Form, Select, Space, Tag } from 'antd';
 import { TableParams } from '@/constants/types';
-import { formatDateTime } from '@/commons/util/date.utils';
+import { formatDateTimeSeconds } from '@/commons/util/date.utils';
 import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
 import dayjs from 'dayjs';
 import _ from 'lodash';
@@ -97,9 +97,12 @@ const MonitorTrends: React.FC = () => {
             xAxis: {
                 label: {
                     formatter: (time) => {
-                        return formatDateTime(Number(time));
+                        return formatDateTimeSeconds(Number(time));
                     },
                 },
+            },
+            tooltip: {
+                title: (title) => formatDateTimeSeconds(Number(title)),
             },
         };
     }, [areaData]);
@@ -109,7 +112,7 @@ const MonitorTrends: React.FC = () => {
             title: '时间',
             dataIndex: 'time',
             render: (value: number) => {
-                return formatDateTime(value);
+                return formatDateTimeSeconds(value);
             },
         },
         {
