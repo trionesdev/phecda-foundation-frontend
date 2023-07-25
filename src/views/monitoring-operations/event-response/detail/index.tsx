@@ -82,14 +82,14 @@ const SceneDetail: React.FC = () => {
             }}
             extra={
                 <Space>
-                    <Button
+                    {/* <Button
                         type={scenesData?.enabled ? 'default' : 'primary'}
                         onClick={() => {
                             editScenesStatus(id, !scenesData?.enabled);
                         }}
                     >
                         {scenesData?.enabled ? '禁用' : '启用'}
-                    </Button>
+                    </Button> */}
                     <Button
                         type="primary"
                         onClick={async () => {
