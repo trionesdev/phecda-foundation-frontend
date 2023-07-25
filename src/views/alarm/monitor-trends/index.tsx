@@ -11,7 +11,7 @@ import { findOptionsLabel } from '@/commons/util/findOptionsLabel';
 import dayjs from 'dayjs';
 import _ from 'lodash';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';
-import { Area, AreaConfig } from '@ant-design/charts';
+import { Line, LineConfig } from '@ant-design/charts';
 import useQueryDeviceRelatedByAsset from '@/hooks/useOptions/useQueryDeviceRelatedByAsset';
 import useQueryDevicePropertiesData from '@/hooks/useOptions/useQueryDevicePropertiesData';
 import useQueryAssetsAll from '@/hooks/useOptions/useQueryAssetsAll';
@@ -27,10 +27,15 @@ const MonitorTrends: React.FC = () => {
     const { allAssetsOptions } = useQueryAssetsAll();
     const { deviceOptions } = useQueryDeviceRelatedByAsset(assetSn);
     const { devicePropertiesOptions } = useQueryDevicePropertiesData(deviceId);
-    const startTime = dayjs().isBefore(dayjs().hour(12))
-        ? dayjs().hour(0)
-        : dayjs().hour(12);
-    const endTime = startTime.add(12, 'hour');
+    const startTime = dayjs().isBefore(
+        dayjs().hour(12).set('minute', 0).set('second', 0)
+    )
+        ? dayjs().hour(0).set('minute', 0).set('second', 0)
+        : dayjs().hour(12).set('minute', 0).set('second', 0);
+    const endTime = startTime
+        .add(11, 'hour')
+        .add(59, 'minute')
+        .add(59, 'second');
 
     const {
         data: tableData,
@@ -42,13 +47,12 @@ const MonitorTrends: React.FC = () => {
         { manual: true }
     );
 
-    const {
-        data: areaData,
-        loading: areaDataLoading,
-        run: fetchAreaData,
-    } = useRequest((param: any) => deviceDataApi.queryDeviceDatasList(param), {
-        manual: true,
-    });
+    const { data: lineData, run: fetchLineData } = useRequest(
+        (param: any) => deviceDataApi.queryDeviceDatasList(param),
+        {
+            manual: true,
+        }
+    );
 
     const handlePageChange = (pageNum: number, pageSize: number) => {
         setTableParams({ ...tableParams, pageNum, pageSize });
@@ -71,7 +75,7 @@ const MonitorTrends: React.FC = () => {
             pageSize: 10,
             pageNum: 1,
         };
-        fetchAreaData(areaValue);
+        fetchLineData(areaValue);
         setTableParams(tableValue);
     };
 
@@ -89,9 +93,9 @@ const MonitorTrends: React.FC = () => {
         form.resetFields(['field']);
     };
 
-    const areaConfig: AreaConfig = useMemo(() => {
+    const lineConfig: LineConfig = useMemo(() => {
         return {
-            data: areaData,
+            data: lineData,
             xField: 'time',
             yField: 'value',
             xAxis: {
@@ -103,9 +107,19 @@ const MonitorTrends: React.FC = () => {
             },
             tooltip: {
                 title: (title) => formatDateTimeSeconds(Number(title)),
+                fields: ['field', 'value'],
+                formatter: (datum) => {
+                    return {
+                        name: findOptionsLabel(
+                            devicePropertiesOptions,
+                            datum.field
+                        ),
+                        value: datum.value,
+                    };
+                },
             },
         };
-    }, [areaData]);
+    }, [lineData]);
 
     const columns = [
         {
@@ -203,10 +217,10 @@ const MonitorTrends: React.FC = () => {
                             </Form.Item>
                         </div>
                         <div className={styles.chartWrapper}>
-                            {areaData == undefined ? (
+                            {lineData == undefined ? (
                                 <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
                             ) : (
-                                <Area {...areaConfig} />
+                                <Line {...lineConfig} />
                             )}
                         </div>
                     </div>
