@@ -21,13 +21,11 @@ const ActionsFormList: React.FC<ActionsFormListType> = () => {
                                             场景动作{name + 1}
                                         </Typography.Text>
                                         <Space wrap>
-                                            <Form.Item
-                                                name={[name, 'type']}
-                                                label="场景动作类型"
-                                            >
+                                            <Form.Item name={[name, 'type']}>
                                                 <Select
                                                     style={{ width: 180 }}
                                                     options={sceneActionOptions}
+                                                    placeholder="场景动作类型"
                                                 />
                                             </Form.Item>
                                             <Form.Item>

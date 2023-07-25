@@ -103,7 +103,7 @@ export const operatorOptions = [
 
 export const sceneActionOptions = [
     {
-        label: '警告',
+        label: '设备告警',
         value: SCENE_ACTION.ALARM,
     },
 ];

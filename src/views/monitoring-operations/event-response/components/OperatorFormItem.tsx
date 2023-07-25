@@ -21,10 +21,11 @@ const OperatorFormItemItem: React.FC<OperatorFormItemItemType> = ({
 
     return (
         <Space>
-            <Form.Item label="运算符" name={getNamePath('operator')}>
+            <Form.Item name={getNamePath('operator')}>
                 <Select
                     style={{ width: 180 }}
                     options={operatorOptions}
+                    placeholder="运算符"
                     onChange={(v) => {
                         sceneForm.setFieldValue(
                             _.concat(fullNamePath, 'params', 0),
@@ -38,10 +39,9 @@ const OperatorFormItemItem: React.FC<OperatorFormItemItemType> = ({
                 />
             </Form.Item>
             <Form.Item
-                label="参数"
                 name={[...(getNamePath('params') as InternalNamePath), 0]}
             >
-                <InputNumber />
+                <InputNumber placeholder="参数" />
             </Form.Item>
             <Form.Item
                 dependencies={[_.concat(fullNamePath, 'operator')]}
@@ -68,7 +68,7 @@ const OperatorFormItemItem: React.FC<OperatorFormItemItemType> = ({
                                         1,
                                     ]}
                                 >
-                                    <InputNumber />
+                                    <InputNumber placeholder="参数" />
                                 </Form.Item>
                             </Space>
                         );

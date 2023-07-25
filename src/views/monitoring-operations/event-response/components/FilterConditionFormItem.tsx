@@ -17,13 +17,11 @@ const FilterConditionFormItem: React.FC<FilterConditionFormItemType> = () => {
             <Typography.Title level={3}>场景定义</Typography.Title>
             <Typography.Title level={5}>当以下事件发生</Typography.Title>
             <Space wrap>
-                <Form.Item
-                    label="场景事件类型"
-                    name={getFilterConditionNamePath('type')}
-                >
+                <Form.Item name={getFilterConditionNamePath('type')}>
                     <Select
                         style={{ width: 180 }}
                         options={SceneEventOptions}
+                        placeholder="场景事件类型"
                     />
                 </Form.Item>
                 <ProductDeviceFormItem namePath="filterCondition" />

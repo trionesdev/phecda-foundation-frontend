@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button, Form, Input, Space, Typography } from 'antd';
+import { Button, Form, Input, Select, Space, Typography } from 'antd';
 import { NamePath } from 'antd/es/form/interface';
 import _ from 'lodash';
 import ProductDeviceFormItem from './ProductDeviceFormItem';
 import OperatorFormItemItem from './OperatorFormItem';
+import { SceneEventOptions } from '@/constants/consts';
 
 type ConditionsAndFormListType = {
     namePath: NamePath;
@@ -32,9 +33,14 @@ const ConditionsAndFormList: React.FC<ConditionsAndFormListType> = ({
                                                         conditionsFieldsName,
                                                         'type',
                                                     ]}
-                                                    label="条件类型"
                                                 >
-                                                    <Input />
+                                                    <Select
+                                                        placeholder="条件类型"
+                                                        style={{ width: 180 }}
+                                                        options={
+                                                            SceneEventOptions
+                                                        }
+                                                    />
                                                 </Form.Item>
                                                 <ProductDeviceFormItem
                                                     namePath={
