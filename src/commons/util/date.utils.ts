@@ -18,6 +18,13 @@ export const formatDateTime = (date?: number) => {
     return '--';
 };
 
+export const formatDateTimeSeconds = (date?: number) => {
+    if (date) {
+        return dayjs(date).format('YYYY-MM-DD HH:mm:ss');
+    }
+    return '--';
+};
+
 export const format = (date: number, format: string) => {
     if (date) {
         return dayjs(date).format(format);
