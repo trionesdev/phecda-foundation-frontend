@@ -4,7 +4,7 @@ import { NamePath } from 'antd/es/form/interface';
 import _ from 'lodash';
 import ProductDeviceFormItem from './ProductDeviceFormItem';
 import OperatorFormItemItem from './OperatorFormItem';
-import { SceneEventOptions } from '@/constants/consts';
+import { SceneConditionOptions } from '@/constants/consts';
 
 type ConditionsAndFormListType = {
     namePath: NamePath;
@@ -38,7 +38,7 @@ const ConditionsAndFormList: React.FC<ConditionsAndFormListType> = ({
                                                         placeholder="条件类型"
                                                         style={{ width: 180 }}
                                                         options={
-                                                            SceneEventOptions
+                                                            SceneConditionOptions
                                                         }
                                                     />
                                                 </Form.Item>
