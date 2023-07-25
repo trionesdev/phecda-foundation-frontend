@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Select, Space } from 'antd';
 import { NamePath } from 'antd/es/form/interface';
 import _ from 'lodash';
@@ -22,6 +22,15 @@ const ProductDeviceFormItem: React.FC<ProductDeviceFormItemType> = ({
     const getNamePath = (name: NamePath): NamePath => {
         return _.concat(namePath, name);
     };
+    useEffect(() => {
+        const id = sceneForm.getFieldValue(_.concat(fullNamePath, 'product'));
+        if (id) {
+            queryDeviceList({
+                productId: id,
+            });
+            queryProductThingMode(id);
+        }
+    }, [fullNamePath, queryDeviceList, queryProductThingMode, sceneForm]);
     return (
         <Space>
             <Form.Item name={getNamePath('product')}>

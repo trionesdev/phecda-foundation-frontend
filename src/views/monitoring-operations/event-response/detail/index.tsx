@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.module.less';
 import { PageHeader, VPanel } from '@moensun/antd-react-ext';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Form, Input, Space } from 'antd';
+import { Button, Form, Input, Space, message } from 'antd';
 import { operationApi } from '@/apis';
 import { useRequest } from 'ahooks';
 import DrawerForm from '@/components/drawer-form';
@@ -41,6 +41,7 @@ const SceneDetail: React.FC = () => {
         {
             manual: true,
             onSuccess() {
+                message.success('保存成功');
                 refreshQueryScenes();
                 refreshGetScenesRules();
             },
