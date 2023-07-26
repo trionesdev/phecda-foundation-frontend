@@ -35,6 +35,18 @@ export default class DeviceApi extends BaseApi {
         return this.request.get(`${this.baseUri}/products/page`, { params });
     }
 
+    publishProduct(productId: string) {
+        return this.request.put(
+            `${this.baseUri}/products/${productId}/publish`
+        );
+    }
+
+    revokePublishProduct(productId: string) {
+        return this.request.put(
+            `${this.baseUri}/products/${productId}/unpublish`
+        );
+    }
+
     queryProductThingModel(productId: string): Promise<any> {
         return this.request.get(
             `${this.baseUri}/products/${productId}/thing-model`

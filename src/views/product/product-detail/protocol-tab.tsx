@@ -1,14 +1,16 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Button, Form, Input, message, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageHeader, VPanel } from '@moensun/antd-react-ext';
 import styles from './product-detail.module.less';
 import { deviceApi } from '@apis';
+import _ from 'lodash';
 
 type ProtocolTabProps = {
     product: any;
 };
 const ProtocolTab: FC<ProtocolTabProps> = ({ product }) => {
+    const [editStatus, setEditStatus] = useState<boolean>(true);
     const [form] = Form.useForm();
     const handleQueryProtocolProperties = () => {
         deviceApi.queryProductById(product?.id).then((res) => {
@@ -32,6 +34,8 @@ const ProtocolTab: FC<ProtocolTabProps> = ({ product }) => {
     };
 
     useEffect(() => {
+        setEditStatus(_.eq(product?.status, 'DEVELOPMENT'));
+
         if (product.id) {
             handleQueryProtocolProperties();
         }
@@ -42,9 +46,11 @@ const ProtocolTab: FC<ProtocolTabProps> = ({ product }) => {
             title={`设备连接协议`}
             backIcon={false}
             extra={[
-                <Button type={`primary`} onClick={handleSave}>
-                    保存
-                </Button>,
+                editStatus && (
+                    <Button type={`primary`} onClick={handleSave}>
+                        保存
+                    </Button>
+                ),
             ]}
         />
     );
@@ -71,21 +77,25 @@ const ProtocolTab: FC<ProtocolTabProps> = ({ product }) => {
                                         >
                                             <Input />
                                         </Form.Item>
-                                        <MinusCircleOutlined
-                                            onClick={() => remove(name)}
-                                        />
+                                        {editStatus && (
+                                            <MinusCircleOutlined
+                                                onClick={() => remove(name)}
+                                            />
+                                        )}
                                     </Space>
                                 ))}
-                                <Form.Item>
-                                    <Button
-                                        type="dashed"
-                                        onClick={() => add()}
-                                        block
-                                        icon={<PlusOutlined />}
-                                    >
-                                        添加协议项
-                                    </Button>
-                                </Form.Item>
+                                {editStatus && (
+                                    <Form.Item>
+                                        <Button
+                                            type="dashed"
+                                            onClick={() => add()}
+                                            block
+                                            icon={<PlusOutlined />}
+                                        >
+                                            添加协议项
+                                        </Button>
+                                    </Form.Item>
+                                )}
                             </>
                         )}
                     </Form.List>

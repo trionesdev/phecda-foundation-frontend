@@ -52,7 +52,11 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
             >
                 <Input />
             </Form.Item>
-            <Form.Item label={`节点类型`} name={`nodeType`}>
+            <Form.Item
+                label={`节点类型`}
+                name={`nodeType`}
+                rules={[{ required: true }]}
+            >
                 <Radio.Group>
                     {_.map(DeviceNodeType, (value, key) => (
                         <Radio.Button key={key} value={key}>
@@ -60,6 +64,9 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
                         </Radio.Button>
                     ))}
                 </Radio.Group>
+            </Form.Item>
+            <Form.Item label={`驱动服务名称`} name={`driverName`}>
+                <Input />
             </Form.Item>
         </DrawerForm>
     );

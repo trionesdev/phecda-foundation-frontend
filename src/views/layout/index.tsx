@@ -12,8 +12,61 @@ const MainLayoutView = () => {
     const [openKeys, setOpenKeys] = useState<any[]>([]);
     const menuItems: MenuProps['items'] = [
         {
+            key: 'device-management',
+            label: '设备管理',
+            children: [
+                {
+                    key: RoutesConstants.PRODUCTS.key,
+                    label: '产品',
+                    onClick: () => navigate(RoutesConstants.PRODUCTS.path()),
+                },
+                {
+                    key: RoutesConstants.DEVICES.key,
+                    label: `设备`,
+                    onClick: () => navigate(RoutesConstants.DEVICES.path()),
+                },
+            ],
+        },
+        {
+            key: 'assets-management',
+            label: '资产管理',
+            children: [
+                {
+                    key: RoutesConstants.PRODUCTION_DEVICE.key,
+                    label: '生产设备',
+                    onClick: () =>
+                        navigate(RoutesConstants.PRODUCTION_DEVICE.path()),
+                },
+                // 因为采用字典方式，暂不需要
+                // {
+                //     key: RoutesConstants.PRODUCTION_DEVICE_TYPE.key,
+                //     label: `生产设备类型`,
+                //     onClick: () =>
+                //         navigate(RoutesConstants.PRODUCTION_DEVICE_TYPE.path()),
+                // },
+                {
+                    key: RoutesConstants.ACCESSORY_TYPE.key,
+                    label: `配件类型`,
+                    onClick: () =>
+                        navigate(RoutesConstants.ACCESSORY_TYPE.path()),
+                },
+            ],
+        },
+        {
+            key: 'monitoring-operations',
+            label: '监控运维',
+            children: [
+                {
+                    key: RoutesConstants.MONITORING_OPERATIONS.key,
+                    label: `事件响应`,
+                    onClick: () =>
+                        navigate(RoutesConstants.MONITORING_OPERATIONS.path()),
+                },
+            ],
+        },
+        {
             key: 'alarm-management',
-            label: '告警管理',
+            label: '数据中心',
             children: [
                 /*{
                     key: RoutesConstants.ALARM_RULES.key,
@@ -45,59 +98,6 @@ const MainLayoutView = () => {
             ],
         },
         {
-            key: 'assets-management',
-            label: '资产管理',
-            children: [
-                {
-                    key: RoutesConstants.PRODUCTION_DEVICE.key,
-                    label: '生产设备',
-                    onClick: () =>
-                        navigate(RoutesConstants.PRODUCTION_DEVICE.path()),
-                },
-                // 因为采用字典方式，暂不需要
-                // {
-                //     key: RoutesConstants.PRODUCTION_DEVICE_TYPE.key,
-                //     label: `生产设备类型`,
-                //     onClick: () =>
-                //         navigate(RoutesConstants.PRODUCTION_DEVICE_TYPE.path()),
-                // },
-                {
-                    key: RoutesConstants.ACCESSORY_TYPE.key,
-                    label: `配件类型`,
-                    onClick: () =>
-                        navigate(RoutesConstants.ACCESSORY_TYPE.path()),
-                },
-            ],
-        },
-        {
-            key: 'device-management',
-            label: '设备管理',
-            children: [
-                {
-                    key: RoutesConstants.PRODUCTS.key,
-                    label: '产品',
-                    onClick: () => navigate(RoutesConstants.PRODUCTS.path()),
-                },
-                {
-                    key: RoutesConstants.DEVICES.key,
-                    label: `设备`,
-                    onClick: () => navigate(RoutesConstants.DEVICES.path()),
-                },
-            ],
-        },
-        {
-            key: 'monitoring-operations',
-            label: '监控运维',
-            children: [
-                {
-                    key: RoutesConstants.MONITORING_OPERATIONS.key,
-                    label: `事件响应`,
-                    onClick: () =>
-                        navigate(RoutesConstants.MONITORING_OPERATIONS.path()),
-                },
-            ],
-        },
-        {
             key: 'system-setting',
             label: '系统设置',
             children: [
@@ -123,7 +123,7 @@ const MainLayoutView = () => {
             setSelectedKeys([keyArr?.[2]]);
         }
     }, [location]);
-    const appBar = <AppToolbar title={`物联网`} />;
+    const appBar = <AppToolbar title={`皮带管家`} />;
     const sider = (
         <div className={styles.layoutViewSider}>
             <Menu

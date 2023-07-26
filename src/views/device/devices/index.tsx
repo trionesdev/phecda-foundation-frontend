@@ -1,20 +1,35 @@
 import { TableToolbar, VPanel } from '@moensun/antd-react-ext';
 import styles from './device.module.less';
-import { useEffect, useState } from 'react';
-import { Button, Divider, message, Popconfirm, Space, Switch } from 'antd';
+import React, { useEffect, useMemo, useState } from 'react';
+import {
+    Button,
+    Divider,
+    Form,
+    Input,
+    message,
+    Popconfirm,
+    Select,
+    Space,
+    Switch,
+} from 'antd';
 import DeviceForm from './device-form';
 import { deviceApi } from '@apis';
 import { Link } from 'react-router-dom';
 import { RoutesConstants } from '../../../router/routes.constants';
 import GridTable from '@components/grid-table';
+import ProductFormBtn from '@views/product/products/product-form-btn';
+import SearchToolbar from '@components/search-toolbar';
 const DevicesView = () => {
     const [querySeq, setQuerySeq] = useState(0);
     const [loading, setLoading] = useState(false);
     const [pageNum, setPageNum] = useState(1);
     const [pageSize, setPageSize] = useState(10);
     const [devices, setDevices] = useState([]);
+    const [formData, setFormData] = useState({});
+
     const handleQueryDevices = () => {
         let params = {
+            ...formData,
             pageNum,
             pageSize,
         };
@@ -51,7 +66,7 @@ const DevicesView = () => {
 
     useEffect(() => {
         handleQueryDevices();
-    }, [querySeq, pageNum, pageSize]);
+    }, [formData, querySeq, pageNum, pageSize]);
 
     const columns = [
         {
@@ -124,9 +139,26 @@ const DevicesView = () => {
         },
     ];
 
+    const searchForm = useMemo(() => {
+        return (
+            <>
+                <Form.Item name="name" label="DeviceName">
+                    <Input allowClear />
+                </Form.Item>
+                <Form.Item name="remarkName" label={`备注名称`}>
+                    <Input allowClear />
+                </Form.Item>
+            </>
+        );
+    }, []);
+
     const tableBar = (
-        <TableToolbar
-            extra={
+        <SearchToolbar
+            formItems={searchForm}
+            onSearch={(values) => {
+                setFormData(values);
+            }}
+            addButtons={
                 <DeviceForm
                     key={`create-btn`}
                     type={`primary`}

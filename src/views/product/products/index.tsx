@@ -5,8 +5,8 @@ import {
     TableToolbar,
     VPanel,
 } from '@moensun/antd-react-ext';
-import { Button, Popconfirm, Space } from 'antd';
-import { useEffect, useState } from 'react';
+import { Button, Form, Input, Popconfirm, Select, Space, Tag } from 'antd';
+import React, { useEffect, useMemo, useState } from 'react';
 import ProductFormBtn from './product-form-btn';
 import { deviceApi } from '@apis';
 import { ProductPageRep, ProductRep } from '../../../apis/device/device.rep';
@@ -19,6 +19,10 @@ import {
     DeviceNodeTypeKeys,
 } from '../support/device.constants';
 import { useRequest } from 'ahooks';
+import { AssetsStatesOptions } from '@/constants/consts';
+import { OptionsType } from '@/constants/types';
+import SearchToolbar from '@components/search-toolbar';
+import _ from 'lodash';
 
 const ProductsView = () => {
     const navigate = useNavigate();
@@ -27,9 +31,26 @@ const ProductsView = () => {
     const [pageSize, setPageSize] = useState(10);
     const [loading, setLoading] = useState(false);
     const [products, setProducts] = useState<ProductRep[]>([]);
+    const [formData, setFormData] = useState({});
+
+    const nodeTypes: OptionsType[] = [
+        {
+            label: '直连设备',
+            value: 'DIRECT',
+        },
+        {
+            label: '网关设备',
+            value: 'GATEWAY',
+        },
+        {
+            label: '网关子设备',
+            value: 'GATEWAY_SUB',
+        },
+    ];
 
     const handleQueryProductPage = () => {
         let params = {
+            ...formData,
             pageNum,
             pageSize,
         };
@@ -61,7 +82,7 @@ const ProductsView = () => {
     );
     useEffect(() => {
         handleQueryProductPage();
-    }, [querySeq, pageNum, pageSize]);
+    }, [formData, querySeq, pageNum, pageSize]);
 
     const columns = [
         {
@@ -73,6 +94,19 @@ const ProductsView = () => {
             dataIndex: 'nodeType',
             render: (value: DeviceNodeTypeKeys) => {
                 return DeviceNodeType?.[value];
+            },
+        },
+        {
+            title: '状态',
+            dataIndex: 'status',
+            render: (value: number) => {
+                if (_.eq(value, 'RELEASE')) {
+                    return <Tag color={'blue'}>已发布</Tag>;
+                } else if (_.eq(value, 'DEVELOPMENT')) {
+                    return <Tag>未发布</Tag>;
+                } else {
+                    return <Tag color={'red'}>未知</Tag>;
+                }
             },
         },
         {
@@ -96,19 +130,21 @@ const ProductsView = () => {
             render: (text: string, record: any) => {
                 return (
                     <Space>
-                        <ProductFormBtn
-                            key={`update-product`}
-                            type={`link`}
-                            onSuccess={handleRefresh}
-                            id={record?.id}
-                            initValue={{
-                                name: record?.name,
-                                nodeType: record?.nodeType,
-                            }}
-                            isEdit
-                        >
-                            编辑
-                        </ProductFormBtn>
+                        {_.eq(record?.status, 'DEVELOPMENT') && (
+                            <ProductFormBtn
+                                key={`update-product`}
+                                type={`link`}
+                                onSuccess={handleRefresh}
+                                id={record?.id}
+                                initValue={{
+                                    name: record?.name,
+                                    nodeType: record?.nodeType,
+                                }}
+                                isEdit
+                            >
+                                编辑
+                            </ProductFormBtn>
+                        )}
                         <Button
                             size={`small`}
                             type={`link`}
@@ -120,32 +156,59 @@ const ProductsView = () => {
                         >
                             查看
                         </Button>
-                        <Popconfirm
-                            key={`del-btn`}
-                            title={`确定删除 ${record.name}？`}
-                            onConfirm={() => deleteProductById(record?.id)}
-                        >
-                            <Button size={`small`} type={`link`} danger={true}>
-                                删除
-                            </Button>
-                        </Popconfirm>
+                        {_.eq(record?.status, 'DEVELOPMENT') && (
+                            <Popconfirm
+                                key={`del-btn`}
+                                title={`确定删除 ${record.name}？`}
+                                onConfirm={() => deleteProductById(record?.id)}
+                            >
+                                <Button
+                                    size={`small`}
+                                    type={`link`}
+                                    danger={true}
+                                >
+                                    删除
+                                </Button>
+                            </Popconfirm>
+                        )}
                     </Space>
                 );
             },
         },
     ];
 
+    const searchForm = useMemo(() => {
+        return (
+            <>
+                <Form.Item name="name" label="名称">
+                    <Input allowClear />
+                </Form.Item>
+                <Form.Item name="nodeType" label={`节点类型`}>
+                    <Select
+                        style={{ width: 230 }}
+                        options={nodeTypes}
+                        allowClear
+                    />
+                </Form.Item>
+            </>
+        );
+    }, []);
+
     const tableBar = (
-        <TableToolbar
-            extra={[
+        <SearchToolbar
+            formItems={searchForm}
+            onSearch={(values) => {
+                setFormData(values);
+            }}
+            addButtons={
                 <ProductFormBtn
                     key={`create-product`}
                     type={`primary`}
                     onSuccess={handleRefresh}
                 >
                     新建产品
-                </ProductFormBtn>,
-            ]}
+                </ProductFormBtn>
+            }
         />
     );
 
