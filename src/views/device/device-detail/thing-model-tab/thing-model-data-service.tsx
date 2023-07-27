@@ -38,6 +38,7 @@ const ThingModelDataService: React.FC<{
 
     /** 服务名称的options */
     const productThingModelDataOptions = useMemo(() => {
+        console.log(productThingModelData);
         return productThingModelData?.thingModel?.services?.map((item: any) => {
             return {
                 label: item?.name,
@@ -97,7 +98,7 @@ const ThingModelDataService: React.FC<{
             </>
         ),
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        []
+        [productThingModelDataOptions]
     );
     return (
         <VPanel>
