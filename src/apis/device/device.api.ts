@@ -133,7 +133,7 @@ export default class DeviceApi extends BaseApi {
         );
     }
 
-    queryDeviceEventsData(deviceId: string) {
+    queryDeviceEventsData(deviceId: string): Promise<any> {
         return this.request.get(
             `${this.baseUri}/devices/${deviceId}/events-data`
         );
