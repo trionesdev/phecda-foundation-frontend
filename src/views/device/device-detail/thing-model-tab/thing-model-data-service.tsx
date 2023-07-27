@@ -2,14 +2,16 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { VPanel } from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
 import { useRequest } from 'ahooks';
-import { systemApi } from '@/apis';
+import { deviceApi, systemApi } from '@/apis';
 import { DatePicker, Form, Select } from 'antd';
 import SearchToolbar from '@/components/search-toolbar';
 import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
 import dayjs from 'dayjs';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';
-const ThingModelDataService: React.FC = () => {
+const ThingModelDataService: React.FC<{
+    deviceData: Record<string, any>;
+}> = ({ deviceData }) => {
     const initDateValue = [dayjs().add(-1, 'h'), dayjs()];
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
@@ -28,13 +30,32 @@ const ThingModelDataService: React.FC = () => {
             systemApi.queryDictionaryTypesPage(tableParams),
         { manual: true }
     );
+    /** 请求对应产品的物模型数据 */
+    const { data: productThingModelData, run: queryProductThingMode } =
+        useRequest((id) => deviceApi.queryProductThingModel(id), {
+            manual: true,
+        });
 
+    /** 服务名称的options */
+    const productThingModelDataOptions = useMemo(() => {
+        return productThingModelData?.thingModel?.services?.map((item: any) => {
+            return {
+                label: item?.name,
+                value: item?.name,
+            };
+        });
+    }, [productThingModelData]);
     const handlePageChange = (pageNum: number, pageSize: number) => {
         setTableParams({ ...tableParams, pageNum, pageSize });
     };
     useEffect(() => {
         fetchTableData(tableParams);
     }, [fetchTableData, tableParams]);
+    useEffect(() => {
+        if (deviceData?.product?.id) {
+            queryProductThingMode(deviceData?.product.id);
+        }
+    }, [deviceData?.product?.id, queryProductThingMode]);
     const columns = [
         {
             title: '时间',
@@ -67,7 +88,11 @@ const ThingModelDataService: React.FC = () => {
                     <DatePicker.RangePicker showTime allowClear={false} />
                 </Form.Item>
                 <Form.Item name="name" label="服务名称">
-                    <Select allowClear style={{ width: 230 }} />
+                    <Select
+                        allowClear
+                        style={{ width: 230 }}
+                        options={productThingModelDataOptions}
+                    />
                 </Form.Item>
             </>
         ),

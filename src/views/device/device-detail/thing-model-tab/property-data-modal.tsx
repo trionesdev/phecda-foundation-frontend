@@ -29,7 +29,9 @@ type PropertyDataModalType = {
     propertyData: Record<string, any>;
 };
 
-const PropertyDataModal: React.FC<PropertyDataModalType> = () => {
+const PropertyDataModal: React.FC<PropertyDataModalType> = ({
+    propertyData,
+}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [dateTime, setDateTime] = useState<any[]>([

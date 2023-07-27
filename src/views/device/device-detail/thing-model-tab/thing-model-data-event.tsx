@@ -9,7 +9,9 @@ import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
 import dayjs from 'dayjs';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';
-const ThingModelDataEvent: React.FC = () => {
+const ThingModelDataEvent: React.FC<{
+    deviceData: Record<string, any>;
+}> = ({ deviceData }) => {
     const initDateValue = [dayjs().add(-1, 'h'), dayjs()];
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,

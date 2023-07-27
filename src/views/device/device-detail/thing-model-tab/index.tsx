@@ -45,12 +45,12 @@ const ThingModelDataTab: FC<ThingModelDataTabProps> = ({ device }) => {
         {
             key: 'events',
             label: `事件管理`,
-            children: <ThingModelDataEvent />,
+            children: <ThingModelDataEvent deviceData={device} />,
         },
         {
             key: 'services',
             label: `服务调用`,
-            children: <ThingModelDataService />,
+            children: <ThingModelDataService deviceData={device} />,
         },
     ];
     return (
