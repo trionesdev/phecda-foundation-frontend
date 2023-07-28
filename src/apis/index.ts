@@ -1,6 +1,7 @@
 import AlarmApi from './alarm/alarm.api';
 import AssetsApi from './assets/assets.api';
 import DeviceApi from './device/device.api';
+import LoggingApi from './logging/logging.api';
 import OperationApi from './operation/operation.api';
 import OssApi from './oss/oss.api';
 import SystemApi from './system/system.api';
@@ -20,3 +21,5 @@ export const systemApi = new SystemApi();
 export const operationApi = new OperationApi();
 /** 设备数据 */
 export const deviceDataApi = new DeviceDataApi();
+/** 日志 */
+export const loggingApi = new LoggingApi();

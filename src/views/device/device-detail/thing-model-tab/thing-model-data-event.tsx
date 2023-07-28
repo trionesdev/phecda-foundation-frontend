@@ -2,13 +2,14 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { VPanel } from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
 import { useRequest } from 'ahooks';
-import { systemApi } from '@/apis';
+import { loggingApi } from '@/apis';
 import { DatePicker, Form, Select } from 'antd';
 import SearchToolbar from '@/components/search-toolbar';
 import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
 import dayjs from 'dayjs';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';
+import { eventTypeConfig } from '@/constants/consts';
 const ThingModelDataEvent: React.FC<{
     deviceData: Record<string, any>;
 }> = ({ deviceData }) => {
@@ -16,7 +17,7 @@ const ThingModelDataEvent: React.FC<{
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
         pageNum: 1,
-        beginTime: dayjs(initDateValue[0]).valueOf(),
+        startTime: dayjs(initDateValue[0]).valueOf(),
         endTime: dayjs(initDateValue[1]).valueOf(),
     });
 
@@ -27,7 +28,7 @@ const ThingModelDataEvent: React.FC<{
         run: fetchTableData,
     } = useRequest(
         (tableParams: TableParams) =>
-            systemApi.queryDictionaryTypesPage(tableParams),
+            loggingApi.queryDevicesEventLogPage(tableParams),
         { manual: true }
     );
 
@@ -47,19 +48,25 @@ const ThingModelDataEvent: React.FC<{
         },
         {
             title: '标识符',
-            dataIndex: 'identifier',
+            dataIndex: 'eventIdentifier',
         },
         {
             title: '事件名称',
-            dataIndex: 'name',
+            dataIndex: 'eventName',
         },
         {
             title: '事件类型',
-            dataIndex: 'type',
+            dataIndex: 'eventType',
+            render: (eventType: keyof typeof eventTypeConfig) => {
+                return eventTypeConfig?.[eventType];
+            },
         },
         {
             title: '输出参数',
-            dataIndex: 'outParams',
+            dataIndex: 'outputData',
+            render: (outputData: Record<string, any>) => {
+                return JSON.stringify(outputData);
+            },
         },
     ];
     const tableParamsFormItems = useMemo(
@@ -68,7 +75,7 @@ const ThingModelDataEvent: React.FC<{
                 <Form.Item name="date" initialValue={initDateValue}>
                     <DatePicker.RangePicker showTime allowClear={false} />
                 </Form.Item>
-                <Form.Item name="type" label="事件类型">
+                <Form.Item name="eventType" label="事件类型">
                     <Select
                         options={[
                             {
@@ -110,13 +117,13 @@ const ThingModelDataEvent: React.FC<{
                                 setTableParams({
                                     pageNum: 1,
                                     pageSize: 10,
-                                    beginTime: dataIsEmpty
+                                    startTime: dataIsEmpty
                                         ? undefined
                                         : dayjs(start).valueOf(),
                                     endTime: dataIsEmpty
                                         ? undefined
                                         : dayjs(end).valueOf(),
-                                    type: values?.type,
+                                    eventType: values?.eventType,
                                     // ...v,
                                 });
                             }}
