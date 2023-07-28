@@ -100,9 +100,10 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
             xAxis: {
                 label: {
                     formatter: (time) => {
-                        return formatDateTimeSeconds(Number(time));
+                        return time;
                     },
                 },
+                tickCount: 5,
             },
         };
     }, [lineData]);
@@ -149,13 +150,13 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
                 </div>
                 <div className={styles.contentWrapper}>
                     {viewType === 'chart' && (
-                        <>
+                        <div className={styles.chartWrapper}>
                             {isNilEmpty(lineData) ? (
                                 <Empty />
                             ) : (
                                 <Line {...lineConfig} />
                             )}
-                        </>
+                        </div>
                     )}
                     {viewType === 'table' && (
                         <GridTable
