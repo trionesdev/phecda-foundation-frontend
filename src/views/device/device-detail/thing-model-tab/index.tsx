@@ -4,6 +4,8 @@ import { Tabs, TabsProps } from 'antd';
 import ThingModelDataPropertiesTab from './thing-model-data-properties-tab';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
+import ThingModelDataEvent from './thing-model-data-event';
+import ThingModelDataService from './thing-model-data-service';
 
 type ThingModelDataTabProps = {
     device: any;
@@ -43,10 +45,12 @@ const ThingModelDataTab: FC<ThingModelDataTabProps> = ({ device }) => {
         {
             key: 'events',
             label: `事件管理`,
+            children: <ThingModelDataEvent deviceData={device} />,
         },
         {
             key: 'services',
             label: `服务调用`,
+            children: <ThingModelDataService deviceData={device} />,
         },
     ];
     return (
