@@ -116,3 +116,9 @@ export const sceneActionOptions = [
         value: SCENE_ACTION.ALARM,
     },
 ];
+
+export const eventTypeConfig = {
+    INFO: '信息',
+    WARN: '告警',
+    ERROR: '故障',
+};

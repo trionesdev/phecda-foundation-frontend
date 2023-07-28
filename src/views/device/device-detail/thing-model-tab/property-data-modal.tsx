@@ -1,5 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Button, DatePicker, Modal, Radio, RadioChangeEvent } from 'antd';
+import {
+    Button,
+    DatePicker,
+    Empty,
+    Modal,
+    Radio,
+    RadioChangeEvent,
+} from 'antd';
 import GridTable from '@components/grid-table';
 import styles from './property-data-modal.module.less';
 import {
@@ -7,30 +14,20 @@ import {
     formatDateTimeSeconds,
 } from '@/commons/util/date.utils';
 import { TableParams } from '@/constants/types';
-import { systemApi } from '@/apis';
+import { deviceDataApi } from '@/apis';
 import { useRequest } from 'ahooks';
 import dayjs from 'dayjs';
 import { Line, LineConfig } from '@ant-design/charts';
-const lineData = [
-    {
-        time: '1991',
-        value: 3,
-    },
-    {
-        time: '1992',
-        value: 4,
-    },
-    {
-        time: '1993',
-        value: 3.5,
-    },
-];
+import { isNilEmpty } from '@/commons/util/isNilEmpty';
+
 type PropertyDataModalType = {
     propertyData: Record<string, any>;
+    deviceData: Record<string, any>;
 };
 
 const PropertyDataModal: React.FC<PropertyDataModalType> = ({
     propertyData,
+    deviceData,
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -40,11 +37,12 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
     ]);
     const [viewType, setViewType] = useState<'table' | 'chart'>('table');
 
-    const [tableParams, setTableParams] = useState<TableParams>({
-        pageSize: 10,
-        pageNum: 1,
-        beginTime: dayjs(dateTime[0]).valueOf(),
+    const [tableParams, setTableParams] = useState<any>({
+        startTime: dayjs(dateTime[0]).valueOf(),
         endTime: dayjs(dateTime[1]).valueOf(),
+        field: propertyData?.identifier,
+        deviceName: deviceData?.name,
+        assetSn: 'assetSn',
     });
 
     /** 请求表格 */
@@ -54,29 +52,21 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
         run: fetchTableData,
     } = useRequest(
         (tableParams: TableParams) =>
-            systemApi.queryDictionaryTypesPage(tableParams),
+            deviceDataApi.queryDeviceDataList(tableParams),
         { manual: true }
     );
-    /** 请求图表 */
-    // const { data: lineData, run: fetchLineData } = useRequest(
-    //     (param: any) => deviceDataApi.queryDeviceDatasList(param),
-    //     {
-    //         manual: true,
-    //     }
-    // );
-    // useEffect(() => {
-    //     const param = {
-    //         beginTime: dayjs(dateTime?.[0]).valueOf(),
-    //         endTime: dayjs(dateTime?.[1]).valueOf(),
-    //     };
-    //     fetchLineData(param);
-    // }, [fetchLineData,dateTime]);
-    const handlePageChange = (pageNum: number, pageSize: number) => {
-        setTableParams({ ...tableParams, pageNum, pageSize });
-    };
+    const lineData = useMemo(() => {
+        if (isNilEmpty(tableData)) return [];
+        return tableData?.map((item: any) => {
+            return {
+                time: formatDateTime(Number(item?.time)),
+                value: item?.value,
+            };
+        });
+    }, [tableData]);
     useEffect(() => {
-        fetchTableData(tableParams);
-    }, [fetchTableData, tableParams]);
+        isModalOpen && fetchTableData(tableParams);
+    }, [fetchTableData, isModalOpen, tableParams]);
     const showModal = () => {
         setIsModalOpen(true);
     };
@@ -92,7 +82,7 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
     const columns = [
         {
             title: '时间',
-            dataIndex: 'createdAt',
+            dataIndex: 'time',
             render: (value: number) => {
                 return formatDateTime(value);
             },
@@ -124,7 +114,7 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
             </Button>
             <Modal
                 width={800}
-                title="查看数据"
+                title={`查看数据-${propertyData?.name}`}
                 open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
@@ -139,7 +129,7 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
                             setDateTime(value as any);
                             setTableParams({
                                 ...tableParams,
-                                beginTime: dayjs(value?.[0]).valueOf(),
+                                startTime: dayjs(value?.[0]).valueOf(),
                                 endTime: dayjs(value?.[1]).valueOf(),
                             });
                         }}
@@ -160,7 +150,11 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
                 <div className={styles.contentWrapper}>
                     {viewType === 'chart' && (
                         <>
-                            <Line {...lineConfig} />
+                            {isNilEmpty(lineData) ? (
+                                <Empty />
+                            ) : (
+                                <Line {...lineConfig} />
+                            )}
                         </>
                     )}
                     {viewType === 'table' && (
@@ -170,12 +164,9 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
                             scroll={{ y: 'max-content' }}
                             rowKey="id"
                             columns={columns}
-                            dataSource={tableData?.rows}
+                            dataSource={tableData}
                             loading={tableDataLoading}
-                            pagination={{
-                                ...tableParams,
-                                onChange: handlePageChange,
-                            }}
+                            pagination={false}
                         />
                     )}
                 </div>

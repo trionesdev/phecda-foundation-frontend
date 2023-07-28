@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { VPanel } from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
 import { useRequest } from 'ahooks';
-import { deviceApi, systemApi } from '@/apis';
+import { deviceApi, loggingApi } from '@/apis';
 import { DatePicker, Form, Select } from 'antd';
 import SearchToolbar from '@/components/search-toolbar';
 import { TableParams } from '@/constants/types';
@@ -16,7 +16,7 @@ const ThingModelDataService: React.FC<{
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
         pageNum: 1,
-        beginTime: dayjs(initDateValue[0]).valueOf(),
+        startTime: dayjs(initDateValue[0]).valueOf(),
         endTime: dayjs(initDateValue[1]).valueOf(),
     });
 
@@ -27,7 +27,7 @@ const ThingModelDataService: React.FC<{
         run: fetchTableData,
     } = useRequest(
         (tableParams: TableParams) =>
-            systemApi.queryDictionaryTypesPage(tableParams),
+            loggingApi.queryDevicesServiceLogPage(tableParams),
         { manual: true }
     );
     /** 请求对应产品的物模型数据 */
@@ -67,19 +67,25 @@ const ThingModelDataService: React.FC<{
         },
         {
             title: '标识符',
-            dataIndex: 'identifier',
+            dataIndex: 'serviceIdentifier',
         },
         {
             title: '服务名称',
-            dataIndex: 'name',
+            dataIndex: 'serviceName',
         },
         {
             title: '输入参数',
-            dataIndex: 'inputParams',
+            dataIndex: 'inputData',
+            render: (inputData: Record<string, any>) => {
+                return JSON.stringify(inputData);
+            },
         },
         {
             title: '输出参数',
-            dataIndex: 'outParams',
+            dataIndex: 'outputData',
+            render: (outputData: Record<string, any>) => {
+                return JSON.stringify(outputData);
+            },
         },
     ];
     const tableParamsFormItems = useMemo(
@@ -88,7 +94,7 @@ const ThingModelDataService: React.FC<{
                 <Form.Item name="date" initialValue={initDateValue}>
                     <DatePicker.RangePicker showTime allowClear={false} />
                 </Form.Item>
-                <Form.Item name="name" label="服务名称">
+                <Form.Item name="serviceName" label="服务名称">
                     <Select
                         allowClear
                         style={{ width: 230 }}
@@ -117,13 +123,13 @@ const ThingModelDataService: React.FC<{
                                 setTableParams({
                                     pageNum: 1,
                                     pageSize: 10,
-                                    beginTime: dataIsEmpty
+                                    startTime: dataIsEmpty
                                         ? undefined
                                         : dayjs(start).valueOf(),
                                     endTime: dataIsEmpty
                                         ? undefined
                                         : dayjs(end).valueOf(),
-                                    name: values?.name,
+                                    serviceName: values?.serviceName,
                                     // ...v,
                                 });
                             }}
