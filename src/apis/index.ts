@@ -6,6 +6,7 @@ import OperationApi from './operation/operation.api';
 import OssApi from './oss/oss.api';
 import SystemApi from './system/system.api';
 import DeviceDataApi from '@apis/alarm/device-data.api';
+import NodeApi from '@apis/edge/node.api';
 
 /** 设备管理 */
 export const deviceApi = new DeviceApi();
@@ -23,3 +24,5 @@ export const operationApi = new OperationApi();
 export const deviceDataApi = new DeviceDataApi();
 /** 日志 */
 export const loggingApi = new LoggingApi();
+/** 边缘节点 */
+export const nodeApi = new NodeApi();

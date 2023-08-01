@@ -80,17 +80,16 @@ const DevicesView = () => {
         {
             title: `设备所属产品`,
             dataIndex: ['product', 'name'],
-            width: 120,
         },
         {
             title: '节点类型',
             dataIndex: ['product', 'nodeTypeLabel'],
-            width: 100,
+            width: 150,
         },
         {
             title: `启用/禁用`,
             dataIndex: 'enabled',
-            width: 100,
+            width: 120,
             render: (text: boolean, record: any) => {
                 return (
                     <Switch
