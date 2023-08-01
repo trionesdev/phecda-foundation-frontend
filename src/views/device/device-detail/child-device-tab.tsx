@@ -20,7 +20,7 @@ const ChildDeviceTab: FC<ChildDeviceTabProps> = ({ device }) => {
     const [devices, setDevices] = useState([]);
     const handleQueryDevices = () => {
         let params = {
-            gatewayDeviceId: _.get(device, 'id'),
+            gatewayId: _.get(device, 'id'),
             pageNum,
             pageSize,
         };
