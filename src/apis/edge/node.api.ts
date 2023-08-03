@@ -31,17 +31,17 @@ class NodeApi extends BaseApi {
 
     addChildDevice(nodeId: string, childDeviceIds: string[]) {
         return this.request.post(
-            `${this.baseUri}/nodes/${nodeId}/children/${childDeviceIds.join(
-                ','
-            )}`
+            `${
+                this.baseUri
+            }/nodes/${nodeId}/device-children/${childDeviceIds.join(',')}`
         );
     }
 
     removeChildDevice(nodeId: string, childDeviceIds: string[]) {
         return this.request.delete(
-            `${this.baseUri}/nodes/${nodeId}/children/${childDeviceIds.join(
-                ','
-            )}`
+            `${
+                this.baseUri
+            }/nodes/${nodeId}/device-children/${childDeviceIds.join(',')}`
         );
     }
 }
