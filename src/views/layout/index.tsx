@@ -98,6 +98,17 @@ const MainLayoutView = () => {
             ],
         },
         {
+            key: 'edge-management',
+            label: '边缘计算',
+            children: [
+                {
+                    key: RoutesConstants.NODE.key,
+                    label: '节点管理',
+                    onClick: () => navigate(RoutesConstants.NODE.path()),
+                },
+            ],
+        },
+        {
             key: 'system-setting',
             label: '系统设置',
             children: [

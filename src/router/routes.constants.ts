@@ -89,4 +89,14 @@ export const RoutesConstants: RoutesConstantsProps = {
         path: (id?: string) =>
             `/system-setting/dictionary-type/${id ?? ':id'}/dictionary`,
     }, //字典
+
+    /** ---边缘计算---- */
+    NODE: {
+        key: 'edge-node',
+        path: () => `/edge/node`,
+    },
+    NODE_DETAIL: {
+        key: 'edge-node-detail',
+        path: (id?: string) => `/edge/node/${id ? id : ':id'}/detail`,
+    },
 };

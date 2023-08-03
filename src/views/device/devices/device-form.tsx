@@ -1,6 +1,6 @@
 import { Button, ButtonProps, Form, Input, message, Select } from 'antd';
-import { FC, useEffect, useState } from 'react';
-import { deviceApi, nodeApi } from '@apis';
+import { FC, useState } from 'react';
+import { deviceApi } from '@apis';
 import ProductSelect from '@components/product-select';
 import ModalForm from '@/components/modal-form';
 
@@ -17,7 +17,6 @@ const DeviceForm: FC<DeviceFormProps> = ({
     ...rest
 }) => {
     const [open, setOpen] = useState(false);
-    const [nodes, setNodes] = useState([]);
     const handleSubmit = (values: any) => {
         deviceApi
             .createDevice(values)
@@ -32,18 +31,6 @@ const DeviceForm: FC<DeviceFormProps> = ({
                 message.error(ex.message);
             });
     };
-
-    const listNodes = () => {
-        nodeApi.list().then((res) => {
-            setNodes(res || []);
-        });
-    };
-
-    useEffect(() => {
-        if (open) {
-            listNodes();
-        }
-    }, [open]);
 
     return (
         <ModalForm
@@ -84,17 +71,6 @@ const DeviceForm: FC<DeviceFormProps> = ({
             </Form.Item>
             <Form.Item label={`备注名称`} name={`remarkName`}>
                 <Input />
-            </Form.Item>
-            <Form.Item
-                label={`边缘节点`}
-                name={`nodeId`}
-                rules={[{ required: true }]}
-            >
-                <Select
-                    options={nodes}
-                    fieldNames={{ label: 'name', value: 'id' }}
-                    placeholder={`请选择归属的边缘节点`}
-                />
             </Form.Item>
         </ModalForm>
     );

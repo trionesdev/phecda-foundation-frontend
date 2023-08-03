@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy } from 'react';
 import { useRoutes, RouteObject } from 'react-router-dom';
 import SignInView from '../views/account/sign-in';
 import MainLayoutView from '../views/layout';
@@ -20,6 +20,8 @@ import Dictionary from '@/views/system-setting/dictionary';
 import DictionaryType from '@/views/system-setting/dictionary-type';
 import EventResponse from '@/views/monitoring-operations/event-response';
 import SceneDetail from '@/views/monitoring-operations/event-response/detail';
+import NodeView from '@views/edge/node';
+import NodeDetailView from '@views/edge/node-detail';
 
 export const routes: RouteObject[] = [
     { path: '/sign-in', element: <SignInView /> },
@@ -97,6 +99,15 @@ export const routes: RouteObject[] = [
             {
                 path: RoutesConstants.DICTIONARY.path(),
                 element: <Dictionary />, //字典
+            },
+            //------边缘计算-----
+            {
+                path: RoutesConstants.NODE.path(),
+                element: <NodeView />,
+            },
+            {
+                path: RoutesConstants.NODE_DETAIL.path(),
+                element: <NodeDetailView />,
             },
         ],
     },
