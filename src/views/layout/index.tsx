@@ -84,17 +84,18 @@ const MainLayoutView = () => {
                     onClick: () =>
                         navigate(RoutesConstants.MONITOR_TRENDS.path()),
                 },
-                /*{
-                    key: RoutesConstants.DEVICE_DATA.key,
-                    label: `设备数据`,
-                    onClick: () => navigate(RoutesConstants.DEVICE_DATA.path()),
-                },
                 {
                     key: RoutesConstants.MONITOR_VIEW.key,
                     label: `监控画面`,
                     onClick: () =>
                         navigate(RoutesConstants.MONITOR_VIEW.path()),
-                },*/
+                },
+                /*{
+                    key: RoutesConstants.DEVICE_DATA.key,
+                    label: `设备数据`,
+                    onClick: () => navigate(RoutesConstants.DEVICE_DATA.path()),
+                },
+             ,*/
             ],
         },
         {
