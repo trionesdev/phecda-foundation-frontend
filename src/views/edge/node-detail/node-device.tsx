@@ -5,15 +5,13 @@ import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import { TableToolbar, VPanel } from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
-import _ from 'lodash';
-import ChildDeviceForm from '@views/device/device-detail/child-device-form';
-import NodeChildDeviceForm from '@views/edge/node-detail/node-child-device-form';
+import NodeDeviceForm from '@views/edge/node-detail/node-device-form';
 
-type ChildNodeTabProps = {
+type NodeDeviceProps = {
     node: any;
 };
 
-const ChildNodeTab: FC<ChildNodeTabProps> = ({ node }) => {
+const NodeDevice: FC<NodeDeviceProps> = ({ node }) => {
     const [querySeq, setQuerySeq] = useState(0);
     const [loading, setLoading] = useState(false);
     const [pageNum, setPageNum] = useState(1);
@@ -38,9 +36,9 @@ const ChildNodeTab: FC<ChildNodeTabProps> = ({ node }) => {
             });
     };
 
-    const handleRemoveChildDevice = (id: string) => {
+    const handleRemoveDevice = (id: string) => {
         nodeApi
-            .removeChildDevice(node.id, [id])
+            .removeDevice(node.id, [id])
             .then(() => {
                 handleRefresh();
                 notification.success({ message: '子设备删除成功' });
@@ -112,7 +110,7 @@ const ChildNodeTab: FC<ChildNodeTabProps> = ({ node }) => {
                         <Popconfirm
                             key={`del-btn`}
                             title={`确定删除设备"${record.remarkName}"？`}
-                            onConfirm={() => handleRemoveChildDevice(text)}
+                            onConfirm={() => handleRemoveDevice(text)}
                         >
                             <Button size={`small`} type={`link`} danger={true}>
                                 删除
@@ -127,14 +125,14 @@ const ChildNodeTab: FC<ChildNodeTabProps> = ({ node }) => {
     const tableBar = (
         <TableToolbar
             extra={
-                <NodeChildDeviceForm
+                <NodeDeviceForm
                     key={`add-child-device-btn`}
                     type={`primary`}
                     onSuccess={handleRefresh}
                     nodeId={node.id}
                 >
                     添加终端设备
-                </NodeChildDeviceForm>
+                </NodeDeviceForm>
             }
         />
     );
@@ -158,4 +156,4 @@ const ChildNodeTab: FC<ChildNodeTabProps> = ({ node }) => {
     );
 };
 
-export default ChildNodeTab;
+export default NodeDevice;

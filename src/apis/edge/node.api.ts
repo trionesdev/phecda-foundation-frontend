@@ -29,19 +29,15 @@ class NodeApi extends BaseApi {
         return this.request.delete(`${this.baseUri}/nodes/${id}`);
     }
 
-    addChildDevice(nodeId: string, childDeviceIds: string[]) {
+    addDevice(nodeId: string, deviceIds: string[]) {
         return this.request.post(
-            `${
-                this.baseUri
-            }/nodes/${nodeId}/device-children/${childDeviceIds.join(',')}`
+            `${this.baseUri}/nodes/${nodeId}/device/${deviceIds.join(',')}`
         );
     }
 
-    removeChildDevice(nodeId: string, childDeviceIds: string[]) {
+    removeDevice(nodeId: string, deviceIds: string[]) {
         return this.request.delete(
-            `${
-                this.baseUri
-            }/nodes/${nodeId}/device-children/${childDeviceIds.join(',')}`
+            `${this.baseUri}/nodes/${nodeId}/device/${deviceIds.join(',')}`
         );
     }
 }

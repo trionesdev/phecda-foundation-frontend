@@ -6,8 +6,8 @@ import _ from 'lodash';
 import styles from './node-detail.module.less';
 import NodeInfo from '@views/edge/node-detail/node-info';
 import NodeApplication from '@views/edge/node-detail/node-application';
-import NodeChildDevice from '@views/edge/node-detail/node-child-device';
 import { nodeApi } from '@apis';
+import NodeDevice from '@views/edge/node-detail/node-device';
 
 const NodeDetailView = () => {
     const { id } = useParams();
@@ -43,7 +43,7 @@ const NodeDetailView = () => {
         {
             key: `sub-device`,
             label: `子设备管理`,
-            children: <NodeChildDevice node={node} />,
+            children: <NodeDevice node={node} />,
         },
     ]);
 

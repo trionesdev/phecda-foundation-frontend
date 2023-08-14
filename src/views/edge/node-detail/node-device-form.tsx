@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import ModalForm from '@components/modal-form';
-import { Button, ButtonProps, Form, Input, notification, Select } from 'antd';
+import { Button, ButtonProps, Form, notification, Select } from 'antd';
 import ProductSelect from '@components/product-select';
 import { deviceApi, nodeApi } from '@apis';
 import _ from 'lodash';
@@ -10,7 +10,7 @@ type NodeChildDeviceFormProps = {
     onSuccess?: () => void;
 } & ButtonProps;
 
-const NodeChildDeviceForm: FC<NodeChildDeviceFormProps> = ({
+const NodeDeviceForm: FC<NodeChildDeviceFormProps> = ({
     nodeId,
     onSuccess,
     ...rest
@@ -43,7 +43,7 @@ const NodeChildDeviceForm: FC<NodeChildDeviceFormProps> = ({
     const handleSubmit = (values: any) => {
         const deviceIds = _.get(values, 'deviceIds');
         nodeApi
-            .addChildDevice(nodeId, deviceIds!)
+            .addDevice(nodeId, deviceIds!)
             .then(() => {
                 setOpen(false);
                 notification.success({ message: '保存成功' });
@@ -86,4 +86,4 @@ const NodeChildDeviceForm: FC<NodeChildDeviceFormProps> = ({
     );
 };
 
-export default NodeChildDeviceForm;
+export default NodeDeviceForm;
