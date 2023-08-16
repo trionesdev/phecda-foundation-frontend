@@ -18,8 +18,14 @@ const InfoTab: FC<InfoTabProps> = ({ product }) => {
                 <Descriptions.Item label={`节点类型`}>
                     {_.get(DeviceNodeType, product?.nodeType)}
                 </Descriptions.Item>
+                <Descriptions.Item label={`产品标识`}>
+                    {_.get(product, 'id', '')}
+                </Descriptions.Item>
                 <Descriptions.Item label={`创建时间`}>
                     {formatDateTime(_.get(product, 'createdAt'))}
+                </Descriptions.Item>
+                <Descriptions.Item label={`物模型版本`}>
+                    {_.get(product, 'thingModelVersion', '')}
                 </Descriptions.Item>
             </Descriptions>
         </div>
