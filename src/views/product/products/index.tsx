@@ -130,21 +130,20 @@ const ProductsView = () => {
             render: (text: string, record: any) => {
                 return (
                     <Space>
-                        {_.eq(record?.status, 'DEVELOPMENT') && (
-                            <ProductFormBtn
-                                key={`update-product`}
-                                type={`link`}
-                                onSuccess={handleRefresh}
-                                id={record?.id}
-                                initValue={{
-                                    name: record?.name,
-                                    nodeType: record?.nodeType,
-                                }}
-                                isEdit
-                            >
-                                编辑
-                            </ProductFormBtn>
-                        )}
+                        <ProductFormBtn
+                            key={`update-product`}
+                            type={`link`}
+                            onSuccess={handleRefresh}
+                            id={record?.id}
+                            disabled={!_.eq(record?.status, 'DEVELOPMENT')}
+                            initValue={{
+                                name: record?.name,
+                                nodeType: record?.nodeType,
+                            }}
+                            isEdit
+                        >
+                            编辑
+                        </ProductFormBtn>
                         <Button
                             size={`small`}
                             type={`link`}
@@ -156,21 +155,21 @@ const ProductsView = () => {
                         >
                             查看
                         </Button>
-                        {_.eq(record?.status, 'DEVELOPMENT') && (
-                            <Popconfirm
-                                key={`del-btn`}
-                                title={`确定删除 ${record.name}？`}
-                                onConfirm={() => deleteProductById(record?.id)}
+                        <Popconfirm
+                            key={`del-btn`}
+                            title={`确定删除 ${record.name}？`}
+                            onConfirm={() => deleteProductById(record?.id)}
+                            disabled={!_.eq(record?.status, 'DEVELOPMENT')}
+                        >
+                            <Button
+                                size={`small`}
+                                type={`link`}
+                                disabled={!_.eq(record?.status, 'DEVELOPMENT')}
+                                danger
                             >
-                                <Button
-                                    size={`small`}
-                                    type={`link`}
-                                    danger={true}
-                                >
-                                    删除
-                                </Button>
-                            </Popconfirm>
-                        )}
+                                删除
+                            </Button>
+                        </Popconfirm>
                     </Space>
                 );
             },
