@@ -135,7 +135,7 @@ const MainLayoutView = () => {
             setSelectedKeys([keyArr?.[2]]);
         }
     }, [location]);
-    const appBar = <AppToolbar title={`皮带管家`} />;
+    const appBar = <AppToolbar title={`物联网平台`} />;
     const sider = (
         <div className={styles.layoutViewSider}>
             <Menu
