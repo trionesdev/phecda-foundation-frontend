@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@ant-design/charts": "^1.4.2",
         "@ant-design/icons": "^5.1.4",
         "@craco/craco": "^7.1.0",
         "@moensun/antd-icons-react-ext": "latest",
@@ -14,7 +15,6 @@
         "@types/node": "^18.15.5",
         "@types/react": "^18.0.28",
         "@types/react-dom": "^18.0.11",
-        "@ant-design/charts": "^1.4.2",
         "add": "^2.0.6",
         "ahooks": "^3.7.8",
         "antd": "^5.6.0",
@@ -24,6 +24,7 @@
         "lodash": "^4.17.21",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "react-player": "^2.12.0",
         "react-router-dom": "^6.9.0",
         "react-scripts": "5.0.1",
         "typescript": "^5.0.2",
