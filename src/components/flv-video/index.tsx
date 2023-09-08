@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import flvjs from 'flv.js';
 
 interface FlvVideoProps {
@@ -8,10 +8,8 @@ interface FlvVideoProps {
 const FlvVideo: React.FC<FlvVideoProps> = ({ url }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const flvPlayerRef = useRef<flvjs.Player | null>(null);
-    const [readState, setReadState] = useState<number>();
 
     useEffect(() => {
-        closePlay();
         if (videoRef.current) {
             const flvPlayer = flvjs.createPlayer({
                 type: 'flv',
@@ -20,21 +18,21 @@ const FlvVideo: React.FC<FlvVideoProps> = ({ url }) => {
             });
             flvPlayer.attachMediaElement(videoRef.current);
             flvPlayer.load();
-            flvPlayer.play();
+            const playPromise = flvPlayer.play();
             flvPlayerRef.current = flvPlayer;
+
+            if (playPromise !== undefined) {
+                playPromise.catch((e) => {
+                    console.log('play error :', e);
+                });
+            }
         }
 
         return () => closePlay();
     }, [url]);
 
-    useEffect(() => {
-        setReadState(videoRef.current?.readyState);
-        console.log('readyState : ', url, videoRef.current?.readyState);
-    }, [videoRef.current?.readyState]);
-
     const closePlay = () => {
         if (flvPlayerRef.current) {
-            console.log(flvPlayerRef.current);
             flvPlayerRef.current.pause();
             flvPlayerRef.current.unload();
             flvPlayerRef.current.detachMediaElement();

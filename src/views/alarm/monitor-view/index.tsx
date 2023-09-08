@@ -79,7 +79,7 @@ const MonitorView: React.FC = () => {
                                 alt=""
                             />
                         )}
-                        {url && <FlvVideo url={url} />}
+                        {!isNilEmpty(url) && <FlvVideo url={url} />}
                     </div>
                 </div>
             </VPanel>
