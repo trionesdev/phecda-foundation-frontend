@@ -36,6 +36,10 @@ const MonitorView: React.FC = () => {
         });
     };
 
+    const handlePlayError = () => {
+        setUrl(undefined);
+    };
+
     useEffect(() => {
         const options = deviceData?.map((item: any) => {
             return {
@@ -79,7 +83,9 @@ const MonitorView: React.FC = () => {
                                 alt=""
                             />
                         )}
-                        {!isNilEmpty(url) && <FlvVideo url={url} />}
+                        {!isNilEmpty(url) && (
+                            <FlvVideo url={url} onError={handlePlayError} />
+                        )}
                     </div>
                 </div>
             </VPanel>

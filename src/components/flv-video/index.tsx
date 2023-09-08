@@ -3,14 +3,15 @@ import flvjs from 'flv.js';
 
 interface FlvVideoProps {
     url: string | undefined;
+    onError?: Function;
 }
 
-const FlvVideo: React.FC<FlvVideoProps> = ({ url }) => {
+const FlvVideo: React.FC<FlvVideoProps> = ({ url, onError }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const flvPlayerRef = useRef<flvjs.Player | null>(null);
 
     useEffect(() => {
-        if (videoRef.current) {
+        if (videoRef.current && flvjs.isSupported()) {
             const flvPlayer = flvjs.createPlayer({
                 type: 'flv',
                 url: url,
@@ -22,10 +23,16 @@ const FlvVideo: React.FC<FlvVideoProps> = ({ url }) => {
             flvPlayerRef.current = flvPlayer;
 
             if (playPromise !== undefined) {
-                playPromise.catch((e) => {
-                    console.log('play error :', e);
-                });
+                playPromise.catch(() => {});
             }
+
+            flvPlayer.on(flvjs.Events.ERROR, (event, data) => {
+                if (onError) {
+                    onError();
+                }
+            });
+        } else {
+            console.log('flvjs is not support');
         }
 
         return () => closePlay();
