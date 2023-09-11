@@ -187,4 +187,10 @@ export default class DeviceApi extends BaseApi {
             }/devices/${parentDeviceId}/children/${childDeviceIds.join(',')}`
         );
     }
+
+    startPushStreaming(id: string): Promise<any> {
+        return this.request.get(
+            `${this.baseUri}/devices/${id}/streaming/start`
+        );
+    }
 }
