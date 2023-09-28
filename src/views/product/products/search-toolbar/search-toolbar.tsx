@@ -127,67 +127,64 @@ export const SearchToolbar: FC<SearchToolbarProps> = ({
     });
 
     return wrapSSR(
-        <Form
-            className={classNames(prefixCls, hashId)}
-            form={form}
-            layout={layout}
-            initialValues={initialValues}
-        >
-            <Row gutter={[8, 8]}>
-                {items?.map((item, index) => (
+        <div className={classNames(prefixCls, hashId)}>
+            <Form form={form} layout={layout} initialValues={initialValues}>
+                <Row gutter={[8, 8]}>
+                    {items?.map((item, index) => (
+                        <Col
+                            key={index}
+                            {...colSpanProps}
+                            className={classNames({
+                                [`${prefixCls}-col-hidden`]:
+                                    index > rowColSize - 2 && !expanded,
+                            })}
+                        >
+                            <Form.Item label={item.label} name={item.name}>
+                                {item.children}
+                            </Form.Item>
+                        </Col>
+                    ))}
                     <Col
-                        key={index}
                         {...colSpanProps}
-                        className={classNames({
-                            [`${prefixCls}-col-hidden`]:
-                                index > rowColSize - 2 && !expanded,
-                        })}
+                        offset={offsetSpan}
+                        style={{ textAlign: 'end' }}
                     >
-                        <Form.Item label={item.label} name={item.name}>
-                            {item.children}
+                        <Form.Item>
+                            <Space>
+                                <Button
+                                    onClick={() => {
+                                        form.resetFields();
+                                    }}
+                                >
+                                    重置
+                                </Button>
+                                <Button type={`primary`} onClick={handleSearch}>
+                                    查询
+                                </Button>
+                                {expandable && (
+                                    <Button
+                                        type={`link`}
+                                        onClick={() => setExpanded(!expanded)}
+                                    >
+                                        {' '}
+                                        {expanded ? (
+                                            <>
+                                                收起
+                                                <UpOutlined />
+                                            </>
+                                        ) : (
+                                            <>
+                                                展开
+                                                <DownOutlined />
+                                            </>
+                                        )}{' '}
+                                    </Button>
+                                )}
+                            </Space>
                         </Form.Item>
                     </Col>
-                ))}
-                <Col
-                    {...colSpanProps}
-                    offset={offsetSpan}
-                    style={{ textAlign: 'end' }}
-                >
-                    <Form.Item>
-                        <Space>
-                            <Button
-                                onClick={() => {
-                                    form.resetFields();
-                                }}
-                            >
-                                重置
-                            </Button>
-                            <Button type={`primary`} onClick={handleSearch}>
-                                查询
-                            </Button>
-                            {expandable && (
-                                <Button
-                                    type={`link`}
-                                    onClick={() => setExpanded(!expanded)}
-                                >
-                                    {' '}
-                                    {expanded ? (
-                                        <>
-                                            收起
-                                            <UpOutlined />
-                                        </>
-                                    ) : (
-                                        <>
-                                            展开
-                                            <DownOutlined />
-                                        </>
-                                    )}{' '}
-                                </Button>
-                            )}
-                        </Space>
-                    </Form.Item>
-                </Col>
-            </Row>
-        </Form>
+                </Row>
+            </Form>
+        </div>
     );
 };

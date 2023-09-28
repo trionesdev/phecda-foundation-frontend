@@ -7,6 +7,13 @@ export const genSearchToolbarStyle = (
 ): CSSInterpolation => {
     return {
         [`.${prefixCls}`]: {
+            paddingTop: 16,
+            paddingLeft: 16,
+            paddingRight: 16,
+            boxSizing: 'border-box',
+            [`.ant-form-item`]: {
+                marginBottom: 16,
+            },
             [`&-col-hidden`]: {
                 display: 'none',
             },

@@ -1,4 +1,4 @@
-import { GridTable } from '@moensun/antd-react-ext';
+import { GridTable, Layout, TableToolbar } from '@moensun/antd-react-ext';
 import { Button, Form, Input, Popconfirm, Select, Space, Tag } from 'antd';
 import React, { useEffect, useMemo, useState } from 'react';
 import ProductFormBtn from './product-form-btn';
@@ -218,7 +218,22 @@ const ProductsView = () => {
     ];
 
     return (
-        <div className={styles[`products`]}>
+        <Layout direction={`vertical`} className={styles[`products`]}>
+            <Layout.Item className={styles[`search-toolbar`]}>
+                <SearchToolbar
+                    span={6}
+                    xxl={4}
+                    xl={6}
+                    lg={6}
+                    md={8}
+                    sm={12}
+                    xs={24}
+                    items={items}
+                    onSearch={(values) => {
+                        setFormData(values);
+                    }}
+                />
+            </Layout.Item>
             <GridTable
                 style={{
                     backgroundColor: 'white',
@@ -226,12 +241,16 @@ const ProductsView = () => {
                     boxSizing: 'border-box',
                 }}
                 toolbar={
-                    <SearchToolbar
-                        span={4}
-                        items={items}
-                        onSearch={(values) => {
-                            setFormData(values);
-                        }}
+                    <TableToolbar
+                        extra={
+                            <ProductFormBtn
+                                key={`create-product`}
+                                type={`primary`}
+                                onSuccess={handleRefresh}
+                            >
+                                新建产品
+                            </ProductFormBtn>
+                        }
                     />
                 }
                 size={`small`}
@@ -240,7 +259,7 @@ const ProductsView = () => {
                 rowKey={`id`}
                 loading={loading}
             />
-        </div>
+        </Layout>
     );
 };
 export default ProductsView;
