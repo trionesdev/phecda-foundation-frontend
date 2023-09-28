@@ -1,17 +1,11 @@
-import {
-    AppToolbar,
-    GridTable,
-    HPanel,
-    TableToolbar,
-    VPanel,
-} from '@moensun/antd-react-ext';
+import { GridTable } from '@moensun/antd-react-ext';
 import { Button, Form, Input, Popconfirm, Select, Space, Tag } from 'antd';
 import React, { useEffect, useMemo, useState } from 'react';
 import ProductFormBtn from './product-form-btn';
 import { deviceApi } from '@apis';
-import { ProductPageRep, ProductRep } from '../../../apis/device/device.rep';
+import { ProductPageRep, ProductRep } from '@apis/device/device.rep';
 import { useNavigate } from 'react-router-dom';
-import { RoutesConstants } from '../../../router/routes.constants';
+import { RoutesConstants } from '@/router/routes.constants';
 import styles from './products.module.less';
 import { formatDateTime } from '@/commons/util/date.utils';
 import {
@@ -19,10 +13,9 @@ import {
     DeviceNodeTypeKeys,
 } from '../support/device.constants';
 import { useRequest } from 'ahooks';
-import { AssetsStatesOptions } from '@/constants/consts';
 import { OptionsType } from '@/constants/types';
-import SearchToolbar from '@components/search-toolbar';
 import _ from 'lodash';
+import { SearchToolbar } from '@views/product/products/search-toolbar/search-toolbar';
 
 const ProductsView = () => {
     const navigate = useNavigate();
@@ -126,7 +119,7 @@ const ProductsView = () => {
         {
             title: '操作',
             dataIndex: 'id',
-            width: 225,
+            width: 230,
             render: (text: string, record: any) => {
                 return (
                     <Space>
@@ -176,53 +169,78 @@ const ProductsView = () => {
         },
     ];
 
-    const searchForm = useMemo(() => {
-        return (
-            <>
-                <Form.Item name="name" label="名称">
-                    <Input allowClear />
-                </Form.Item>
-                <Form.Item name="nodeType" label={`节点类型`}>
-                    <Select
-                        style={{ width: 230 }}
-                        options={nodeTypes}
-                        allowClear
-                    />
-                </Form.Item>
-            </>
-        );
-    }, []);
+    // const searchForm = useMemo(() => {
+    //     return (
+    //         <>
+    //             <Form.Item name="name" label="名称">
+    //                 <Input allowClear />
+    //             </Form.Item>
+    //             <Form.Item name="nodeType" label={`节点类型`}>
+    //                 <Select
+    //                     style={{ width: 230 }}
+    //                     options={nodeTypes}
+    //                     allowClear
+    //                 />
+    //             </Form.Item>
+    //         </>
+    //     );
+    // }, []);
+    //
+    // const tableBar = (
+    //     <SearchToolbar
+    //         formItems={searchForm}
+    //         onSearch={(values) => {
+    //             setFormData(values);
+    //         }}
+    //         addButtons={
+    //             <ProductFormBtn
+    //                 key={`create-product`}
+    //                 type={`primary`}
+    //                 onSuccess={handleRefresh}
+    //             >
+    //                 新建产品
+    //             </ProductFormBtn>
+    //         }
+    //     />
+    // );
 
-    const tableBar = (
-        <SearchToolbar
-            formItems={searchForm}
-            onSearch={(values) => {
-                setFormData(values);
-            }}
-            addButtons={
-                <ProductFormBtn
-                    key={`create-product`}
-                    type={`primary`}
-                    onSuccess={handleRefresh}
-                >
-                    新建产品
-                </ProductFormBtn>
-            }
-        />
-    );
+    const items = [
+        {
+            label: '名称',
+            name: 'name',
+            children: <Input allowClear />,
+        },
+        {
+            label: '节点类型',
+            name: 'nodeType',
+            children: <Select options={nodeTypes} allowClear={true} />,
+        },
+    ];
 
     return (
-        <VPanel className={styles.productsView}>
+        <div className={styles[`products`]}>
             <GridTable
-                style={{ backgroundColor: 'white', padding: '8px' }}
-                toolbar={tableBar}
+                style={{
+                    backgroundColor: 'white',
+                    padding: 8,
+                    boxSizing: 'border-box',
+                }}
+                toolbar={
+                    <SearchToolbar
+                        span={4}
+                        items={items}
+                        onSearch={(values) => {
+                            setFormData(values);
+                        }}
+                    />
+                }
                 size={`small`}
                 columns={columns}
                 dataSource={products}
                 rowKey={`id`}
                 loading={loading}
             />
-        </VPanel>
+        </div>
     );
 };
 export default ProductsView;

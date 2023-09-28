@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
-import ModalForm from '@components/modal-form';
 import { Button, ButtonProps, Form, notification, Select } from 'antd';
 import ProductSelect from '@components/product-select';
 import { deviceApi, nodeApi } from '@apis';
 import _ from 'lodash';
+import { ModalForm } from '@moensun/antd-react-ext';
 
 type NodeChildDeviceFormProps = {
     nodeId: string;
@@ -63,7 +63,7 @@ const NodeDeviceForm: FC<NodeChildDeviceFormProps> = ({
                 title={`添加终端设备`}
                 trigger={<Button {...rest} />}
                 layout={`vertical`}
-                onOpenChange={(op) => setOpen(op)}
+                afterOpenChange={(op: boolean) => setOpen(op)}
                 onSubmit={handleSubmit}
             >
                 <Form.Item label={`产品`} name={`productId`} required>

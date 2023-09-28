@@ -1,8 +1,8 @@
-import { AppToolbar, HPanel, VPanel } from '@moensun/antd-react-ext';
+import { AppToolbar, Layout } from '@moensun/antd-react-ext';
 import { Menu, MenuProps } from 'antd';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styles from './layout.module.less';
-import { RoutesConstants } from '../../router/routes.constants';
+import { RoutesConstants } from '@/router/routes.constants';
 import { useEffect, useState } from 'react';
 
 const MainLayoutView = () => {
@@ -135,25 +135,30 @@ const MainLayoutView = () => {
             setSelectedKeys([keyArr?.[2]]);
         }
     }, [location]);
-    const appBar = <AppToolbar title={`物联网平台`} />;
-    const sider = (
-        <div className={styles.layoutViewSider}>
-            <Menu
-                style={{ minWidth: 250 }}
-                mode={`inline`}
-                items={menuItems}
-                openKeys={openKeys}
-                onOpenChange={onOpenChange}
-                selectedKeys={selectedKeys}
-            />
-        </div>
-    );
+
     return (
-        <VPanel className={styles.layoutView} header={appBar}>
-            <HPanel className={styles.layoutViewContent} left={sider}>
-                <Outlet />
-            </HPanel>
-        </VPanel>
+        <Layout direction={`vertical`}>
+            <Layout.Item>
+                <AppToolbar title={`物联网平台`} />
+            </Layout.Item>
+            <Layout className={styles.layoutViewContent}>
+                <Layout.Item>
+                    <div className={styles.layoutViewSider}>
+                        <Menu
+                            style={{ minWidth: 250 }}
+                            mode={`inline`}
+                            items={menuItems}
+                            openKeys={openKeys}
+                            onOpenChange={onOpenChange}
+                            selectedKeys={selectedKeys}
+                        />
+                    </div>
+                </Layout.Item>
+                <Layout.Item auto={true}>
+                    <Outlet />
+                </Layout.Item>
+            </Layout>
+        </Layout>
     );
 };
 export default MainLayoutView;

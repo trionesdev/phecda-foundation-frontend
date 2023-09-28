@@ -1,8 +1,8 @@
 import { Button, ButtonProps, Form, Input, message, Select } from 'antd';
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { deviceApi } from '@apis';
 import ProductSelect from '@components/product-select';
-import ModalForm from '@/components/modal-form';
+import { ModalForm } from '@moensun/antd-react-ext';
 
 type DeviceFormProps = {
     isEdit?: boolean;
@@ -38,8 +38,8 @@ const DeviceForm: FC<DeviceFormProps> = ({
             title={`添加设备`}
             trigger={<Button {...rest} />}
             layout={`vertical`}
-            onOpenChange={(op) => setOpen(op)}
-            onSubmit={(values) => {
+            afterOpenChange={(op: boolean) => setOpen(op)}
+            onSubmit={(values: any) => {
                 !isEdit && handleSubmit(values);
                 //TODO:编辑
                 isEdit && message.error('TODO');
