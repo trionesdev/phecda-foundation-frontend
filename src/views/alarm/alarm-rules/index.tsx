@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
-import { VPanel } from '@moensun/antd-react-ext';
+import { TableToolbar, VPanel } from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
 import { useRequest } from 'ahooks';
 import { systemApi } from '@/apis';
@@ -14,7 +14,6 @@ import {
     Space,
     message,
 } from 'antd';
-import SearchToolbar from '@/components/search-toolbar';
 import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
 import { Link } from 'react-router-dom';
@@ -185,29 +184,19 @@ const AlarmRules: React.FC = () => {
             <GridTable
                 style={{ padding: '8px', backgroundColor: 'white' }}
                 toolbar={
-                    <>
-                        <SearchToolbar
-                            formItems={tableParamsFormItems}
-                            onSearch={(v) => {
-                                setTableParams({
-                                    pageNum: 1,
-                                    pageSize: 10,
-                                    ...v,
-                                });
-                            }}
-                            addButtons={
-                                <Button
-                                    type="primary"
-                                    onClick={() => {
-                                        setDrawerFormeValue(undefined);
-                                        setDrawerOpen(true);
-                                    }}
-                                >
-                                    新建告警规则
-                                </Button>
-                            }
-                        />
-                    </>
+                    <TableToolbar
+                        extra={[
+                            <Button
+                                type="primary"
+                                onClick={() => {
+                                    setDrawerFormeValue(undefined);
+                                    setDrawerOpen(true);
+                                }}
+                            >
+                                新建告警规则
+                            </Button>,
+                        ]}
+                    />
                 }
                 fit
                 size="small"

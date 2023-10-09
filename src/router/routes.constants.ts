@@ -5,7 +5,7 @@ type RoutesConstantsProps = {
  * @description
  *  注意：key的名字要与path路径中的名称相对应，才能保证菜单栏的menu准确显示展开状态(src/views/layout/index.tsx:119)
  */
-export const RoutesConstants: RoutesConstantsProps = {
+export const RoutesConstants = {
     /** --------告警管理------- */
     ALARM_RULES: {
         key: 'alarm-rules',
@@ -28,24 +28,24 @@ export const RoutesConstants: RoutesConstantsProps = {
         path: () => `/alarm-management/monitor-view`,
     }, //监控画面
 
-    /** --------资产管理------- */
-    PRODUCTION_DEVICE: {
-        key: 'production-device',
-        path: () => `/assets-management/production-device`,
-    }, //生产设备
-    PRODUCTION_DEVICE_DETAIL: {
-        key: 'production-device',
-        path: (id?: string) =>
-            `/assets-management/production-device/${id ? id : ':id'}/detail`,
-    }, //生产设备详情
-    PRODUCTION_DEVICE_TYPE: {
-        key: 'production-device-type',
-        path: () => `/assets-management/production-device-type`,
-    }, //生产设备类型
-    ACCESSORY_TYPE: {
-        key: 'accessory-type',
-        path: () => `/assets-management/accessory-type`,
-    }, //配件类型
+    // /** --------资产管理------- */
+    // PRODUCTION_DEVICE: {
+    //     key: 'production-device',
+    //     path: () => `/assets-management/production-device`,
+    // }, //生产设备
+    // PRODUCTION_DEVICE_DETAIL: {
+    //     key: 'production-device',
+    //     path: (id?: string) =>
+    //         `/assets-management/production-device/${id ? id : ':id'}/detail`,
+    // }, //生产设备详情
+    // PRODUCTION_DEVICE_TYPE: {
+    //     key: 'production-device-type',
+    //     path: () => `/assets-management/production-device-type`,
+    // }, //生产设备类型
+    // ACCESSORY_TYPE: {
+    //     key: 'accessory-type',
+    //     path: () => `/assets-management/accessory-type`,
+    // }, //配件类型
 
     /** -------设备管理-------- */
     PRODUCTS: { key: 'products', path: () => `/device-management/products` },
@@ -91,11 +91,11 @@ export const RoutesConstants: RoutesConstantsProps = {
     }, //字典
 
     /** ---边缘计算---- */
-    NODE: {
+    EDGE_NODE: {
         key: 'edge-node',
         path: () => `/edge/node`,
     },
-    NODE_DETAIL: {
+    EDGE_NODE_DETAIL: {
         key: 'edge-node-detail',
         path: (id?: string) => `/edge/node/${id ? id : ':id'}/detail`,
     },

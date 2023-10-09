@@ -13,7 +13,6 @@ import {
     Select,
     Space,
 } from 'antd';
-import SearchToolbar from '@/components/search-toolbar';
 import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
 import dayjs from 'dayjs';
@@ -155,28 +154,28 @@ const AlarmLog: React.FC = () => {
                 style={{ padding: '8px', backgroundColor: 'white' }}
                 toolbar={
                     <>
-                        <AlarmLogOverview statisticsData={statisticsData} />
-                        <SearchToolbar
-                            formItems={tableParamsFormItems}
-                            onSearch={(values) => {
-                                const [start, end] = values?.date ?? [
-                                    undefined,
-                                    undefined,
-                                ];
-                                const dataIsEmpty = isNilEmpty(values.date);
-                                setTableParams({
-                                    pageNum: 1,
-                                    pageSize: 10,
-                                    beginTime: dataIsEmpty
-                                        ? undefined
-                                        : dayjs(start).valueOf(),
-                                    endTime: dataIsEmpty
-                                        ? undefined
-                                        : dayjs(end).valueOf(),
-                                    dealStatus: values?.dealStatus,
-                                });
-                            }}
-                        />
+                        {/*<AlarmLogOverview statisticsData={statisticsData} />*/}
+                        {/*<SearchToolbar*/}
+                        {/*    formItems={tableParamsFormItems}*/}
+                        {/*    onSearch={(values) => {*/}
+                        {/*        const [start, end] = values?.date ?? [*/}
+                        {/*            undefined,*/}
+                        {/*            undefined,*/}
+                        {/*        ];*/}
+                        {/*        const dataIsEmpty = isNilEmpty(values.date);*/}
+                        {/*        setTableParams({*/}
+                        {/*            pageNum: 1,*/}
+                        {/*            pageSize: 10,*/}
+                        {/*            beginTime: dataIsEmpty*/}
+                        {/*                ? undefined*/}
+                        {/*                : dayjs(start).valueOf(),*/}
+                        {/*            endTime: dataIsEmpty*/}
+                        {/*                ? undefined*/}
+                        {/*                : dayjs(end).valueOf(),*/}
+                        {/*            dealStatus: values?.dealStatus,*/}
+                        {/*        });*/}
+                        {/*    }}*/}
+                        {/*/>*/}
                     </>
                 }
                 fit

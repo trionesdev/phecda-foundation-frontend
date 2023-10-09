@@ -1,14 +1,15 @@
-import { CSSInterpolation, useStyleRegister } from '@ant-design/cssinjs';
+import {
+    CSSInterpolation,
+    CSSObject,
+    useStyleRegister,
+} from '@ant-design/cssinjs';
 import { GlobalToken, Table, TableProps, theme } from 'antd';
 import classNames from 'classnames';
 import React, { FC } from 'react';
 import _, { rest } from 'lodash';
 
 const { useToken } = theme;
-const genGridTableStyle = (
-    prefixCls: string,
-    token: GlobalToken
-): CSSInterpolation => {
+const genGridTableStyle = (prefixCls: string, token: GlobalToken): any => {
     return {
         [`.${prefixCls}`]: {
             width: '100%',
@@ -37,6 +38,9 @@ const genGridTableStyle = (
                             height: '100%',
                             display: 'flex',
                             flexDirection: 'column',
+                            '& > .ant-table-body': {
+                                overflowY: 'auto !important',
+                            },
                         },
                     },
                 },

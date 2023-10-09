@@ -4,14 +4,13 @@ import GridTable from '@components/grid-table';
 import { useRequest } from 'ahooks';
 import { systemApi } from '@/apis';
 import { Button, Divider, Form, Input, Popconfirm, Space, message } from 'antd';
-import SearchToolbar from '@/components/search-toolbar';
 import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
 import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import qs from 'qs';
 import DrawerForm from '@/components/drawer-form';
-import { VPanel } from '@moensun/antd-react-ext';
+import { TableToolbar, VPanel } from '@moensun/antd-react-ext';
 
 const DictionaryType: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
@@ -168,29 +167,19 @@ const DictionaryType: React.FC = () => {
             <GridTable
                 style={{ padding: '8px', backgroundColor: 'white' }}
                 toolbar={
-                    <>
-                        <SearchToolbar
-                            formItems={tableParamsFormItems}
-                            onSearch={(v) => {
-                                setTableParams({
-                                    pageNum: 1,
-                                    pageSize: 10,
-                                    ...v,
-                                });
-                            }}
-                            addButtons={
-                                <Button
-                                    type="primary"
-                                    onClick={() => {
-                                        setDrawerFormeValue(undefined);
-                                        setDrawerOpen(true);
-                                    }}
-                                >
-                                    新建字典类型
-                                </Button>
-                            }
-                        />
-                    </>
+                    <TableToolbar
+                        extra={[
+                            <Button
+                                type="primary"
+                                onClick={() => {
+                                    setDrawerFormeValue(undefined);
+                                    setDrawerOpen(true);
+                                }}
+                            >
+                                新建字典类型
+                            </Button>,
+                        ]}
+                    />
                 }
                 fit
                 size="small"

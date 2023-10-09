@@ -5,7 +5,6 @@ import GridTable from '@components/grid-table';
 import { useRequest } from 'ahooks';
 import { systemApi } from '@/apis';
 import { Button, DatePicker, Divider, Form, Select, Space } from 'antd';
-import SearchToolbar from '@/components/search-toolbar';
 import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
 import dayjs from 'dayjs';
@@ -84,31 +83,6 @@ const DeviceData: React.FC = () => {
         <VPanel className={styles.wrapper}>
             <GridTable
                 style={{ padding: '8px', backgroundColor: 'white' }}
-                toolbar={
-                    <>
-                        <SearchToolbar
-                            formItems={tableParamsFormItems}
-                            onSearch={(values) => {
-                                const [start, end] = values.date ?? [
-                                    undefined,
-                                    undefined,
-                                ];
-                                const dataIsEmpty = isNilEmpty(values.date);
-                                setTableParams({
-                                    pageNum: 1,
-                                    pageSize: 10,
-                                    beginTime: dataIsEmpty
-                                        ? undefined
-                                        : dayjs(start).valueOf(),
-                                    endTime: dataIsEmpty
-                                        ? undefined
-                                        : dayjs(end).valueOf(),
-                                    // ...v,
-                                });
-                            }}
-                        />
-                    </>
-                }
                 fit
                 size="small"
                 scroll={{ y: 'max-content' }}

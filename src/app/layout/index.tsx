@@ -28,31 +28,6 @@ const MainLayoutView = () => {
             ],
         },
         {
-            key: 'assets-management',
-            label: '资产管理',
-            children: [
-                {
-                    key: RoutesConstants.PRODUCTION_DEVICE.key,
-                    label: '生产设备',
-                    onClick: () =>
-                        navigate(RoutesConstants.PRODUCTION_DEVICE.path()),
-                },
-                // 因为采用字典方式，暂不需要
-                // {
-                //     key: RoutesConstants.PRODUCTION_DEVICE_TYPE.key,
-                //     label: `生产设备类型`,
-                //     onClick: () =>
-                //         navigate(RoutesConstants.PRODUCTION_DEVICE_TYPE.path()),
-                // },
-                {
-                    key: RoutesConstants.ACCESSORY_TYPE.key,
-                    label: `配件类型`,
-                    onClick: () =>
-                        navigate(RoutesConstants.ACCESSORY_TYPE.path()),
-                },
-            ],
-        },
-        {
             key: 'monitoring-operations',
             label: '监控运维',
             children: [
@@ -100,24 +75,12 @@ const MainLayoutView = () => {
         },
         {
             key: 'edge-management',
-            label: '边缘计算',
+            label: '边缘节点',
             children: [
                 {
-                    key: RoutesConstants.NODE.key,
+                    key: RoutesConstants.EDGE_NODE.key,
                     label: '节点管理',
-                    onClick: () => navigate(RoutesConstants.NODE.path()),
-                },
-            ],
-        },
-        {
-            key: 'system-setting',
-            label: '系统设置',
-            children: [
-                {
-                    key: RoutesConstants.DICTIONARY_TYPE.key,
-                    label: `字典类型`,
-                    onClick: () =>
-                        navigate(RoutesConstants.DICTIONARY_TYPE.path()),
+                    onClick: () => navigate(RoutesConstants.EDGE_NODE.path()),
                 },
             ],
         },

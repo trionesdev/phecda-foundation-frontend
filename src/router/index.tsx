@@ -1,30 +1,27 @@
-import React, { lazy } from 'react';
-import { useRoutes, RouteObject } from 'react-router-dom';
-import SignInView from '../views/account/sign-in';
+import React from 'react';
+import {
+    createHashRouter,
+    RouteObject,
+    RouterProvider,
+} from 'react-router-dom';
 import MainLayoutView from '../app/layout';
-import ProductsView from '../views/product/products';
-import ProductDetailView from '../views/product/product-detail';
+import ProductsView from '@/app/(normal)/product/products';
 import { RoutesConstants } from './routes.constants';
-import ProductThingsModelDraftView from '../views/product/product-things-model-draft';
-import DevicesView from '../views/device/devices';
-import DeviceDetailView from '../views/device/device-detail';
-import ProductionDevice from '../views/assets/production-device';
-import AccessoryType from '../views/assets/accessory-type';
+import ProductThingsModelDraftView from '@/app/(normal)/product/product-things-model-draft';
+import DeviceDetailView from '@/app/(normal)/device/device-detail';
 import AlarmLog from 'src/views/alarm/alarm-log';
 import AlarmRules from 'src/views/alarm/alarm-rules';
 import MonitorTrends from 'src/views/alarm/monitor-trends';
 import DeviceData from 'src/views/alarm/device-data';
 import MonitorView from 'src/views/alarm/monitor-view';
-import ProductionDeviceDetail from '@/views/assets/production-device/detail';
-import Dictionary from '@/views/system-setting/dictionary';
-import DictionaryType from '@/views/system-setting/dictionary-type';
 import EventResponse from '@/views/monitoring-operations/event-response';
 import SceneDetail from '@/views/monitoring-operations/event-response/detail';
-import NodeView from '@views/edge/node';
-import NodeDetailView from '@views/edge/node-detail';
+import NodeDetailView from '@/app/(normal)/edge/node-detail';
+import { EdgeNodePage } from '@/app/(normal)/edge/node/page';
+import { DevicesPage } from '@/app/(normal)/device/devices/page';
+import { ProductDetailPage } from '@/app/(normal)/product/product-detail/page';
 
 export const routes: RouteObject[] = [
-    { path: '/sign-in', element: <SignInView /> },
     {
         path: '/',
         element: <MainLayoutView />,
@@ -50,20 +47,6 @@ export const routes: RouteObject[] = [
                 path: RoutesConstants.MONITOR_VIEW.path(),
                 element: <MonitorView />, //监控画面
             },
-            //------资产管理-----
-            {
-                path: RoutesConstants.PRODUCTION_DEVICE.path(),
-                element: <ProductionDevice />, //生产设备
-            },
-            {
-                path: RoutesConstants.PRODUCTION_DEVICE_DETAIL.path(),
-                element: <ProductionDeviceDetail />, //生产设备详情
-            },
-
-            {
-                path: RoutesConstants.ACCESSORY_TYPE.path(),
-                element: <AccessoryType />, //配件类型
-            },
             //------设备管理-----
             {
                 path: RoutesConstants.PRODUCTS.path(),
@@ -71,13 +54,13 @@ export const routes: RouteObject[] = [
             },
             {
                 path: RoutesConstants.PRODUCT_DETAIL.path(),
-                element: <ProductDetailView />,
+                element: <ProductDetailPage />,
             },
             {
                 path: RoutesConstants.PRODUCT_THINGS_MODEL_DRAFT.path(),
                 element: <ProductThingsModelDraftView />,
             },
-            { path: RoutesConstants.DEVICES.path(), element: <DevicesView /> },
+            { path: RoutesConstants.DEVICES.path(), element: <DevicesPage /> },
             {
                 path: RoutesConstants.DEVICE_DETAIL.path(),
                 element: <DeviceDetailView />,
@@ -91,22 +74,13 @@ export const routes: RouteObject[] = [
                 path: RoutesConstants.SCENE_DETAIL.path(),
                 element: <SceneDetail />, //场景详情
             },
-            //------系统设置------
-            {
-                path: RoutesConstants.DICTIONARY_TYPE.path(),
-                element: <DictionaryType />, //字典类型
-            },
-            {
-                path: RoutesConstants.DICTIONARY.path(),
-                element: <Dictionary />, //字典
-            },
             //------边缘计算-----
             {
-                path: RoutesConstants.NODE.path(),
-                element: <NodeView />,
+                path: RoutesConstants.EDGE_NODE.path(),
+                element: <EdgeNodePage />,
             },
             {
-                path: RoutesConstants.NODE_DETAIL.path(),
+                path: RoutesConstants.EDGE_NODE_DETAIL.path(),
                 element: <NodeDetailView />,
             },
         ],
@@ -114,8 +88,7 @@ export const routes: RouteObject[] = [
 ];
 
 // 生成路由
-const AppRoutes = () => {
-    return useRoutes(routes);
-};
 
-export default AppRoutes;
+export const AppRouter = () => {
+    return <RouterProvider router={createHashRouter(routes)} />;
+};
