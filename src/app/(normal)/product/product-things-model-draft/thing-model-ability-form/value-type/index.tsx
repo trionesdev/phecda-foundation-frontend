@@ -67,7 +67,8 @@ const ValueType: FC<ValueTypeProps> = ({ group, isChild = false }) => {
                             <Component
                                 group={[
                                     group,
-                                    valueType === ValueTypeEnum.STRUCT
+                                    valueType === ValueTypeEnum.STRUCT ||
+                                    valueType === ValueTypeEnum.BOOL
                                         ? 'valueSpecs'
                                         : `valueSpec`,
                                 ]}
