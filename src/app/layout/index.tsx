@@ -101,7 +101,7 @@ const MainLayoutView = () => {
 
     return (
         <Layout direction={`vertical`}>
-            <Layout.Item>
+            <Layout.Item style={{ backgroundColor: 'white' }}>
                 <AppToolbar title={`物联网平台`} />
             </Layout.Item>
             <Layout className={styles.layoutViewContent}>

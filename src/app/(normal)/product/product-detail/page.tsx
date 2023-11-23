@@ -144,7 +144,10 @@ export const ProductDetailPage = () => {
                     />
                 </div>
             </Layout.Item>
-            <Layout.Item auto={true} style={{ padding: 8 }}>
+            <Layout.Item
+                auto={true}
+                style={{ padding: 8, backgroundColor: 'white' }}
+            >
                 <Tabs
                     defaultActiveKey={`info`}
                     items={items}
