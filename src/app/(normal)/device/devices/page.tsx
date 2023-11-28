@@ -110,7 +110,7 @@ export const DevicesPage = () => {
                             type="link"
                             size={`small`}
                             isEdit
-                            initValue={record}
+                            id={record?.id}
                             onSuccess={handleRefresh}
                         >
                             编辑
