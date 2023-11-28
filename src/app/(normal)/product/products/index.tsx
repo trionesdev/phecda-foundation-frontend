@@ -129,10 +129,6 @@ const ProductsView = () => {
                             onSuccess={handleRefresh}
                             id={record?.id}
                             disabled={!_.eq(record?.status, 'DEVELOPMENT')}
-                            initValue={{
-                                name: record?.name,
-                                nodeType: record?.nodeType,
-                            }}
                             isEdit
                         >
                             编辑

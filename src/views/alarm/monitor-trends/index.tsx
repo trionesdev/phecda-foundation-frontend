@@ -12,9 +12,9 @@ import dayjs from 'dayjs';
 import _ from 'lodash';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';
 import { Line, LineConfig } from '@ant-design/charts';
-import useQueryDeviceRelatedByAsset from '@/hooks/useOptions/useQueryDeviceRelatedByAsset';
 import useQueryDevicePropertiesData from '@/hooks/useOptions/useQueryDevicePropertiesData';
-import useQueryAssetsAll from '@/hooks/useOptions/useQueryAssetsAll';
+import useQueryProductsList from '@/hooks/useOptions/useQueryProductsList';
+import useQueryDeviceByParams from '@/hooks/useOptions/useQueryDeviceByParams';
 
 const MonitorTrends: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
@@ -22,11 +22,12 @@ const MonitorTrends: React.FC = () => {
         pageNum: 1,
     });
     const [form] = Form.useForm();
-    const [assetSn, setAssetSn] = useState<string>();
-    const [deviceId, setDeviceId] = useState<string>();
-    const { allAssetsOptions } = useQueryAssetsAll();
-    const { deviceOptions } = useQueryDeviceRelatedByAsset(assetSn);
-    const { devicePropertiesOptions } = useQueryDevicePropertiesData(deviceId);
+    const [deviceName, setDeviceName] = useState<string>();
+    const { deviceData, queryDeviceList } = useQueryDeviceByParams();
+    const { productOptions } = useQueryProductsList();
+    const [deviceOptions, setDeviceOptions] = useState<any>();
+    const { devicePropertiesOptions } =
+        useQueryDevicePropertiesData(deviceName);
     const startTime = dayjs().isBefore(
         dayjs().hour(12).set('minute', 0).set('second', 0)
     )
@@ -83,15 +84,26 @@ const MonitorTrends: React.FC = () => {
         fetchTableData(tableParams);
     }, [fetchTableData, tableParams]);
 
-    const handleAssetChange = (value: string) => {
-        setAssetSn(value);
-        form.resetFields(['deviceName', 'field']);
+    const handleProductChange = (value: string) => {
+        queryDeviceList({
+            productId: value,
+        });
     };
 
     const handleDeviceChange = (value: string) => {
-        setDeviceId(value);
-        form.resetFields(['field']);
+        setDeviceName(value);
     };
+
+    useEffect(() => {
+        const options = deviceData?.map((item: any) => {
+            return {
+                label: item.remarkName,
+                value: item?.name,
+                ...item,
+            };
+        });
+        setDeviceOptions(options);
+    }, [deviceData]);
 
     const lineConfig: LineConfig = useMemo(() => {
         return {
@@ -141,17 +153,6 @@ const MonitorTrends: React.FC = () => {
             },
         },
         {
-            title: '设备名称',
-            dataIndex: 'assetName',
-            render: (text: string, record: any) => {
-                return findOptionsLabel(allAssetsOptions, record.assetSn);
-            },
-        },
-        {
-            title: '设备编号',
-            dataIndex: 'assetSn',
-        },
-        {
             title: '实时数据',
             dataIndex: 'value',
         },
@@ -173,21 +174,21 @@ const MonitorTrends: React.FC = () => {
                                     allowClear={false}
                                 />
                             </Form.Item>
-                            <Form.Item name="assetSn" label="生产设备">
+                            <Form.Item name="productId" label={`产品`}>
                                 <Select
-                                    options={allAssetsOptions}
                                     style={{ width: 230 }}
-                                    onChange={handleAssetChange}
+                                    options={productOptions}
+                                    onChange={handleProductChange}
                                 />
                             </Form.Item>
-
-                            <Form.Item name="deviceName" label="设备">
+                            <Form.Item name="deviceName" label={`设备`}>
                                 <Select
-                                    options={deviceOptions}
                                     style={{ width: 230 }}
+                                    options={deviceOptions}
                                     onChange={handleDeviceChange}
                                 />
                             </Form.Item>
+
                             <Form.Item name="field" label="监控指标">
                                 <Select
                                     options={devicePropertiesOptions}
