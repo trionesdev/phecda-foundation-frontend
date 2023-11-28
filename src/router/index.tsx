@@ -49,6 +49,10 @@ export const routes: RouteObject[] = [
             },
             //------设备管理-----
             {
+                index: true,
+                element: <ProductsView />,
+            },
+            {
                 path: RoutesConstants.PRODUCTS.path(),
                 element: <ProductsView />,
             },
