@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from 'react';
 import { Select, SelectProps } from 'antd';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
-import { all } from 'axios';
 
 type ProductSelectProps = {
     allOption?: boolean;
@@ -24,7 +23,7 @@ const ProductSelect: FC<ProductSelectProps> = ({ allOption, ...rest }) => {
     useEffect(() => {
         handleQuery();
     }, []);
-    console.log(options);
+
     return (
         <Select
             {...rest}

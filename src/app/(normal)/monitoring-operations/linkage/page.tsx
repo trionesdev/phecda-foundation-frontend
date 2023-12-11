@@ -1,9 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
-import { TableToolbar, VPanel } from '@moensun/antd-react-ext';
+import {
+    Layout,
+    ModalForm,
+    TableToolbar,
+    VPanel,
+} from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
 import { useRequest } from 'ahooks';
-import { operationApi } from '@/apis';
+import { operationApi } from '@apis';
 import {
     Button,
     Divider,
@@ -19,10 +24,10 @@ import { formatDateTime } from '@/commons/util/date.utils';
 import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import qs from 'qs';
-import DrawerForm from '@/components/drawer-form';
+import { SearchToolbar } from '@components';
 
 const { TextArea } = Input;
-const EventResponse: React.FC = () => {
+export const LinkagePage: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
         pageNum: 1,
@@ -183,63 +188,74 @@ const EventResponse: React.FC = () => {
         []
     );
     return (
-        <VPanel className={styles.wrapper}>
-            <GridTable
-                style={{ padding: '8px', backgroundColor: 'white' }}
-                toolbar={
-                    <TableToolbar
-                        extra={[
-                            <Button
-                                type="primary"
-                                onClick={() => {
-                                    // setDrawerFormeValue(undefined);
-                                    setDrawerOpen(true);
-                                }}
-                            >
-                                新建场景
-                            </Button>,
-                        ]}
-                    />
-                }
-                fit
-                size="small"
-                scroll={{ y: 'max-content' }}
-                rowKey="id"
-                columns={columns}
-                dataSource={tableData?.rows}
-                loading={tableDataLoading}
-                pagination={{
-                    ...tableParams,
-                    onChange: handlePageChange,
-                }}
-            />
-
-            <DrawerForm
-                open={drawerOpen}
-                title={`${drawerFormeValue?.id ? '编辑' : '新建'}场景`}
-                layout="vertical"
-                onOpenChange={(op) => setDrawerOpen(op)}
-                onSubmit={(value, from) => {
-                    drawerFormeValue?.id
-                        ? editScenes(drawerFormeValue.id, value)
-                        : addDictionaryType(value);
-                    from?.resetFields();
-                }}
-                formValues={drawerFormeValue}
-            >
-                <Form.Item
-                    name="name"
-                    label="场景名称"
-                    rules={[{ required: true }]}
+        <Layout direction={`vertical`} className={styles.wrapper}>
+            <Layout.Item style={{ backgroundColor: 'white' }}>
+                <SearchToolbar
+                    items={[
+                        {
+                            label: '场景名称',
+                            name: 'name',
+                            children: <Input />,
+                        },
+                    ]}
+                />
+            </Layout.Item>
+            <Layout.Item auto={true}>
+                <GridTable
+                    style={{ padding: '8px', backgroundColor: 'white' }}
+                    toolbar={
+                        <TableToolbar
+                            extra={[
+                                <Button
+                                    key={`new-scene-btn`}
+                                    type="primary"
+                                    onClick={() => {
+                                        // setDrawerFormeValue(undefined);
+                                        setDrawerOpen(true);
+                                    }}
+                                >
+                                    新建场景
+                                </Button>,
+                            ]}
+                        />
+                    }
+                    fit
+                    size="small"
+                    scroll={{ y: 'max-content' }}
+                    rowKey="id"
+                    columns={columns}
+                    dataSource={tableData?.rows}
+                    loading={tableDataLoading}
+                    pagination={{
+                        ...tableParams,
+                        onChange: handlePageChange,
+                    }}
+                />
+                <ModalForm
+                    open={drawerOpen}
+                    title={`${drawerFormeValue?.id ? '编辑' : '新建'}场景`}
+                    layout="vertical"
+                    afterOpenChange={(op) => setDrawerOpen(op)}
+                    onSubmit={(values) => {
+                        // drawerFormeValue?.id
+                        //     ? editScenes(drawerFormeValue.id, value)
+                        //     : addDictionaryType(value);
+                        // from?.resetFields();
+                    }}
+                    formValues={drawerFormeValue}
                 >
-                    <Input />
-                </Form.Item>
-                <Form.Item name="description" label="场景描述">
-                    <TextArea />
-                </Form.Item>
-            </DrawerForm>
-        </VPanel>
+                    <Form.Item
+                        name="name"
+                        label="场景名称"
+                        rules={[{ required: true }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item name="description" label="场景描述">
+                        <TextArea />
+                    </Form.Item>
+                </ModalForm>
+            </Layout.Item>
+        </Layout>
     );
 };
-
-export default EventResponse;

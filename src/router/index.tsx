@@ -14,12 +14,15 @@ import AlarmRules from 'src/views/alarm/alarm-rules';
 import MonitorTrends from 'src/views/alarm/monitor-trends';
 import DeviceData from 'src/views/alarm/device-data';
 import MonitorView from 'src/views/alarm/monitor-view';
-import EventResponse from '@/views/monitoring-operations/event-response';
-import SceneDetail from '@/views/monitoring-operations/event-response/detail';
+import SceneDetail from '@/app/(normal)/monitoring-operations/linkage/detail';
 import NodeDetailView from '@/app/(normal)/edge/node-detail';
 import { EdgeNodePage } from '@/app/(normal)/edge/node/page';
 import { DevicesPage } from '@/app/(normal)/device/devices/page';
 import { ProductDetailPage } from '@/app/(normal)/product/product-detail/page';
+import { LinkagePage } from '@/app/(normal)/monitoring-operations/linkage/page';
+import { ForwardingRulePage } from '@/app/(normal)/message-forwording/rule/page';
+import { MessageSourceDetailPage } from '@/app/(normal)/message-forwording/source-detail/page';
+import { ForwardingRuleDetailPage } from '@/app/(normal)/message-forwording/rule-detail/page';
 
 export const routes: RouteObject[] = [
     {
@@ -71,8 +74,8 @@ export const routes: RouteObject[] = [
             },
             //------监控运维------
             {
-                path: RoutesConstants.MONITORING_OPERATIONS.path(),
-                element: <EventResponse />, //事件响应
+                path: RoutesConstants.LINKAGE.path(),
+                element: <LinkagePage />, //事件响应
             },
             {
                 path: RoutesConstants.SCENE_DETAIL.path(),
@@ -87,6 +90,20 @@ export const routes: RouteObject[] = [
                 path: RoutesConstants.EDGE_NODE_DETAIL.path(),
                 element: <NodeDetailView />,
             },
+            //region 消息流转
+            {
+                path: RoutesConstants.MESSAGE_FORWARDING_RULES.path(),
+                element: <ForwardingRulePage />,
+            },
+            {
+                path: RoutesConstants.MESSAGE_SOURCE_DETAIL.path(),
+                element: <MessageSourceDetailPage />,
+            },
+            {
+                path: RoutesConstants.MESSAGE_FORWARDING_RULE_DETAIL.path(),
+                element: <ForwardingRuleDetailPage />,
+            },
+            //endregion
         ],
     },
 ];
