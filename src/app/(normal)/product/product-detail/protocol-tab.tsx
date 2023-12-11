@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Button, Form, Input, message, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { PageHeader, VPanel } from '@moensun/antd-react-ext';
+import { Layout, PageHeader, VPanel } from '@moensun/antd-react-ext';
 import styles from './product-detail.module.less';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
@@ -41,67 +41,69 @@ const ProtocolTab: FC<ProtocolTabProps> = ({ product }) => {
         }
     }, [product]);
 
-    const tabToolbar = (
-        <PageHeader
-            title={`设备连接协议`}
-            backIcon={false}
-            extra={[
-                editStatus && (
-                    <Button type={`primary`} onClick={handleSave}>
-                        保存
-                    </Button>
-                ),
-            ]}
-        />
-    );
     return (
-        <VPanel className={styles.protocolTab} header={tabToolbar}>
-            <div className={styles.protocolTabContentWrapper}>
-                <Form form={form}>
-                    <Form.List name={`protocolProperties`}>
-                        {(fields, { add, remove }) => (
-                            <>
-                                {fields.map(({ key, name }) => (
-                                    <Space key={key} align={`baseline`}>
-                                        <Form.Item
-                                            name={[name, 'label']}
-                                            label={`名称`}
-                                            rules={[{ required: true }]}
-                                        >
-                                            <Input />
+        <Layout className={styles.protocolTab} direction={`vertical`}>
+            <Layout.Item>
+                <PageHeader
+                    title={`设备连接协议`}
+                    backIcon={false}
+                    extra={[
+                        editStatus && (
+                            <Button type={`primary`} onClick={handleSave}>
+                                保存
+                            </Button>
+                        ),
+                    ]}
+                />
+            </Layout.Item>
+            <Layout.Item auto={true}>
+                <div className={styles.protocolTabContentWrapper}>
+                    <Form form={form} disabled={!editStatus}>
+                        <Form.List name={`protocolProperties`}>
+                            {(fields, { add, remove }) => (
+                                <>
+                                    {fields.map(({ key, name }) => (
+                                        <Space key={key} align={`baseline`}>
+                                            <Form.Item
+                                                name={[name, 'label']}
+                                                label={`名称`}
+                                                rules={[{ required: true }]}
+                                            >
+                                                <Input />
+                                            </Form.Item>
+                                            <Form.Item
+                                                name={[name, 'name']}
+                                                label={`属性`}
+                                                rules={[{ required: true }]}
+                                            >
+                                                <Input />
+                                            </Form.Item>
+                                            {editStatus && (
+                                                <MinusCircleOutlined
+                                                    onClick={() => remove(name)}
+                                                />
+                                            )}
+                                        </Space>
+                                    ))}
+                                    {editStatus && (
+                                        <Form.Item>
+                                            <Button
+                                                type="dashed"
+                                                onClick={() => add()}
+                                                block
+                                                icon={<PlusOutlined />}
+                                            >
+                                                添加协议项
+                                            </Button>
                                         </Form.Item>
-                                        <Form.Item
-                                            name={[name, 'name']}
-                                            label={`属性`}
-                                            rules={[{ required: true }]}
-                                        >
-                                            <Input />
-                                        </Form.Item>
-                                        {editStatus && (
-                                            <MinusCircleOutlined
-                                                onClick={() => remove(name)}
-                                            />
-                                        )}
-                                    </Space>
-                                ))}
-                                {editStatus && (
-                                    <Form.Item>
-                                        <Button
-                                            type="dashed"
-                                            onClick={() => add()}
-                                            block
-                                            icon={<PlusOutlined />}
-                                        >
-                                            添加协议项
-                                        </Button>
-                                    </Form.Item>
-                                )}
-                            </>
-                        )}
-                    </Form.List>
-                </Form>
-            </div>
-        </VPanel>
+                                    )}
+                                </>
+                            )}
+                        </Form.List>
+                    </Form>
+                </div>
+            </Layout.Item>
+        </Layout>
     );
 };
 export default ProtocolTab;

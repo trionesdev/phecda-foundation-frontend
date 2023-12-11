@@ -1,0 +1,30 @@
+.rulesPage {
+    padding: 8px;
+    height: 100%;
+    box-sizing: border-box;
+
+    &Tabs {
+        background-color: white;
+        padding: 4px;
+        height: 100%;
+    }
+
+    &Rule {
+        :global {
+            .out-point {
+                font-size: 12px;
+                span {
+                    height: 8px;
+                    width: 8px;
+                    border-radius: 50%;
+                    display: inline-block;
+                    margin-right: 8px;
+                    background-color: #888;
+                    &.enabled {
+                        background-color: green;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -19,6 +19,20 @@ export const RoutesConstants = {
         key: 'device-data',
         path: () => `/alarm-management/device-data`,
     }, //设备数据
+    //region 消息转发
+    MESSAGE_FORWARDING_RULES: {
+        key: 'MESSAGE_FORWARDING_RULES',
+        path: () => `/message-forwarding/rules`,
+    },
+    MESSAGE_SOURCE_DETAIL: {
+        key: 'MESSAGE_SOURCE_DETAIL',
+        path: (id?: string) => `/message-forwarding/sources/${id ? id : `:id`}`,
+    },
+    MESSAGE_FORWARDING_RULE_DETAIL: {
+        key: 'MESSAGE_FORWARDING_RULE_DETAIL',
+        path: (id?: string) => `/message-forwarding/rules/${id ? id : `:id`}`,
+    },
+    //endregion
     MONITOR_TRENDS: {
         key: 'monitor-trends',
         path: () => `/alarm-management/monitor-trends`,
@@ -67,9 +81,9 @@ export const RoutesConstants = {
     },
     /** ---监控运维---- */
 
-    MONITORING_OPERATIONS: {
+    LINKAGE: {
         key: 'event-response',
-        path: () => `/monitoring-operations/event-response`,
+        path: () => `/monitoring-operations/linkage`,
     }, //事件响应
     SCENE_DETAIL: {
         key: 'event-response',

@@ -7,6 +7,7 @@ import OssApi from './oss/oss.api';
 import SystemApi from './system/system.api';
 import DeviceDataApi from '@apis/alarm/device-data.api';
 import NodeApi from '@apis/edge/node.api';
+import MessageForwardingApi from '@apis/message-forwarding/message-forwarding.api';
 
 /** 设备管理 */
 export const deviceApi = new DeviceApi();
@@ -26,3 +27,5 @@ export const deviceDataApi = new DeviceDataApi();
 export const loggingApi = new LoggingApi();
 /** 边缘节点 */
 export const nodeApi = new NodeApi();
+
+export const messageForwardingApi = new MessageForwardingApi();

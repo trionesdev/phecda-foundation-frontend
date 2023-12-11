@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import styles from './index.module.less';
 import { VPanel } from '@moensun/antd-react-ext';
 import GridTable from '@components/grid-table';
@@ -218,7 +218,7 @@ const MonitorTrends: React.FC = () => {
                             </Form.Item>
                         </div>
                         <div className={styles.chartWrapper}>
-                            {lineData == undefined ? (
+                            {lineData === undefined ? (
                                 <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
                             ) : (
                                 <Line {...lineConfig} />

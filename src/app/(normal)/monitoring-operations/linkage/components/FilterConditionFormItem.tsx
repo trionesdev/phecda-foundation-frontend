@@ -2,9 +2,9 @@ import React from 'react';
 import { Form, Select, Space, Typography } from 'antd';
 import { NamePath } from 'antd/es/form/interface';
 import _ from 'lodash';
-import { SceneEventOptions } from '@/constants/consts';
 import ProductDeviceFormItem from './ProductDeviceFormItem';
 import OperatorFormItemItem from './OperatorFormItem';
+import { LinkageSceneEventOptions } from '@/domains/linkage/linkage.constants';
 type FilterConditionFormItemType = {
     // name: NamePath;
 };
@@ -17,10 +17,14 @@ const FilterConditionFormItem: React.FC<FilterConditionFormItemType> = () => {
             <Typography.Title level={3}>场景定义</Typography.Title>
             <Typography.Title level={5}>当以下事件发生</Typography.Title>
             <Space wrap>
-                <Form.Item name={getFilterConditionNamePath('type')}>
+                <Form.Item
+                    label={`场景事件类型`}
+                    name={getFilterConditionNamePath('type')}
+                    required={true}
+                >
                     <Select
                         style={{ width: 180 }}
-                        options={SceneEventOptions}
+                        options={LinkageSceneEventOptions}
                         placeholder="场景事件类型"
                     />
                 </Form.Item>

@@ -4,6 +4,8 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styles from './layout.module.less';
 import { RoutesConstants } from '@/router/routes.constants';
 import { useEffect, useState } from 'react';
+import Icon from '@ant-design/icons';
+import { ReactComponent as PhecdaSvg } from './assests/phecda.svg';
 
 const MainLayoutView = () => {
     const navigate = useNavigate();
@@ -28,14 +30,27 @@ const MainLayoutView = () => {
             ],
         },
         {
+            key: 'message-forwarding-group',
+            label: `消息转发`,
+            children: [
+                {
+                    key: '',
+                    label: '业务流转',
+                    onClick: () =>
+                        navigate(
+                            RoutesConstants.MESSAGE_FORWARDING_RULES.path()
+                        ),
+                },
+            ],
+        },
+        {
             key: 'monitoring-operations',
             label: '监控运维',
             children: [
                 {
-                    key: RoutesConstants.MONITORING_OPERATIONS.key,
+                    key: RoutesConstants.LINKAGE.key,
                     label: `事件响应`,
-                    onClick: () =>
-                        navigate(RoutesConstants.MONITORING_OPERATIONS.path()),
+                    onClick: () => navigate(RoutesConstants.LINKAGE.path()),
                 },
             ],
         },
@@ -52,12 +67,6 @@ const MainLayoutView = () => {
                     key: RoutesConstants.ALARM_LOG.key,
                     label: '告警日志',
                     onClick: () => navigate(RoutesConstants.ALARM_LOG.path()),
-                },
-                {
-                    key: RoutesConstants.MONITOR_TRENDS.key,
-                    label: `监控趋势`,
-                    onClick: () =>
-                        navigate(RoutesConstants.MONITOR_TRENDS.path()),
                 },
                 {
                     key: RoutesConstants.MONITOR_VIEW.key,
@@ -102,7 +111,13 @@ const MainLayoutView = () => {
     return (
         <Layout direction={`vertical`}>
             <Layout.Item>
-                <AppToolbar title={`物联网平台`} />
+                <AppToolbar
+                    avatar={{
+                        icon: <Icon component={PhecdaSvg} />,
+                        style: { fontSize: 40 },
+                    }}
+                    title={`物联网平台`}
+                />
             </Layout.Item>
             <Layout className={styles.layoutViewContent}>
                 <Layout.Item>
