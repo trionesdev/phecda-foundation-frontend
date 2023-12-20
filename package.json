@@ -36,7 +36,7 @@
         "yarn": "^1.22.19"
     },
     "devDependencies": {
-        "@ant-design/cssinjs": "^1.6.1",
+        "@ant-design/cssinjs": "^1.18.1",
         "@commitlint/cli": "^17.6.6",
         "@commitlint/config-conventional": "^17.6.6",
         "@types/js-cookie": "^3.0.3",
