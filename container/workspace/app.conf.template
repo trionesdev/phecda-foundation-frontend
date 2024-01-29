@@ -3,7 +3,7 @@ server{
         server_name localhost;
         client_max_body_size 50M;
 
-        location /{
+        location / {
             add_header "Access-Control-Allow-Credentials" true;
             add_header 'Access-Control-Allow-Origin' '*' always;
             add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, FETCH, OPTIONS';
@@ -18,10 +18,14 @@ server{
         location /api {
             proxy_pass $SERVER_PROXY_PASS;
 
-            add_header "Access-Control-Allow-Credentials" true;
-            add_header 'Access-Control-Allow-Origin' $http_origin;
+            if ($request_method != 'OPTIONS') {
+                add_header "Access-Control-Allow-Credentials" true;
+                add_header 'Access-Control-Allow-Origin' $http_origin always;
+            }
 
             if ($request_method = 'OPTIONS') {
+                add_header 'Access-Control-Allow-Origin' $http_origin always;
+
                 add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, FETCH, OPTIONS';
                 add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,token,source';
                 add_header 'Access-Control-Max-Age' 1728000;
