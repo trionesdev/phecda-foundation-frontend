@@ -1,4 +1,4 @@
-import { PageHeader, VPanel } from '@moensun/antd-react-ext';
+import { PageHeader, VPanel } from '@trionesdev/antd-react-ext';
 import { message, Tabs, TabsProps } from 'antd';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';

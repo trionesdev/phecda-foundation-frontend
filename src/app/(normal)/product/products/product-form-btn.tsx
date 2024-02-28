@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Button, ButtonProps, Form, Input, message, Radio } from 'antd';
 import { deviceApi } from '@apis';
 import { DeviceNodeType } from '../support/device.constants';
@@ -8,17 +8,16 @@ import DrawerForm from '@components/drawer-form';
 type ProductFormBtnProps = {
     id?: string;
     isEdit?: boolean;
-    initValue?: Record<string, any>;
     onSuccess?: () => void;
 } & ButtonProps;
 const ProductFormBtn: FC<ProductFormBtnProps> = ({
     id,
     onSuccess,
     isEdit,
-    initValue,
     ...rest
 }) => {
     const [open, setOpen] = useState(false);
+    const [formValues, setFormValues] = useState({});
     const handleSubmit = (values: any) => {
         let request: Promise<any>;
         if (id) {
@@ -35,6 +34,20 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
         });
     };
 
+    const getById = (id: any) => {
+        deviceApi.queryProductById(id!).then((res: any) => {
+            if (res) {
+                setFormValues(res);
+            }
+        });
+    };
+
+    useEffect(() => {
+        if (id && open && isEdit) {
+            getById(id);
+        }
+    }, [id, open, isEdit]);
+
     return (
         <DrawerForm
             open={open}
@@ -42,7 +55,7 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
             title={`${isEdit ? '编辑' : '新建'}产品`}
             layout={`vertical`}
             onOpenChange={(op) => setOpen(op)}
-            initialValues={isEdit ? { ...initValue } : { nodeType: 'DIRECT' }}
+            formValues={isEdit ? { ...formValues } : { nodeType: 'DIRECT' }}
             onSubmit={handleSubmit}
         >
             <Form.Item

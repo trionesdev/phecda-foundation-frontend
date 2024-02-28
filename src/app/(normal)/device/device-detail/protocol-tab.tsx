@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import { Form, Input, Space, Button, message } from 'antd';
 import styles from './device-detail.module.less';
 import VPanel from '@components/v-panel';
-import { PageHeader } from '@moensun/antd-react-ext';
+import { PageHeader } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
 import { deviceApi } from '@apis';
 import { arrayToObject } from '@/commons/util/arrayToObject';

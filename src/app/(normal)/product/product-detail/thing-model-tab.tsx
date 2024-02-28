@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
 import styles from './product-detail.module.less';
 import { FC, useEffect, useState } from 'react';
-import { RoutesConstants } from '../../../../router/routes.constants';
-import { VPanel } from '@moensun/antd-react-ext';
+import { RoutesConstants } from '@/router/routes.constants';
+import { GridTable, Layout } from '@trionesdev/antd-react-ext';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
 import { AbilityType } from '../product-things-model-draft/thing-model-ability-form';
-import GridTable from '@components/grid-table';
 import { Alert } from 'antd';
 
 type ThingsModelTabProps = {
@@ -84,41 +83,44 @@ const ThingModelTab: FC<ThingsModelTabProps> = ({ product }) => {
         },
     ];
 
-    const alert = (
-        <div className={styles.thingsModelTabPrompt}>
-            {product && _.eq(product?.status, 'DEVELOPMENT') && (
-                <>
-                    当前展示的是已发布到线上的功能定义，如需修改，
-                    <Link
-                        to={RoutesConstants.PRODUCT_THINGS_MODEL_DRAFT.path(
-                            product?.id
-                        )}
-                    >
-                        请点击
-                    </Link>
-                </>
-            )}
-            {product && _.eq(product?.status, 'RELEASE') && (
-                <Alert
-                    message="当前展示的是已发布到线上的功能定义，如需编辑请先撤销发布"
-                    type="info"
-                    showIcon
-                />
-            )}
-        </div>
-    );
     return (
-        <VPanel className={styles.thingsModelTab} header={alert}>
-            <GridTable
-                style={{ backgroundColor: 'white' }}
-                size={`small`}
-                columns={columns}
-                dataSource={rows}
-                loading={loading}
-                rowKey={`identifier`}
-                pagination={false}
-            />
-        </VPanel>
+        <Layout className={styles.thingsModelTab} direction={`vertical`}>
+            <Layout.Item>
+                <div className={styles.thingsModelTabPrompt}>
+                    {product && _.eq(product?.status, 'DEVELOPMENT') && (
+                        <>
+                            当前展示的是已发布到线上的功能定义，如需修改，
+                            <Link
+                                to={RoutesConstants.PRODUCT_THINGS_MODEL_DRAFT.path(
+                                    product?.id
+                                )}
+                            >
+                                请点击
+                            </Link>
+                        </>
+                    )}
+                    {product && _.eq(product?.status, 'RELEASE') && (
+                        <Alert
+                            message="当前展示的是已发布到线上的功能定义，如需编辑请先撤销发布"
+                            type="info"
+                            showIcon
+                        />
+                    )}
+                </div>
+            </Layout.Item>
+            <Layout.Item auto={true}>
+                <GridTable
+                    style={{ backgroundColor: 'white' }}
+                    fit={true}
+                    size={`small`}
+                    columns={columns}
+                    dataSource={rows}
+                    loading={loading}
+                    rowKey={`identifier`}
+                    pagination={false}
+                />
+            </Layout.Item>
+        </Layout>
     );
 };
 export default ThingModelTab;

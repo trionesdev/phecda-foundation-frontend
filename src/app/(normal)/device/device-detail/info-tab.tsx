@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Descriptions } from 'antd';
 import styles from './device-detail.module.less';
-import { formatDateTime } from '../../../../commons/util/date.utils';
+import { formatDateTime } from '@/commons/util/date.utils';
 
 type DeviceInfoTabProps = {
     device: any;

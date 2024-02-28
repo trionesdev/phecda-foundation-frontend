@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
-import { TableToolbar, VPanel } from '@moensun/antd-react-ext';
-import GridTable from '@components/grid-table';
+import { GridTable, TableToolbar, VPanel } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
 import { systemApi } from '@/apis';
 import {

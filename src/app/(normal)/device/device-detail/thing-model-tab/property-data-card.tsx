@@ -1,8 +1,7 @@
-import { FC, useEffect, useState } from 'react';
-import { Card, Col, Row, Space, Typography } from 'antd';
+import { FC, useEffect } from 'react';
+import { Card, Col, Space, Typography } from 'antd';
 import { deviceDataApi } from '@apis';
-import { formatDateTime } from '../../../../../commons/util/date.utils';
-import _ from 'lodash';
+import { formatDateTime } from '@/commons/util/date.utils';
 import PropertyDataModal from './property-data-modal';
 import { useRequest } from 'ahooks';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';

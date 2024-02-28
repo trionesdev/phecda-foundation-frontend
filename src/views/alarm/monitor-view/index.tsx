@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './index.module.less';
 import VPanel from '@/components/v-panel';
 import { Form, Select, Space } from 'antd';

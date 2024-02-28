@@ -1,6 +1,6 @@
-import { GridTable, Layout, TableToolbar } from '@moensun/antd-react-ext';
-import { Button, Form, Input, Popconfirm, Select, Space, Tag } from 'antd';
-import React, { useEffect, useMemo, useState } from 'react';
+import { GridTable, Layout, TableToolbar } from '@trionesdev/antd-react-ext';
+import { Button, Input, Popconfirm, Select, Space, Tag } from 'antd';
+import React, { useEffect, useState } from 'react';
 import ProductFormBtn from './product-form-btn';
 import { deviceApi } from '@apis';
 import { ProductPageRep, ProductRep } from '@apis/device/device.rep';
@@ -129,10 +129,6 @@ const ProductsView = () => {
                             onSuccess={handleRefresh}
                             id={record?.id}
                             disabled={!_.eq(record?.status, 'DEVELOPMENT')}
-                            initValue={{
-                                name: record?.name,
-                                nodeType: record?.nodeType,
-                            }}
                             isEdit
                         >
                             编辑

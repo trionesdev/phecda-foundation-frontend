@@ -109,6 +109,10 @@ export default class DeviceApi extends BaseApi {
         return this.request.post(`${this.baseUri}/devices`, data);
     }
 
+    updateDevice(data: {}) {
+        return this.request.put(`${this.baseUri}/devices`, data);
+    }
+
     deleteDeviceById(id: string) {
         return this.request.delete(`${this.baseUri}/devices/${id}`);
     }

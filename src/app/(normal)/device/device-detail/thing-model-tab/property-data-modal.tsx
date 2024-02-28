@@ -7,7 +7,6 @@ import {
     Radio,
     RadioChangeEvent,
 } from 'antd';
-import GridTable from '@components/grid-table';
 import styles from './property-data-modal.module.less';
 import {
     formatDateTime,
@@ -19,6 +18,7 @@ import { useRequest } from 'ahooks';
 import dayjs from 'dayjs';
 import { Line, LineConfig } from '@ant-design/charts';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';
+import { GridTable } from '@trionesdev/antd-react-ext';
 
 type PropertyDataModalType = {
     propertyData: Record<string, any>;

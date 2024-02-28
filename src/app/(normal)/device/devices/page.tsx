@@ -1,4 +1,4 @@
-import { Layout, TableToolbar } from '@moensun/antd-react-ext';
+import { GridTable, Layout, TableToolbar } from '@trionesdev/antd-react-ext';
 import styles from './device.module.less';
 import React, { useEffect, useState } from 'react';
 import {
@@ -14,7 +14,6 @@ import DeviceForm from './device-form';
 import { deviceApi } from '@apis';
 import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
-import GridTable from '@components/grid-table';
 import { SearchToolbar } from '@components';
 
 export const DevicesPage = () => {
@@ -110,7 +109,7 @@ export const DevicesPage = () => {
                             type="link"
                             size={`small`}
                             isEdit
-                            initValue={record}
+                            id={record?.id}
                             onSuccess={handleRefresh}
                         >
                             编辑

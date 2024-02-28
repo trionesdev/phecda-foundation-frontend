@@ -3,7 +3,7 @@ import {
     PageHeader,
     TableToolbar,
     VPanel,
-} from '@moensun/antd-react-ext';
+} from '@trionesdev/antd-react-ext';
 import styles from './product-thing-model-draft.module.less';
 import {
     Alert,

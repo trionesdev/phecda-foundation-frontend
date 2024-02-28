@@ -1,4 +1,4 @@
-import { Layout, PageHeader } from '@moensun/antd-react-ext';
+import { Layout, PageHeader } from '@trionesdev/antd-react-ext';
 import { Button, message, Tabs, TabsProps } from 'antd';
 import { useEffect, useState } from 'react';
 import styles from './product-detail.module.less';

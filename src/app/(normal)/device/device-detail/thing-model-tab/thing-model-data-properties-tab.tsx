@@ -1,4 +1,4 @@
-import { VPanel } from '@moensun/antd-react-ext';
+import { VPanel } from '@trionesdev/antd-react-ext';
 import { FC, useEffect, useState } from 'react';
 import { Row } from 'antd';
 import { deviceApi } from '@apis';

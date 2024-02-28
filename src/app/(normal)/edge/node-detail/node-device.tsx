@@ -3,8 +3,7 @@ import { deviceApi, nodeApi } from '@apis';
 import { Button, Divider, notification, Popconfirm, Space, Switch } from 'antd';
 import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
-import { TableToolbar, VPanel } from '@moensun/antd-react-ext';
-import GridTable from '@components/grid-table';
+import { GridTable, TableToolbar, VPanel } from '@trionesdev/antd-react-ext';
 import NodeDeviceForm from '@/app/(normal)/edge/node-detail/node-device-form';
 
 type NodeDeviceProps = {
