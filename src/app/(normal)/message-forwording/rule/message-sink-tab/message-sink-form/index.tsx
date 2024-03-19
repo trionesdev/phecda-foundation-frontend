@@ -1,4 +1,4 @@
-import { ModalForm } from '@moensun/antd-react-ext';
+import { ModalForm } from '@trionesdev/antd-react-ext';
 import React, { FC, useEffect } from 'react';
 import { Form, Input, message, Select } from 'antd';
 import { MessageSinkTypeOptions } from '@/domains/message-forwarding/message-forwarding.constants';

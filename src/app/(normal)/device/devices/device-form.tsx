@@ -2,7 +2,7 @@ import { Button, ButtonProps, Form, Input, message, Select } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
 import { deviceApi } from '@apis';
 import ProductSelect from '@components/product-select';
-import { ModalForm } from '@moensun/antd-react-ext';
+import { ModalForm } from '@trionesdev/antd-react-ext';
 
 type DeviceFormProps = {
     id?: string;

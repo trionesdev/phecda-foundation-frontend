@@ -1,4 +1,4 @@
-import { GridTable, TableToolbar } from '@moensun/antd-react-ext';
+import { GridTable, TableToolbar } from '@trionesdev/antd-react-ext';
 import { useEffect, useState } from 'react';
 import { ForwardingRuleForm } from '@/app/(normal)/message-forwording/rule/forwarding-rule-tab/ForwardingRuleForm';
 import { Button, Divider, message, Popconfirm, Space, Tooltip } from 'antd';

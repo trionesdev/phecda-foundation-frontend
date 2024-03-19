@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
-import GridTable from '@components/grid-table';
 import { useRequest } from 'ahooks';
 import { systemApi } from '@/apis';
 import { Button, Divider, Form, Input, Popconfirm, Space, message } from 'antd';
@@ -10,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import qs from 'qs';
 import DrawerForm from '@/components/drawer-form';
-import { TableToolbar, VPanel } from '@moensun/antd-react-ext';
+import { GridTable, TableToolbar, VPanel } from '@trionesdev/antd-react-ext';
 
 const DictionaryType: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({

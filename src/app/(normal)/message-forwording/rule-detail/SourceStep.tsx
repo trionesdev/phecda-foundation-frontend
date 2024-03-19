@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { GridTable, TableToolbar } from '@moensun/antd-react-ext';
+import { GridTable, TableToolbar } from '@trionesdev/antd-react-ext';
 import { Button, message, Popconfirm, Space } from 'antd';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis';

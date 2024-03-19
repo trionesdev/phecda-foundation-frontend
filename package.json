@@ -7,7 +7,7 @@
         "@ant-design/icons": "^5.1.4",
         "@craco/craco": "^7.1.0",
         "@moensun/antd-icons-react-ext": "latest",
-        "@moensun/antd-react-ext": "latest",
+        "@trionesdev/antd-react-ext": "latest",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^14.0.0",
         "@testing-library/user-event": "^14.4.3",

@@ -3,7 +3,7 @@ import {
     PageHeader,
     TableToolbar,
     VPanel,
-} from '@moensun/antd-react-ext';
+} from '@trionesdev/antd-react-ext';
 import styles from './product-thing-model-draft.module.less';
 import {
     Alert,
@@ -21,7 +21,7 @@ import ThingsModelAbilityForm, {
 import { useNavigate, useParams } from 'react-router-dom';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
-import { RoutesConstants } from '../../../../router/routes.constants';
+import { RoutesConstants } from '@/router/routes.constants';
 
 const ProductThingModelDraftView = () => {
     const navigate = useNavigate();
@@ -73,7 +73,7 @@ const ProductThingModelDraftView = () => {
     };
 
     const handlePublishThingModel = () => {
-        deviceApi.publishThingModel(id!).then(() => {
+        deviceApi.publishThingModel(id!).then(async () => {
             message.success('发布成功');
         });
     };
@@ -113,7 +113,7 @@ const ProductThingModelDraftView = () => {
         {
             title: `操作`,
             dataIndex: 'identifier',
-            width: 150,
+            width: 180,
             render: (text: string, record: any) => {
                 return (
                     <Space split={<Divider type="vertical" />}>

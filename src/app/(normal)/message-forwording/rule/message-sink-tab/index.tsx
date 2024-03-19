@@ -1,4 +1,4 @@
-import { GridTable, TableToolbar } from '@moensun/antd-react-ext';
+import { GridTable, TableToolbar } from '@trionesdev/antd-react-ext';
 import { formatDateTimeSeconds } from '@/commons/util/date.utils';
 import { useEffect, useState } from 'react';
 import { Button, message, Popconfirm, Space, Tooltip } from 'antd';

@@ -1,4 +1,4 @@
-import { AppToolbar, Layout } from '@moensun/antd-react-ext';
+import { AppToolbar, Layout } from '@trionesdev/antd-react-ext';
 import { Menu, MenuProps } from 'antd';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styles from './layout.module.less';

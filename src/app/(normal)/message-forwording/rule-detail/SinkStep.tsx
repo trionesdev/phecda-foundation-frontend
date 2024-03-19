@@ -2,8 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis';
 import { Button, message, Popconfirm, Space } from 'antd';
-import { GridTable, TableToolbar } from '@moensun/antd-react-ext';
-import { SourceLinkForm } from '@/app/(normal)/message-forwording/rule-detail/SourceLinkForm';
+import { GridTable, TableToolbar } from '@trionesdev/antd-react-ext';
 import _ from 'lodash';
 import { SinkLinkForm } from '@/app/(normal)/message-forwording/rule-detail/SinkLinkForm';
 

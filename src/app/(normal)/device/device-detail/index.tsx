@@ -1,4 +1,4 @@
-import { PageHeader, VPanel } from '@moensun/antd-react-ext';
+import { PageHeader, VPanel } from '@trionesdev/antd-react-ext';
 import { Tabs, TabsProps } from 'antd';
 import InfoTab from './info-tab';
 import { useEffect, useState } from 'react';

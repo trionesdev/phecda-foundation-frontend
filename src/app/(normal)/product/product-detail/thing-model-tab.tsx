@@ -2,11 +2,10 @@ import { Link } from 'react-router-dom';
 import styles from './product-detail.module.less';
 import { FC, useEffect, useState } from 'react';
 import { RoutesConstants } from '@/router/routes.constants';
-import { Layout } from '@moensun/antd-react-ext';
+import { GridTable, Layout } from '@trionesdev/antd-react-ext';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
 import { AbilityType } from '../product-things-model-draft/thing-model-ability-form';
-import GridTable from '@components/grid-table';
 import { Alert } from 'antd';
 
 type ThingsModelTabProps = {

@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import { Button, ButtonProps, Form, Input, message, Radio } from 'antd';
 import { deviceApi } from '@apis';
-import { DeviceNodeType } from '../support/device.constants';
+import { AccessChannel, DeviceNodeType } from '../support/device.constants';
 import _ from 'lodash';
-import DrawerForm from '@components/drawer-form';
+import { ModalForm } from '@trionesdev/antd-react-ext';
 
 type ProductFormBtnProps = {
     id?: string;
@@ -49,19 +49,36 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
     }, [id, open, isEdit]);
 
     return (
-        <DrawerForm
+        <ModalForm
             open={open}
             trigger={<Button {...rest} />}
             title={`${isEdit ? '编辑' : '新建'}产品`}
             layout={`vertical`}
-            onOpenChange={(op) => setOpen(op)}
-            formValues={isEdit ? { ...formValues } : { nodeType: 'DIRECT' }}
+            afterOpenChange={(op: boolean) => setOpen(op)}
+            formValues={
+                isEdit
+                    ? { ...formValues }
+                    : { nodeType: 'DIRECT', accessChannel: 'MQTT' }
+            }
             onSubmit={handleSubmit}
         >
             <Form.Item
                 rules={[{ required: true }]}
                 label={`名称`}
                 name={`name`}
+            >
+                <Input />
+            </Form.Item>
+            <Form.Item
+                label={
+                    <span>
+                        KEY{' '}
+                        <span style={{ color: '#0000005c', fontSize: 12 }}>
+                            产品唯一标识，不填则随机生成
+                        </span>
+                    </span>
+                }
+                name={`key`}
             >
                 <Input />
             </Form.Item>
@@ -78,10 +95,23 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
                     ))}
                 </Radio.Group>
             </Form.Item>
+            <Form.Item
+                label={`接入通道`}
+                name={`accessChannel`}
+                rules={[{ required: true }]}
+            >
+                <Radio.Group>
+                    {_.map(AccessChannel, (value, key) => (
+                        <Radio.Button key={key} value={key}>
+                            {value}
+                        </Radio.Button>
+                    ))}
+                </Radio.Group>
+            </Form.Item>
             <Form.Item label={`驱动服务名称`} name={`driverName`}>
                 <Input />
             </Form.Item>
-        </DrawerForm>
+        </ModalForm>
     );
 };
 export default ProductFormBtn;

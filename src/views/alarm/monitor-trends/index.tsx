@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
-import { VPanel } from '@moensun/antd-react-ext';
-import GridTable from '@components/grid-table';
+import { GridTable, VPanel } from '@trionesdev/antd-react-ext';
 import { useRequest, useUpdateEffect } from 'ahooks';
 import { deviceDataApi } from '@/apis';
 import { Button, DatePicker, Empty, Form, Select, Space, Tag } from 'antd';

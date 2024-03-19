@@ -3,7 +3,7 @@ import { Button, ButtonProps, Form, Input, notification, Select } from 'antd';
 import ProductSelect from '@components/product-select';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
-import { ModalForm } from '@moensun/antd-react-ext';
+import { ModalForm } from '@trionesdev/antd-react-ext';
 
 type ChildDeviceFormProps = {
     parentDeviceId: string;

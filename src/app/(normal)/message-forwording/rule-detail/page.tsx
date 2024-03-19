@@ -1,4 +1,4 @@
-import { Layout, PageHeader } from '@moensun/antd-react-ext';
+import { Layout, PageHeader } from '@trionesdev/antd-react-ext';
 import styles from './rule-detail.module.less';
 import { Button, Steps } from 'antd';
 import React, { useEffect, useState } from 'react';

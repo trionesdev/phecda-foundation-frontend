@@ -1,4 +1,4 @@
-import { ModalForm } from '@moensun/antd-react-ext';
+import { ModalForm } from '@trionesdev/antd-react-ext';
 import { Form, Input, notification } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';

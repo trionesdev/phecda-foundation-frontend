@@ -1,4 +1,4 @@
-import { ModalForm } from '@moensun/antd-react-ext';
+import { ModalForm } from '@trionesdev/antd-react-ext';
 import React, { FC } from 'react';
 import { Alert, Form, message } from 'antd';
 import { SourcesSelect } from '@/app/(normal)/message-forwording/components/sources-select';

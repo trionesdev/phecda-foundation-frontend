@@ -4,7 +4,7 @@ import { MessageSourceTopicTypeOptions } from '@/domains/message-forwarding/mess
 import _ from 'lodash';
 import { MESSAGE_SOURCE_TOPIC_TYPE } from '@/domains/message-forwarding/message-forwarding.enums';
 import { ThingPropertyReport } from '@/app/(normal)/message-forwording/source-detail/topic-form/ThingPropertyReport';
-import { ModalForm } from '@moensun/antd-react-ext';
+import { ModalForm } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis';
 

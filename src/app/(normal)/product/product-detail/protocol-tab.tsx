@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Button, Form, Input, message, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Layout, PageHeader, VPanel } from '@moensun/antd-react-ext';
+import { Layout, PageHeader } from '@trionesdev/antd-react-ext';
 import styles from './product-detail.module.less';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
