@@ -1,8 +1,8 @@
 import {
-    STATE_CONDITION_TYPE,
+    ACTION_TYPE,
     LINKAGE_SCENE_EVENT_TYPE,
     OPERATOR,
-    ACTION_TYPE,
+    STATE_CONDITION_TYPE,
 } from '@/domains/linkage/linkage.enums';
 
 export const LinkageSceneEventOptions = [
@@ -54,5 +54,9 @@ export const ActionTypeOptions = [
     {
         label: '发送通知消息',
         value: ACTION_TYPE.MESSAGE,
+    },
+    {
+        label: '告警',
+        value: ACTION_TYPE.ALARM,
     },
 ];

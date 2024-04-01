@@ -27,7 +27,7 @@ const ProductSelect: FC<ProductSelectProps> = ({ allOption, ...rest }) => {
     return (
         <Select
             {...rest}
-            fieldNames={{ value: 'id', label: 'name' }}
+            fieldNames={{ value: 'key', label: 'name' }}
             placeholder={`请选择产品`}
             options={options}
         />

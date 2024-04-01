@@ -5,7 +5,7 @@ import { Select, SelectProps } from 'antd';
 import _ from 'lodash';
 
 type DeviceSelectProps = {
-    productId?: string;
+    productKey?: string;
     allOption?: {
         label?: string;
         value?: string;
@@ -13,13 +13,13 @@ type DeviceSelectProps = {
 } & SelectProps;
 
 export const DeviceSelect: FC<DeviceSelectProps> = ({
-    productId,
+    productKey,
     allOption,
     ...props
 }) => {
     const [options, setOptions] = useState<any>([]);
     const { run: handleQueryDevicesByProductId } = useRequest(
-        () => deviceApi.queryDeviceByParams({ productId }),
+        () => deviceApi.queryDeviceByParams({ productKey }),
         {
             manual: true,
             onSuccess: (res: any) => {
@@ -36,12 +36,12 @@ export const DeviceSelect: FC<DeviceSelectProps> = ({
     );
 
     useEffect(() => {
-        if (productId) {
+        if (productKey) {
             handleQueryDevicesByProductId();
         } else {
             setOptions([allOption] || []);
         }
-    }, [productId]);
+    }, [productKey]);
 
     return (
         <Select

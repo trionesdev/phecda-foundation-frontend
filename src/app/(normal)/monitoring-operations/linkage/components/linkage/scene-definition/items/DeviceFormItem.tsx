@@ -4,20 +4,20 @@ import { useRequest } from 'ahooks';
 import { deviceApi } from '@apis';
 
 type DeviceFormItemProps = {
-    productId?: string;
+    productKey?: string;
     required?: boolean;
     form?: FormInstance;
     namePath?: any;
 };
 export const DeviceFormItem: FC<DeviceFormItemProps> = ({
-    productId,
+    productKey,
     required,
     form,
     namePath,
 }) => {
     const [options, setOptions] = useState([]);
     const { run: handleQueryDevicesByProductId } = useRequest(
-        () => deviceApi.queryDeviceByParams({ productId }),
+        () => deviceApi.queryDeviceByParams({ productKey }),
         {
             manual: true,
             onSuccess: (res: any) => {
@@ -27,12 +27,12 @@ export const DeviceFormItem: FC<DeviceFormItemProps> = ({
     );
 
     useEffect(() => {
-        if (productId) {
+        if (productKey) {
             handleQueryDevicesByProductId();
         } else {
             setOptions([]);
         }
-    }, [productId]);
+    }, [productKey]);
 
     return (
         <Form.Item label={`设备`} name={[...namePath]} required={required}>

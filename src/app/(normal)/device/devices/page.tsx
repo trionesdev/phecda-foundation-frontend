@@ -1,4 +1,9 @@
-import { GridTable, Layout, TableToolbar } from '@trionesdev/antd-react-ext';
+import {
+    GridTable,
+    Layout,
+    SearchToolbar,
+    TableToolbar,
+} from '@trionesdev/antd-react-ext';
 import styles from './device.module.less';
 import React, { useEffect, useState } from 'react';
 import {
@@ -14,34 +19,53 @@ import DeviceForm from './device-form';
 import { deviceApi } from '@apis';
 import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
-import { SearchToolbar } from '@components';
+import { useRequest } from 'ahooks';
 
 export const DevicesPage = () => {
     const [querySeq, setQuerySeq] = useState(0);
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const [pageNum, setPageNum] = useState(1);
     const [pageSize, setPageSize] = useState(10);
     const [devices, setDevices] = useState([]);
     const [formData, setFormData] = useState({});
 
-    const handleQueryDevices = () => {
-        let params = {
-            ...formData,
-            pageNum,
-            pageSize,
-        };
-        setLoading(true);
-        deviceApi
-            .queryDevicesExtPage(params)
-            .then((res: any) => {
+    const { run: handleQueryDevices, loading } = useRequest(
+        () => {
+            let params = {
+                ...formData,
+                pageNum,
+                pageSize,
+            };
+            return deviceApi.queryDevicesExtPage(params);
+        },
+        {
+            manual: true,
+            onSuccess(res: any) {
                 if (res) {
                     setDevices(res.rows || []);
                 }
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    };
+            },
+        }
+    );
+
+    // const handleQueryDevices = () => {
+    //     let params = {
+    //         ...formData,
+    //         pageNum,
+    //         pageSize,
+    //     };
+    //     setLoading(true);
+    //     deviceApi
+    //         .queryDevicesExtPage(params)
+    //         .then((res: any) => {
+    //             if (res) {
+    //                 setDevices(res.rows || []);
+    //             }
+    //         })
+    //         .finally(() => {
+    //             setLoading(false);
+    //         });
+    // };
 
     const handleDeleteById = (id: string) => {
         deviceApi.deleteDeviceById(id).then(() => {
@@ -62,7 +86,7 @@ export const DevicesPage = () => {
 
     useEffect(() => {
         handleQueryDevices();
-    }, [formData, querySeq, pageNum, pageSize]);
+    }, [querySeq, pageNum, pageSize]);
 
     const columns = [
         {
