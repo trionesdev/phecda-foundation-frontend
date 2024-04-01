@@ -4,7 +4,7 @@ import { useRequest } from 'ahooks';
 import { alarmApi } from '@apis';
 import styles from './alarms.module.less';
 import { dateParse, formatDateTimeSeconds } from '@/commons/util/date.utils';
-import { Button, DatePicker, Input, Select } from 'antd';
+import { Button, DatePicker, Input, Select, Space } from 'antd';
 import { AlarmStatusOptions } from '@/domains/alarm/alarm.constants';
 import SearchToolbar from '@components/search-toolbar/index';
 import { AlarmTypeSelect } from '@/app/(normal)/(alarm)/alarms/AlarmTypeSelect';
@@ -63,6 +63,24 @@ export const AlarmsPage = () => {
             title: 'deviceName',
             dataIndex: 'deviceName',
             width: 200,
+        },
+        {
+            title: '告警值',
+            dataIndex: 'eventData',
+            width: 150,
+            render: (text: any) => {
+                return (
+                    <Space direction={`vertical`}>
+                        {text?.map((item?: any) => {
+                            return (
+                                <div key={item?.identifier}>
+                                    {item?.label} : {item?.value}
+                                </div>
+                            );
+                        })}
+                    </Space>
+                );
+            },
         },
         {
             title: '描述',

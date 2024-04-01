@@ -69,7 +69,7 @@ const DeviceForm: FC<DeviceFormProps> = ({
         >
             <Form.Item
                 label={`产品`}
-                name={`productId`}
+                name={`productKey`}
                 rules={[{ required: true }]}
             >
                 <ProductSelect disabled={!!id} />

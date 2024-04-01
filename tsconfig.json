@@ -19,6 +19,8 @@
         "paths": {
             "@": ["src"],
             "@/*": ["src/*"],
+            "@commons/*": ["src/commons/*"],
+            "@general/*": ["src/general/*"],
             "@apis": ["src/apis"],
             "@apis/*": ["src/apis/*"],
             "@components": ["src/components"],

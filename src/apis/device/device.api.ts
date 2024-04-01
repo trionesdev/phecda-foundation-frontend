@@ -109,6 +109,10 @@ export default class DeviceApi extends BaseApi {
         );
     }
 
+    deviceStatistics() {
+        return this.request.get(`${this.baseUri}/devices/statistics`);
+    }
+
     createDevice(data: {}) {
         return this.request.post(`${this.baseUri}/devices`, data);
     }

@@ -33,6 +33,7 @@ module.exports = {
     webpack: {
         alias: {
             '@': resolve('src'),
+            '@commons': resolve('src/commons'),
             '@apis': resolve('src/apis'),
             '@views': resolve('src/views'),
             '@components': resolve('src/components'),
