@@ -1,21 +1,29 @@
-import { Button, Col, Form, Grid, Row, Space } from 'antd';
-import React, { FC, useEffect, useState } from 'react';
-import _ from 'lodash';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
-import { useCssInJs } from '@trionesdev/antd-react-ext';
+import { Button, Col, Form, Grid, Row, Space } from 'antd';
 import classNames from 'classnames';
+import _ from 'lodash';
+import React, { FC, useEffect, useState } from 'react';
 import { genSearchToolbarStyle } from './styled';
+import { useCssInJs } from '@trionesdev/antd-react-ext';
 
 const { useBreakpoint } = Grid;
 
-type SearchToolbarProps = {
-    items?: {
-        label?: React.ReactNode;
-        name?: string | string[];
-        children?: React.ReactNode;
-    }[];
+export type SearchToolbarItem = {
+    label?: React.ReactNode;
+    name?: string | string[];
+    children?: React.ReactNode;
+};
+
+export type SearchToolbarProps = {
+    style?: React.CSSProperties;
+    className?: string;
+    items?: SearchToolbarItem[];
     layout?: 'horizontal' | 'inline' | 'vertical';
+    labelCol?: { span?: number; offset?: number };
+    labelAlign?: 'left' | 'right';
+    size?: 'large' | 'middle' | 'small';
     initialValues?: any;
+    onSearchParamsChange?: (values: any) => void;
     onSearch?: (values: any) => void;
     onReset?: () => void;
     span?: number;
@@ -26,11 +34,17 @@ type SearchToolbarProps = {
     xl?: number;
     xxl?: number;
 };
-export const SearchToolbar: FC<SearchToolbarProps> = ({
+const SearchToolbar: FC<SearchToolbarProps> = ({
+    style,
+    className,
     items,
     layout,
+    labelCol,
+    labelAlign,
+    size,
     initialValues,
     onSearch,
+    onSearchParamsChange,
     onReset,
     span = 6,
     xs,
@@ -44,7 +58,6 @@ export const SearchToolbar: FC<SearchToolbarProps> = ({
 
     const [form] = Form.useForm();
     const screens = useBreakpoint();
-    console.log(screens);
     const [expanded, setExpanded] = useState(true);
     const [colSpan, setColSpan] = useState(span);
     const [rowColSize, setRowColSize] = useState(4);
@@ -73,10 +86,10 @@ export const SearchToolbar: FC<SearchToolbarProps> = ({
         ); //需要补偿列数
         const offsetSpan = colSpan * compensateColCount;
 
-        console.log(colSpan);
-        console.log(rowColSize);
-        console.log(compensateColCount);
-        console.log(offsetSpan);
+        // console.log(colSpan);
+        // console.log(rowColSize);
+        // console.log(compensateColCount);
+        // console.log(offsetSpan);
 
         setRowColSize(rowColSize);
         setOffsetSpan(offsetSpan);
@@ -95,8 +108,6 @@ export const SearchToolbar: FC<SearchToolbarProps> = ({
     };
 
     useEffect(() => {
-        console.log('sss');
-        console.log(screens);
         let colSpan = span;
         if (screens.xxl) {
             colSpan = xxl || span;
@@ -134,8 +145,18 @@ export const SearchToolbar: FC<SearchToolbarProps> = ({
     });
 
     return wrapSSR(
-        <div className={classNames(prefixCls, hashId)}>
-            <Form form={form} layout={layout} initialValues={initialValues}>
+        <div className={classNames(className, prefixCls, hashId)} style={style}>
+            <Form
+                form={form}
+                layout={layout}
+                labelCol={labelCol}
+                labelAlign={labelAlign}
+                size={size}
+                onValuesChange={(_, allValues) => {
+                    onSearchParamsChange?.(allValues);
+                }}
+                initialValues={initialValues}
+            >
                 <Row gutter={[8, 8]}>
                     {items?.map((item, index) => (
                         <Col
@@ -171,12 +192,12 @@ export const SearchToolbar: FC<SearchToolbarProps> = ({
                                         {expanded ? (
                                             <>
                                                 收起
-                                                <UpOutlined />
+                                                <UpOutlined rev={undefined} />
                                             </>
                                         ) : (
                                             <>
                                                 展开
-                                                <DownOutlined />
+                                                <DownOutlined rev={undefined} />
                                             </>
                                         )}{' '}
                                     </Button>
@@ -189,3 +210,4 @@ export const SearchToolbar: FC<SearchToolbarProps> = ({
         </div>
     );
 };
+export default SearchToolbar;

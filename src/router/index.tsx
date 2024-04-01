@@ -23,38 +23,59 @@ import { LinkagePage } from '@/app/(normal)/monitoring-operations/linkage/page';
 import { ForwardingRulePage } from '@/app/(normal)/message-forwording/rule/page';
 import { MessageSourceDetailPage } from '@/app/(normal)/message-forwording/source-detail/page';
 import { ForwardingRuleDetailPage } from '@/app/(normal)/message-forwording/rule-detail/page';
+import { DashboardPage } from '@/app/(normal)/dashboard/page';
+import { AlarmTypesPage } from '@/app/(normal)/(alarm)/alarm-types/page';
+import { AlarmLevelsPage } from '@/app/(normal)/(alarm)/alarm-levels/page';
+import { AlarmsPage } from '@/app/(normal)/(alarm)/alarms/page';
 
 export const routes: RouteObject[] = [
     {
         path: '/',
         element: <MainLayoutView />,
         children: [
-            //------告警管理-----
             {
-                path: RoutesConstants.ALARM_RULES.path(),
-                element: <AlarmRules />, //告警配置
+                index: true,
+                // path: RoutesConstants.PRODUCTS.path(),
+                element: <DashboardPage />,
             },
             {
-                path: RoutesConstants.ALARM_LOG.path(),
-                element: <AlarmLog />, //告警日志
+                path: RoutesConstants.ALARM_TYPES.path(),
+                element: <AlarmTypesPage />,
             },
             {
-                path: RoutesConstants.MONITOR_TRENDS.path(),
-                element: <MonitorTrends />, //监控趋势
+                path: RoutesConstants.ALARM_LEVELS.path(),
+                element: <AlarmLevelsPage />,
             },
             {
-                path: RoutesConstants.DEVICE_DATA.path(),
-                element: <DeviceData />, //设备数据
+                path: RoutesConstants.ALARMS.path(),
+                element: <AlarmsPage />,
             },
+
+            // //------告警管理-----
+            // {
+            //     path: RoutesConstants.ALARM_RULES.path(),
+            //     element: <AlarmRules />, //告警配置
+            // },
+            // {
+            //     path: RoutesConstants.ALARM_LOG.path(),
+            //     element: <AlarmLog />, //告警日志
+            // },
+            // {
+            //     path: RoutesConstants.MONITOR_TRENDS.path(),
+            //     element: <MonitorTrends />, //监控趋势
+            // },
+            // {
+            //     path: RoutesConstants.DEVICE_DATA.path(),
+            //     element: <DeviceData />, //设备数据
+            // },
             {
                 path: RoutesConstants.MONITOR_VIEW.path(),
                 element: <MonitorView />, //监控画面
             },
             //------设备管理-----
-            {
-                index: true,
-                element: <ProductsView />,
-            },
+            // {
+            //     element: <ProductsView />,
+            // },
             {
                 path: RoutesConstants.PRODUCTS.path(),
                 element: <ProductsView />,

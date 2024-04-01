@@ -27,4 +27,5 @@ export enum OPERATOR {
 
 export enum ACTION_TYPE {
     MESSAGE = 'MESSAGE',
+    ALARM = 'ALARM',
 }

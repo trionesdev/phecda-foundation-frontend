@@ -8,6 +8,10 @@ export default class DeviceApi extends BaseApi {
         return this.request.get(`${this.baseUri}/value-type/options`);
     }
 
+    productStatistics() {
+        return this.request.get(`${this.baseUri}/products/statistics`);
+    }
+
     createProduct(data: {}) {
         return this.request.post(`${this.baseUri}/products`, data);
     }

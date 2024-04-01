@@ -12,7 +12,7 @@ export const ThingPropertyReportTriggerIdentifier: FC<
     ThingPropertyReportTriggerIdentifierProps
 > = ({ form, namePath }) => {
     const eventTriggerIdentifierProduct = Form.useWatch(
-        [...namePath, 'identifier', 'product'],
+        [...namePath, 'identifier', 'productKey'],
         form
     );
 
@@ -31,13 +31,13 @@ export const ThingPropertyReportTriggerIdentifier: FC<
         <Space>
             <ProductFormItem
                 form={form}
-                namePath={[...namePath, 'identifier', 'product']}
+                namePath={[...namePath, 'identifier', 'productKey']}
                 required={true}
             />
             <DeviceFormItem
                 form={form}
                 namePath={[...namePath, 'identifier', 'deviceName']}
-                productId={eventTriggerIdentifierProduct}
+                productKey={eventTriggerIdentifierProduct}
             />
             <ThingModelPropertyFormItem
                 form={form}

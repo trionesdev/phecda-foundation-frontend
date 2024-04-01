@@ -1,4 +1,9 @@
-import { GridTable, Layout, TableToolbar } from '@trionesdev/antd-react-ext';
+import {
+    GridTable,
+    Layout,
+    SearchToolbar,
+    TableToolbar,
+} from '@trionesdev/antd-react-ext';
 import { Button, Input, Popconfirm, Select, Space, Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 import ProductFormBtn from './product-form-btn';
@@ -15,7 +20,6 @@ import {
 import { useRequest } from 'ahooks';
 import { OptionsType } from '@/constants/types';
 import _ from 'lodash';
-import { SearchToolbar } from '@components';
 
 const ProductsView = () => {
     const navigate = useNavigate();

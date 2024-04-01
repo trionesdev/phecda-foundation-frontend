@@ -6,19 +6,34 @@ type RoutesConstantsProps = {
  *  注意：key的名字要与path路径中的名称相对应，才能保证菜单栏的menu准确显示展开状态(src/views/layout/index.tsx:119)
  */
 export const RoutesConstants = {
+    DASHBOARD: {
+        key: 'dashboard',
+        path: () => `/`,
+    },
     /** --------告警管理------- */
-    ALARM_RULES: {
-        key: 'alarm-rules',
-        path: () => `/alarm-management/alarm-rules`,
-    }, //告警规则配置
-    ALARM_LOG: {
-        key: 'alarm-log',
-        path: () => `/alarm-management/alarm-log`,
-    }, //告警日志
-    DEVICE_DATA: {
-        key: 'device-data',
-        path: () => `/alarm-management/device-data`,
-    }, //设备数据
+    // ALARM_RULES: {
+    //     key: 'alarm-rules',
+    //     path: () => `/alarm-management/alarm-rules`,
+    // }, //告警规则配置
+    // ALARM_LOG: {
+    //     key: 'alarm-log',
+    //     path: () => `/alarm-management/alarm-log`,
+    // }, //告警日志
+    // DEVICE_DATA: {
+    //     key: 'device-data',
+    //     path: () => `/alarm-management/device-data`,
+    // }, //设备数据
+
+    ALARM_TYPES: {
+        key: 'alarm-types',
+        path: () => `/alarm-management/alarm-types`,
+    },
+    ALARM_LEVELS: {
+        key: 'alarm-levels',
+        path: () => `/alarm-management/alarm-levels`,
+    },
+    ALARMS: { key: 'alarms', path: () => `/alarm-management/alarms` },
+
     //region 消息转发
     MESSAGE_FORWARDING_RULES: {
         key: 'MESSAGE_FORWARDING_RULES',

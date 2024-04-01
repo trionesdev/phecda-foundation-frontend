@@ -14,8 +14,8 @@ type ThingPropertyStateIdentifierProps = {
 export const ThingPropertyStateIdentifier: FC<
     ThingPropertyStateIdentifierProps
 > = ({ form, namePath = [] }) => {
-    const stateIdentifierProduct = Form.useWatch(
-        [...namePath, 'stateIdentifier', 'product'],
+    const stateIdentifierProductKey = Form.useWatch(
+        [...namePath, 'stateIdentifier', 'productKey'],
         form
     );
 
@@ -49,12 +49,12 @@ export const ThingPropertyStateIdentifier: FC<
         <Space>
             <ProductFormItem
                 form={form}
-                namePath={[...namePath, 'stateIdentifier', 'product']}
+                namePath={[...namePath, 'stateIdentifier', 'productKey']}
             />
             <DeviceFormItem
                 form={form}
                 namePath={[...namePath, 'stateIdentifier', 'deviceName']}
-                productId={stateIdentifierProduct}
+                productKey={stateIdentifierProductKey}
             />
             <Form.Item
                 name={[...namePath, 'condition', 'valueType']}
@@ -66,7 +66,7 @@ export const ThingPropertyStateIdentifier: FC<
             <ThingModelPropertyFormItem
                 form={form}
                 namePath={[...namePath, 'condition', 'valuePath']}
-                productId={stateIdentifierProduct}
+                productId={stateIdentifierProductKey}
                 onSelect={handlePropertySelect}
             />
             <OperatorFormItem

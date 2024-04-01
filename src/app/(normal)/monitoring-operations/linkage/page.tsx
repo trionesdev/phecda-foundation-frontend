@@ -1,11 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './index.module.less';
 import {
     GridTable,
     Layout,
-    ModalForm,
+    SearchToolbar,
     TableToolbar,
-    VPanel,
 } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
 import { operationApi } from '@apis';
@@ -24,7 +23,7 @@ import { formatDateTime } from '@/commons/util/date.utils';
 import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import qs from 'qs';
-import { SearchToolbar } from '@components';
+import { LinkageForm } from '@/app/(normal)/monitoring-operations/linkage/LinkageForm';
 
 const { TextArea } = Input;
 export const LinkagePage: React.FC = () => {
@@ -47,39 +46,14 @@ export const LinkagePage: React.FC = () => {
         (tableParams: TableParams) => operationApi.queryScenesPage(tableParams),
         { manual: true }
     );
-    const afterSubmitForm = () => {
-        setDrawerFormeValue(undefined);
-        setDrawerOpen(false);
-        message.success('操作成功');
-        refreshFetchTableData();
-    };
-    /** 新建场景 */
-    const { run: addDictionaryType } = useRequest(
-        (params) => operationApi.addScenes(params),
-        {
-            manual: true,
-            onSuccess() {
-                afterSubmitForm();
-            },
-        }
-    );
-    /** 修改场景 */
-    const { run: editScenes } = useRequest(
-        (id, params) => operationApi.editScenesById(id, params),
-        {
-            manual: true,
-            onSuccess() {
-                afterSubmitForm();
-            },
-        }
-    );
+
     /** 修改场景状态 */
     const { run: editScenesStatus } = useRequest(
         (id, params) => operationApi.editScenesStatusById(id, params),
         {
             manual: true,
             onSuccess() {
-                afterSubmitForm();
+                refreshFetchTableData();
             },
         }
     );
@@ -89,7 +63,7 @@ export const LinkagePage: React.FC = () => {
         {
             manual: true,
             onSuccess() {
-                afterSubmitForm();
+                refreshFetchTableData();
             },
         }
     );
@@ -152,17 +126,14 @@ export const LinkagePage: React.FC = () => {
                                 查看
                             </Link>
                         </Button>
-                        <Button
-                            key={`edit-btn`}
-                            size={`small`}
-                            type={`link`}
-                            onClick={() => {
-                                setDrawerFormeValue({ ...record });
-                                setDrawerOpen(true);
-                            }}
+                        <LinkageForm
+                            id={record?.id}
+                            onRefresh={refreshFetchTableData}
                         >
-                            编辑
-                        </Button>
+                            <Button size={`small`} type={`link`}>
+                                编辑
+                            </Button>
+                        </LinkageForm>
                         <Popconfirm
                             key={`del-btn`}
                             title={`确定删除 ${record.name}？`}
@@ -177,16 +148,7 @@ export const LinkagePage: React.FC = () => {
             },
         },
     ];
-    const tableParamsFormItems = useMemo(
-        () => (
-            <>
-                <Form.Item name="name" label={`场景名称`}>
-                    <Input />
-                </Form.Item>
-            </>
-        ),
-        []
-    );
+
     return (
         <Layout direction={`vertical`} className={styles.wrapper}>
             <Layout.Item style={{ backgroundColor: 'white' }}>
@@ -205,18 +167,11 @@ export const LinkagePage: React.FC = () => {
                     style={{ padding: '8px', backgroundColor: 'white' }}
                     toolbar={
                         <TableToolbar
-                            extra={[
-                                <Button
-                                    key={`new-scene-btn`}
-                                    type="primary"
-                                    onClick={() => {
-                                        // setDrawerFormeValue(undefined);
-                                        setDrawerOpen(true);
-                                    }}
-                                >
-                                    新建场景
-                                </Button>,
-                            ]}
+                            extra={
+                                <LinkageForm onRefresh={refreshFetchTableData}>
+                                    <Button type={`primary`}>新建场景</Button>
+                                </LinkageForm>
+                            }
                         />
                     }
                     fit
@@ -231,30 +186,6 @@ export const LinkagePage: React.FC = () => {
                         onChange: handlePageChange,
                     }}
                 />
-                <ModalForm
-                    open={drawerOpen}
-                    title={`${drawerFormeValue?.id ? '编辑' : '新建'}场景`}
-                    layout="vertical"
-                    afterOpenChange={(op) => setDrawerOpen(op)}
-                    onSubmit={(values) => {
-                        // drawerFormeValue?.id
-                        //     ? editScenes(drawerFormeValue.id, value)
-                        //     : addDictionaryType(value);
-                        // from?.resetFields();
-                    }}
-                    formValues={drawerFormeValue}
-                >
-                    <Form.Item
-                        name="name"
-                        label="场景名称"
-                        rules={[{ required: true }]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item name="description" label="场景描述">
-                        <TextArea />
-                    </Form.Item>
-                </ModalForm>
             </Layout.Item>
         </Layout>
     );

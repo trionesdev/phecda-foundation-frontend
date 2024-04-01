@@ -14,6 +14,11 @@ const MainLayoutView = () => {
     const [openKeys, setOpenKeys] = useState<any[]>([]);
     const menuItems: MenuProps['items'] = [
         {
+            key: RoutesConstants.DASHBOARD.key,
+            label: '首页',
+            onClick: () => navigate(RoutesConstants.DASHBOARD.path()),
+        },
+        {
             key: 'device-management',
             label: '设备管理',
             children: [
@@ -30,11 +35,11 @@ const MainLayoutView = () => {
             ],
         },
         {
-            key: 'message-forwarding-group',
+            key: 'message-forwarding',
             label: `消息转发`,
             children: [
                 {
-                    key: '',
+                    key: RoutesConstants.MESSAGE_FORWARDING_RULES.key,
                     label: '业务流转',
                     onClick: () =>
                         navigate(
@@ -54,32 +59,54 @@ const MainLayoutView = () => {
                 },
             ],
         },
+        // {
+        //     key: 'alarm-management',
+        //     label: '数据中心',
+        //     children: [
+        //         /*{
+        //             key: RoutesConstants.ALARM_RULES.key,
+        //             label: `告警配置`,
+        //             onClick: () => navigate(RoutesConstants.ALARM_RULES.path()),
+        //         },*/
+        //         {
+        //             key: RoutesConstants.ALARM_LOG.key,
+        //             label: '告警日志',
+        //             onClick: () => navigate(RoutesConstants.ALARM_LOG.path()),
+        //         },
+        //         {
+        //             key: RoutesConstants.MONITOR_VIEW.key,
+        //             label: `监控画面`,
+        //             onClick: () =>
+        //                 navigate(RoutesConstants.MONITOR_VIEW.path()),
+        //         },
+        //         /*{
+        //             key: RoutesConstants.DEVICE_DATA.key,
+        //             label: `设备数据`,
+        //             onClick: () => navigate(RoutesConstants.DEVICE_DATA.path()),
+        //         },
+        //      ,*/
+        //     ],
+        // },
         {
             key: 'alarm-management',
-            label: '数据中心',
+            label: '告警管理',
             children: [
-                /*{
-                    key: RoutesConstants.ALARM_RULES.key,
-                    label: `告警配置`,
-                    onClick: () => navigate(RoutesConstants.ALARM_RULES.path()),
-                },*/
                 {
-                    key: RoutesConstants.ALARM_LOG.key,
-                    label: '告警日志',
-                    onClick: () => navigate(RoutesConstants.ALARM_LOG.path()),
+                    key: RoutesConstants.ALARM_TYPES.key,
+                    label: '告警类型',
+                    onClick: () => navigate(RoutesConstants.ALARM_TYPES.path()),
                 },
                 {
-                    key: RoutesConstants.MONITOR_VIEW.key,
-                    label: `监控画面`,
+                    key: RoutesConstants.ALARM_LEVELS.key,
+                    label: '告警等级',
                     onClick: () =>
-                        navigate(RoutesConstants.MONITOR_VIEW.path()),
+                        navigate(RoutesConstants.ALARM_LEVELS.path()),
                 },
-                /*{
-                    key: RoutesConstants.DEVICE_DATA.key,
-                    label: `设备数据`,
-                    onClick: () => navigate(RoutesConstants.DEVICE_DATA.path()),
+                {
+                    key: RoutesConstants.ALARMS.key,
+                    label: '告警列表',
+                    onClick: () => navigate(RoutesConstants.ALARMS.path()),
                 },
-             ,*/
             ],
         },
         {
@@ -113,7 +140,9 @@ const MainLayoutView = () => {
             <Layout.Item>
                 <AppToolbar
                     avatar={{
-                        icon: <Icon component={PhecdaSvg} />,
+                        icon: (
+                            <Icon component={PhecdaSvg} style={{ width: 40 }} />
+                        ),
                         style: { fontSize: 40 },
                     }}
                     title={`物联网平台`}
