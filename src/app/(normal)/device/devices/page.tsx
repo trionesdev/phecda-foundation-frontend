@@ -88,7 +88,7 @@ export const DevicesPage = () => {
         handleQueryDevices();
     }, [querySeq, pageNum, pageSize]);
 
-    const columns = [
+    const columns: any[] = [
         {
             title: '备注名称',
             dataIndex: 'remarkName',
@@ -125,6 +125,7 @@ export const DevicesPage = () => {
             title: '操作',
             dataIndex: 'id',
             width: 225,
+            fixed: 'right',
             render: (text: string, record: any) => {
                 return (
                     <Space split={<Divider type={`vertical`} />}>
@@ -209,6 +210,7 @@ export const DevicesPage = () => {
                     rowKey={`id`}
                     loading={loading}
                     pagination={{ pageSize }}
+                    // scroll={{ x: 1300 }}
                 />
             </Layout.Item>
         </Layout>
