@@ -1,5 +1,5 @@
 import {
-    GridTable,
+    // GridTable,
     Layout,
     SearchToolbar,
     TableToolbar,
@@ -20,12 +20,13 @@ import { deviceApi } from '@apis';
 import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import { useRequest } from 'ahooks';
+import GridTable from '@components/grid-table';
 
 export const DevicesPage = () => {
     const [querySeq, setQuerySeq] = useState(0);
-    // const [loading, setLoading] = useState(false);
     const [pageNum, setPageNum] = useState(1);
     const [pageSize, setPageSize] = useState(10);
+    const [total, setTotal] = useState(100);
     const [devices, setDevices] = useState([]);
     const [formData, setFormData] = useState({});
 
@@ -43,32 +44,14 @@ export const DevicesPage = () => {
             onSuccess(res: any) {
                 if (res) {
                     setDevices(res.rows || []);
+                    setTotal(res.total || 0);
                 }
             },
         }
     );
 
-    // const handleQueryDevices = () => {
-    //     let params = {
-    //         ...formData,
-    //         pageNum,
-    //         pageSize,
-    //     };
-    //     setLoading(true);
-    //     deviceApi
-    //         .queryDevicesExtPage(params)
-    //         .then((res: any) => {
-    //             if (res) {
-    //                 setDevices(res.rows || []);
-    //             }
-    //         })
-    //         .finally(() => {
-    //             setLoading(false);
-    //         });
-    // };
-
     const handleDeleteById = (id: string) => {
-        deviceApi.deleteDeviceById(id).then(() => {
+        deviceApi.deleteDeviceById(id).then(async () => {
             handleRefresh();
             message.success('操作成功');
         });
@@ -110,6 +93,7 @@ export const DevicesPage = () => {
             title: `启用/禁用`,
             dataIndex: 'enabled',
             width: 120,
+            fixed: 'right',
             render: (text: boolean, record: any) => {
                 return (
                     <Switch
@@ -209,8 +193,14 @@ export const DevicesPage = () => {
                     dataSource={devices}
                     rowKey={`id`}
                     loading={loading}
-                    pagination={{ pageSize }}
-                    // scroll={{ x: 1300 }}
+                    pagination={{
+                        pageSize,
+                        total,
+                        onChange: (page, size) => {
+                            setPageNum(page);
+                        },
+                    }}
+                    scroll={{ x: 1300 }}
                 />
             </Layout.Item>
         </Layout>
