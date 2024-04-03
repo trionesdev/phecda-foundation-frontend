@@ -34,6 +34,11 @@ export const RoutesConstants = {
     },
     ALARMS: { key: 'alarms', path: () => `/alarm-management/alarms` },
 
+    NOTIFICATION_CONTACTS: {
+        key: 'contacts',
+        path: () => `/notification/contacts`,
+    },
+
     //region 消息转发
     MESSAGE_FORWARDING_RULES: {
         key: 'MESSAGE_FORWARDING_RULES',

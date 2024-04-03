@@ -110,6 +110,18 @@ const MainLayoutView = () => {
             ],
         },
         {
+            key: 'notification',
+            label: '通知管理',
+            children: [
+                {
+                    key: RoutesConstants.NOTIFICATION_CONTACTS.key,
+                    label: '联系人',
+                    onClick: () =>
+                        navigate(RoutesConstants.NOTIFICATION_CONTACTS.path()),
+                },
+            ],
+        },
+        {
             key: 'edge-management',
             label: '边缘节点',
             children: [

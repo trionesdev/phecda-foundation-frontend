@@ -1,5 +1,5 @@
-import { FC, useEffect, useState } from 'react';
-import { Button, ButtonProps, Form, Input, message, Radio } from 'antd';
+import React, { FC, useEffect, useState } from 'react';
+import { Button, ButtonProps, Form, Input, message, Radio, Tag } from 'antd';
 import { deviceApi } from '@apis';
 import { AccessChannel, DeviceNodeType } from '../support/device.constants';
 import _ from 'lodash';
@@ -25,7 +25,7 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
         } else {
             request = deviceApi.createProduct(values);
         }
-        request.then(() => {
+        request.then(async () => {
             setOpen(false);
             message.success('操作成功');
             if (onSuccess) {
@@ -74,11 +74,23 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
                     <span>
                         KEY{' '}
                         <span style={{ color: '#0000005c', fontSize: 12 }}>
-                            产品唯一标识，不填则随机生成
+                            产品唯一标识，不填则随机生成(必须英文字母开头)
                         </span>
                     </span>
                 }
                 name={`key`}
+                rules={[
+                    {
+                        validator: (rule, value) => {
+                            if (value && !/^[a-zA-Z]/.test(value)) {
+                                return Promise.reject(
+                                    'DeviceName必须英文字母开头'
+                                );
+                            }
+                            return Promise.resolve();
+                        },
+                    },
+                ]}
             >
                 <Input />
             </Form.Item>

@@ -9,10 +9,6 @@ import ProductsView from '@/app/(normal)/product/products';
 import { RoutesConstants } from './routes.constants';
 import ProductThingsModelDraftView from '@/app/(normal)/product/product-things-model-draft';
 import DeviceDetailView from '@/app/(normal)/device/device-detail';
-import AlarmLog from 'src/views/alarm/alarm-log';
-import AlarmRules from 'src/views/alarm/alarm-rules';
-import MonitorTrends from 'src/views/alarm/monitor-trends';
-import DeviceData from 'src/views/alarm/device-data';
 import MonitorView from 'src/views/alarm/monitor-view';
 import SceneDetail from '@/app/(normal)/monitoring-operations/linkage/detail';
 import NodeDetailView from '@/app/(normal)/edge/node-detail';
@@ -27,6 +23,7 @@ import { DashboardPage } from '@/app/(normal)/dashboard/page';
 import { AlarmTypesPage } from '@/app/(normal)/(alarm)/alarm-types/page';
 import { AlarmLevelsPage } from '@/app/(normal)/(alarm)/alarm-levels/page';
 import { AlarmsPage } from '@/app/(normal)/(alarm)/alarms/page';
+import { ContactPage } from '@/app/(normal)/(notification)/contact/page';
 
 export const routes: RouteObject[] = [
     {
@@ -51,6 +48,11 @@ export const routes: RouteObject[] = [
                 element: <AlarmsPage />,
             },
 
+            {
+                path: RoutesConstants.NOTIFICATION_CONTACTS.path(),
+                element: <ContactPage />,
+            },
+
             // //------告警管理-----
             // {
             //     path: RoutesConstants.ALARM_RULES.path(),
@@ -72,6 +74,7 @@ export const routes: RouteObject[] = [
                 path: RoutesConstants.MONITOR_VIEW.path(),
                 element: <MonitorView />, //监控画面
             },
+
             //------设备管理-----
             // {
             //     element: <ProductsView />,

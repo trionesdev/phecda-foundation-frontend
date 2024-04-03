@@ -8,15 +8,11 @@ import {
     RadioChangeEvent,
 } from 'antd';
 import styles from './property-data-modal.module.less';
-import {
-    formatDateTime,
-    formatDateTimeSeconds,
-} from '@/commons/util/date.utils';
+import { formatDateTime } from '@/commons/util/date.utils';
 import { TableParams } from '@/constants/types';
 import { deviceDataApi } from '@apis';
 import { useRequest } from 'ahooks';
 import dayjs from 'dayjs';
-import { Line, LineConfig } from '@ant-design/charts';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';
 import { GridTable } from '@trionesdev/antd-react-ext';
 
@@ -92,21 +88,6 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
             dataIndex: 'value',
         },
     ];
-    const lineConfig: LineConfig = useMemo(() => {
-        return {
-            data: lineData,
-            xField: 'time',
-            yField: 'value',
-            xAxis: {
-                label: {
-                    formatter: (time) => {
-                        return time;
-                    },
-                },
-                tickCount: 5,
-            },
-        };
-    }, [lineData]);
 
     return (
         <>
@@ -153,9 +134,9 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
                         <div className={styles.chartWrapper}>
                             {isNilEmpty(lineData) ? (
                                 <Empty />
-                            ) : (
-                                <Line {...lineConfig} />
-                            )}
+                            ) : null
+                            // <Line {...lineConfig} />
+                            }
                         </div>
                     )}
                     {viewType === 'table' && (

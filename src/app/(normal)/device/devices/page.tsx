@@ -14,6 +14,7 @@ import {
     Popconfirm,
     Space,
     Switch,
+    Tag,
 } from 'antd';
 import DeviceForm from './device-form';
 import { deviceApi } from '@apis';
@@ -93,7 +94,7 @@ export const DevicesPage = () => {
             title: `启用/禁用`,
             dataIndex: 'enabled',
             width: 120,
-            fixed: 'right',
+            // fixed: 'right',
             render: (text: boolean, record: any) => {
                 return (
                     <Switch
@@ -156,7 +157,6 @@ export const DevicesPage = () => {
                     xs={24}
                     items={[
                         {
-                            label: 'DeviceName',
                             name: 'name',
                             children: <Input allowClear />,
                         },

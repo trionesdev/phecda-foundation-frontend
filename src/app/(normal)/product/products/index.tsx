@@ -81,7 +81,7 @@ const ProductsView = () => {
         handleQueryProductPage();
     }, [formData, querySeq, pageNum, pageSize]);
 
-    const columns = [
+    const columns: any[] = [
         {
             title: '产品名称',
             dataIndex: 'name',
@@ -89,13 +89,20 @@ const ProductsView = () => {
         {
             title: '节点类型',
             dataIndex: 'nodeType',
+            width: 100,
             render: (value: DeviceNodeTypeKeys) => {
                 return DeviceNodeType?.[value];
             },
         },
         {
+            title: `ProductKey`,
+            dataIndex: 'key',
+            width: 180,
+        },
+        {
             title: '状态',
             dataIndex: 'status',
+            width: 100,
             render: (value: number) => {
                 if (_.eq(value, 'RELEASE')) {
                     return <Tag color={'blue'}>已发布</Tag>;
@@ -109,6 +116,7 @@ const ProductsView = () => {
         {
             title: '创建时间',
             dataIndex: 'createdAt',
+            width: 180,
             render: (value: number) => {
                 return formatDateTime(value);
             },
@@ -116,6 +124,7 @@ const ProductsView = () => {
         {
             title: '更新时间',
             dataIndex: 'updatedAt',
+            width: 180,
             render: (value: number) => {
                 return formatDateTime(value);
             },
@@ -124,6 +133,7 @@ const ProductsView = () => {
             title: '操作',
             dataIndex: 'id',
             width: 230,
+            fixed: 'right',
             render: (text: string, record: any) => {
                 return (
                     <Space>
@@ -224,6 +234,7 @@ const ProductsView = () => {
                     columns={columns}
                     dataSource={products}
                     rowKey={`id`}
+                    scroll={{ x: 1000 }}
                     loading={loading}
                 />
             </Layout.Item>

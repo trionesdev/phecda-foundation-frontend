@@ -1,4 +1,4 @@
-import { Button, ButtonProps, Form, Input, message, Select } from 'antd';
+import { Button, ButtonProps, Form, Input, message, Select, Tag } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
 import { deviceApi } from '@apis';
 import ProductSelect from '@components/product-select';
@@ -75,9 +75,28 @@ const DeviceForm: FC<DeviceFormProps> = ({
                 <ProductSelect disabled={!!id} />
             </Form.Item>
             <Form.Item
-                label={`DeviceName/设备名称`}
+                label={
+                    <>
+                        DeviceName/设备名称
+                        <span style={{ color: '#0000005c', fontSize: 12 }}>
+                            必须英文字母开头
+                        </span>
+                    </>
+                }
                 name={`name`}
-                rules={[{ required: true }]}
+                rules={[
+                    { required: true },
+                    {
+                        validator: (rule, value) => {
+                            if (value && !/^[a-zA-Z]/.test(value)) {
+                                return Promise.reject(
+                                    'DeviceName必须英文字母开头'
+                                );
+                            }
+                            return Promise.resolve();
+                        },
+                    },
+                ]}
             >
                 <Input disabled={!!id} />
             </Form.Item>
