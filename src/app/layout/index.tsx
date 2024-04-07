@@ -15,7 +15,7 @@ const MainLayoutView = () => {
     const menuItems: MenuProps['items'] = [
         {
             key: RoutesConstants.DASHBOARD.key,
-            label: '首页',
+            label: '概览',
             onClick: () => navigate(RoutesConstants.DASHBOARD.path()),
         },
         {

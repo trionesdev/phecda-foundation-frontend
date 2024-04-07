@@ -64,7 +64,9 @@ export const AlarmTypesPage = () => {
                 return (
                     <Space>
                         <AlarmTypeForm id={text} onRefresh={refreshAsync}>
-                            <Button type={`link`}>编辑</Button>
+                            <Button size={`small`} type={`link`}>
+                                编辑
+                            </Button>
                         </AlarmTypeForm>
                         <Popconfirm
                             title={`确定删除`}
@@ -80,7 +82,7 @@ export const AlarmTypesPage = () => {
                                     });
                             }}
                         >
-                            <Button type={`link`} danger>
+                            <Button size={`small`} type={`link`} danger>
                                 删除
                             </Button>
                         </Popconfirm>

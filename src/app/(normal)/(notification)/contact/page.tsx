@@ -7,7 +7,7 @@ export const ContactPage = () => {
     return (
         <div className={styles.contactPage}>
             <Tabs
-                style={{ backgroundColor: 'white' }}
+                style={{ backgroundColor: 'white', padding: 8 }}
                 defaultActiveKey="1"
                 items={[
                     {
