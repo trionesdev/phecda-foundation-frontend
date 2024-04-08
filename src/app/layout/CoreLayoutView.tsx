@@ -1,13 +1,13 @@
-import { AppToolbar, Layout } from '@trionesdev/antd-react-ext';
-import { Menu, MenuProps } from 'antd';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import styles from './layout.module.less';
-import { RoutesConstants } from '@/router/routes.constants';
 import { useEffect, useState } from 'react';
+import { Menu, MenuProps } from 'antd';
+import { RoutesConstants } from '@/router/routes.constants';
+import { AppToolbar, Layout } from '@trionesdev/antd-react-ext';
 import Icon from '@ant-design/icons';
+import styles from '@/app/layout/layout.module.less';
 import { ReactComponent as PhecdaSvg } from './assests/phecda.svg';
 
-const MainLayoutView = () => {
+export const CoreLayoutView = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [selectedKeys, setSelectedKeys] = useState<any[]>([]);
@@ -148,4 +148,3 @@ const MainLayoutView = () => {
         </Layout>
     );
 };
-export default MainLayoutView;

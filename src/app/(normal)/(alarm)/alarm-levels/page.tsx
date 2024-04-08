@@ -93,6 +93,7 @@ export const AlarmLevelsPage = () => {
     return (
         <div className={styles.alarmLevels}>
             <GridTable
+                fit={true}
                 size={`small`}
                 style={{ backgroundColor: 'white' }}
                 toolbar={
