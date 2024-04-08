@@ -2,10 +2,9 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Menu, MenuProps } from 'antd';
 import { RoutesConstants } from '@/router/routes.constants';
-import { AppToolbar, Layout } from '@trionesdev/antd-react-ext';
-import Icon from '@ant-design/icons';
+import { Layout } from '@trionesdev/antd-react-ext';
 import styles from '@/app/layout/layout.module.less';
-import { ReactComponent as PhecdaSvg } from './assests/phecda.svg';
+import { DashboardIcon } from '@icons';
 
 export const CoreLayoutView = () => {
     const navigate = useNavigate();
@@ -16,6 +15,7 @@ export const CoreLayoutView = () => {
         {
             key: RoutesConstants.DASHBOARD.key,
             label: '概览',
+            icon: <DashboardIcon />,
             onClick: () => navigate(RoutesConstants.DASHBOARD.path()),
         },
         {
@@ -120,31 +120,18 @@ export const CoreLayoutView = () => {
     }, [location]);
 
     return (
-        <Layout direction={`vertical`}>
-            <Layout.Item>
-                <AppToolbar
-                    avatar={{
-                        icon: (
-                            <Icon component={PhecdaSvg} style={{ width: 40 }} />
-                        ),
-                        style: { fontSize: 40 },
-                    }}
-                    title={`物联网平台`}
+        <Layout className={styles.layoutViewContent}>
+            <Layout.Sider width={250} className={styles.layoutViewSider}>
+                <Menu
+                    items={menuItems}
+                    openKeys={openKeys}
+                    onOpenChange={onOpenChange}
+                    selectedKeys={selectedKeys}
                 />
+            </Layout.Sider>
+            <Layout.Item auto={true}>
+                <Outlet />
             </Layout.Item>
-            <Layout className={styles.layoutViewContent}>
-                <Layout.Sider width={250} className={styles.layoutViewSider}>
-                    <Menu
-                        items={menuItems}
-                        openKeys={openKeys}
-                        onOpenChange={onOpenChange}
-                        selectedKeys={selectedKeys}
-                    />
-                </Layout.Sider>
-                <Layout.Item auto={true}>
-                    <Outlet />
-                </Layout.Item>
-            </Layout>
         </Layout>
     );
 };

@@ -1,5 +1,5 @@
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
-import { Button, Col, Form, Grid, Row, Space } from 'antd';
+import { Button, Col, Form, FormItemProps, Grid, Row, Space } from 'antd';
 import classNames from 'classnames';
 import _ from 'lodash';
 import React, { FC, useEffect, useState } from 'react';
@@ -8,16 +8,10 @@ import { useCssInJs } from '@trionesdev/antd-react-ext';
 
 const { useBreakpoint } = Grid;
 
-export type SearchToolbarItem = {
-    label?: React.ReactNode;
-    name?: string | string[];
-    children?: React.ReactNode;
-};
-
 export type SearchToolbarProps = {
     style?: React.CSSProperties;
     className?: string;
-    items?: SearchToolbarItem[];
+    items?: FormItemProps[];
     layout?: 'horizontal' | 'inline' | 'vertical';
     labelCol?: { span?: number; offset?: number };
     labelAlign?: 'left' | 'right';
@@ -167,9 +161,7 @@ const SearchToolbar: FC<SearchToolbarProps> = ({
                                     index > rowColSize - 2 && !expanded,
                             })}
                         >
-                            <Form.Item label={item.label} name={item.name}>
-                                {item.children}
-                            </Form.Item>
+                            <Form.Item {...item} />
                         </Col>
                     ))}
                     <Col
