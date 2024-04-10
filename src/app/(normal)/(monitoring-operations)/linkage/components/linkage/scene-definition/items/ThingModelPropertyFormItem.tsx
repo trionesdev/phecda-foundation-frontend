@@ -5,7 +5,7 @@ import { deviceApi } from '@apis';
 import _ from 'lodash';
 
 type ThingModelPropertyFormItemProps = {
-    productId?: string;
+    productKey?: string;
     required?: boolean;
     form?: FormInstance;
     namePath?: any[];
@@ -14,11 +14,11 @@ type ThingModelPropertyFormItemProps = {
 
 export const ThingModelPropertyFormItem: FC<
     ThingModelPropertyFormItemProps
-> = ({ productId, required, form, namePath = [], onSelect }) => {
+> = ({ productKey, required, form, namePath = [], onSelect }) => {
     const property = Form.useWatch([...namePath], { form });
     const [options, setOptions] = useState([]);
     const { run: queryProductThingModel } = useRequest(
-        (id) => deviceApi.queryProductThingModel(id),
+        (key) => deviceApi.queryProductThingModelByKey(key),
         {
             manual: true,
             onSuccess: (data, params) => {
@@ -28,12 +28,12 @@ export const ThingModelPropertyFormItem: FC<
     );
 
     useEffect(() => {
-        if (productId) {
-            queryProductThingModel(productId);
+        if (productKey) {
+            queryProductThingModel(productKey);
         } else {
             setOptions([]);
         }
-    }, [productId]);
+    }, [productKey]);
 
     useEffect(() => {
         if (property && !_.isEmpty(options)) {

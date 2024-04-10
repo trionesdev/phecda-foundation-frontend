@@ -11,19 +11,22 @@ type ThingPropertyReportTriggerIdentifierProps = {
 export const ThingPropertyReportTriggerIdentifier: FC<
     ThingPropertyReportTriggerIdentifierProps
 > = ({ form, namePath }) => {
-    const eventTriggerIdentifierProduct = Form.useWatch(
+    const productKey = Form.useWatch(
         [...namePath, 'identifier', 'productKey'],
         form
     );
 
     const handlePropertySelect = (value: any, option: any) => {
+        if (!option) {
+            return;
+        }
         form?.setFieldValue(
             [...namePath, 'filter', 'valueType'],
-            option.valueType
+            option?.valueType
         );
         form?.setFieldValue(
             [...namePath, 'filter', 'valueSpecs'],
-            option.valueSpecs
+            option?.valueSpecs
         );
     };
 
@@ -37,12 +40,12 @@ export const ThingPropertyReportTriggerIdentifier: FC<
             <DeviceFormItem
                 form={form}
                 namePath={[...namePath, 'identifier', 'deviceName']}
-                productKey={eventTriggerIdentifierProduct}
+                productKey={productKey}
             />
             <ThingModelPropertyFormItem
                 form={form}
                 namePath={[...namePath, 'identifier', 'property']}
-                productId={eventTriggerIdentifierProduct}
+                productKey={productKey}
                 onSelect={handlePropertySelect}
                 required={true}
             />

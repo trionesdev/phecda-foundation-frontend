@@ -5,6 +5,8 @@ import { DeviceFormItem } from '@/app/(normal)/(monitoring-operations)/linkage/c
 import { ThingModelPropertyFormItem } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/items/ThingModelPropertyFormItem';
 import { ThingPropertyValueFormItem } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/items/ThingPropertyValueFormItem';
 import { OperatorFormItem } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/items/OperatorFormItem';
+import _ from 'lodash';
+import { OPERATOR } from '@/domains/linkage/linkage.enums';
 
 type ThingPropertyStateIdentifierProps = {
     form?: FormInstance;
@@ -33,14 +35,22 @@ export const ThingPropertyStateIdentifier: FC<
         }
     );
 
+    const operator = Form.useWatch([...namePath, 'condition', 'operator'], {
+        form,
+        preserve: true,
+    });
+
     const handlePropertySelect = (value: any, option: any) => {
+        if (!option) {
+            return;
+        }
         form?.setFieldValue(
             [...namePath, 'condition', 'valueType'],
-            option.valueType
+            option?.valueType
         );
         form?.setFieldValue(
             [...namePath, 'condition', 'valueSpecs'],
-            option.valueSpecs
+            option?.valueSpecs
         );
     };
 
@@ -65,7 +75,7 @@ export const ThingPropertyStateIdentifier: FC<
             <ThingModelPropertyFormItem
                 form={form}
                 namePath={[...namePath, 'condition', 'valuePath']}
-                productId={stateIdentifierProductKey}
+                productKey={stateIdentifierProductKey}
                 onSelect={handlePropertySelect}
             />
             <OperatorFormItem
@@ -78,6 +88,17 @@ export const ThingPropertyStateIdentifier: FC<
                 valueType={conditionValueType}
                 valueSpecs={conditionValueSpecs}
             />
+            {_.includes(
+                [OPERATOR.RANGE_CLOSED, OPERATOR.RANGE_OPEN],
+                operator
+            ) && (
+                <ThingPropertyValueFormItem
+                    form={form}
+                    namePath={[...namePath, 'condition', 'args', 1]}
+                    valueType={conditionValueType}
+                    valueSpecs={conditionValueSpecs}
+                />
+            )}
         </Space>
     );
 };

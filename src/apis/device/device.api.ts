@@ -57,6 +57,12 @@ export default class DeviceApi extends BaseApi {
         );
     }
 
+    queryProductThingModelByKey(productKey: string): Promise<any> {
+        return this.request.get(
+            `${this.baseUri}/products/key/${productKey}/thing-model`
+        );
+    }
+
     queryProductThingModelDraft(productId: string) {
         return this.request.get(
             `${this.baseUri}/products/${productId}/thing-model-draft`
