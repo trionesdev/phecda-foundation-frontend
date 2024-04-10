@@ -1,8 +1,8 @@
 import {
     GridTable,
+    Layout,
     PageHeader,
     TableToolbar,
-    VPanel,
 } from '@trionesdev/antd-react-ext';
 import styles from './product-thing-model-draft.module.less';
 import {
@@ -10,9 +10,9 @@ import {
     Button,
     Descriptions,
     Divider,
+    message,
     Popconfirm,
     Space,
-    message,
 } from 'antd';
 import { useEffect, useState } from 'react';
 import ThingsModelAbilityForm, {
@@ -22,19 +22,19 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
 import { RoutesConstants } from '@/router/routes.constants';
+import { useRequest } from 'ahooks';
 
-const ProductThingModelDraftView = () => {
+const ProductThingModelDraftPage = () => {
     const navigate = useNavigate();
     const { id } = useParams();
-    const [querySeq, setQuerySeq] = useState(0);
-    const [loading, setLoading] = useState(false);
     const [rows, setRows] = useState([]);
-
-    const handleQueryThingModel = () => {
-        setLoading(true);
-        deviceApi
-            .queryProductThingModelDraft(id!)
-            .then((res: any) => {
+    const { run: handleQueryThingModel, loading } = useRequest(
+        () => {
+            return deviceApi.queryProductThingModelDraft(id!);
+        },
+        {
+            manual: true,
+            onSuccess: (res: any) => {
                 const thingModelData = _.cloneDeep(_.get(res, 'thingModel'));
                 _.get(thingModelData, 'events')?.map((ability: any) => {
                     _.assign(ability, {
@@ -56,20 +56,18 @@ const ProductThingModelDraftView = () => {
                     .reduce((prev, cur) => _.concat(prev, cur), [])
                     .sort();
                 setRows(abilities || []);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    };
+            },
+        }
+    );
 
     const handleDeleteAbility = (identifier: string) => {
         deviceApi.deleteThingModelDraftAbility(id!, identifier).then(() => {
-            setQuerySeq(querySeq + 1);
+            handleQueryThingModel();
         });
     };
 
     const handleEditSuccess = () => {
-        setQuerySeq(querySeq + 1);
+        handleQueryThingModel();
     };
 
     const handlePublishThingModel = () => {
@@ -80,7 +78,7 @@ const ProductThingModelDraftView = () => {
 
     useEffect(() => {
         handleQueryThingModel();
-    }, [id, querySeq]);
+    }, [id]);
 
     const columns = [
         {
@@ -148,61 +146,69 @@ const ProductThingModelDraftView = () => {
     ];
 
     const breadcrumbItems = [{ title: '设备管理' }];
-    const header = (
-        <PageHeader
-            breadcrumb={{ items: breadcrumbItems }}
-            title={`编辑功能定义草稿`}
-            onBack={() =>
-                navigate(
-                    `${RoutesConstants.PRODUCT_DETAIL.path(
-                        id!
-                    )}?tab=thing-model`
-                )
-            }
-        >
-            <Descriptions>
-                <Descriptions.Item label={`产品名称`}>流量</Descriptions.Item>
-            </Descriptions>
-            <Alert
-                message="您正在编辑的是草稿，需点击发布后，物模型才会正式生效。"
-                type="info"
-            />
-        </PageHeader>
-    );
-    const tableToolbar = (
-        <TableToolbar
-            extra={[
-                <ThingsModelAbilityForm
-                    key={`create-ability`}
-                    type={`primary`}
-                    productId={id!}
-                    onSuccess={handleEditSuccess}
-                >
-                    添加功能
-                </ThingsModelAbilityForm>,
-                <Button
-                    key={`publish-btn`}
-                    type={`primary`}
-                    onClick={handlePublishThingModel}
-                >
-                    发布上线
-                </Button>,
-            ]}
-        />
-    );
     return (
-        <VPanel className={styles.productThingsModelDraftView} header={header}>
-            <GridTable
-                style={{ backgroundColor: 'white', padding: '8px' }}
-                size={`small`}
-                toolbar={tableToolbar}
-                columns={columns}
-                dataSource={rows}
-                loading={loading}
-                rowKey={`identifier`}
-                pagination={false}
-            />
-        </VPanel>
+        <Layout
+            className={styles.productThingsModelDraftView}
+            direction={`vertical`}
+        >
+            <Layout.Item>
+                <PageHeader
+                    breadcrumb={{ items: breadcrumbItems }}
+                    title={`编辑功能定义草稿`}
+                    onBack={() =>
+                        navigate(
+                            `${RoutesConstants.PRODUCT_DETAIL.path(
+                                id!
+                            )}?tab=thing-model`
+                        )
+                    }
+                >
+                    <Descriptions>
+                        <Descriptions.Item label={`产品名称`}>
+                            流量
+                        </Descriptions.Item>
+                    </Descriptions>
+                    <Alert
+                        message="您正在编辑的是草稿，需点击发布后，物模型才会正式生效。"
+                        type="info"
+                    />
+                </PageHeader>
+            </Layout.Item>
+            <Layout.Item auto={true} style={{ backgroundColor: 'white' }}>
+                <GridTable
+                    style={{ backgroundColor: 'white', padding: '8px' }}
+                    size={`small`}
+                    toolbar={
+                        <TableToolbar
+                            extra={
+                                <Space>
+                                    <ThingsModelAbilityForm
+                                        key={`create-ability`}
+                                        type={`primary`}
+                                        productId={id!}
+                                        onSuccess={handleEditSuccess}
+                                    >
+                                        添加功能
+                                    </ThingsModelAbilityForm>
+                                    <Button
+                                        key={`publish-btn`}
+                                        type={`primary`}
+                                        onClick={handlePublishThingModel}
+                                    >
+                                        发布上线
+                                    </Button>
+                                </Space>
+                            }
+                        />
+                    }
+                    columns={columns}
+                    dataSource={rows}
+                    loading={loading}
+                    rowKey={`identifier`}
+                    pagination={false}
+                />
+            </Layout.Item>
+        </Layout>
     );
 };
-export default ProductThingModelDraftView;
+export default ProductThingModelDraftPage;

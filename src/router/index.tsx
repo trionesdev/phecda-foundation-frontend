@@ -24,8 +24,8 @@ import { ForwardingRulePage } from '@/app/(normal)/(message-forwarding)/rule/pag
 import { MessageSourceDetailPage } from '@/app/(normal)/(message-forwarding)/source-detail/page';
 import { ForwardingRuleDetailPage } from '@/app/(normal)/(message-forwarding)/rule-detail/page';
 import { LinkagePage } from '@/app/(normal)/(monitoring-operations)/linkage/page';
-import ProductThingsModelDraft from '@/app/(normal)/(product)/product-things-model-draft';
 import { NotificationTemplatesPage } from '@/app/(normal)/(notification)/templates/page';
+import ProductThingModelDraftPage from '@/app/(normal)/(product)/product-things-model-draft/page';
 
 export const routes: RouteObject[] = [
     {
@@ -99,7 +99,7 @@ export const routes: RouteObject[] = [
                     },
                     {
                         path: RoutesConstants.PRODUCT_THINGS_MODEL_DRAFT.path(),
-                        element: <ProductThingsModelDraft />,
+                        element: <ProductThingModelDraftPage />,
                     },
                     {
                         path: RoutesConstants.DEVICES.path(),
