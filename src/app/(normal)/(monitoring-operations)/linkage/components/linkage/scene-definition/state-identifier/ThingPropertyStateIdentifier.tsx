@@ -39,7 +39,7 @@ export const ThingPropertyStateIdentifier: FC<
         form,
         preserve: true,
     });
-
+    console.log(operator);
     const handlePropertySelect = (value: any, option: any) => {
         if (!option) {
             return;

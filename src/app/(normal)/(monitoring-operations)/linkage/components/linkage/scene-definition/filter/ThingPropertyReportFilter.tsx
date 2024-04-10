@@ -2,6 +2,8 @@ import { FC } from 'react';
 import { Button, Form, FormInstance, Input, Space } from 'antd';
 import { ThingPropertyValueFormItem } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/items/ThingPropertyValueFormItem';
 import { OperatorFormItem } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/items/OperatorFormItem';
+import _ from 'lodash';
+import { OPERATOR } from '@/domains/linkage/linkage.enums';
 
 type ThingPropertyReportFilterProps = {
     editing?: boolean;
@@ -20,6 +22,10 @@ export const ThingPropertyReportFilter: FC<ThingPropertyReportFilterProps> = ({
             preserve: true,
         }
     );
+    const operator = Form.useWatch([...namePath, 'filter', 'operator'], {
+        form,
+        preserve: true,
+    });
     const eventTriggerValueSpecs = Form.useWatch(
         [...namePath, 'filter', 'valueSpecs'],
         {
@@ -51,6 +57,17 @@ export const ThingPropertyReportFilter: FC<ThingPropertyReportFilterProps> = ({
                 valueType={eventTriggerValueType}
                 valueSpecs={eventTriggerValueSpecs}
             />
+            {_.includes(
+                [OPERATOR.RANGE_CLOSED, OPERATOR.RANGE_OPEN],
+                operator
+            ) && (
+                <ThingPropertyValueFormItem
+                    form={form}
+                    namePath={[...namePath, 'filter', 'args', 1]}
+                    valueType={eventTriggerValueType}
+                    valueSpecs={eventTriggerValueSpecs}
+                />
+            )}
             {editing && (
                 <Form.Item label={<span></span>}>
                     <Button
