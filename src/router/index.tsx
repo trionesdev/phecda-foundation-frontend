@@ -25,6 +25,7 @@ import { MessageSourceDetailPage } from '@/app/(normal)/(message-forwarding)/sou
 import { ForwardingRuleDetailPage } from '@/app/(normal)/(message-forwarding)/rule-detail/page';
 import { LinkagePage } from '@/app/(normal)/(monitoring-operations)/linkage/page';
 import ProductThingsModelDraft from '@/app/(normal)/(product)/product-things-model-draft';
+import { NotificationTemplatesPage } from '@/app/(normal)/(notification)/templates/page';
 
 export const routes: RouteObject[] = [
     {
@@ -56,6 +57,10 @@ export const routes: RouteObject[] = [
                     {
                         path: RoutesConstants.NOTIFICATION_CONTACTS.path(),
                         element: <ContactPage />,
+                    },
+                    {
+                        path: RoutesConstants.NOTIFICATION_TEMPLATES.path(),
+                        element: <NotificationTemplatesPage />,
                     },
 
                     // //------告警管理-----

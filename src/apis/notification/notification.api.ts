@@ -31,6 +31,7 @@ export class NotificationApi extends BaseApi {
     }) {
         return this.request.get(`${this.baseUri}/contacts/page`, { params });
     }
+
     //endregion
 
     //region contact group
@@ -50,6 +51,12 @@ export class NotificationApi extends BaseApi {
         return this.request.get(`${this.baseUri}/contact-groups/${id}`);
     }
 
+    findContactGroups(params?: { [key: string]: any }) {
+        return this.request.get(`${this.baseUri}/contact-groups/list`, {
+            params,
+        });
+    }
+
     findContactGroupsPage(params: {
         pageNum: number;
         pageSize: number;
@@ -59,5 +66,34 @@ export class NotificationApi extends BaseApi {
             params,
         });
     }
+
     //endregion
+
+    createTemplate(data: any) {
+        return this.request.post(`${this.baseUri}/templates`, data);
+    }
+
+    deleteTemplate(id: string) {
+        return this.request.delete(`${this.baseUri}/templates/${id}`);
+    }
+
+    updateTemplateById(id: string, data: any) {
+        return this.request.put(`${this.baseUri}/templates/${id}`, data);
+    }
+
+    findTemplateById(id: string) {
+        return this.request.get(`${this.baseUri}/templates/${id}`);
+    }
+
+    findTemplates(params?: { [key: string]: any }) {
+        return this.request.get(`${this.baseUri}/templates/list`, { params });
+    }
+
+    findTemplatesPage(params: {
+        pageNum: number;
+        pageSize: number;
+        [key: string]: any;
+    }) {
+        return this.request.get(`${this.baseUri}/templates/page`, { params });
+    }
 }

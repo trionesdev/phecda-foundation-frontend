@@ -1,5 +1,7 @@
 import {
     ACTION_TYPE,
+    CHANNEL_TYPE,
+    CONTACTS_TYPE,
     LINKAGE_SCENE_EVENT_TYPE,
     OPERATOR,
     STATE_CONDITION_TYPE,
@@ -53,10 +55,28 @@ export const OperatorOptions = [
 export const ActionTypeOptions = [
     {
         label: '发送通知消息',
-        value: ACTION_TYPE.MESSAGE,
+        value: ACTION_TYPE.NOTIFICATION,
     },
     {
         label: '告警',
         value: ACTION_TYPE.ALARM,
+    },
+];
+
+export const ContactsTypeOptions = [
+    {
+        label: '联系人',
+        value: CONTACTS_TYPE.CONTACTS,
+    },
+    {
+        label: '联系人组',
+        value: CONTACTS_TYPE.CONTACTS_GROUP,
+    },
+];
+
+export const ChannelTypeOptions = [
+    {
+        label: '短信',
+        value: CHANNEL_TYPE.SMS,
     },
 ];

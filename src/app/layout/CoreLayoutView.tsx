@@ -91,6 +91,12 @@ export const CoreLayoutView = () => {
                     onClick: () =>
                         navigate(RoutesConstants.NOTIFICATION_CONTACTS.path()),
                 },
+                {
+                    key: RoutesConstants.NOTIFICATION_TEMPLATES.key,
+                    label: '模板管理',
+                    onClick: () =>
+                        navigate(RoutesConstants.NOTIFICATION_TEMPLATES.path()),
+                },
             ],
         },
         {

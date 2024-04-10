@@ -26,6 +26,15 @@ export enum OPERATOR {
 }
 
 export enum ACTION_TYPE {
-    MESSAGE = 'MESSAGE',
+    NOTIFICATION = 'NOTIFICATION',
     ALARM = 'ALARM',
+}
+
+export enum CONTACTS_TYPE {
+    CONTACTS = 'CONTACTS',
+    CONTACTS_GROUP = 'CONTACTS_GROUP',
+}
+
+export enum CHANNEL_TYPE {
+    SMS = 'SMS',
 }

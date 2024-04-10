@@ -22,14 +22,14 @@ export const AlarmAction: FC<AlarmActionProps> = ({ form, namePath = [] }) => {
                 name={[...namePath, 'alarmType']}
                 required={true}
             >
-                <AlarmTypeSelect style={{ minWidth: 175 }} />
+                <AlarmTypeSelect style={{ minWidth: 175 }} allowClear={true} />
             </Form.Item>
             <Form.Item
                 label={`告警级别`}
                 name={[...namePath, 'alarmLevel']}
                 required={true}
             >
-                <AlarmLevelSelect style={{ minWidth: 175 }} />
+                <AlarmLevelSelect style={{ minWidth: 175 }} allowClear={true} />
             </Form.Item>
             <Form.Item
                 label={`触发方式`}
@@ -39,6 +39,7 @@ export const AlarmAction: FC<AlarmActionProps> = ({ form, namePath = [] }) => {
                 <Select
                     options={AlarmTriggerModeOptions}
                     style={{ minWidth: 175 }}
+                    allowClear={true}
                 />
             </Form.Item>
             {_.isEqual(triggerMode, ALARM_TRIGGER_MODE.CONTINUOUS) && (
@@ -60,7 +61,7 @@ export const AlarmAction: FC<AlarmActionProps> = ({ form, namePath = [] }) => {
                 <InputNumber style={{ minWidth: 175 }} min={0} />
             </Form.Item>
             <Form.Item label={`描述`} name={[...namePath, 'description']}>
-                <Input />
+                <Input allowClear={true} />
             </Form.Item>
         </Space>
     );
