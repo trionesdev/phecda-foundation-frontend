@@ -1,6 +1,6 @@
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import React, { FC, useEffect, useState } from 'react';
-import { Form, Input, message, Spin } from 'antd';
+import { Form, Input, message, Space, Spin } from 'antd';
 import { notificationApi } from '@apis';
 import { useRequest } from 'ahooks';
 
@@ -66,7 +66,50 @@ export const TemplateForm: FC<TemplateFormProps> = ({
                 <Form.Item label={`标题`} name={`title`} required={true}>
                     <Input />
                 </Form.Item>
-                <Form.Item label={`内容`} name={`content`} required={true}>
+                <Form.Item
+                    label={`内容`}
+                    name={`content`}
+                    required={true}
+                    extra={
+                        <Space size={`small`} direction={`vertical`}>
+                            <div>可用变量：</div>
+                            <div>
+                                <span>
+                                    产品Key：
+                                    <span
+                                        dangerouslySetInnerHTML={{
+                                            __html: '${productKey}',
+                                        }}
+                                    />{' '}
+                                </span>
+                                <span>
+                                    产品名称：
+                                    <span
+                                        dangerouslySetInnerHTML={{
+                                            __html: '${productName}',
+                                        }}
+                                    />{' '}
+                                </span>
+                                <span>
+                                    设备名称：
+                                    <span
+                                        dangerouslySetInnerHTML={{
+                                            __html: '${deviceName}',
+                                        }}
+                                    />{' '}
+                                </span>
+                                <span>
+                                    数据内容：
+                                    <span
+                                        dangerouslySetInnerHTML={{
+                                            __html: '${content}',
+                                        }}
+                                    />{' '}
+                                </span>
+                            </div>
+                        </Space>
+                    }
+                >
                     <Input.TextArea />
                 </Form.Item>
                 <Form.Item label={`备注`} name={`remark`}>
