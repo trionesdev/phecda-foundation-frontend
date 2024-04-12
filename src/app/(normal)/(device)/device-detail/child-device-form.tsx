@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Button, ButtonProps, Form, Input, notification, Select } from 'antd';
-import ProductSelect from '@components/product-select';
+import { Button, ButtonProps, Form, notification, Select } from 'antd';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
 import { ModalForm } from '@trionesdev/antd-react-ext';
+import ProductKeySelect from '@components/product-key-select';
 
 type ChildDeviceFormProps = {
     parentDeviceId: string;
@@ -67,7 +67,7 @@ const ChildDeviceForm: FC<ChildDeviceFormProps> = ({
                 onSubmit={handleSubmit}
             >
                 <Form.Item label={`产品`} name={`productId`} required>
-                    <ProductSelect
+                    <ProductKeySelect
                         onChange={(value) => handleProductOnChange(value)}
                     />
                 </Form.Item>

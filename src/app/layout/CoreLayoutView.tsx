@@ -4,7 +4,14 @@ import { Menu, MenuProps } from 'antd';
 import { RoutesConstants } from '@/router/routes.constants';
 import { Layout } from '@trionesdev/antd-react-ext';
 import styles from '@/app/layout/layout.module.less';
-import { DashboardIcon } from '@icons';
+import {
+    AlarmIcon,
+    DashboardIcon,
+    DeviceIcon,
+    MessageForwardingIcon,
+    MonitoringIcon,
+    NotificationIcon,
+} from '@icons';
 
 export const CoreLayoutView = () => {
     const navigate = useNavigate();
@@ -21,6 +28,7 @@ export const CoreLayoutView = () => {
         {
             key: 'device-management',
             label: '设备管理',
+            icon: <DeviceIcon />,
             children: [
                 {
                     key: RoutesConstants.PRODUCTS.key,
@@ -37,6 +45,7 @@ export const CoreLayoutView = () => {
         {
             key: 'message-forwarding',
             label: `消息转发`,
+            icon: <MessageForwardingIcon />,
             children: [
                 {
                     key: RoutesConstants.MESSAGE_FORWARDING_RULES.key,
@@ -51,6 +60,7 @@ export const CoreLayoutView = () => {
         {
             key: 'monitoring-operations',
             label: '监控运维',
+            icon: <MonitoringIcon />,
             children: [
                 {
                     key: RoutesConstants.LINKAGE.key,
@@ -62,6 +72,7 @@ export const CoreLayoutView = () => {
         {
             key: 'alarm-management',
             label: '告警管理',
+            icon: <AlarmIcon />,
             children: [
                 {
                     key: RoutesConstants.ALARM_TYPES.key,
@@ -84,6 +95,7 @@ export const CoreLayoutView = () => {
         {
             key: 'notification',
             label: '通知管理',
+            icon: <NotificationIcon />,
             children: [
                 {
                     key: RoutesConstants.NOTIFICATION_CONTACTS.key,

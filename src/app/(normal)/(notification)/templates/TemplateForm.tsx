@@ -71,43 +71,16 @@ export const TemplateForm: FC<TemplateFormProps> = ({
                     name={`content`}
                     required={true}
                     extra={
-                        <Space size={`small`} direction={`vertical`}>
-                            <div>可用变量：</div>
-                            <div>
-                                <span>
-                                    产品Key：
-                                    <span
-                                        dangerouslySetInnerHTML={{
-                                            __html: '${productKey}',
-                                        }}
-                                    />{' '}
-                                </span>
-                                <span>
-                                    产品名称：
-                                    <span
-                                        dangerouslySetInnerHTML={{
-                                            __html: '${productName}',
-                                        }}
-                                    />{' '}
-                                </span>
-                                <span>
-                                    设备名称：
-                                    <span
-                                        dangerouslySetInnerHTML={{
-                                            __html: '${deviceName}',
-                                        }}
-                                    />{' '}
-                                </span>
-                                <span>
-                                    数据内容：
-                                    <span
-                                        dangerouslySetInnerHTML={{
-                                            __html: '${content}',
-                                        }}
-                                    />{' '}
-                                </span>
-                            </div>
-                        </Space>
+                        <div
+                            style={{ backgroundColor: '#d7d7d7', marginTop: 4 }}
+                        >
+                            <strong>可用变量：</strong>
+                            <span
+                                dangerouslySetInnerHTML={{
+                                    __html: '产品Key：${productKey},产品名称：${productName},设备名称：${deviceName}',
+                                }}
+                            />
+                        </div>
                     }
                 >
                     <Input.TextArea />

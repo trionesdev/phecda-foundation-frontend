@@ -2,7 +2,7 @@ import { Card, DatePicker } from 'antd';
 import React, { useEffect } from 'react';
 import { Chart } from '@antv/g2';
 
-export const AlarmStatistics = () => {
+export const AlarmStatistics1 = () => {
     const containerRef = React.useRef<any>();
 
     const data = [
@@ -62,7 +62,11 @@ export const AlarmStatistics = () => {
     }, []);
 
     return (
-        <Card title={`告警统计`} extra={<DatePicker.RangePicker />}>
+        <Card
+            size={`small`}
+            title={`告警统计`}
+            styles={{ body: { height: 300 } }}
+        >
             <div ref={containerRef} />
         </Card>
     );

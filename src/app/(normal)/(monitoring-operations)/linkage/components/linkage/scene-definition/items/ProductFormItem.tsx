@@ -1,6 +1,6 @@
 import { Form, FormInstance } from 'antd';
-import ProductSelect from '@components/product-select';
 import { FC } from 'react';
+import ProductKeySelect from '@components/product-key-select';
 
 type ProductFormItemProps = {
     required?: boolean;
@@ -14,7 +14,7 @@ export const ProductFormItem: FC<ProductFormItemProps> = ({
 }) => {
     return (
         <Form.Item label={`产品`} name={namePath} required={required}>
-            <ProductSelect
+            <ProductKeySelect
                 style={{ minWidth: 180 }}
                 placeholder={`请选择产品`}
             />

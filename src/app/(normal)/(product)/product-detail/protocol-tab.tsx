@@ -36,7 +36,7 @@ const ProtocolTab: FC<ProtocolTabProps> = ({ product }) => {
     useEffect(() => {
         setEditStatus(_.eq(product?.status, 'DEVELOPMENT'));
 
-        if (product.id) {
+        if (product?.id) {
             handleQueryProtocolProperties();
         }
     }, [product]);
@@ -47,13 +47,15 @@ const ProtocolTab: FC<ProtocolTabProps> = ({ product }) => {
                 <PageHeader
                     title={`设备连接协议`}
                     backIcon={false}
-                    extra={[
-                        editStatus && (
-                            <Button type={`primary`} onClick={handleSave}>
-                                保存
-                            </Button>
-                        ),
-                    ]}
+                    extra={
+                        <Space>
+                            {editStatus && (
+                                <Button type={`primary`} onClick={handleSave}>
+                                    保存
+                                </Button>
+                            )}
+                        </Space>
+                    }
                 />
             </Layout.Item>
             <Layout.Item auto={true}>

@@ -2,20 +2,20 @@ import { Card } from 'antd';
 import React, { useEffect } from 'react';
 import { Chart } from '@antv/g2';
 
-export const NodeTypeStatistics = () => {
+export const AlarmLevelStatistics = () => {
     const containerRef = React.createRef<any>();
 
     const handleRender = async () => {
         const data = [
-            { item: '事例一', count: 40, percent: 0.4 },
-            { item: '事例二', count: 21, percent: 0.21 },
-            { item: '事例三', count: 17, percent: 0.17 },
+            { item: 'A级告警', count: 40, percent: 0.4 },
+            { item: 'B级告警', count: 21, percent: 0.21 },
+            { item: 'C级告警', count: 17, percent: 0.17 },
         ];
 
         const chart = new Chart({
             container: containerRef.current,
             autoFit: true,
-            height: 400,
+            height: 250,
         });
 
         chart.coordinate({ type: 'theta', outerRadius: 0.8 });
@@ -44,7 +44,11 @@ export const NodeTypeStatistics = () => {
     }, []);
 
     return (
-        <Card title={`节点类型统计`}>
+        <Card
+            size={`small`}
+            title={`告警类型`}
+            styles={{ body: { height: 300 } }}
+        >
             <div ref={containerRef} />
         </Card>
     );

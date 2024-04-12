@@ -88,6 +88,10 @@ export default class AlarmApi extends BaseApi {
 
     //endregion
 
+    queryAlarmsExtList(params: { [key: string]: any }) {
+        return this.request.get(`${this.baseUri}/alarms/ext/list`, { params });
+    }
+
     queryAlarmsExtPage(params: {
         pageNum: number;
         pageSize: number;

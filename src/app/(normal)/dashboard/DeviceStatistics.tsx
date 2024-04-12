@@ -19,7 +19,11 @@ export const DeviceStatistics = () => {
     });
 
     return (
-        <Card title={`设备状态`}>
+        <Card
+            size={`small`}
+            title={`设备状态`}
+            styles={{ body: { height: 120 } }}
+        >
             <Spin spinning={loading}>
                 <Row>
                     <Col flex={`150px`}>

@@ -1,7 +1,7 @@
 import { Form, Select } from 'antd';
-import ProductSelect from '@components/product-select';
 import { FC } from 'react';
 import DeviceSelect from '@components/device-select';
+import ProductKeySelect from '@components/product-key-select';
 
 type ThingPropertyReportProps = {};
 export const ThingPropertyReport: FC<ThingPropertyReportProps> = ({}) => {
@@ -10,7 +10,10 @@ export const ThingPropertyReport: FC<ThingPropertyReportProps> = ({}) => {
     return (
         <>
             <Form.Item name={`productKey`}>
-                <ProductSelect placeholder={`请选择产品`} showSearch={true} />
+                <ProductKeySelect
+                    placeholder={`请选择产品`}
+                    showSearch={true}
+                />
             </Form.Item>
             <Form.Item name={`deviceName`} initialValue={'+'}>
                 <DeviceSelect
