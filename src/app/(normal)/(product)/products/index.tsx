@@ -4,7 +4,7 @@ import {
     SearchToolbar,
     TableToolbar,
 } from '@trionesdev/antd-react-ext';
-import { Button, Input, Popconfirm, Select, Space, Tag } from 'antd';
+import { Button, Input, message, Popconfirm, Select, Space, Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 import ProductFormBtn from './product-form-btn';
 import { deviceApi } from '@apis';
@@ -16,7 +16,7 @@ import { formatDateTime } from '@/commons/util/date.utils';
 import {
     DeviceNodeType,
     DeviceNodeTypeKeys,
-} from '../support/device.constants';
+} from '@/app/(normal)/(product)/internal/device.constants';
 import { useRequest } from 'ahooks';
 import { OptionsType } from '@/constants/types';
 import _ from 'lodash';
@@ -26,6 +26,7 @@ const ProductsView = () => {
     const [pageNum, setPageNum] = useState(1);
     const [pageSize, setPageSize] = useState(10);
     const [products, setProducts] = useState<ProductRep[]>([]);
+    const [total, setTotal] = useState<number>(0);
     const [searchParams, setSearchParams] = useState({});
 
     const nodeTypes: OptionsType[] = [
@@ -55,7 +56,11 @@ const ProductsView = () => {
         {
             manual: true,
             onSuccess: (res: any) => {
-                setProducts(res.rows);
+                setProducts(res?.rows || []);
+                setTotal(res?.total || 0);
+            },
+            onError: async (err) => {
+                message.error(err?.message);
             },
         }
     );
@@ -226,6 +231,15 @@ const ProductsView = () => {
                     rowKey={`id`}
                     scroll={{ x: 1000 }}
                     loading={loading}
+                    pagination={{
+                        current: pageNum,
+                        pageSize,
+                        total: total,
+                        onChange: (page, pageSize) => {
+                            setPageNum(page);
+                            setPageSize(pageSize);
+                        },
+                    }}
                 />
             </Layout.Item>
         </Layout>

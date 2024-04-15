@@ -1,7 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Button, ButtonProps, Form, Input, message, Radio, Tag } from 'antd';
 import { deviceApi } from '@apis';
-import { AccessChannel, DeviceNodeType } from '../support/device.constants';
+import {
+    AccessChannel,
+    DeviceNodeType,
+} from '@/app/(normal)/(product)/internal/device.constants';
 import _ from 'lodash';
 import { ModalForm } from '@trionesdev/antd-react-ext';
 

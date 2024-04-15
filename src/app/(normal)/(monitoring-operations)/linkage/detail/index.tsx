@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './linkage-edit.module.less';
 import { Layout, PageHeader } from '@trionesdev/antd-react-ext';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Form, notification, Space } from 'antd';
+import { Alert, Button, Form, notification, Space, Tooltip } from 'antd';
 import { operationApi } from '@apis';
 import { useRequest } from 'ahooks';
 import _ from 'lodash';
@@ -10,6 +10,7 @@ import { RoutesConstants } from '@/router/routes.constants';
 import { ActionDefinition } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/action-definition';
 import { SceneDefinition } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition';
 import { ActionTrigger } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/action-trigger';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 
 const SceneDetail: React.FC = () => {
     const navigate = useNavigate();
@@ -170,7 +171,16 @@ const SceneDetail: React.FC = () => {
                     {_.size(actions) > 0 && (
                         <div>
                             <div className={styles.linkageEditTitle}>
-                                动作触发设置
+                                动作触发设置{' '}
+                                <Tooltip
+                                    title={
+                                        <span>
+                                            默认场景触发即执行，每10分钟内最多执行1次动作
+                                        </span>
+                                    }
+                                >
+                                    <QuestionCircleOutlined />
+                                </Tooltip>
                             </div>
                             <Space
                                 direction={`vertical`}
@@ -185,7 +195,10 @@ const SceneDetail: React.FC = () => {
                                             onClick={() => {
                                                 form.setFieldValue(
                                                     'actionTrigger',
-                                                    { triggerMode: 'SINGLE' }
+                                                    {
+                                                        triggerMode: 'SINGLE',
+                                                        interval: 600,
+                                                    }
                                                 );
                                             }}
                                         >

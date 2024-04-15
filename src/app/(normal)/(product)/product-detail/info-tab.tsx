@@ -3,7 +3,7 @@ import { Descriptions } from 'antd';
 import { FC } from 'react';
 import _ from 'lodash';
 import { formatDateTime } from '../../../../commons/util/date.utils';
-import { DeviceNodeType } from '../support/device.constants';
+import { DeviceNodeType } from '@/app/(normal)/(product)/internal/device.constants';
 
 type InfoTabProps = {
     product: any;
