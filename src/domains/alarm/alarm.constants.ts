@@ -2,11 +2,11 @@ import { ALARM_STATUS, ALARM_TRIGGER_MODE } from '@/domains/alarm/alarm.enums';
 
 export const AlarmTriggerModeOptions = [
     {
-        label: '直接触发',
+        label: '单次触发',
         value: ALARM_TRIGGER_MODE.SINGLE,
     },
     {
-        label: '持续报警',
+        label: '持续触发',
         value: ALARM_TRIGGER_MODE.CONTINUOUS,
     },
 ];

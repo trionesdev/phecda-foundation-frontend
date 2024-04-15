@@ -9,6 +9,7 @@ import _ from 'lodash';
 import { RoutesConstants } from '@/router/routes.constants';
 import { ActionDefinition } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/action-definition';
 import { SceneDefinition } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition';
+import { ActionTrigger } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/action-trigger';
 
 const SceneDetail: React.FC = () => {
     const navigate = useNavigate();
@@ -18,6 +19,10 @@ const SceneDetail: React.FC = () => {
 
     const scenes = Form.useWatch('scenes', { form, preserve: true }) || [{}];
     const actions = Form.useWatch('actions', { form, preserve: true }) || [];
+    const actionTrigger = Form.useWatch('actionTrigger', {
+        form,
+        preserve: true,
+    });
 
     const {
         run: handleQueryLinkScene,
@@ -29,6 +34,7 @@ const SceneDetail: React.FC = () => {
             form.setFieldsValue({
                 scenes: res.scenes || [{}],
                 actions: res.actions,
+                actionTrigger: res.actionTrigger,
             });
         },
     });
@@ -161,6 +167,42 @@ const SceneDetail: React.FC = () => {
                             </div>
                         )}
                     </div>
+                    {_.size(actions) > 0 && (
+                        <div>
+                            <div className={styles.linkageEditTitle}>
+                                动作触发设置
+                            </div>
+                            <Space
+                                direction={`vertical`}
+                                style={{ width: '100%' }}
+                            >
+                                {_.isEmpty(actionTrigger) && (
+                                    <div>
+                                        <Button
+                                            size={`small`}
+                                            type={`link`}
+                                            style={{ fontSize: 12 }}
+                                            onClick={() => {
+                                                form.setFieldValue(
+                                                    'actionTrigger',
+                                                    { triggerMode: 'SINGLE' }
+                                                );
+                                            }}
+                                        >
+                                            + 设置动作触发机制
+                                        </Button>
+                                    </div>
+                                )}
+                                {!_.isEmpty(actionTrigger) && (
+                                    <ActionTrigger
+                                        form={form}
+                                        namePath={['actionTrigger']}
+                                        editing={editing}
+                                    />
+                                )}
+                            </Space>
+                        </div>
+                    )}
                 </Form>
             </Layout.Item>
             <Layout.Item style={{ padding: 8 }}>
