@@ -3,9 +3,9 @@ import { FC } from 'react';
 import {
     ChannelTypeOptions,
     ContactsTypeOptions,
-} from '@/domains/linkage/linkage.constants';
+} from '@/app/(normal)/(monitoring-operations)/internal/linkage.constants';
 import _ from 'lodash';
-import { CONTACTS_TYPE } from '@/domains/linkage/linkage.enums';
+import { CONTACTS_TYPE } from '@/app/(normal)/(monitoring-operations)/internal/linkage.enums';
 import { ContactSelect } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/action-definition/notification/ContactSelect';
 import { ContactGroupSelect } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/action-definition/notification/ContactGroupSelect';
 import { TemplateSelect } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/action-definition/notification/TemplateSelect';

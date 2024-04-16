@@ -4,7 +4,7 @@ import { NamePath } from 'antd/es/form/interface';
 import _ from 'lodash';
 import ProductDeviceFormItem from './ProductDeviceFormItem';
 import OperatorFormItemItem from './OperatorFormItem';
-import { LinkageSceneEventOptions } from '@/domains/linkage/linkage.constants';
+import { LinkageSceneEventOptions } from '@/app/(normal)/(monitoring-operations)/internal/linkage.constants';
 type FilterConditionFormItemType = {
     // name: NamePath;
 };

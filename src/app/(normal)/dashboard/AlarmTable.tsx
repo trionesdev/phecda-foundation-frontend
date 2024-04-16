@@ -4,7 +4,7 @@ import { useRequest } from 'ahooks';
 import { alarmApi } from '@apis';
 import _ from 'lodash';
 import { formatDateTimeSeconds } from '@commons/util/date.utils';
-import { ALARM_STATUS } from '@/domains/alarm/alarm.enums';
+import { ALARM_STATUS } from '@/app/(normal)/(alarm)/internal/alarm.enums';
 
 export const AlarmTable = () => {
     const [rows, setRows] = useState([]);

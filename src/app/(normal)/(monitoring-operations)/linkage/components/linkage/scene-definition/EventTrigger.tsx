@@ -1,7 +1,7 @@
 import { Button, Form, FormInstance, Input, Select, Space } from 'antd';
 import React, { FC, useEffect } from 'react';
 import _ from 'lodash';
-import { LINKAGE_SCENE_EVENT_TYPE } from '@/domains/linkage/linkage.enums';
+import { LINKAGE_SCENE_EVENT_TYPE } from '@/app/(normal)/(monitoring-operations)/internal/linkage.enums';
 import { SceneEventTypeFormItem } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/items/SceneEventTypeFormItem';
 import { ThingPropertyReportTriggerIdentifier } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/identifier/ThingPropertyReportTriggerIdentifier';
 import { ThingPropertyReportFilter } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/filter/ThingPropertyReportFilter';

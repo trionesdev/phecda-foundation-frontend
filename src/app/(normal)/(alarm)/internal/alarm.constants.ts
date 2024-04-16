@@ -1,4 +1,7 @@
-import { ALARM_STATUS, ALARM_TRIGGER_MODE } from '@/domains/alarm/alarm.enums';
+import {
+    ALARM_STATUS,
+    ALARM_TRIGGER_MODE,
+} from '@/app/(normal)/(alarm)/internal/alarm.enums';
 
 export const AlarmTriggerModeOptions = [
     {

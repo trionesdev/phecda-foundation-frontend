@@ -1,9 +1,9 @@
 import { Button, Col, Form, FormInstance, Row, Select, Space } from 'antd';
 import { FC } from 'react';
-import { ActionTypeOptions } from '@/domains/linkage/linkage.constants';
+import { ActionTypeOptions } from '@/app/(normal)/(monitoring-operations)/internal/linkage.constants';
 import styles from './action-definition.module.less';
 import _ from 'lodash';
-import { ACTION_TYPE } from '@/domains/linkage/linkage.enums';
+import { ACTION_TYPE } from '@/app/(normal)/(monitoring-operations)/internal/linkage.enums';
 import { AlarmAction } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/action-definition/alarm';
 import { NotificationAction } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/action-definition/notification';
 

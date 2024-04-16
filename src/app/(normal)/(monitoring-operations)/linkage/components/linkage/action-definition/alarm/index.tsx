@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Form, FormInstance, Input, InputNumber, Select, Space } from 'antd';
-import { AlarmTriggerModeOptions } from '@/domains/alarm/alarm.constants';
+import { AlarmTriggerModeOptions } from '@/app/(normal)/(alarm)/internal/alarm.constants';
 import _ from 'lodash';
-import { ALARM_TRIGGER_MODE } from '@/domains/alarm/alarm.enums';
+import { ALARM_TRIGGER_MODE } from '@/app/(normal)/(alarm)/internal/alarm.enums';
 import { AlarmTypeSelect } from '@/app/(normal)/(alarm)/alarms/AlarmTypeSelect';
 import { AlarmLevelSelect } from '@/app/(normal)/(alarm)/alarms/AlarmLevelSelect';
 

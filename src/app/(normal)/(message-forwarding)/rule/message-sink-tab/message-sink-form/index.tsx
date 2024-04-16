@@ -1,9 +1,9 @@
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import React, { FC, useEffect } from 'react';
 import { Form, Input, message, Select } from 'antd';
-import { MessageSinkTypeOptions } from '@/domains/message-forwarding/message-forwarding.constants';
+import { MessageSinkTypeOptions } from '@/app/(normal)/(message-forwarding)/internal/message-forwarding.constants';
 import _ from 'lodash';
-import { MESSAGE_SINK_TYPE } from '@/domains/message-forwarding/message-forwarding.enums';
+import { MESSAGE_SINK_TYPE } from '@/app/(normal)/(message-forwarding)/internal/message-forwarding.enums';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis';
 import { KafkaSinkAction } from '@/app/(normal)/(message-forwarding)/rule/message-sink-tab/message-sink-form/KafkaSinkAction';

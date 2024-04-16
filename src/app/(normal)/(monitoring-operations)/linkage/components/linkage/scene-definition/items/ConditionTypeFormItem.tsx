@@ -1,5 +1,5 @@
 import { Form, FormInstance, Select } from 'antd';
-import { ConditionTypeOptions } from '@/domains/linkage/linkage.constants';
+import { ConditionTypeOptions } from '@/app/(normal)/(monitoring-operations)/internal/linkage.constants';
 import { FC } from 'react';
 
 type ConditionTypeFormItemProps = {

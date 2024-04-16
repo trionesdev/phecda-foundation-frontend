@@ -84,6 +84,11 @@ export const DevicesPage = () => {
             width: 150,
         },
         {
+            title: '产品类型',
+            dataIndex: ['product', 'typeLabel'],
+            width: 150,
+        },
+        {
             title: `启用/禁用`,
             dataIndex: 'enabled',
             width: 120,

@@ -6,17 +6,14 @@ import {
 } from '@trionesdev/antd-react-ext';
 import { Button, Input, message, Popconfirm, Select, Space, Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
-import ProductFormBtn from './product-form-btn';
+import ProductForm from './product-form';
 import { deviceApi } from '@apis';
 import { ProductRep } from '@apis/device/device.rep';
 import { useNavigate } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import styles from './products.module.less';
 import { formatDateTime } from '@/commons/util/date.utils';
-import {
-    DeviceNodeType,
-    DeviceNodeTypeKeys,
-} from '@/app/(normal)/(product)/internal/device.constants';
+import { DeviceNodeTypeOptions } from '@/app/(normal)/(product)/internal/device.constants';
 import { useRequest } from 'ahooks';
 import { OptionsType } from '@/constants/types';
 import _ from 'lodash';
@@ -89,8 +86,10 @@ const ProductsView = () => {
             title: '节点类型',
             dataIndex: 'nodeType',
             width: 100,
-            render: (value: DeviceNodeTypeKeys) => {
-                return DeviceNodeType?.[value];
+            render: (value: any) => {
+                return DeviceNodeTypeOptions.find((item) => {
+                    return item.value === value;
+                })?.label;
             },
         },
         {
@@ -136,16 +135,19 @@ const ProductsView = () => {
             render: (text: string, record: any) => {
                 return (
                     <Space>
-                        <ProductFormBtn
+                        <ProductForm
                             key={`update-product`}
-                            type={`link`}
                             onSuccess={handleQueryProductPage}
                             id={record?.id}
-                            disabled={!_.eq(record?.status, 'DEVELOPMENT')}
                             isEdit
                         >
-                            编辑
-                        </ProductFormBtn>
+                            <Button
+                                type={`link`}
+                                disabled={!_.eq(record?.status, 'DEVELOPMENT')}
+                            >
+                                编辑
+                            </Button>
+                        </ProductForm>
                         <Button
                             size={`small`}
                             type={`link`}
@@ -214,13 +216,12 @@ const ProductsView = () => {
                     toolbar={
                         <TableToolbar
                             extra={
-                                <ProductFormBtn
+                                <ProductForm
                                     key={`create-product`}
-                                    type={`primary`}
                                     onSuccess={handleQueryProductPage}
                                 >
-                                    新建产品
-                                </ProductFormBtn>
+                                    <Button type={`primary`}>新建产品</Button>
+                                </ProductForm>
                             }
                         />
                     }

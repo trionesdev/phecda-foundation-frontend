@@ -1,26 +1,35 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Button, ButtonProps, Form, Input, message, Radio, Tag } from 'antd';
+import { Form, Input, message, Radio, Select } from 'antd';
 import { deviceApi } from '@apis';
 import {
     AccessChannel,
-    DeviceNodeType,
+    DeviceNodeTypeOptions,
+    ProductTypeOptions,
 } from '@/app/(normal)/(product)/internal/device.constants';
 import _ from 'lodash';
 import { ModalForm } from '@trionesdev/antd-react-ext';
+import {
+    NODE_TYPE,
+    PRODUCT_TYPE,
+} from '@/app/(normal)/(product)/internal/device.enum';
 
 type ProductFormBtnProps = {
+    children?: React.ReactElement;
     id?: string;
     isEdit?: boolean;
     onSuccess?: () => void;
-} & ButtonProps;
-const ProductFormBtn: FC<ProductFormBtnProps> = ({
+};
+const ProductForm: FC<ProductFormBtnProps> = ({
+    children,
     id,
     onSuccess,
     isEdit,
-    ...rest
 }) => {
+    const [form] = Form.useForm();
     const [open, setOpen] = useState(false);
-    const [formValues, setFormValues] = useState({});
+
+    const nodeType = Form.useWatch('nodeType', form);
+
     const handleSubmit = (values: any) => {
         let request: Promise<any>;
         if (id) {
@@ -40,11 +49,11 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
     const getById = (id: any) => {
         deviceApi.queryProductById(id!).then((res: any) => {
             if (res) {
-                setFormValues(res);
+                form.setFieldsValue(res);
             }
         });
     };
-
+    debugger;
     useEffect(() => {
         if (id && open && isEdit) {
             getById(id);
@@ -53,17 +62,14 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
 
     return (
         <ModalForm
+            form={form}
             open={open}
-            trigger={<Button {...rest} />}
+            trigger={children}
             title={`${isEdit ? '编辑' : '新建'}产品`}
             layout={`vertical`}
             afterOpenChange={(op: boolean) => setOpen(op)}
-            formValues={
-                isEdit
-                    ? { ...formValues }
-                    : { nodeType: 'DIRECT', accessChannel: 'MQTT' }
-            }
             onSubmit={handleSubmit}
+            initialValues={{ nodeType: 'DIRECT', accessChannel: 'MQTT' }}
         >
             <Form.Item
                 rules={[{ required: true }]}
@@ -103,9 +109,12 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
                 rules={[{ required: true }]}
             >
                 <Radio.Group>
-                    {_.map(DeviceNodeType, (value, key) => (
-                        <Radio.Button key={key} value={key}>
-                            {value}
+                    {_.map(DeviceNodeTypeOptions, (nodeType, key) => (
+                        <Radio.Button
+                            key={nodeType.value}
+                            value={nodeType.value}
+                        >
+                            {nodeType.label}
                         </Radio.Button>
                     ))}
                 </Radio.Group>
@@ -123,10 +132,23 @@ const ProductFormBtn: FC<ProductFormBtnProps> = ({
                     ))}
                 </Radio.Group>
             </Form.Item>
+            {_.includes(
+                [NODE_TYPE.DIRECT, NODE_TYPE.GATEWAY_SUB],
+                nodeType
+            ) && (
+                <Form.Item
+                    label={`产品类型`}
+                    name={`type`}
+                    required={true}
+                    initialValue={PRODUCT_TYPE.SENSOR}
+                >
+                    <Select options={ProductTypeOptions} />
+                </Form.Item>
+            )}
             <Form.Item label={`驱动服务名称`} name={`driverName`}>
                 <Input />
             </Form.Item>
         </ModalForm>
     );
 };
-export default ProductFormBtn;
+export default ProductForm;

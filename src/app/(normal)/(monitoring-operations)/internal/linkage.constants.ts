@@ -5,7 +5,7 @@ import {
     LINKAGE_SCENE_EVENT_TYPE,
     OPERATOR,
     STATE_CONDITION_TYPE,
-} from '@/domains/linkage/linkage.enums';
+} from '@/app/(normal)/(monitoring-operations)/internal/linkage.enums';
 
 export const LinkageSceneEventOptions = [
     {

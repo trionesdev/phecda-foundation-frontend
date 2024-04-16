@@ -1,8 +1,8 @@
 import { Form, FormInstance, Select } from 'antd';
-import { OperatorOptions } from '@/domains/linkage/linkage.constants';
+import { OperatorOptions } from '@/app/(normal)/(monitoring-operations)/internal/linkage.constants';
 import { FC, useEffect, useState } from 'react';
 import _ from 'lodash';
-import { OPERATOR } from '@/domains/linkage/linkage.enums';
+import { OPERATOR } from '@/app/(normal)/(monitoring-operations)/internal/linkage.enums';
 import { ValueTypeEnum } from '@/app/(normal)/(product)/product-things-model-draft/thing-model-ability-form/value-type';
 
 type OperatorFormItemProps = {

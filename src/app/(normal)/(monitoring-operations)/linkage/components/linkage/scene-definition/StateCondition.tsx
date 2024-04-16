@@ -1,7 +1,7 @@
 import { Button, Divider, Form, FormInstance, Space } from 'antd';
 import React, { FC } from 'react';
 import _ from 'lodash';
-import { STATE_CONDITION_TYPE } from '@/domains/linkage/linkage.enums';
+import { STATE_CONDITION_TYPE } from '@/app/(normal)/(monitoring-operations)/internal/linkage.enums';
 import { ConditionTypeFormItem } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/items/ConditionTypeFormItem';
 import { ThingPropertyStateIdentifier } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/state-identifier/ThingPropertyStateIdentifier';
 

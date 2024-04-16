@@ -1,5 +1,5 @@
 import { Form, Input } from 'antd';
-import { MESSAGE_SINK_TYPE } from '@/domains/message-forwarding/message-forwarding.enums';
+import { MESSAGE_SINK_TYPE } from '@/app/(normal)/(message-forwarding)/internal/message-forwarding.enums';
 
 export const KafkaSinkAction = () => {
     return (

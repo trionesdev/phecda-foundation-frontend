@@ -1,5 +1,5 @@
 import { Form, Input, Select } from 'antd';
-import { LinkageSceneEventOptions } from '@/domains/linkage/linkage.constants';
+import { LinkageSceneEventOptions } from '@/app/(normal)/(monitoring-operations)/internal/linkage.constants';
 import React, { FC } from 'react';
 
 type SceneEventTypeFormItemProps = {

@@ -5,12 +5,12 @@ import { alarmApi } from '@apis';
 import styles from './alarms.module.less';
 import { dateParse, formatDateTimeSeconds } from '@/commons/util/date.utils';
 import { Button, DatePicker, Input, Select, Space } from 'antd';
-import { AlarmStatusOptions } from '@/domains/alarm/alarm.constants';
+import { AlarmStatusOptions } from '@/app/(normal)/(alarm)/internal/alarm.constants';
 import SearchToolbar from '@components/search-toolbar/index';
 import { AlarmTypeSelect } from '@/app/(normal)/(alarm)/alarms/AlarmTypeSelect';
 import { AlarmLevelSelect } from '@/app/(normal)/(alarm)/alarms/AlarmLevelSelect';
 import _ from 'lodash';
-import { ALARM_STATUS } from '@/domains/alarm/alarm.enums';
+import { ALARM_STATUS } from '@/app/(normal)/(alarm)/internal/alarm.enums';
 
 export const AlarmsPage = () => {
     const [pageNum, setPageNum] = useState(1);

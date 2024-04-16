@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Form, message, Select } from 'antd';
-import { MessageSourceTopicTypeOptions } from '@/domains/message-forwarding/message-forwarding.constants';
+import { MessageSourceTopicTypeOptions } from '@/app/(normal)/(message-forwarding)/internal/message-forwarding.constants';
 import _ from 'lodash';
-import { MESSAGE_SOURCE_TOPIC_TYPE } from '@/domains/message-forwarding/message-forwarding.enums';
+import { MESSAGE_SOURCE_TOPIC_TYPE } from '@/app/(normal)/(message-forwarding)/internal/message-forwarding.enums';
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis';

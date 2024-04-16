@@ -3,7 +3,7 @@ import { Button, Form, FormInstance, Input, Space } from 'antd';
 import { ThingPropertyValueFormItem } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/items/ThingPropertyValueFormItem';
 import { OperatorFormItem } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/items/OperatorFormItem';
 import _ from 'lodash';
-import { OPERATOR } from '@/domains/linkage/linkage.enums';
+import { OPERATOR } from '@/app/(normal)/(monitoring-operations)/internal/linkage.enums';
 
 type ThingPropertyReportFilterProps = {
     editing?: boolean;

@@ -1,7 +1,7 @@
 import {
     MESSAGE_SINK_TYPE,
     MESSAGE_SOURCE_TOPIC_TYPE,
-} from '@/domains/message-forwarding/message-forwarding.enums';
+} from '@/app/(normal)/(message-forwarding)/internal/message-forwarding.enums';
 
 export const MessageSourceTopicTypeOptions = [
     {

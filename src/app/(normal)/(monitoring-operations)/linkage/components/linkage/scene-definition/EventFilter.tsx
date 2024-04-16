@@ -1,6 +1,6 @@
 // 事件过滤条件
 import { FC } from 'react';
-import { LINKAGE_SCENE_EVENT_TYPE } from '@/domains/linkage/linkage.enums';
+import { LINKAGE_SCENE_EVENT_TYPE } from '@/app/(normal)/(monitoring-operations)/internal/linkage.enums';
 import { Button, Form, FormInstance, Space } from 'antd';
 import _ from 'lodash';
 import OperatorFormItem from '@/app/(normal)/(monitoring-operations)/linkage/components/OperatorFormItem';
