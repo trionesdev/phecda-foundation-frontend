@@ -61,6 +61,10 @@ export const ActionTypeOptions = [
         label: '告警',
         value: ACTION_TYPE.ALARM,
     },
+    {
+        label: '服务调用',
+        value: ACTION_TYPE.SERVICE_INVOCATION,
+    },
 ];
 
 export const ContactsTypeOptions = [

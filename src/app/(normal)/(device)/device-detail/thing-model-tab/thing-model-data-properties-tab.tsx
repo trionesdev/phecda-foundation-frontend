@@ -28,7 +28,7 @@ const ThingModelDataPropertiesTab: FC<ThingModelDataPropertiesTabProps> = ({
     }, [device]);
     console.log(rows);
     return (
-        <VPanel className={styles.thingModelPropertiesDataTab}>
+        <div className={styles.thingModelPropertiesDataTab}>
             <Row gutter={[16, 16]}>
                 {rows.map((propertyData: any) => (
                     <PropertyDataCard
@@ -38,7 +38,7 @@ const ThingModelDataPropertiesTab: FC<ThingModelDataPropertiesTabProps> = ({
                     />
                 ))}
             </Row>
-        </VPanel>
+        </div>
     );
 };
 export default ThingModelDataPropertiesTab;

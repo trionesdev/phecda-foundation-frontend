@@ -83,6 +83,11 @@ const ProductsView = () => {
             dataIndex: 'name',
         },
         {
+            title: `ProductKey`,
+            dataIndex: 'key',
+            width: 180,
+        },
+        {
             title: '节点类型',
             dataIndex: 'nodeType',
             width: 100,
@@ -93,10 +98,11 @@ const ProductsView = () => {
             },
         },
         {
-            title: `ProductKey`,
-            dataIndex: 'key',
-            width: 180,
+            title: `类型`,
+            dataIndex: 'typeLabel',
+            width: 100,
         },
+
         {
             title: '状态',
             dataIndex: 'status',
@@ -114,7 +120,7 @@ const ProductsView = () => {
         {
             title: '创建时间',
             dataIndex: 'createdAt',
-            width: 180,
+            width: 150,
             render: (value: number) => {
                 return formatDateTime(value);
             },
@@ -122,7 +128,7 @@ const ProductsView = () => {
         {
             title: '更新时间',
             dataIndex: 'updatedAt',
-            width: 180,
+            width: 150,
             render: (value: number) => {
                 return formatDateTime(value);
             },

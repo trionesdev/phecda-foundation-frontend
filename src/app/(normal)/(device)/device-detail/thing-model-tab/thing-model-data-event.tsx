@@ -1,41 +1,52 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { GridTable, VPanel } from '@trionesdev/antd-react-ext';
+import { GridTable, SearchToolbar, VPanel } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
-import { loggingApi } from '@apis';
+import { deviceDataApi } from '@apis';
 import { DatePicker, Form, Select } from 'antd';
-import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
 import dayjs from 'dayjs';
 import { eventTypeConfig } from '@/constants/consts';
+import { ThingModelEventSelect } from '@/app/(normal)/(device)/device-detail/thing-model-tab/ThingModelEventSelect';
 
 const ThingModelDataEvent: React.FC<{
     deviceData: Record<string, any>;
 }> = ({ deviceData }) => {
     const initDateValue = [dayjs().add(-1, 'h'), dayjs()];
-    const [tableParams, setTableParams] = useState<TableParams>({
+    const [params, setParams] = useState<{
+        pageNum: number;
+        pageSize: number;
+        [key: string]: any;
+    }>({
         pageSize: 10,
         pageNum: 1,
         startTime: dayjs(initDateValue[0]).valueOf(),
         endTime: dayjs(initDateValue[1]).valueOf(),
     });
+    const [rows, setRows] = useState<any>([]);
+    const [total, setTotal] = useState<number>(0);
 
     /** 请求表格 */
-    const {
-        data: tableData,
-        loading: tableDataLoading,
-        run: fetchTableData,
-    } = useRequest(
-        (tableParams: TableParams) =>
-            loggingApi.queryDevicesEventLogPage(tableParams),
-        { manual: true }
+    const { loading: tableDataLoading, run: fetchEventLogs } = useRequest(
+        () => {
+            return deviceDataApi
+                .queryEventLogsPage(params)
+                .then((res: any) => res);
+        },
+        {
+            manual: true,
+            onSuccess: (res: any) => {
+                setRows(res?.rows);
+                setTotal(res?.total);
+            },
+        }
     );
 
     const handlePageChange = (pageNum: number, pageSize: number) => {
-        setTableParams({ ...tableParams, pageNum, pageSize });
+        setParams({ ...params, pageNum, pageSize });
     };
     useEffect(() => {
-        fetchTableData(tableParams);
-    }, [fetchTableData, tableParams]);
+        fetchEventLogs();
+    }, [params]);
     const columns = [
         {
             title: '时间',
@@ -99,48 +110,37 @@ const ThingModelDataEvent: React.FC<{
         []
     );
     return (
-        <VPanel>
-            <GridTable
-                style={{ padding: '8px', backgroundColor: 'white' }}
-                toolbar={
-                    <>
-                        {/*<SearchToolbar*/}
-                        {/*    formItems={tableParamsFormItems}*/}
-                        {/*    onSearch={(values) => {*/}
-                        {/*        const [start, end] = values.date ?? [*/}
-                        {/*            undefined,*/}
-                        {/*            undefined,*/}
-                        {/*        ];*/}
-                        {/*        const dataIsEmpty = isNilEmpty(values.date);*/}
-                        {/*        setTableParams({*/}
-                        {/*            pageNum: 1,*/}
-                        {/*            pageSize: 10,*/}
-                        {/*            startTime: dataIsEmpty*/}
-                        {/*                ? undefined*/}
-                        {/*                : dayjs(start).valueOf(),*/}
-                        {/*            endTime: dataIsEmpty*/}
-                        {/*                ? undefined*/}
-                        {/*                : dayjs(end).valueOf(),*/}
-                        {/*            eventType: values?.eventType,*/}
-                        {/*            // ...v,*/}
-                        {/*        });*/}
-                        {/*    }}*/}
-                        {/*/>*/}
-                    </>
-                }
-                fit
-                size="small"
-                scroll={{ y: 'max-content' }}
-                rowKey="id"
-                columns={columns}
-                dataSource={tableData?.rows}
-                loading={tableDataLoading}
-                pagination={{
-                    ...tableParams,
-                    onChange: handlePageChange,
-                }}
-            />
-        </VPanel>
+        <GridTable
+            style={{ padding: '8px', backgroundColor: 'white' }}
+            toolbar={
+                <SearchToolbar
+                    items={[
+                        {
+                            label: '事件',
+                            name: 'eventIdentifier',
+                            children: (
+                                <ThingModelEventSelect
+                                    productId={deviceData?.productId}
+                                />
+                            ),
+                        },
+                    ]}
+                />
+            }
+            fit
+            size="small"
+            scroll={{ y: 'max-content' }}
+            rowKey="id"
+            columns={columns}
+            dataSource={rows}
+            loading={tableDataLoading}
+            pagination={{
+                current: params?.pageNum,
+                pageSize: params?.pageSize,
+                total,
+                onChange: handlePageChange,
+            }}
+        />
     );
 };
 

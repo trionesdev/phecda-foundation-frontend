@@ -28,6 +28,7 @@ export enum OPERATOR {
 export enum ACTION_TYPE {
     NOTIFICATION = 'NOTIFICATION',
     ALARM = 'ALARM',
+    SERVICE_INVOCATION = 'SERVICE_INVOCATION',
 }
 
 export enum CONTACTS_TYPE {

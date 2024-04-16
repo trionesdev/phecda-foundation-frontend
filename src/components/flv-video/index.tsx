@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import flvjs from 'flv.js';
 
 interface FlvVideoProps {
-    url: string | undefined;
+    url?: string | undefined;
     onError?: Function;
 }
 

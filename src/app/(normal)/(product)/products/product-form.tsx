@@ -53,7 +53,7 @@ const ProductForm: FC<ProductFormBtnProps> = ({
             }
         });
     };
-    debugger;
+
     useEffect(() => {
         if (id && open && isEdit) {
             getById(id);

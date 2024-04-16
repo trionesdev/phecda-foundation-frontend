@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Form, FormInstance, Input, Space } from 'antd';
-import { ProductFormItem } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/items/ProductFormItem';
+import { ProductKeyFormItem } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/items/ProductKeyFormItem';
 import { DeviceFormItem } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/items/DeviceFormItem';
 import { ThingModelPropertyFormItem } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/scene-definition/items/ThingModelPropertyFormItem';
 
@@ -32,7 +32,7 @@ export const ThingPropertyReportTriggerIdentifier: FC<
 
     return (
         <Space>
-            <ProductFormItem
+            <ProductKeyFormItem
                 form={form}
                 namePath={[...namePath, 'identifier', 'productKey']}
                 required={true}

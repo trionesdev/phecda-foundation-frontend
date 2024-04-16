@@ -1,10 +1,7 @@
-import { FC, useEffect } from 'react';
+import { FC, useState } from 'react';
 import { Card, Col, Space, Typography } from 'antd';
-import { deviceDataApi } from '@apis';
 import { formatDateTime } from '@/commons/util/date.utils';
 import PropertyDataModal from './property-data-modal';
-import { useRequest } from 'ahooks';
-import { isNilEmpty } from '@/commons/util/isNilEmpty';
 
 type ThingModelDataPropertiesTabProps = {
     device: any;
@@ -15,19 +12,20 @@ const PropertyDataCard: FC<ThingModelDataPropertiesTabProps> = ({
     device,
     propertyData,
 }) => {
-    const { data: latestData, run: queryDeviceDataListLatest } = useRequest(
-        (params: any) => {
-            return deviceDataApi.queryDeviceDataListLatest(params);
-        },
-        { manual: true }
-    );
-    useEffect(() => {
-        if (isNilEmpty(propertyData) || isNilEmpty(device)) return;
-        queryDeviceDataListLatest({
-            deviceName: device?.name,
-            propertyIdentifier: propertyData?.identifier,
-        });
-    }, [device, propertyData, queryDeviceDataListLatest]);
+    const [latestData, setLatestData] = useState<any>({});
+    // const { data: latestData, run: queryDeviceDataListLatest } = useRequest(
+    //     (params: any) => {
+    //         return deviceDataApi.queryDeviceDataListLatest(params);
+    //     },
+    //     { manual: true }
+    // );
+    // useEffect(() => {
+    //     if (isNilEmpty(propertyData) || isNilEmpty(device)) return;
+    //     queryDeviceDataListLatest({
+    //         deviceName: device?.name,
+    //         propertyIdentifier: propertyData?.identifier,
+    //     });
+    // }, [device, propertyData, queryDeviceDataListLatest]);
     return (
         <Col key={propertyData?.name} span={6}>
             <Card
@@ -46,7 +44,7 @@ const PropertyDataCard: FC<ThingModelDataPropertiesTabProps> = ({
                         {latestData?.value ?? '--'}
                     </Typography.Paragraph>
                 </Space>
-                <div>{formatDateTime(latestData?.time) ?? '--'}</div>
+                <div>{formatDateTime(latestData?.ts) ?? '--'}</div>
             </Card>
         </Col>
     );

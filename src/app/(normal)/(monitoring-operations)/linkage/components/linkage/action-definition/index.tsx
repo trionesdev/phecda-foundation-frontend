@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { ACTION_TYPE } from '@/app/(normal)/(monitoring-operations)/internal/linkage.enums';
 import { AlarmAction } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/action-definition/alarm';
 import { NotificationAction } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/action-definition/notification';
+import { ServiceInvocationAction } from '@/app/(normal)/(monitoring-operations)/linkage/components/linkage/action-definition/service-invocation';
 
 type ActionDefinitionProps = {
     editing?: boolean;
@@ -51,6 +52,15 @@ export const ActionDefinition: FC<ActionDefinitionProps> = ({
                             )}
                             {_.isEqual(actionType, ACTION_TYPE.ALARM) && (
                                 <AlarmAction form={form} namePath={namePath} />
+                            )}
+                            {_.isEqual(
+                                ACTION_TYPE.SERVICE_INVOCATION,
+                                actionType
+                            ) && (
+                                <ServiceInvocationAction
+                                    form={form}
+                                    namePath={namePath}
+                                />
                             )}
                         </Space>
                     </Space>

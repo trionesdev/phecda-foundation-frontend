@@ -29,7 +29,7 @@ export default class DeviceApi extends BaseApi {
     }
     /** 获取产品列表 */
     queryProductList(params?: {}): Promise<ProductRep[]> {
-        return this.request.get(`${this.baseUri}/products`, { params });
+        return this.request.get(`${this.baseUri}/products/list`, { params });
     }
 
     queryProductPage(params: {

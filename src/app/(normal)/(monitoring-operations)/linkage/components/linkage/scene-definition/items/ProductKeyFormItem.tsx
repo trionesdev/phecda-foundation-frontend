@@ -7,7 +7,7 @@ type ProductFormItemProps = {
     form?: FormInstance;
     namePath?: any[];
 };
-export const ProductFormItem: FC<ProductFormItemProps> = ({
+export const ProductKeyFormItem: FC<ProductFormItemProps> = ({
     required,
     form,
     namePath = [],

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
     Button,
     DatePicker,
@@ -9,7 +9,6 @@ import {
 } from 'antd';
 import styles from './property-data-modal.module.less';
 import { formatDateTime } from '@/commons/util/date.utils';
-import { TableParams } from '@/constants/types';
 import { deviceDataApi } from '@apis';
 import { useRequest } from 'ahooks';
 import dayjs from 'dayjs';
@@ -36,10 +35,11 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
     const [tableParams, setTableParams] = useState<any>({
         startTime: dayjs(dateTime[0]).valueOf(),
         endTime: dayjs(dateTime[1]).valueOf(),
-        field: propertyData?.identifier,
+        identifier: propertyData?.identifier,
         deviceName: deviceData?.name,
         assetSn: 'assetSn',
     });
+    const [rows, setRows] = useState<any>([]);
 
     /** 请求表格 */
     const {
@@ -47,9 +47,15 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
         loading: tableDataLoading,
         run: fetchTableData,
     } = useRequest(
-        (tableParams: TableParams) =>
-            deviceDataApi.queryDeviceDataList(tableParams),
-        { manual: true }
+        () => {
+            return deviceDataApi.queryPropertyDataList(tableParams);
+        },
+        {
+            manual: true,
+            onSuccess: (res: any) => {
+                setRows(res || []);
+            },
+        }
     );
     const lineData = useMemo(() => {
         if (isNilEmpty(tableData)) return [];
@@ -60,9 +66,7 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
             };
         });
     }, [tableData]);
-    useEffect(() => {
-        isModalOpen && fetchTableData(tableParams);
-    }, [fetchTableData, isModalOpen, tableParams]);
+    useEffect(() => {}, [fetchTableData, isModalOpen, tableParams]);
     const showModal = () => {
         setIsModalOpen(true);
     };
@@ -142,10 +146,9 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
                         <GridTable
                             fit
                             size="small"
-                            scroll={{ y: 'max-content' }}
                             rowKey="id"
                             columns={columns}
-                            dataSource={tableData}
+                            dataSource={rows}
                             loading={tableDataLoading}
                             pagination={false}
                         />

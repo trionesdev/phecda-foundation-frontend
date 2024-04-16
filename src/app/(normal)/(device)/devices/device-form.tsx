@@ -1,16 +1,18 @@
-import { Button, ButtonProps, Form, Input, message, Select, Tag } from 'antd';
+import { Form, Input, message } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
 import { deviceApi } from '@apis';
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import ProductSelect from '@/app/(normal)/(device)/components/ProductSelect';
 
 type DeviceFormProps = {
+    children: React.ReactElement;
     id?: string;
     isEdit?: boolean;
     onSuccess?: () => void;
-} & ButtonProps;
+};
 
 const DeviceForm: FC<DeviceFormProps> = ({
+    children,
     id,
     onSuccess,
     isEdit,
@@ -61,7 +63,7 @@ const DeviceForm: FC<DeviceFormProps> = ({
         <ModalForm
             open={open}
             title={`${isEdit ? '编辑' : '新建'}设备`}
-            trigger={<Button {...rest} />}
+            trigger={children}
             layout={`vertical`}
             afterOpenChange={(op: boolean) => setOpen(op)}
             onSubmit={handleSubmit}

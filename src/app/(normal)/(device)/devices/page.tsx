@@ -114,13 +114,13 @@ export const DevicesPage = () => {
                     <Space split={<Divider type={`vertical`} />}>
                         <DeviceForm
                             key={`edit-btn`}
-                            type="link"
-                            size={`small`}
                             isEdit
                             id={record?.id}
                             onSuccess={handleQueryDevices}
                         >
-                            编辑
+                            <Button size={`small`} type={`link`}>
+                                编辑
+                            </Button>
                         </DeviceForm>
                         <Button key={`view-btn`} size={`small`} type={`link`}>
                             <Link to={RoutesConstants.DEVICE_DETAIL.path(text)}>
@@ -176,10 +176,9 @@ export const DevicesPage = () => {
                             extra={
                                 <DeviceForm
                                     key={`create-btn`}
-                                    type={`primary`}
                                     onSuccess={handleQueryDevices}
                                 >
-                                    新建设备
+                                    <Button type={`primary`}>新建设备</Button>
                                 </DeviceForm>
                             }
                         />

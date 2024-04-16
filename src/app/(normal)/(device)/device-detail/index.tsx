@@ -1,16 +1,17 @@
-import { PageHeader, VPanel } from '@trionesdev/antd-react-ext';
+import { Layout, PageHeader } from '@trionesdev/antd-react-ext';
 import { Tabs, TabsProps } from 'antd';
 import InfoTab from './info-tab';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { deviceApi } from '@apis';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './device-detail.module.less';
-import Index from './thing-model-tab';
+import ThingModelDataTab from './thing-model-tab';
 import _ from 'lodash';
 import ProtocolTab from './protocol-tab';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';
 import { useRequest } from 'ahooks';
 import ChildDeviceTab from '@/app/(normal)/(device)/device-detail/child-device-tab';
+import { CameraFrameTab } from '@/app/(normal)/(device)/device-detail/camera-frame-tab';
 
 const DeviceDetailView = () => {
     const { id } = useParams();
@@ -39,7 +40,7 @@ const DeviceDetailView = () => {
             {
                 key: `thing-model-data`,
                 label: `物模型数据`,
-                children: <Index device={device} />,
+                children: <ThingModelDataTab device={device} />,
             },
         ],
         !isNilEmpty(device?.product?.protocolProperties)
@@ -62,21 +63,31 @@ const DeviceDetailView = () => {
                   label: `子设备`,
                   children: <ChildDeviceTab device={device} />,
               }
+            : [],
+        _.isEqual('CAMERA', device?.product?.type)
+            ? {
+                  key: `camera-frame`,
+                  label: `相机画面`,
+                  children: <CameraFrameTab device={device} />,
+              }
             : []
     );
 
-    const pageHelper = (
-        <PageHeader
-            title={device?.name}
-            onBack={() => {
-                navigate(-1);
-            }}
-        />
-    );
     return (
-        <VPanel className={styles.deviceDetailView} header={pageHelper}>
-            <Tabs items={items} />
-        </VPanel>
+        <Layout direction={`vertical`} className={styles.deviceDetailView}>
+            <Layout.Item>
+                {' '}
+                <PageHeader
+                    title={device?.name}
+                    onBack={() => {
+                        navigate(-1);
+                    }}
+                />
+            </Layout.Item>
+            <Layout.Item auto={true} className={styles.tabs}>
+                <Tabs items={items} />
+            </Layout.Item>
+        </Layout>
     );
 };
 export default DeviceDetailView;

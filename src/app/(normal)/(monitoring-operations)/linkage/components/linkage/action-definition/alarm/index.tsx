@@ -31,35 +31,6 @@ export const AlarmAction: FC<AlarmActionProps> = ({ form, namePath = [] }) => {
             >
                 <AlarmLevelSelect style={{ minWidth: 175 }} allowClear={true} />
             </Form.Item>
-            <Form.Item
-                label={`触发方式`}
-                name={[...namePath, 'triggerMode']}
-                required={true}
-            >
-                <Select
-                    options={AlarmTriggerModeOptions}
-                    style={{ minWidth: 175 }}
-                    allowClear={true}
-                />
-            </Form.Item>
-            {_.isEqual(triggerMode, ALARM_TRIGGER_MODE.CONTINUOUS) && (
-                <Form.Item
-                    label={`持续时间(s)`}
-                    name={[...namePath, 'duration']}
-                    initialValue={0}
-                    required={true}
-                >
-                    <InputNumber style={{ minWidth: 175 }} min={0} />
-                </Form.Item>
-            )}
-            <Form.Item
-                label={`间隔时间(s)`}
-                name={[...namePath, 'interval']}
-                initialValue={0}
-                required={true}
-            >
-                <InputNumber style={{ minWidth: 175 }} min={0} />
-            </Form.Item>
             <Form.Item label={`描述`} name={[...namePath, 'description']}>
                 <Input allowClear={true} />
             </Form.Item>
