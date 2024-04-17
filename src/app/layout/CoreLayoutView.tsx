@@ -111,17 +111,17 @@ export const CoreLayoutView = () => {
                 },
             ],
         },
-        {
-            key: 'edge-management',
-            label: '边缘节点',
-            children: [
-                {
-                    key: RoutesConstants.EDGE_NODE.key,
-                    label: '节点管理',
-                    onClick: () => navigate(RoutesConstants.EDGE_NODE.path()),
-                },
-            ],
-        },
+        // {
+        //     key: 'edge-management',
+        //     label: '边缘节点',
+        //     children: [
+        //         {
+        //             key: RoutesConstants.EDGE_NODE.key,
+        //             label: '节点管理',
+        //             onClick: () => navigate(RoutesConstants.EDGE_NODE.path()),
+        //         },
+        //     ],
+        // },
     ];
 
     const onOpenChange: MenuProps['onOpenChange'] = (keys) => {

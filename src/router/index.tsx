@@ -7,25 +7,25 @@ import {
 import MainLayoutView from '../app/layout';
 import { RoutesConstants } from './routes.constants';
 import MonitorView from 'src/views/alarm/monitor-view';
-import NodeDetailView from '@/app/(normal)/edge/node-detail';
-import { EdgeNodePage } from '@/app/(normal)/edge/node/page';
-import { DashboardPage } from '@/app/(normal)/dashboard/page';
-import { AlarmTypesPage } from '@/app/(normal)/(alarm)/alarm-types/page';
-import { AlarmLevelsPage } from '@/app/(normal)/(alarm)/alarm-levels/page';
-import { AlarmsPage } from '@/app/(normal)/(alarm)/alarms/page';
-import { ContactPage } from '@/app/(normal)/(notification)/contact/page';
 import { CoreLayoutView } from '@/app/layout/CoreLayoutView';
-import ProductsView from '@/app/(normal)/(product)/products';
-import { ProductDetailPage } from '@/app/(normal)/(product)/product-detail/page';
-import { DevicesPage } from '@/app/(normal)/(device)/devices/page';
-import DeviceDetailView from '@/app/(normal)/(device)/device-detail';
-import SceneDetail from '@/app/(normal)/(monitoring-operations)/linkage/detail';
-import { ForwardingRulePage } from '@/app/(normal)/(message-forwarding)/rule/page';
-import { MessageSourceDetailPage } from '@/app/(normal)/(message-forwarding)/source-detail/page';
-import { ForwardingRuleDetailPage } from '@/app/(normal)/(message-forwarding)/rule-detail/page';
-import { LinkagePage } from '@/app/(normal)/(monitoring-operations)/linkage/page';
-import { NotificationTemplatesPage } from '@/app/(normal)/(notification)/templates/page';
-import ProductThingModelDraftPage from '@/app/(normal)/(product)/product-things-model-draft/page';
+import { DashboardPage } from '@/app/normal/dashboard/page';
+import { AlarmTypesPage } from '@/app/normal/alarm/alarm-types/page';
+import { AlarmLevelsPage } from '@/app/normal/alarm/alarm-levels/page';
+import { AlarmsPage } from '@/app/normal/alarm/alarms/page';
+import { ContactPage } from '@/app/normal/notification/contact/page';
+import { NotificationTemplatesPage } from '@/app/normal/notification/templates/page';
+import { ProductsPage } from '@/app/normal/device/products/page';
+import { ProductDetailPage } from '@/app/normal/device/product-detail/page';
+import ProductThingModelDraftPage from '@/app/normal/device/product-things-model-draft/page';
+import { DevicesPage } from '@/app/normal/device/devices/page';
+import { DeviceDetailPage } from '@/app/normal/device/device-detail/page';
+import { LinkagesPage } from '@/app/normal/monitoring-operations/linkage/page';
+import { ForwardingRuleDetailPage } from '@/app/normal/message-forwarding/rule-detail/page';
+import { MessageSourceDetailPage } from '@/app/normal/message-forwarding/source-detail/page';
+import { ForwardingRulePage } from '@/app/normal/message-forwarding/rule/page';
+import NodeDetailView from '@/app/normal/edge/node-detail';
+import { EdgeNodePage } from '@/app/normal/edge/node/page';
+import { SceneDetailPage } from '@/app/normal/monitoring-operations/scene-detail/page';
 
 export const routes: RouteObject[] = [
     {
@@ -91,7 +91,7 @@ export const routes: RouteObject[] = [
                     // },
                     {
                         path: RoutesConstants.PRODUCTS.path(),
-                        element: <ProductsView />,
+                        element: <ProductsPage />,
                     },
                     {
                         path: RoutesConstants.PRODUCT_DETAIL.path(),
@@ -107,16 +107,16 @@ export const routes: RouteObject[] = [
                     },
                     {
                         path: RoutesConstants.DEVICE_DETAIL.path(),
-                        element: <DeviceDetailView />,
+                        element: <DeviceDetailPage />,
                     },
                     //------监控运维------
                     {
                         path: RoutesConstants.LINKAGE.path(),
-                        element: <LinkagePage />, //事件响应
+                        element: <LinkagesPage />, //事件响应
                     },
                     {
                         path: RoutesConstants.SCENE_DETAIL.path(),
-                        element: <SceneDetail />, //场景详情
+                        element: <SceneDetailPage />, //场景详情
                     },
                     //------边缘计算-----
                     {

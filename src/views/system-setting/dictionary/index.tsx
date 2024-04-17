@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
 import {
+    DrawerForm,
     GridTable,
     PageHeader,
     TableToolbar,
     VPanel,
 } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
-import { systemApi } from '@/apis';
+import { systemApi } from '@apis';
 import {
     Button,
     Divider,
@@ -18,11 +19,11 @@ import {
     Space,
     message,
 } from 'antd';
-import { TableParams } from '@/constants/types';
-import { formatDateTime } from '@/commons/util/date.utils';
+
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetSearch } from '@/hooks/useSearch';
-import DrawerForm from '@/components/drawer-form';
+import { useGetSearch } from '../../../hooks/useSearch';
+import { TableParams } from '../../../constants/types';
+import { formatDateTime } from '@commons/util/date.utils';
 
 const Dictionary: React.FC = () => {
     const { id: typeCode } = useParams();
@@ -231,7 +232,7 @@ const Dictionary: React.FC = () => {
                 open={drawerOpen}
                 title={`${isEdit ? '编辑' : '新建'}字典`}
                 layout="vertical"
-                onOpenChange={(op) => setDrawerOpen(op)}
+                afterOpenChange={(op) => setDrawerOpen(op)}
                 onSubmit={(value, from) => {
                     const newValue = { ...value, typeCode };
                     console.log(newValue);
