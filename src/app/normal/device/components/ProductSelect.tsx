@@ -6,7 +6,10 @@ import _ from 'lodash';
 type ProductSelectProps = {
     allOption?: boolean;
 } & SelectProps;
-const ProductSelect: FC<ProductSelectProps> = ({ allOption, ...rest }) => {
+export const ProductSelect: FC<ProductSelectProps> = ({
+    allOption,
+    ...rest
+}) => {
     const [options, setOptions] = useState<any>([]);
 
     const handleQuery = () => {
@@ -33,4 +36,3 @@ const ProductSelect: FC<ProductSelectProps> = ({ allOption, ...rest }) => {
         />
     );
 };
-export default ProductSelect;

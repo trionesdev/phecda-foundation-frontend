@@ -6,7 +6,7 @@ import { GridTable, Layout } from '@trionesdev/antd-react-ext';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
 import { Alert } from 'antd';
-import { AbilityType } from '@/app/normal/device/internal/device.enum';
+import { AbilityType } from '../internal/device.enum';
 
 type ThingsModelTabProps = {
     product: any;

@@ -19,13 +19,14 @@ import { ProductDetailPage } from '@/app/normal/device/product-detail/page';
 import ProductThingModelDraftPage from '@/app/normal/device/product-things-model-draft/page';
 import { DevicesPage } from '@/app/normal/device/devices/page';
 import { DeviceDetailPage } from '@/app/normal/device/device-detail/page';
-import { LinkagesPage } from '@/app/normal/monitoring-operations/linkage/page';
+
 import { ForwardingRuleDetailPage } from '@/app/normal/message-forwarding/rule-detail/page';
 import { MessageSourceDetailPage } from '@/app/normal/message-forwarding/source-detail/page';
 import { ForwardingRulePage } from '@/app/normal/message-forwarding/rule/page';
 import NodeDetailView from '@/app/normal/edge/node-detail';
 import { EdgeNodePage } from '@/app/normal/edge/node/page';
-import { SceneDetailPage } from '@/app/normal/monitoring-operations/scene-detail/page';
+import { LinkagesPage } from '@/app/normal/linkage/linkages/page';
+import { SceneDetailPage } from '@/app/normal/linkage/scene-detail/page';
 
 export const routes: RouteObject[] = [
     {

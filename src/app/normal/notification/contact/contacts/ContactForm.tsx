@@ -34,7 +34,6 @@ export const ContactForm: FC<ContactFormProps> = ({
 
     useEffect(() => {
         if (open && id) {
-            debugger;
             notificationApi
                 .findContactById(id)
                 .then(async (res: any) => {

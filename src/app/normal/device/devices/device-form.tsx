@@ -2,7 +2,7 @@ import { Form, Input, message } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
 import { deviceApi } from '@apis';
 import { ModalForm } from '@trionesdev/antd-react-ext';
-import ProductSelect from '@/app/normal/device/components/ProductSelect';
+import { ProductSelect } from '../components';
 
 type DeviceFormProps = {
     children: React.ReactElement;
