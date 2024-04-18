@@ -4,10 +4,6 @@ import { useRequest } from 'ahooks';
 import { deviceApi } from '@apis';
 
 export const ProductStatistics = () => {
-    const [count, setCount] = useState(0);
-    const [publishedCount, setPublishedCount] = useState(0);
-    const [unpublishedCount, setUnpublishedCount] = useState(0);
-
     const [productStatistics, setProductStatistics] = useState<{
         count?: number;
         publishedCount?: number;
