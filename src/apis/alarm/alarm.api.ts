@@ -99,4 +99,8 @@ export default class AlarmApi extends BaseApi {
     }) {
         return this.request.get(`${this.baseUri}/alarms/ext/page`, { params });
     }
+
+    queryAlarmStatistics() {
+        return this.request.get(`${this.baseUri}/alarms/statistics`);
+    }
 }

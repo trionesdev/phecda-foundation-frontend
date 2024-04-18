@@ -4,16 +4,16 @@ import { useRequest } from 'ahooks';
 import { deviceApi } from '@apis';
 
 export const DeviceStatistics = () => {
-    const [count, setCount] = useState(0);
-    const [enabledCount, setEnabledCount] = useState(0);
-    const [disabledCount, setDisabledCount] = useState(0);
+    const [deviceStatistics, setDeviceStatistics] = useState<{
+        count?: number;
+        enabledCount?: number;
+        disabledCount?: number;
+    }>({});
 
     const { loading } = useRequest(() => deviceApi.deviceStatistics(), {
         onSuccess: (res: any) => {
             if (res) {
-                setCount(res.count);
-                setEnabledCount(res.enabledCount);
-                setDisabledCount(res.disabledCount);
+                setDeviceStatistics(res);
             }
         },
     });
@@ -27,28 +27,41 @@ export const DeviceStatistics = () => {
             <Spin spinning={loading}>
                 <Row>
                     <Col flex={`150px`}>
-                        <Statistic title="设备总数" value={count} />
+                        <Statistic
+                            title="设备总数"
+                            value={deviceStatistics?.count || 0}
+                        />
                     </Col>
                     <Col flex={`auto`}>
                         <Space direction={`vertical`} style={{ width: `100%` }}>
                             <div>
                                 <Flex justify={`space-between`}>
                                     <span>已发布</span>
-                                    <span>{enabledCount}</span>
+                                    <span>{}</span>
                                 </Flex>
                                 <Progress
-                                    percent={(enabledCount / count) * 100}
+                                    percent={
+                                        ((deviceStatistics?.enabledCount || 0) /
+                                            (deviceStatistics?.count || 0)) *
+                                        100
+                                    }
                                     showInfo={false}
                                 />
                             </div>
                             <div>
                                 <Flex justify={`space-between`}>
                                     <span>未发布</span>
-                                    <span>{disabledCount}</span>
+                                    <span>
+                                        {deviceStatistics.disabledCount || 0}
+                                    </span>
                                 </Flex>
                                 <Progress
                                     strokeColor={`#9B9B9B`}
-                                    percent={(disabledCount / count) * 100}
+                                    percent={
+                                        ((deviceStatistics.disabledCount || 0) /
+                                            (deviceStatistics?.count || 0)) *
+                                        100
+                                    }
                                     showInfo={false}
                                 />
                             </div>

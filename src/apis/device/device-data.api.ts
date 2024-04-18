@@ -3,6 +3,10 @@ import BaseApi from '@apis/base.api';
 export class DeviceDataApi extends BaseApi {
     private baseUri = '/be/device';
 
+    queryPropertiesPostStatistics() {
+        return this.request.get(`${this.baseUri}/properties-post/statistics`);
+    }
+
     queryPropertyDataList(params: {
         deviceName: string;
         identifier: string;

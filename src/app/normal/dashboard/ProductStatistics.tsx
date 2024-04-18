@@ -8,12 +8,16 @@ export const ProductStatistics = () => {
     const [publishedCount, setPublishedCount] = useState(0);
     const [unpublishedCount, setUnpublishedCount] = useState(0);
 
+    const [productStatistics, setProductStatistics] = useState<{
+        count?: number;
+        publishedCount?: number;
+        unpublishedCount?: number;
+    }>({});
+
     const { loading } = useRequest(() => deviceApi.productStatistics(), {
         onSuccess: (res: any) => {
             if (res) {
-                setCount(res.count);
-                setPublishedCount(res.publishedCount);
-                setUnpublishedCount(res.unpublishedCount);
+                setProductStatistics(res);
             }
         },
     });
@@ -27,28 +31,46 @@ export const ProductStatistics = () => {
             <Spin spinning={loading}>
                 <Row>
                     <Col flex={`150px`}>
-                        <Statistic title="产品总数" value={count} />
+                        <Statistic
+                            title="产品总数"
+                            value={productStatistics?.count || 0}
+                        />
                     </Col>
                     <Col flex={`auto`}>
                         <Space direction={`vertical`} style={{ width: `100%` }}>
                             <div>
                                 <Flex justify={`space-between`}>
                                     <span>已发布</span>
-                                    <span>{publishedCount}</span>
+                                    <span>
+                                        {productStatistics?.publishedCount || 0}
+                                    </span>
                                 </Flex>
                                 <Progress
-                                    percent={(publishedCount / count) * 100}
+                                    percent={
+                                        ((productStatistics?.publishedCount ||
+                                            0) /
+                                            (productStatistics?.count || 0)) *
+                                        100
+                                    }
                                     showInfo={false}
                                 />
                             </div>
                             <div>
                                 <Flex justify={`space-between`}>
                                     <span>未发布</span>
-                                    <span>{unpublishedCount}</span>
+                                    <span>
+                                        {productStatistics?.unpublishedCount ||
+                                            0}
+                                    </span>
                                 </Flex>
                                 <Progress
                                     strokeColor={`#9B9B9B`}
-                                    percent={(unpublishedCount / count) * 100}
+                                    percent={
+                                        ((productStatistics?.unpublishedCount ||
+                                            0) /
+                                            (productStatistics?.count || 0)) *
+                                        100
+                                    }
                                     showInfo={false}
                                 />
                             </div>
