@@ -15,7 +15,7 @@ export const DeviceNodeTypeOptions = [
     },
 ];
 export const AccessChannel = {
-    MQTT: 'MQTT',
+    DRIVER: '驱动接入',
     GATEWAY: '平台网关',
 } as const;
 

@@ -66,7 +66,7 @@ const ProductForm: FC<ProductFormBtnProps> = ({
             layout={`vertical`}
             afterOpenChange={(op: boolean) => setOpen(op)}
             onSubmit={handleSubmit}
-            initialValues={{ nodeType: 'DIRECT', accessChannel: 'MQTT' }}
+            initialValues={{ nodeType: 'DIRECT', accessChannel: 'DRIVER' }}
         >
             <Form.Item
                 rules={[{ required: true }]}

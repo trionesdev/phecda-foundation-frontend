@@ -20,6 +20,7 @@ import { deviceApi } from '@apis';
 import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import { useRequest } from 'ahooks';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 export const DevicesPage = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -168,7 +169,7 @@ export const DevicesPage = () => {
             </Layout.Item>
             <Layout.Item auto={true}>
                 <GridTable
-                    style={{ padding: '8px', backgroundColor: 'white' }}
+                    style={{ backgroundColor: 'white' }}
                     fit={true}
                     size={`small`}
                     toolbar={
@@ -178,7 +179,12 @@ export const DevicesPage = () => {
                                     key={`create-btn`}
                                     onSuccess={handleQueryDevices}
                                 >
-                                    <Button type={`primary`}>新建设备</Button>
+                                    <Button
+                                        type={`primary`}
+                                        icon={<PlusCircleOutlined />}
+                                    >
+                                        新建设备
+                                    </Button>
                                 </DeviceForm>
                             }
                         />

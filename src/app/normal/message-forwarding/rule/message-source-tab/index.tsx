@@ -5,7 +5,7 @@ import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis';
 import { useNavigate } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
-import { ReloadOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import { MessageSourceForm } from './MessageSourceForm';
 
 type MessageSourceTabProps = {};
@@ -90,7 +90,12 @@ export const MessageSourceTab: FC<MessageSourceTabProps> = ({}) => {
                                 key={`create-btn`}
                                 onRefresh={handleRefreshQuerySources}
                             >
-                                <Button type={`primary`}>创建数据源</Button>
+                                <Button
+                                    type={`primary`}
+                                    icon={<PlusCircleOutlined />}
+                                >
+                                    创建数据源
+                                </Button>
                             </MessageSourceForm>
                             <Tooltip key={`refresh-btn`} title={`刷新`}>
                                 <Button

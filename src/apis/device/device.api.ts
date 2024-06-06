@@ -1,5 +1,6 @@
 import BaseApi from '../base.api';
 import { ProductPageRep, ProductRep } from './device.rep';
+import { PageQueryParams } from '@apis/types';
 
 export default class DeviceApi extends BaseApi {
     private baseUri = '/be/device';
@@ -27,6 +28,7 @@ export default class DeviceApi extends BaseApi {
     deleteProductById(id: string) {
         return this.request.delete(`${this.baseUri}/products/${id}`);
     }
+
     /** 获取产品列表 */
     queryProductList(params?: {}): Promise<ProductRep[]> {
         return this.request.get(`${this.baseUri}/products/list`, { params });
@@ -104,6 +106,7 @@ export default class DeviceApi extends BaseApi {
             data
         );
     }
+
     /** 设置物模型的协议 */
     updateDeviceProtocolProperties(
         productId: string,
@@ -162,14 +165,17 @@ export default class DeviceApi extends BaseApi {
             `${this.baseUri}/devices/${deviceId}/services-data`
         );
     }
+
     /** 获取所有设备 */
     queryDeviceAll(): Promise<any> {
         return this.request.get(`${this.baseUri}/devices/all`);
     }
+
     /** 根据条件查询设备（不分页） */
     queryDeviceByParams(params?: {}): Promise<any> {
         return this.request.get(`${this.baseUri}/devices/list`, { params });
     }
+
     /** 获取未关联资产的设备 */
     queryDeviceNoRelation(assetSn?: string): Promise<any> {
         return this.request.get(

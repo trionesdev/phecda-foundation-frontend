@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button, message, Popconfirm, Space, Tooltip } from 'antd';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis';
-import { ReloadOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import { MessageSinkForm } from './message-sink-form';
 
 export const MessageSinkTab = () => {
@@ -93,7 +93,12 @@ export const MessageSinkTab = () => {
                     <TableToolbar
                         extra={[
                             <MessageSinkForm key={`create-btn`}>
-                                <Button type={`primary`}>创建数据目的</Button>
+                                <Button
+                                    type={`primary`}
+                                    icon={<PlusCircleOutlined />}
+                                >
+                                    创建数据目的
+                                </Button>
                             </MessageSinkForm>,
                             <Tooltip key={`refresh-btn`} title={`刷新`}>
                                 <Button

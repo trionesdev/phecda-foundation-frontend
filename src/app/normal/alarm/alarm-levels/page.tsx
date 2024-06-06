@@ -4,7 +4,7 @@ import styles from './alarm-levels.module.less';
 import { Button, message, Popconfirm, Space, Switch } from 'antd';
 import { useRequest } from 'ahooks';
 import { alarmApi } from '@apis';
-import { ReloadOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import { AlarmLevelForm } from './AlarmLevelForm';
 
 export const AlarmLevelsPage = () => {
@@ -106,7 +106,10 @@ export const AlarmLevelsPage = () => {
                                     onClick={refreshAsync}
                                 />
                                 <AlarmLevelForm onRefresh={refreshAsync}>
-                                    <Button type={`primary`}>
+                                    <Button
+                                        type={`primary`}
+                                        icon={<PlusCircleOutlined />}
+                                    >
                                         新建报警级别
                                     </Button>
                                 </AlarmLevelForm>

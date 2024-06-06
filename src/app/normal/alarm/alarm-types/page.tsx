@@ -4,7 +4,7 @@ import styles from './alarm-types.module.less';
 import { Button, message, Popconfirm, Space, Switch } from 'antd';
 import { useRequest } from 'ahooks';
 import { alarmApi } from '@apis';
-import { ReloadOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import { AlarmTypeForm } from './AlarmTypeForm';
 
 export const AlarmTypesPage = () => {
@@ -107,7 +107,10 @@ export const AlarmTypesPage = () => {
                                     onClick={refreshAsync}
                                 />
                                 <AlarmTypeForm onRefresh={refreshAsync}>
-                                    <Button type={`primary`}>
+                                    <Button
+                                        type={`primary`}
+                                        icon={<PlusCircleOutlined />}
+                                    >
                                         新建报警类型
                                     </Button>
                                 </AlarmTypeForm>

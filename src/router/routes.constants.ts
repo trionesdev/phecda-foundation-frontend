@@ -105,6 +105,7 @@ export const RoutesConstants = {
         path: (id?: string) =>
             `/device-management/devices/${id ? id : ':id'}/detail`,
     },
+    DRIVERS: { key: 'drivers', path: () => `/device-management/drivers` },
     /** ---监控运维---- */
 
     LINKAGE: {

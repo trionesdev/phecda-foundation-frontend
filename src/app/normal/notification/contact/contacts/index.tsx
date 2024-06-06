@@ -4,6 +4,7 @@ import { Button, message, Popconfirm, Space } from 'antd';
 import { useRequest } from 'ahooks';
 import { notificationApi } from '@apis';
 import { ContactForm } from './ContactForm';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 export const Contacts = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -109,7 +110,10 @@ export const Contacts = () => {
                                     <ContactForm
                                         onRefresh={handleQueryContacts}
                                     >
-                                        <Button type={`primary`}>
+                                        <Button
+                                            type={`primary`}
+                                            icon={<PlusCircleOutlined />}
+                                        >
                                             新建联系人
                                         </Button>
                                     </ContactForm>

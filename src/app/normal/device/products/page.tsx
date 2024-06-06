@@ -17,6 +17,7 @@ import { useRequest } from 'ahooks';
 import { OptionsType } from '@/constants/types';
 import _ from 'lodash';
 import { DeviceNodeTypeOptions } from '../internal/device.constants';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 export const ProductsPage = () => {
     const navigate = useNavigate();
@@ -216,7 +217,6 @@ export const ProductsPage = () => {
                 <GridTable
                     style={{
                         backgroundColor: 'white',
-                        padding: 8,
                         boxSizing: 'border-box',
                     }}
                     toolbar={
@@ -226,7 +226,12 @@ export const ProductsPage = () => {
                                     key={`create-product`}
                                     onSuccess={handleQueryProductPage}
                                 >
-                                    <Button type={`primary`}>新建产品</Button>
+                                    <Button
+                                        type={`primary`}
+                                        icon={<PlusCircleOutlined />}
+                                    >
+                                        新建产品
+                                    </Button>
                                 </ProductForm>
                             }
                         />

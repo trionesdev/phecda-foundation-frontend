@@ -40,6 +40,11 @@ export const CoreLayoutView = () => {
                     label: `设备`,
                     onClick: () => navigate(RoutesConstants.DEVICES.path()),
                 },
+                {
+                    key: RoutesConstants.DRIVERS.key,
+                    label: `驱动`,
+                    onClick: () => navigate(RoutesConstants.DRIVERS.path()),
+                },
             ],
         },
         {
@@ -147,8 +152,10 @@ export const CoreLayoutView = () => {
                     selectedKeys={selectedKeys}
                 />
             </Layout.Sider>
-            <Layout.Item auto={true}>
-                <Outlet />
+            <Layout.Item auto={true} style={{ padding: 8 }}>
+                <div style={{ height: '100%' }}>
+                    <Outlet />
+                </div>
             </Layout.Item>
         </Layout>
     );

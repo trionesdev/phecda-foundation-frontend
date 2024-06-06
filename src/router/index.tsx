@@ -27,6 +27,7 @@ import NodeDetailView from '@/app/normal/edge/node-detail';
 import { EdgeNodePage } from '@/app/normal/edge/node/page';
 import { LinkagesPage } from '@/app/normal/linkage/linkages/page';
 import { SceneDetailPage } from '@/app/normal/linkage/scene-detail/page';
+import { DriversPage } from '@/app/normal/device/drivers/page';
 
 export const routes: RouteObject[] = [
     {
@@ -109,6 +110,10 @@ export const routes: RouteObject[] = [
                     {
                         path: RoutesConstants.DEVICE_DETAIL.path(),
                         element: <DeviceDetailPage />,
+                    },
+                    {
+                        path: RoutesConstants.DRIVERS.path(),
+                        element: <DriversPage />,
                     },
                     //------监控运维------
                     {

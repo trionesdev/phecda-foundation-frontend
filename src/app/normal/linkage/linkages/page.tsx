@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import qs from 'qs';
 import { LinkageForm } from './LinkageForm';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 const { TextArea } = Input;
 export const LinkagesPage: React.FC = () => {
@@ -160,7 +161,12 @@ export const LinkagesPage: React.FC = () => {
                         <TableToolbar
                             extra={
                                 <LinkageForm onRefresh={refreshFetchTableData}>
-                                    <Button type={`primary`}>新建场景</Button>
+                                    <Button
+                                        type={`primary`}
+                                        icon={<PlusCircleOutlined />}
+                                    >
+                                        新建场景
+                                    </Button>
                                 </LinkageForm>
                             }
                         />

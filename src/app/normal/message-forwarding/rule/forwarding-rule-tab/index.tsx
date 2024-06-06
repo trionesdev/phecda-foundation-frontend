@@ -1,7 +1,7 @@
 import { GridTable, TableToolbar } from '@trionesdev/antd-react-ext';
 import { useEffect, useState } from 'react';
 import { Button, Divider, message, Popconfirm, Space, Tooltip } from 'antd';
-import { ReloadOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis';
 import { useNavigate } from 'react-router-dom';
@@ -149,7 +149,10 @@ export const ForwardingRuleTab = () => {
                                     key={`create-btn`}
                                     onRefresh={handleQueryRules}
                                 >
-                                    <Button type={`primary`}>
+                                    <Button
+                                        type={`primary`}
+                                        icon={<PlusCircleOutlined />}
+                                    >
                                         创建流转规则
                                     </Button>
                                 </ForwardingRuleForm>

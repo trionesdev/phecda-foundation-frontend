@@ -5,6 +5,7 @@ import styles from './template.module.less';
 import { useRequest } from 'ahooks';
 import { notificationApi } from '@apis';
 import { TemplateForm } from './TemplateForm';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 export const NotificationTemplatesPage = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -89,7 +90,10 @@ export const NotificationTemplatesPage = () => {
                         extra={
                             <Space>
                                 <TemplateForm onRefresh={handleQueryPage}>
-                                    <Button type={`primary`}>
+                                    <Button
+                                        type={`primary`}
+                                        icon={<PlusCircleOutlined />}
+                                    >
                                         新建通知模板
                                     </Button>
                                 </TemplateForm>
