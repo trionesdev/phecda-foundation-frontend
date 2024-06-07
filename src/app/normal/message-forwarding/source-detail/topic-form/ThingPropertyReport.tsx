@@ -1,9 +1,13 @@
 import { Form, Select } from 'antd';
 import { FC } from 'react';
 import { DeviceSelect, ProductKeySelect } from '@/app/normal/device/components';
+import { MessageSourceTopicsOptions } from '@/app/normal/message-forwarding/internal/message-forwarding.constants';
+import _ from 'lodash';
 
-type ThingPropertyReportProps = {};
-export const ThingPropertyReport: FC<ThingPropertyReportProps> = ({}) => {
+type ThingPropertyReportProps = {
+    type?: string;
+};
+export const ThingPropertyReport: FC<ThingPropertyReportProps> = ({ type }) => {
     const form = Form.useFormInstance();
     const productKey = Form.useWatch('productKey', form);
     return (
@@ -24,11 +28,13 @@ export const ThingPropertyReport: FC<ThingPropertyReportProps> = ({}) => {
                 />
             </Form.Item>
             <Form.Item name={`topicTemplate`} required={true}>
-                <Select placeholder={`请选择Topic`} disabled={!productKey}>
-                    <Select.Option value={`THING_PROPERTY_POST`}>
-                        thing/event/property/post
-                    </Select.Option>
-                </Select>
+                <Select
+                    placeholder={`请选择Topic`}
+                    disabled={!productKey}
+                    options={
+                        type ? _.get(MessageSourceTopicsOptions, type) : []
+                    }
+                />
             </Form.Item>
         </>
     );

@@ -4,6 +4,11 @@ export enum NODE_TYPE {
     GATEWAY_SUB = 'GATEWAY_SUB',
 }
 
+export enum ACCESS_CHANNEL {
+    DRIVER = 'DRIVER',
+    GATEWAY = 'GATEWAY',
+}
+
 export enum PRODUCT_TYPE {
     CAMERA = 'CAMERA',
     SENSOR = 'SENSOR',

@@ -60,8 +60,8 @@ export const MessageSourceDetailPage = () => {
             dataIndex: 'topic',
         },
         {
-            title: 'Product',
-            dataIndex: [`properties`, `productId`],
+            title: 'ProductKey',
+            dataIndex: [`properties`, `productKey`],
             width: 200,
         },
         {
@@ -92,7 +92,7 @@ export const MessageSourceDetailPage = () => {
                                     });
                             }}
                         >
-                            <Button size={`small`} type={`link`}>
+                            <Button size={`small`} type={`link`} danger>
                                 删除
                             </Button>
                         </Popconfirm>
@@ -119,7 +119,11 @@ export const MessageSourceDetailPage = () => {
                     toolbar={
                         <TableToolbar
                             extra={[
-                                <TopicForm key={`create-btn`} sourceId={id!}>
+                                <TopicForm
+                                    key={`create-btn`}
+                                    sourceId={id!}
+                                    onRefresh={handleRefreshTopics}
+                                >
                                     <Button type={`primary`}>创建Topic</Button>
                                 </TopicForm>,
                             ]}

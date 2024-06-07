@@ -66,7 +66,7 @@ export const MessageSourceTab: FC<MessageSourceTabProps> = ({}) => {
                                     });
                             }}
                         >
-                            <Button size={`small`} type={`link`}>
+                            <Button size={`small`} type={`link`} danger>
                                 删除
                             </Button>
                         </Popconfirm>

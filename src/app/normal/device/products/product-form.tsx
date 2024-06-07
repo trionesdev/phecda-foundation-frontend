@@ -3,12 +3,17 @@ import { Form, Input, message, Radio, Select } from 'antd';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
 import { ModalForm } from '@trionesdev/antd-react-ext';
-import { NODE_TYPE, PRODUCT_TYPE } from '../internal/device.enum';
+import {
+    ACCESS_CHANNEL,
+    NODE_TYPE,
+    PRODUCT_TYPE,
+} from '../internal/device.enum';
 import {
     AccessChannel,
     DeviceNodeTypeOptions,
     ProductTypeOptions,
 } from '../internal/device.constants';
+import { DriverSelect } from '@/app/normal/device/components/driver-select';
 
 type ProductFormBtnProps = {
     children?: React.ReactElement;
@@ -26,6 +31,8 @@ const ProductForm: FC<ProductFormBtnProps> = ({
     const [open, setOpen] = useState(false);
 
     const nodeType = Form.useWatch('nodeType', form);
+    const accessChannel = Form.useWatch('accessChannel', form);
+    console.log(accessChannel);
 
     const handleSubmit = (values: any) => {
         let request: Promise<any>;
@@ -116,19 +123,26 @@ const ProductForm: FC<ProductFormBtnProps> = ({
                     ))}
                 </Radio.Group>
             </Form.Item>
-            <Form.Item
-                label={`接入通道`}
-                name={`accessChannel`}
-                rules={[{ required: true }]}
-            >
-                <Radio.Group>
-                    {_.map(AccessChannel, (value, key) => (
-                        <Radio.Button key={key} value={key}>
-                            {value}
-                        </Radio.Button>
-                    ))}
-                </Radio.Group>
-            </Form.Item>
+            {_.includes([NODE_TYPE.DIRECT, NODE_TYPE.GATEWAY], nodeType) && (
+                <Form.Item
+                    label={`接入通道`}
+                    name={`accessChannel`}
+                    rules={[{ required: true }]}
+                >
+                    <Radio.Group>
+                        {_.map(AccessChannel, (value, key) => (
+                            <Radio.Button key={key} value={key}>
+                                {value}
+                            </Radio.Button>
+                        ))}
+                    </Radio.Group>
+                </Form.Item>
+            )}
+            {_.includes([ACCESS_CHANNEL.DRIVER], accessChannel) && (
+                <Form.Item label={`驱动服务名称`} name={`driverName`}>
+                    <DriverSelect />
+                </Form.Item>
+            )}
             {_.includes(
                 [NODE_TYPE.DIRECT, NODE_TYPE.GATEWAY_SUB],
                 nodeType
@@ -142,9 +156,6 @@ const ProductForm: FC<ProductFormBtnProps> = ({
                     <Select options={ProductTypeOptions} />
                 </Form.Item>
             )}
-            <Form.Item label={`驱动服务名称`} name={`driverName`}>
-                <Input />
-            </Form.Item>
         </ModalForm>
     );
 };

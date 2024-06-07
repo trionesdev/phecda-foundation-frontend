@@ -117,16 +117,17 @@ export const ForwardingRuleTab = () => {
                                 </Button>
                             </Popconfirm>
                         )}
-                        {!record?.enabled && (
-                            <>
-                                <Divider type="vertical" />
-                                <Popconfirm title={`确定删除该规则吗?`}>
-                                    <Button size={`small`} type={`link`}>
-                                        删除
-                                    </Button>
-                                </Popconfirm>
-                            </>
-                        )}
+                        <Divider type="vertical" />
+                        <Popconfirm title={`确定删除该规则吗?`}>
+                            <Button
+                                size={`small`}
+                                type={`link`}
+                                danger
+                                disabled={record?.enabled}
+                            >
+                                删除
+                            </Button>
+                        </Popconfirm>
                     </Space>
                 );
             },

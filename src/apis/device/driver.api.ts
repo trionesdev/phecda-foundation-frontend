@@ -21,6 +21,10 @@ export class DriverApi extends BaseApi {
         return this.request.get(`${this.baseUri}/drivers/${id}`);
     }
 
+    queryDriversList() {
+        return this.request.get(`${this.baseUri}/drivers/list`);
+    }
+
     queryDriversPage(params: PageQueryParams) {
         return this.request.get(`${this.baseUri}/drivers/page`, { params });
     }

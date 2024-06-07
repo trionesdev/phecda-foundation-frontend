@@ -8,11 +8,47 @@ import { MESSAGE_SOURCE_TOPIC_TYPE } from '@/app/normal/message-forwarding/inter
 import { MessageSourceTopicTypeOptions } from '@/app/normal/message-forwarding/internal/message-forwarding.constants';
 import { ThingPropertyReport } from '@/app/normal/message-forwarding/source-detail/topic-form/ThingPropertyReport';
 
-const TopicFormInner = () => {
-    const form = Form.useFormInstance();
+type TopicFormProps = {
+    children?: React.ReactElement;
+    sourceId: string;
+    onRefresh?: () => void;
+};
+export const TopicForm: FC<TopicFormProps> = ({
+    children,
+    sourceId,
+    onRefresh,
+}) => {
+    const [open, setOpen] = React.useState(false);
+    const [form] = Form.useForm();
     const type = Form.useWatch('type', form);
+    const { run: handleCreateSourceTopic } = useRequest(
+        (data) =>
+            messageForwardingApi.createSourceTopic(sourceId, {
+                properties: data,
+            }),
+        {
+            manual: true,
+            onSuccess: async () => {
+                message.success('添加Topic成功');
+                setOpen(false);
+                onRefresh?.();
+            },
+            onError: async (error) => {
+                message.error(error.message);
+            },
+        }
+    );
+
     return (
-        <>
+        <ModalForm
+            trigger={children}
+            form={form}
+            open={open}
+            afterOpenChange={setOpen}
+            title={`添加Topic`}
+            layout={`vertical`}
+            onSubmit={handleCreateSourceTopic}
+        >
             <Form.Item
                 label={`消息类型`}
                 name={`type`}
@@ -24,40 +60,6 @@ const TopicFormInner = () => {
                 type,
                 MESSAGE_SOURCE_TOPIC_TYPE.THING_PROPERTY_REPORT
             ) && <ThingPropertyReport />}
-        </>
-    );
-};
-
-type TopicFormProps = {
-    children?: React.ReactElement;
-    sourceId: string;
-};
-export const TopicForm: FC<TopicFormProps> = ({ children, sourceId }) => {
-    const [open, setOpen] = React.useState(false);
-    const { run: handleCreateSourceTopic } = useRequest(
-        (data) =>
-            messageForwardingApi.createSourceTopic(sourceId, {
-                properties: data,
-            }),
-        {
-            manual: true,
-            onSuccess: async () => {
-                message.success('添加Topic成功');
-                setOpen(false);
-            },
-        }
-    );
-
-    return (
-        <ModalForm
-            trigger={children}
-            open={open}
-            afterOpenChange={setOpen}
-            title={`添加Topic`}
-            layout={`vertical`}
-            onSubmit={handleCreateSourceTopic}
-        >
-            <TopicFormInner />
         </ModalForm>
     );
 };
