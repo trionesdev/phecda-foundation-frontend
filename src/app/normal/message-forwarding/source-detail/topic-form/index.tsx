@@ -59,7 +59,7 @@ export const TopicForm: FC<TopicFormProps> = ({
             {_.isEqual(
                 type,
                 MESSAGE_SOURCE_TOPIC_TYPE.THING_PROPERTY_REPORT
-            ) && <ThingPropertyReport />}
+            ) && <ThingPropertyReport type={type} />}
         </ModalForm>
     );
 };

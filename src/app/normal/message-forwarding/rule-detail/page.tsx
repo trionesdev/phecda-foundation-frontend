@@ -34,7 +34,7 @@ export const ForwardingRuleDetailPage = () => {
 
     return (
         <Layout direction={`vertical`} className={styles.ruleDetailPage}>
-            <Layout.Item>
+            <Layout.Item style={{ backgroundColor: 'white' }}>
                 <PageHeader
                     onBack={() => navigate(-1)}
                     title={rule?.name}
@@ -48,7 +48,7 @@ export const ForwardingRuleDetailPage = () => {
                 />
             </Layout.Item>
             <Layout direction={`vertical`}>
-                <Layout.Item>
+                <Layout.Item style={{ backgroundColor: 'white' }}>
                     <div className={styles.ruleDetailPageSteps}>
                         <Steps
                             current={step}
@@ -64,7 +64,7 @@ export const ForwardingRuleDetailPage = () => {
                         />
                     </div>
                 </Layout.Item>
-                <Layout.Item auto={true}>
+                <Layout.Item auto={true} style={{ backgroundColor: 'white' }}>
                     {_.isEqual(0, step) && (
                         <SourceStep ruleId={id!} rule={rule} />
                     )}
