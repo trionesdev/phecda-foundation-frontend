@@ -7,21 +7,22 @@ import { deviceApi } from '@apis';
 import _ from 'lodash';
 import { Alert } from 'antd';
 import { AbilityType } from '../internal/device.enum';
+import { useRequest } from 'ahooks';
 
 type ThingsModelTabProps = {
     product: any;
 };
 
 const ThingModelTab: FC<ThingsModelTabProps> = ({ product }) => {
-    const [loading, setLoading] = useState(false);
     const [rows, setRows] = useState([]);
-
-    const handleQueryThingModel = () => {
-        setLoading(true);
-        deviceApi
-            .queryThingModel(product.id)
-            .then((res: any) => {
-                const thingModelData = _.cloneDeep(_.get(res, 'thingModel'));
+    const { run: handleQueryThingModel, loading } = useRequest(
+        () => {
+            return deviceApi.queryThingModel(product.id);
+        },
+        {
+            manual: true,
+            onSuccess: (res: any) => {
+                const thingModelData = _.cloneDeep(res);
                 _.get(thingModelData, 'events')?.map((ability: any) => {
                     _.assign(ability, {
                         abilityType: AbilityType.EVENT,
@@ -41,11 +42,9 @@ const ThingModelTab: FC<ThingsModelTabProps> = ({ product }) => {
                     .reduce((prev, cur) => _.concat(prev, cur), [])
                     .sort();
                 setRows(abilities || []);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    };
+            },
+        }
+    );
 
     useEffect(() => {
         if (product) {

@@ -49,7 +49,7 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
         let data = _.assign(values, { identifier: identifier });
         deviceApi
             .upsertThingModelDraft(productId, data)
-            .then(() => {
+            .then(async () => {
                 setOpen(false);
                 onSuccess?.();
                 message.success('保存成功');
@@ -59,7 +59,7 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
 
     const handleQueryThingModel = () => {
         deviceApi.queryProductThingModelDraft(productId).then((res: any) => {
-            const ability: any = _.values(_.get(res, 'thingModel'))
+            const ability: any = _.values(res)
                 .reduce((prev, cur) => _.concat(prev, cur), [])
                 .find((ability: any) => {
                     return _.isEqual(ability.identifier, identifier);
@@ -88,7 +88,6 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
         if (open && identifier) {
             handleQueryThingModel();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [abilityType, identifier, open]);
 
     return (

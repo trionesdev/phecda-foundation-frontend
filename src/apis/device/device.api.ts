@@ -84,9 +84,9 @@ export default class DeviceApi extends BaseApi {
         );
     }
 
-    publishThingModel(productId: string) {
+    releaseThingModel(productId: string) {
         return this.request.put(
-            `${this.baseUri}/products/${productId}/thing-model-draft/publish`
+            `${this.baseUri}/products/${productId}/thing-model-draft/release`
         );
     }
 

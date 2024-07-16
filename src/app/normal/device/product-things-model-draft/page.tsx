@@ -34,7 +34,8 @@ const ProductThingModelDraftPage = () => {
         {
             manual: true,
             onSuccess: (res: any) => {
-                const thingModelData = _.cloneDeep(_.get(res, 'thingModel'));
+                debugger;
+                const thingModelData = res;
                 _.get(thingModelData, 'events')?.map((ability: any) => {
                     _.assign(ability, {
                         abilityType: AbilityType.EVENT,
@@ -69,8 +70,8 @@ const ProductThingModelDraftPage = () => {
         handleQueryThingModel();
     };
 
-    const handlePublishThingModel = () => {
-        deviceApi.publishThingModel(id!).then(async () => {
+    const handleReleaseThingModel = () => {
+        deviceApi.releaseThingModel(id!).then(async () => {
             message.success('发布成功');
         });
     };
@@ -192,7 +193,7 @@ const ProductThingModelDraftPage = () => {
                                     <Button
                                         key={`publish-btn`}
                                         type={`primary`}
-                                        onClick={handlePublishThingModel}
+                                        onClick={handleReleaseThingModel}
                                     >
                                         发布上线
                                     </Button>
