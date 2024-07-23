@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { Form, Input, message, Radio, Select } from 'antd';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
-import { ModalForm } from '@trionesdev/antd-react-ext';
+import { DrawerForm } from '@trionesdev/antd-react-ext';
 import {
     ACCESS_CHANNEL,
     NODE_TYPE,
@@ -65,15 +65,18 @@ const ProductForm: FC<ProductFormBtnProps> = ({
     }, [id, open, isEdit]);
 
     return (
-        <ModalForm
+        <DrawerForm
             form={form}
             open={open}
             trigger={children}
             title={`${isEdit ? '编辑' : '新建'}产品`}
-            layout={`vertical`}
+            width={600}
             afterOpenChange={(op: boolean) => setOpen(op)}
             onSubmit={handleSubmit}
-            initialValues={{ nodeType: 'DIRECT', accessChannel: 'DRIVER' }}
+            formProps={{
+                layout: 'vertical',
+                initialValues: { nodeType: 'DIRECT', accessChannel: 'DRIVER' },
+            }}
         >
             <Form.Item
                 rules={[{ required: true }]}
@@ -106,6 +109,12 @@ const ProductForm: FC<ProductFormBtnProps> = ({
                 ]}
             >
                 <Input />
+            </Form.Item>
+            <Form.Item label={`生产厂商`} name={`manufacturer`}>
+                <Input />
+            </Form.Item>
+            <Form.Item label={`描述`} name={`description`}>
+                <Input.TextArea autoSize />
             </Form.Item>
             <Form.Item
                 label={`节点类型`}
@@ -156,7 +165,7 @@ const ProductForm: FC<ProductFormBtnProps> = ({
                     <Select options={ProductTypeOptions} />
                 </Form.Item>
             )}
-        </ModalForm>
+        </DrawerForm>
     );
 };
 export default ProductForm;

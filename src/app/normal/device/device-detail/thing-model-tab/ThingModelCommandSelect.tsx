@@ -7,7 +7,7 @@ type ThingModelServiceSelectProps = {
     productId: string;
 } & SelectProps;
 
-export const ThingModelServiceSelect: FC<ThingModelServiceSelectProps> = ({
+export const ThingModelCommandSelect: FC<ThingModelServiceSelectProps> = ({
     productId,
     ...rest
 }) => {
@@ -17,7 +17,7 @@ export const ThingModelServiceSelect: FC<ThingModelServiceSelectProps> = ({
         () => {
             return deviceApi.queryProductThingModel(productId).then((res) => {
                 return (
-                    res.thingModel?.services?.map((item: any) => {
+                    res.thingModel?.commands?.map((item: any) => {
                         return {
                             label: item.name,
                             value: item.identifier,

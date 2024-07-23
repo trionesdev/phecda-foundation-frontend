@@ -4,7 +4,7 @@ import { useRequest } from 'ahooks';
 import { deviceDataApi } from '@apis';
 import { formatDateTime } from '@/commons/util/date.utils';
 import dayjs from 'dayjs';
-import { ThingModelServiceSelect } from './ThingModelServiceSelect';
+import { ThingModelCommandSelect } from './ThingModelCommandSelect';
 
 const ThingModelDataService: React.FC<{
     deviceData: Record<string, any>;
@@ -83,7 +83,7 @@ const ThingModelDataService: React.FC<{
                             label: '服务',
                             name: 'serviceIdentifier',
                             children: (
-                                <ThingModelServiceSelect
+                                <ThingModelCommandSelect
                                     productId={deviceData.productId}
                                 />
                             ),

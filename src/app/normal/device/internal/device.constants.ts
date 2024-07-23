@@ -1,4 +1,4 @@
-import { NODE_TYPE, PRODUCT_TYPE } from './device.enum';
+import { NODE_TYPE, PRODUCT_TYPE, ValueTypeEnum } from './device.enum';
 
 export const DeviceNodeTypeOptions = [
     {
@@ -27,5 +27,59 @@ export const ProductTypeOptions = [
     {
         label: '摄像头',
         value: PRODUCT_TYPE.CAMERA,
+    },
+];
+
+export const ValueTypeOptions = [
+    {
+        label: '整数',
+        value: ValueTypeEnum.INT,
+    },
+    {
+        label: '单精度浮点数',
+        value: ValueTypeEnum.FLOAT,
+    },
+    {
+        label: '双精度浮点数',
+        value: ValueTypeEnum.DOUBLE,
+    },
+    {
+        label: '布尔值',
+        value: ValueTypeEnum.BOOL,
+    },
+    {
+        label: '字符串',
+        value: ValueTypeEnum.STRING,
+    },
+    {
+        label: '结构体',
+        value: ValueTypeEnum.STRUCT,
+    },
+    {
+        label: '数组',
+        value: ValueTypeEnum.ARRAY,
+    },
+];
+
+export const ArraySubValueTypeOptions = [
+    {
+        label: 'Bool',
+        value: ValueTypeEnum.BOOL,
+    },
+    {
+        label: 'Int',
+        value: ValueTypeEnum.INT,
+    },
+    {
+        label: 'Float',
+        value: ValueTypeEnum.FLOAT,
+    },
+    {
+        label: 'Double',
+        value: ValueTypeEnum.DOUBLE,
+    },
+    {
+        label: 'String',
+        value: ValueTypeEnum.STRING,
     },
 ];

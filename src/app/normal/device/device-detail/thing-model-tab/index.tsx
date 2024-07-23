@@ -13,14 +13,14 @@ type ThingModelDataTabProps = {
 const ThingModelDataTab: FC<ThingModelDataTabProps> = ({ device }) => {
     const [properties, setProperties] = useState([]);
     const [events, setEvents] = useState([]);
-    const [services, setServices] = useState([]);
+    const [commands, setCommands] = useState([]);
 
     const handleQueryThingModel = () => {
         deviceApi.queryThingModel(device?.product?.id).then((res: any) => {
             if (res) {
                 setProperties(_.get(res, ['thingModel', 'properties'], []));
                 setEvents(_.get(res, ['thingModel', 'events'], []));
-                setServices(_.get(res, ['thingModel', 'services'], []));
+                setCommands(_.get(res, ['thingModel', 'commands'], []));
             }
         });
     };
@@ -48,8 +48,8 @@ const ThingModelDataTab: FC<ThingModelDataTabProps> = ({ device }) => {
             children: <ThingModelDataEvent deviceData={device} />,
         },
         {
-            key: 'services',
-            label: `服务调用`,
+            key: 'commands',
+            label: `指令调用`,
             children: <ThingModelDataService deviceData={device} />,
         },
     ];

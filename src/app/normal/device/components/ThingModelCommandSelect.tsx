@@ -3,10 +3,10 @@ import { useRequest } from 'ahooks';
 import { deviceApi } from '@apis';
 import { Select, SelectProps } from 'antd';
 
-type ThingModelServiceSelectProps = {
+type ThingModelCommandSelectProps = {
     productKey?: string;
 } & SelectProps;
-export const ThingModelServiceSelect: FC<ThingModelServiceSelectProps> = ({
+export const ThingModelCommandSelect: FC<ThingModelCommandSelectProps> = ({
     productKey,
     ...rest
 }) => {
@@ -18,7 +18,7 @@ export const ThingModelServiceSelect: FC<ThingModelServiceSelectProps> = ({
                 .queryProductThingModelByKey(productKey!!)
                 .then((res) => {
                     return (
-                        res.thingModel?.services?.map((item: any) => {
+                        res.thingModel?.commands?.map((item: any) => {
                             return {
                                 label: item.name,
                                 value: item.identifier,

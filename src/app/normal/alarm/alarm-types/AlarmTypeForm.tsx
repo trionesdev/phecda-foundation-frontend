@@ -40,7 +40,7 @@ export const AlarmTypeForm: FC<AlarmTypeFormProps> = ({
             trigger={children}
             open={open}
             title={`${id ? `编辑` : `新增`}报警类型`}
-            layout={`vertical`}
+            formProps={{ layout: 'vertical' }}
             afterOpenChange={(op) => setOpen(op)}
             onSubmit={handleSubmit}
         >

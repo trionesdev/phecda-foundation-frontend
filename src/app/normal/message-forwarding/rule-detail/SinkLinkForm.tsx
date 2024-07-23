@@ -39,7 +39,7 @@ export const SinkLinkForm: FC<SinkLinkFormProps> = ({
             title={`关联数据目的`}
             open={open}
             afterOpenChange={setOpen}
-            layout={`vertical`}
+            formProps={{ layout: 'vertical' }}
             onSubmit={handleSubmit}
         >
             <Form.Item>

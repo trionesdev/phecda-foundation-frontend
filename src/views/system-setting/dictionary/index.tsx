@@ -231,17 +231,16 @@ const Dictionary: React.FC = () => {
             <DrawerForm
                 open={drawerOpen}
                 title={`${isEdit ? '编辑' : '新建'}字典`}
-                layout="vertical"
                 afterOpenChange={(op) => setDrawerOpen(op)}
                 onSubmit={(value, from) => {
                     const newValue = { ...value, typeCode };
-                    console.log(newValue);
                     isEdit
                         ? editDictionary(drawerFormeValue.id, newValue)
                         : addDictionary(newValue);
                     from?.resetFields();
                 }}
                 formValues={drawerFormeValue}
+                formProps={{ layout: 'vertical' }}
             >
                 <Form.Item noStyle dependencies={['parentCode']}>
                     {({ getFieldValue }) => {

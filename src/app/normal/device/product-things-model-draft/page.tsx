@@ -26,16 +26,17 @@ import { AbilityType } from '../internal/device.enum';
 const ProductThingModelDraftPage = () => {
     const navigate = useNavigate();
     const { id } = useParams();
+    const [product, setProduct] = useState<any>();
     const [rows, setRows] = useState([]);
     const { run: handleQueryThingModel, loading } = useRequest(
         () => {
-            return deviceApi.queryProductThingModelDraft(id!);
+            return deviceApi.queryProductById(id!);
         },
         {
             manual: true,
             onSuccess: (res: any) => {
-                debugger;
-                const thingModelData = res;
+                setProduct(res);
+                const thingModelData = _.get(res, 'thingModelDraft');
                 _.get(thingModelData, 'events')?.map((ability: any) => {
                     _.assign(ability, {
                         abilityType: AbilityType.EVENT,
@@ -46,9 +47,9 @@ const ProductThingModelDraftPage = () => {
                         abilityType: AbilityType.PROPERTY,
                     });
                 });
-                _.get(thingModelData, 'services')?.map((ability: any) => {
+                _.get(thingModelData, 'commands')?.map((ability: any) => {
                     _.assign(ability, {
-                        abilityType: AbilityType.SERVICE,
+                        abilityType: AbilityType.COMMAND,
                     });
                 });
 
@@ -89,8 +90,8 @@ const ProductThingModelDraftPage = () => {
                 switch (text) {
                     case AbilityType.PROPERTY:
                         return '属性';
-                    case AbilityType.SERVICE:
-                        return '服务';
+                    case AbilityType.COMMAND:
+                        return '指令';
                     case AbilityType.EVENT:
                         return '事件';
                 }
@@ -111,20 +112,19 @@ const ProductThingModelDraftPage = () => {
         {
             title: `操作`,
             dataIndex: 'identifier',
-            width: 180,
+            width: 120,
             render: (text: string, record: any) => {
                 return (
-                    <Space split={<Divider type="vertical" />}>
+                    <Space>
                         <ThingsModelAbilityForm
-                            key={`edit-ability`}
-                            size={`small`}
-                            type={`link`}
                             productId={id!}
                             editAbilityType={record.abilityType}
                             identifier={record.identifier}
                             onSuccess={handleEditSuccess}
                         >
-                            编辑
+                            <Button size={`small`} type={`link`}>
+                                编辑
+                            </Button>
                         </ThingsModelAbilityForm>
                         <Popconfirm
                             title={`确定删除该功能`}
@@ -165,7 +165,7 @@ const ProductThingModelDraftPage = () => {
                 >
                     <Descriptions>
                         <Descriptions.Item label={`产品名称`}>
-                            流量
+                            {product?.name}
                         </Descriptions.Item>
                     </Descriptions>
                     <Alert
@@ -177,18 +177,17 @@ const ProductThingModelDraftPage = () => {
             <Layout.Item auto={true} style={{ backgroundColor: 'white' }}>
                 <GridTable
                     style={{ backgroundColor: 'white', padding: '8px' }}
+                    fit={true}
                     size={`small`}
                     toolbar={
                         <TableToolbar
                             extra={
                                 <Space>
                                     <ThingsModelAbilityForm
-                                        key={`create-ability`}
-                                        type={`primary`}
                                         productId={id!}
                                         onSuccess={handleEditSuccess}
                                     >
-                                        添加功能
+                                        <Button>添加功能</Button>
                                     </ThingsModelAbilityForm>
                                     <Button
                                         key={`publish-btn`}

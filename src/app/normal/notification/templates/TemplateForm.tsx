@@ -58,8 +58,8 @@ export const TemplateForm: FC<TemplateFormProps> = ({
             open={open}
             destroyOnClose={true}
             afterOpenChange={setOpen}
-            layout={`vertical`}
             formValues={formValues}
+            formProps={{ layout: 'vertical' }}
             onSubmit={handleSubmit}
         >
             <Spin spinning={loading}>

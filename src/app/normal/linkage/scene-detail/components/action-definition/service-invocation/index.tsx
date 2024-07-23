@@ -3,7 +3,7 @@ import { FC } from 'react';
 import {
     DeviceSelect,
     ProductKeySelect,
-    ThingModelServiceSelect,
+    ThingModelCommandSelect,
 } from '@/app/normal/device/components';
 
 type ServiceInvocationActionProps = {
@@ -46,7 +46,7 @@ export const ServiceInvocationAction: FC<ServiceInvocationActionProps> = ({
                 name={[...namePath, 'serviceIdentifier']}
                 required={true}
             >
-                <ThingModelServiceSelect
+                <ThingModelCommandSelect
                     productKey={productKey}
                     style={{ minWidth: 180 }}
                 />

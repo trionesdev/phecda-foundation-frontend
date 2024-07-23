@@ -26,7 +26,7 @@ export const operationApi = new OperationApi();
 export const loggingApi = new LoggingApi();
 /** 边缘节点 */
 export const nodeApi = new NodeApi();
-
+/** 消息转发 */
 export const messageForwardingApi = new MessageForwardingApi();
 
 export const notificationApi = new NotificationApi();

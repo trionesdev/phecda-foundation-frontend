@@ -35,7 +35,7 @@ export const LinkageForm: FC<LinkageFormProps> = ({
             trigger={children}
             open={open}
             title={`${id ? '编辑' : '新建'}场景`}
-            layout="vertical"
+            formProps={{ layout: 'vertical' }}
             afterOpenChange={(op) => setOpen(op)}
             onSubmit={(values) => {
                 let request = id

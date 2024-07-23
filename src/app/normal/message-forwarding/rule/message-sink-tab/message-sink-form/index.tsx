@@ -95,7 +95,7 @@ export const MessageSinkForm: FC<MessageSinkFormProps> = ({
             trigger={children}
             open={open}
             afterOpenChange={setOpen}
-            layout={`vertical`}
+            formProps={{ layout: 'vertical' }}
             onSubmit={handleSubmit}
         >
             <MessageSinkFormInner id={id} onRefresh={onRefresh} />

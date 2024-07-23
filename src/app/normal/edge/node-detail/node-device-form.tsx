@@ -62,7 +62,7 @@ const NodeDeviceForm: FC<NodeChildDeviceFormProps> = ({
                 open={open}
                 title={`添加终端设备`}
                 trigger={<Button {...rest} />}
-                layout={`vertical`}
+                formProps={{ layout: 'vertical' }}
                 afterOpenChange={(op: boolean) => setOpen(op)}
                 onSubmit={handleSubmit}
             >

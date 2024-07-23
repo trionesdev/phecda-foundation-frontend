@@ -59,7 +59,7 @@ export const DriverForm: FC<DriverFormProps> = ({
                 setOpen(open);
             }}
             title={`${id ? '编辑' : '新建'}驱动`}
-            layout={`vertical`}
+            formProps={{ layout: 'vertical' }}
             onSubmit={handleSubmit}
         >
             <Spin spinning={loading}>

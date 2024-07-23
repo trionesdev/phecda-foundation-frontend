@@ -3,7 +3,7 @@ import { Form, Input, Radio } from 'antd';
 import ParamsData from './params-data';
 
 type ThingsModelServiceFormProps = {};
-const ThingModelServiceForm: FC<ThingsModelServiceFormProps> = () => {
+const ThingModelCommandForm: FC<ThingsModelServiceFormProps> = () => {
     const ability = 'service';
     return (
         <>
@@ -48,4 +48,4 @@ const ThingModelServiceForm: FC<ThingsModelServiceFormProps> = () => {
         </>
     );
 };
-export default ThingModelServiceForm;
+export default ThingModelCommandForm;

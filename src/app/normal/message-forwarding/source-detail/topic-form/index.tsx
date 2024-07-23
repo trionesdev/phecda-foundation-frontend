@@ -46,7 +46,7 @@ export const TopicForm: FC<TopicFormProps> = ({
             open={open}
             afterOpenChange={setOpen}
             title={`添加Topic`}
-            layout={`vertical`}
+            formProps={{ layout: 'vertical' }}
             onSubmit={handleCreateSourceTopic}
         >
             <Form.Item

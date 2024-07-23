@@ -40,7 +40,7 @@ export const SourceLinkForm: FC<SourceLinkFormProps> = ({
             title={`关联数据源`}
             open={open}
             afterOpenChange={setOpen}
-            layout={`vertical`}
+            formProps={{ layout: 'vertical' }}
             onSubmit={handleSubmit}
         >
             <Form.Item>

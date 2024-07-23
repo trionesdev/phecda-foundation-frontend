@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom';
 import styles from './product-detail.module.less';
 import { FC, useEffect, useState } from 'react';
 import { RoutesConstants } from '@/router/routes.constants';
-import { GridTable, Layout } from '@trionesdev/antd-react-ext';
+import { GridTable, Layout, TableToolbar } from '@trionesdev/antd-react-ext';
 import { deviceApi } from '@apis';
 import _ from 'lodash';
-import { Alert } from 'antd';
+import { Alert, Button, Space } from 'antd';
 import { AbilityType } from '../internal/device.enum';
 import { useRequest } from 'ahooks';
+import { ThingModelProfileModal } from '@/app/normal/device/product-detail/ThingModelProfileModal';
 
 type ThingsModelTabProps = {
     product: any;
@@ -33,9 +34,9 @@ const ThingModelTab: FC<ThingsModelTabProps> = ({ product }) => {
                         abilityType: AbilityType.PROPERTY,
                     });
                 });
-                _.get(thingModelData, 'services')?.map((ability: any) => {
+                _.get(thingModelData, 'commands')?.map((ability: any) => {
                     _.assign(ability, {
-                        abilityType: AbilityType.SERVICE,
+                        abilityType: AbilityType.COMMAND,
                     });
                 });
                 let abilities = _.values(thingModelData)
@@ -61,8 +62,8 @@ const ThingModelTab: FC<ThingsModelTabProps> = ({ product }) => {
                 switch (text) {
                     case AbilityType.PROPERTY:
                         return '属性';
-                    case AbilityType.SERVICE:
-                        return '服务';
+                    case AbilityType.COMMAND:
+                        return '指令';
                     case AbilityType.EVENT:
                         return '事件';
                 }
@@ -111,6 +112,15 @@ const ThingModelTab: FC<ThingsModelTabProps> = ({ product }) => {
                 <GridTable
                     style={{ backgroundColor: 'white' }}
                     fit={true}
+                    toolbar={
+                        <TableToolbar
+                            title={
+                                <Space>
+                                    <ThingModelProfileModal id={product?.id} />
+                                </Space>
+                            }
+                        />
+                    }
                     size={`small`}
                     columns={columns}
                     dataSource={rows}

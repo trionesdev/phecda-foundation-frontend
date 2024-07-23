@@ -53,9 +53,9 @@ export const ContactForm: FC<ContactFormProps> = ({
             title={`${id ? '编辑' : '新建'}联系人`}
             open={open}
             afterOpenChange={setOpen}
-            layout={`vertical`}
             onSubmit={handleSubmit}
             formValues={formValues}
+            formProps={{ layout: 'vertical' }}
         >
             <Form.Item
                 label={`姓名`}

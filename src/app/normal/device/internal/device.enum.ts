@@ -16,7 +16,7 @@ export enum PRODUCT_TYPE {
 
 export enum AbilityType {
     PROPERTY = 'PROPERTY',
-    SERVICE = 'SERVICE',
+    COMMAND = 'COMMAND',
     EVENT = 'EVENT',
 }
 
@@ -26,6 +26,6 @@ export enum ValueTypeEnum {
     DOUBLE = 'DOUBLE',
     BOOL = 'BOOL',
     STRING = 'STRING',
-    STRUCT = 'STRUCT',
     ARRAY = 'ARRAY',
+    STRUCT = 'STRUCT',
 }

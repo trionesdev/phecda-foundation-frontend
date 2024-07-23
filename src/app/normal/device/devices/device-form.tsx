@@ -64,7 +64,7 @@ const DeviceForm: FC<DeviceFormProps> = ({
             open={open}
             title={`${isEdit ? '编辑' : '新建'}设备`}
             trigger={children}
-            layout={`vertical`}
+            formProps={{ layout: 'vertical' }}
             afterOpenChange={(op: boolean) => setOpen(op)}
             onSubmit={handleSubmit}
             formValues={formValues}

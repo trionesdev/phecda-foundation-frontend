@@ -85,7 +85,7 @@ export const ForwardingRuleForm: FC<ForwardingRuleFormProps> = ({
             title={`${id ? '修改' : '创建'}消息流转规则`}
             open={open}
             afterOpenChange={setOpen}
-            layout={`vertical`}
+            formProps={{ layout: 'vertical' }}
             onSubmit={handleSubmit}
         >
             <ForwardingRuleFormInner ruleId={id} />

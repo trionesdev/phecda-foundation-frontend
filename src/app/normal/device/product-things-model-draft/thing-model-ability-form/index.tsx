@@ -10,12 +10,13 @@ import {
 import ThingModelPropertyForm from './thing-model-property-form';
 import _ from 'lodash';
 import { deviceApi } from '@apis';
-import ThingModelServiceForm from './thing-model-service-form';
+import ThingModelCommandForm from './thing-model-command-form';
 import ThingModelEventForm from './thing-model-event-form';
 import DrawerForm from '@components/drawer-form';
 import { AbilityType } from '../../internal/device.enum';
 
 type ThingsModelAbilityEditBtnProps = {
+    children?: React.ReactElement;
     productId: string;
     editAbilityType?: AbilityType;
     identifier?: string;
@@ -24,11 +25,12 @@ type ThingsModelAbilityEditBtnProps = {
 
 const ABILITY_TYPE_CONFIG = {
     [AbilityType.PROPERTY]: <ThingModelPropertyForm />,
-    [AbilityType.SERVICE]: <ThingModelServiceForm />,
+    [AbilityType.COMMAND]: <ThingModelCommandForm />,
     [AbilityType.EVENT]: <ThingModelEventForm />,
 };
 
 const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
+    children,
     productId,
     editAbilityType,
     identifier,
@@ -72,8 +74,8 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
                 case AbilityType.EVENT:
                     typeAbility = { event: ability };
                     break;
-                case AbilityType.SERVICE:
-                    typeAbility = { service: ability };
+                case AbilityType.COMMAND:
+                    typeAbility = { command: ability };
                     break;
                 default:
                     break;
@@ -94,7 +96,7 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
         <DrawerForm
             title={`${identifier ? '编辑' : '新建'}功能定义`}
             layout={`vertical`}
-            trigger={<Button {...rest} />}
+            trigger={children}
             open={open}
             onOpenChange={(open) => setOpen(open)}
             initialValues={{ abilityType: abilityType }}
@@ -113,8 +115,8 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
                     <Radio.Button value={AbilityType.PROPERTY}>
                         属性
                     </Radio.Button>
-                    <Radio.Button value={AbilityType.SERVICE}>
-                        服务
+                    <Radio.Button value={AbilityType.COMMAND}>
+                        指令
                     </Radio.Button>
                     <Radio.Button value={AbilityType.EVENT}>事件</Radio.Button>
                 </Radio.Group>

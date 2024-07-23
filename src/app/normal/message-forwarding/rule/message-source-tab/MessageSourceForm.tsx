@@ -40,7 +40,7 @@ export const MessageSourceForm: FC<MessageSourceFormProps> = ({
             open={open}
             afterOpenChange={setOpen}
             trigger={children}
-            layout={`vertical`}
+            formProps={{ layout: 'vertical' }}
             title={`${id ? '编辑' : '创建'}数据源`}
             onSubmit={handleSubmit}
         >

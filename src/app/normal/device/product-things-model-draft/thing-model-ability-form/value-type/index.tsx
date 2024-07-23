@@ -1,5 +1,4 @@
-import { Form } from 'antd';
-import ValueTypeInt from './value-type-int';
+import { Form, Select } from 'antd';
 import ValueTypeSelect from '@/app/normal/device/components/ValueTypeSelect';
 import { FC } from 'react';
 import _ from 'lodash';
@@ -9,6 +8,9 @@ import ValueTypeDouble from './value-type-double';
 import ValueTypeString from './value-type-string';
 import ValueTypeStruct from './value-type-struct';
 import { ValueTypeEnum } from '../../../internal/device.enum';
+import { ValueTypeArray } from './ValueTypeArray';
+import ValueTypeInt from './ValueTypeInt';
+import { ValueTypeOptions } from '@/app/normal/device/internal/device.constants';
 
 export type ValueTypeProps = {
     group?: string | number | any[];
@@ -28,11 +30,12 @@ const ValueType: FC<ValueTypeProps> = ({ group, isChild = false }) => {
         [ValueTypeEnum.DOUBLE]: ValueTypeDouble,
         [ValueTypeEnum.BOOL]: ValueTypeBool,
         [ValueTypeEnum.STRING]: ValueTypeString,
+        [ValueTypeEnum.ARRAY]: ValueTypeArray,
         [ValueTypeEnum.STRUCT]: ValueTypeStruct,
     };
     const valueTypeNamePath = _.concat(
         group,
-        isChild ? `childValueType` : `valueType`
+        isChild ? `subValueType` : `valueType`
     );
     return (
         <>
@@ -42,7 +45,11 @@ const ValueType: FC<ValueTypeProps> = ({ group, isChild = false }) => {
                 initialValue={ValueTypeEnum.INT}
                 rules={[{ required: true }]}
             >
-                <ValueTypeSelect
+                {/*<ValueTypeSelect*/}
+                {/*    onChange={(value) => handleValueTypesOnChange(value)}*/}
+                {/*/>*/}
+                <Select
+                    options={ValueTypeOptions}
                     onChange={(value) => handleValueTypesOnChange(value)}
                 />
             </Form.Item>

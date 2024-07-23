@@ -84,7 +84,7 @@ export const ContactGroupForm: FC<ContactGroupFormProps> = ({
             trigger={children}
             open={open}
             afterOpenChange={setOpen}
-            layout={`vertical`}
+            formProps={{ layout: 'vertical' }}
             formValues={formValues}
             onSubmit={handleSubmit}
         >

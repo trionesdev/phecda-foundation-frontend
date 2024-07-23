@@ -5,6 +5,7 @@ import { PageQueryParams } from '@apis/types';
 export default class DeviceApi extends BaseApi {
     private baseUri = '/be/device';
 
+    //region product
     valueTypeOptions(): Promise<{ value: string; label: string }> {
         return this.request.get(`${this.baseUri}/value-type/options`);
     }
@@ -118,6 +119,15 @@ export default class DeviceApi extends BaseApi {
         );
     }
 
+    queryProductThingModelProfile(id: string) {
+        return this.request.get(
+            `${this.baseUri}/products/${id}/thing-model-profile`
+        );
+    }
+
+    //endregion
+
+    //region device
     deviceStatistics() {
         return this.request.get(`${this.baseUri}/devices/statistics`);
     }
@@ -217,4 +227,5 @@ export default class DeviceApi extends BaseApi {
             `${this.baseUri}/devices/${id}/streaming/start`
         );
     }
+    //endregion
 }
