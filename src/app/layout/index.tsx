@@ -1,7 +1,7 @@
 import { AppToolbar, Layout } from '@trionesdev/antd-react-ext';
 import { Outlet } from 'react-router-dom';
 import Icon from '@ant-design/icons';
-import { ReactComponent as PhecdaSvg } from './assests/phecda.svg';
+import PhecdaSvg from './assests/phecda.svg?react';
 
 const MainLayoutView = () => {
     return (

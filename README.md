@@ -1,44 +1,50 @@
-# 物联网平台
+# React + TypeScript + Vite
 
-这个前端项目使用 CRA 构建，可以阅读 [Create React App](https://github.com/facebook/create-react-app).
-以及[craco](https://craco.js.org/).
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 快速开始
+Currently, two official plugins are available:
 
-```bash
-# 安装依赖
-$ yarn install
-# 运行
-$ yarn start
-# 构建
-$ yarn build
-# 检查ts类型规范
-$ yarn check:types
-# 对全局文件执行prettier
-$ yarn format
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-###提交
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-1. 规范提交代码
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
 
-```
-# 修复bug fix: bug内容
-fix: 修复了一个致命的bug
-# feature feat: 任务内容
-feat: 增加了一个新功能
-# 主要type
-
-feat:     增加新功能
-fix:      修复bug
-
-# 其他type
-
-docs:     只改动了文档相关的内容
-style:    不影响代码含义的改动，例如去掉空格、改变缩进、增删分号
-build:    构造工具的或者外部依赖的改动，例如webpack，npm
-refactor: 代码重构时使用
-revert:   执行git revert打印的message
-
-
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
 ```

@@ -1,10 +1,10 @@
 import Icon from '@ant-design/icons';
-import { ReactComponent as DashboardSvg } from './svg/Dashboard.svg';
-import { ReactComponent as DeviceSvg } from './svg/DeviceManagement.svg';
-import { ReactComponent as MessageForwardingSvg } from './svg/MessageForwarding.svg';
-import { ReactComponent as MonitoringSvg } from './svg/Monitoring.svg';
-import { ReactComponent as AlarmSvg } from './svg/Alarm.svg';
-import { ReactComponent as NotificationSvg } from './svg/Notification.svg';
+import DashboardSvg from './svg/Dashboard.svg?react';
+import DeviceSvg from './svg/DeviceManagement.svg?react';
+import MessageForwardingSvg from './svg/MessageForwarding.svg?react';
+import MonitoringSvg from './svg/Monitoring.svg?react';
+import AlarmSvg from './svg/Alarm.svg?react';
+import NotificationSvg from './svg/Notification.svg?react';
 
 export const DashboardIcon = () => {
     return <Icon component={DashboardSvg} />;

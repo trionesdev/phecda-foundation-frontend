@@ -1,34 +1,7 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "forceConsistentCasingInFileNames": true,
-        "noFallthroughCasesInSwitch": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
-        "jsx": "react-jsx",
-        "baseUrl": "./",
-        "paths": {
-            "@": ["src"],
-            "@/*": ["src/*"],
-            "@icons": ["src/icons"],
-            "@commons/*": ["src/commons/*"],
-            "@general/*": ["src/general/*"],
-            "@apis": ["src/apis"],
-            "@apis/*": ["src/apis/*"],
-            "@components": ["src/components"],
-            "@components/*": ["src/components/*"],
-            "@views": ["src/views"],
-            "@views/*": ["src/views/*"]
-        }
-    },
-    "include": ["src"]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }

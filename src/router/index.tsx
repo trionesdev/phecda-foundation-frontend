@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     createHashRouter,
     RouteObject,
@@ -6,7 +5,6 @@ import {
 } from 'react-router-dom';
 import MainLayoutView from '../app/layout';
 import { RoutesConstants } from './routes.constants';
-import MonitorView from 'src/views/alarm/monitor-view';
 import { CoreLayoutView } from '@/app/layout/CoreLayoutView';
 import { DashboardPage } from '@/app/normal/dashboard/page';
 import { AlarmTypesPage } from '@/app/normal/alarm/alarm-types/page';
@@ -28,6 +26,7 @@ import { EdgeNodePage } from '@/app/normal/edge/node/page';
 import { LinkagesPage } from '@/app/normal/linkage/linkages/page';
 import { SceneDetailPage } from '@/app/normal/linkage/scene-detail/page';
 import { DriversPage } from '@/app/normal/device/drivers/page';
+import MonitorView from "@views/alarm/monitor-view";
 
 export const routes: RouteObject[] = [
     {
