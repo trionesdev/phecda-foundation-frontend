@@ -4,7 +4,7 @@ import { GridTable, Layout, TableToolbar } from '@trionesdev/antd-react-ext';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { Button, message, Popconfirm, Space } from 'antd';
 import { useRequest } from 'ahooks';
-import { driverApi } from '@apis';
+import { driverApi } from '@apis/tenant';
 import { DriverForm } from './DriverForm';
 
 export const DriversPage = () => {

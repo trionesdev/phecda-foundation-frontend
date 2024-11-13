@@ -8,7 +8,7 @@ import {
     VPanel,
 } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
-import { systemApi } from '@apis';
+import { systemApi } from '@apis/tenant';
 import {
     Button,
     Divider,

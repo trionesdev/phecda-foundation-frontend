@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
 import { GridTable, TableToolbar, VPanel } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
-import { systemApi } from '@/apis';
+import { systemApi } from '@apis/tenant';
 import {
     Button,
     Divider,

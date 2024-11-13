@@ -2,7 +2,7 @@ import { Layout, PageHeader } from '@trionesdev/antd-react-ext';
 import { Tabs, TabsProps } from 'antd';
 import InfoTab from './info-tab';
 import { useEffect } from 'react';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './device-detail.module.less';
 import ThingModelDataTab from './thing-model-tab';

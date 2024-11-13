@@ -3,7 +3,7 @@ import { Form, message, Select } from 'antd';
 import _ from 'lodash';
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
+import { messageForwardingApi } from '@apis/tenant';
 import { MESSAGE_SOURCE_TOPIC_TYPE } from '@/app/normal/message-forwarding/internal/message-forwarding.enums';
 import { MessageSourceTopicTypeOptions } from '@/app/normal/message-forwarding/internal/message-forwarding.constants';
 import { ThingPropertyReport } from '@/app/normal/message-forwarding/source-detail/topic-form/ThingPropertyReport';

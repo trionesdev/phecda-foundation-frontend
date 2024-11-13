@@ -17,7 +17,7 @@ import {
 import { useEffect, useState } from 'react';
 import ThingsModelAbilityForm from './thing-model-ability-form';
 import { useNavigate, useParams } from 'react-router-dom';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import _ from 'lodash';
 import { RoutesConstants } from '@/router/routes.constants';
 import { useRequest } from 'ahooks';

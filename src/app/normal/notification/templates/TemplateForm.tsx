@@ -1,7 +1,7 @@
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import React, { FC, useEffect, useState } from 'react';
 import { Form, Input, message, Space, Spin } from 'antd';
-import { notificationApi } from '@apis';
+import { notificationApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
 
 type TemplateFormProps = {

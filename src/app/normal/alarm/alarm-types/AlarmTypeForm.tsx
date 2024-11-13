@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import { Form, Input, message } from 'antd';
-import { alarmApi } from '@apis';
+import { alarmApi } from '@apis/tenant';
 
 type AlarmTypeFormProps = {
     children?: React.ReactElement;

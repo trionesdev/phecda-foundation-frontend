@@ -2,7 +2,7 @@ import { ModalForm } from '@trionesdev/antd-react-ext';
 import React, { FC, useEffect, useState } from 'react';
 import { Form, Input, message } from 'antd';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
+import { messageForwardingApi } from '@apis/tenant';
 
 type ForwardingRuleFormInnerProps = {
     ruleId?: string;

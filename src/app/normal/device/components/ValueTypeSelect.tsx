@@ -1,6 +1,6 @@
 import { Select, SelectProps } from 'antd';
 import { FC, useEffect, useState } from 'react';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import { ValueTypeEnum } from '../internal/device.enum';
 
 type ValueTypeSelectProps = {

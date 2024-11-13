@@ -4,7 +4,7 @@ import styles from './device-detail.module.less';
 import VPanel from '@components/v-panel';
 import { PageHeader } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import { arrayToObject } from '@/commons/util/arrayToObject';
 import { objectToArray } from '@/commons/util/objectToArray';
 

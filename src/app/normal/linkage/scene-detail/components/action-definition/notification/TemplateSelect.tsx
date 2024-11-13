@@ -1,7 +1,7 @@
 import { message, Select, SelectProps } from 'antd';
 import { FC, useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { notificationApi } from '@apis';
+import { notificationApi } from '@apis/tenant';
 
 type NotificationTemplateSelectProps = {} & Omit<SelectProps, `options`>;
 export const TemplateSelect: FC<NotificationTemplateSelectProps> = ({

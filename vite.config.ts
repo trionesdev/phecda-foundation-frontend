@@ -21,7 +21,7 @@ export default defineConfig({
   server: {
     port: 3200,
     proxy: {
-      '/api': {
+      '/tenant-api': {
         target: 'http://localhost:8200/',
         // target: 'http://192.168.10.202:82/', //测试站ip
         // target: 'http://192.168.10.73:8080/', //戎宇ip

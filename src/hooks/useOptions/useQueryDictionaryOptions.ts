@@ -1,4 +1,4 @@
-import { systemApi } from '@/apis';
+import { systemApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
 import { useEffect, useMemo } from 'react';
 

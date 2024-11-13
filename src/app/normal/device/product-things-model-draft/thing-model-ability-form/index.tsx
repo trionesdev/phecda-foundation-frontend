@@ -9,7 +9,7 @@ import {
 } from 'antd';
 import ThingModelPropertyForm from './thing-model-property-form';
 import _ from 'lodash';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import ThingModelCommandForm from './thing-model-command-form';
 import ThingModelEventForm from './thing-model-event-form';
 import DrawerForm from '@components/drawer-form';

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
 import { GridTable, VPanel } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
-import { alarmApi } from '@/apis';
+import { alarmApi } from '@apis/tenant';
 import {
     Button,
     DatePicker,

@@ -3,7 +3,7 @@ import React, { FC, useEffect } from 'react';
 import { Form, Input, message, Select } from 'antd';
 import _ from 'lodash';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
+import { messageForwardingApi } from '@apis/tenant';
 import { MESSAGE_SINK_TYPE } from '../../../internal/message-forwarding.enums';
 import { KafkaSinkAction } from './KafkaSinkAction';
 import { MessageSinkTypeOptions } from '../../../internal/message-forwarding.constants';

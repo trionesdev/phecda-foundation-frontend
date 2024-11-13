@@ -1,5 +1,5 @@
 import { useRequest } from 'ahooks';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import { useEffect, useMemo } from 'react';
 
 const useQueryDevicePropertiesData = (deviceName?: string) => {

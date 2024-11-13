@@ -1,7 +1,7 @@
 import { message, Select, SelectProps } from 'antd';
 import { FC, useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { notificationApi } from '@apis';
+import { notificationApi } from '@apis/tenant';
 
 type ContactGroupSelectProps = {} & Omit<SelectProps, `options`>;
 export const ContactGroupSelect: FC<ContactGroupSelectProps> = ({

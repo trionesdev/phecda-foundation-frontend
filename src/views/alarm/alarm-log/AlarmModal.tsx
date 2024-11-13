@@ -6,7 +6,7 @@ import FormInfo from '@/components/form-info';
 import UploadImage from '@/components/upload/UploadImage';
 import { AlarmLevelConfig } from '@/constants/consts';
 import { ALARM_IMAGE_TYPE, ALARM_LEVEL, DEAL_STATUS } from '@/constants/enums';
-import { alarmApi } from '@/apis';
+import { alarmApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
 type AlarmModalType = {
     modalOpen: boolean;

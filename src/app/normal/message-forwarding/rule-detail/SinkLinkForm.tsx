@@ -2,7 +2,7 @@ import { ModalForm } from '@trionesdev/antd-react-ext';
 import React, { FC } from 'react';
 import { Alert, Form, message } from 'antd';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
+import { messageForwardingApi } from '@apis/tenant';
 import { SinksSelect } from '../components/sinks-select';
 
 type SinkLinkFormProps = {

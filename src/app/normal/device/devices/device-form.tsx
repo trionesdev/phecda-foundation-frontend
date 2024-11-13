@@ -1,6 +1,6 @@
 import { Form, Input, message } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import { ProductSelect } from '../components';
 

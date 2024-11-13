@@ -5,7 +5,7 @@ import { Form, Select, Space } from 'antd';
 import useQueryProductsList from '@/hooks/useOptions/useQueryProductsList';
 import useQueryDeviceByParams from '@/hooks/useOptions/useQueryDeviceByParams';
 import { useRequest } from 'ahooks';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';
 import NoVideoJpg from '@/images/no-video.jpg';
 import FlvVideo from '@components/flv-video';

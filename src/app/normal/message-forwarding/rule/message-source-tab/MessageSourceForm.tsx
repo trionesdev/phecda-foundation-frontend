@@ -2,7 +2,7 @@ import { ModalForm } from '@trionesdev/antd-react-ext';
 import { Form, Input, notification } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
+import { messageForwardingApi } from '@apis/tenant';
 
 type MessageSourceFormProps = {
     children?: React.ReactElement;

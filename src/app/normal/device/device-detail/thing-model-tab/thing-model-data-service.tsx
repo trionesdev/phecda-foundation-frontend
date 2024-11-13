@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GridTable, SearchToolbar } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
-import { deviceDataApi } from '@apis';
+import { deviceDataApi } from '@apis/tenant';
 import { formatDateTime } from '@/commons/util/date.utils';
 import dayjs from 'dayjs';
 import { ThingModelCommandSelect } from './ThingModelCommandSelect';

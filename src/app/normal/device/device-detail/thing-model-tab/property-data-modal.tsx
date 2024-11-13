@@ -9,7 +9,7 @@ import {
 } from 'antd';
 import styles from './property-data-modal.module.less';
 import { formatDateTime } from '@/commons/util/date.utils';
-import { deviceDataApi } from '@apis';
+import { deviceDataApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
 import dayjs from 'dayjs';
 import { isNilEmpty } from '@/commons/util/isNilEmpty';

@@ -3,7 +3,7 @@ import { formatDateTimeSeconds } from '@/commons/util/date.utils';
 import { useEffect, useState } from 'react';
 import { Button, message, Popconfirm, Space, Tooltip } from 'antd';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
+import { messageForwardingApi } from '@apis/tenant';
 import { PlusCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import { MessageSinkForm } from './message-sink-form';
 

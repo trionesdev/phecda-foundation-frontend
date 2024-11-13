@@ -1,7 +1,7 @@
 import { Card, Space, Spin, Statistic } from 'antd';
 import { useState } from 'react';
 import { useRequest } from 'ahooks';
-import { deviceDataApi } from '@apis';
+import { deviceDataApi } from '@apis/tenant';
 
 export const DeviceMessageStatistics = () => {
     const [propertiesPostStatistics, setPropertiesPostStatistics] = useState<{

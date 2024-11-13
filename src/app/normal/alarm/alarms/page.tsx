@@ -1,7 +1,7 @@
 import { GridTable, Layout } from '@trionesdev/antd-react-ext';
 import React, { useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { alarmApi } from '@apis';
+import { alarmApi } from '@apis/tenant';
 import styles from './alarms.module.less';
 import { dateParse, formatDateTimeSeconds } from '@/commons/util/date.utils';
 import { Button, DatePicker, Input, Select, Space } from 'antd';

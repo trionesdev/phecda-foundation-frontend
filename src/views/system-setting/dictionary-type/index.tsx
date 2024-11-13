@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.less';
 import { useRequest } from 'ahooks';
-import { systemApi } from '@/apis';
+import { systemApi } from '@apis/tenant';
 import { Button, Divider, Form, Input, Popconfirm, Space, message } from 'antd';
 import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';

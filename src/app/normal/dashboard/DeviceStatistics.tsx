@@ -1,7 +1,7 @@
 import { Card, Col, Flex, Progress, Row, Space, Spin, Statistic } from 'antd';
 import { useState } from 'react';
 import { useRequest } from 'ahooks';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 
 export const DeviceStatistics = () => {
     const [deviceStatistics, setDeviceStatistics] = useState<{

@@ -3,7 +3,7 @@ import styles from './product-detail.module.less';
 import { FC, useEffect, useState } from 'react';
 import { RoutesConstants } from '@/router/routes.constants';
 import { GridTable, Layout, TableToolbar } from '@trionesdev/antd-react-ext';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import _ from 'lodash';
 import { Alert, Button, Space } from 'antd';
 import { AbilityType } from '../internal/device.enum';

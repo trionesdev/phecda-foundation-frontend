@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Select, SelectProps } from 'antd';
 import { useRequest } from 'ahooks';
-import { driverApi } from '@apis';
+import { driverApi } from '@apis/tenant';
 import _ from 'lodash';
 
 type DriverSelectProps = Omit<SelectProps, 'options'> & {

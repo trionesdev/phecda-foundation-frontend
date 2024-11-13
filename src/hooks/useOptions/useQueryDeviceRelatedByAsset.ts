@@ -1,4 +1,4 @@
-import { deviceApi } from '@/apis';
+import { deviceApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
 import { useEffect, useMemo } from 'react';
 

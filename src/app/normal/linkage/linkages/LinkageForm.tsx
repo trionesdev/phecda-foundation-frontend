@@ -1,7 +1,7 @@
 import { Form, Input, message, Spin } from 'antd';
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import React, { FC, useEffect } from 'react';
-import { operationApi } from '@apis';
+import { operationApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
 
 type LinkageFormProps = {

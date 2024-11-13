@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styles from './alarm-levels.module.less';
 import { Button, message, Popconfirm, Space, Switch } from 'antd';
 import { useRequest } from 'ahooks';
-import { alarmApi } from '@apis';
+import { alarmApi } from '@apis/tenant';
 import { PlusCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import { AlarmLevelForm } from './AlarmLevelForm';
 

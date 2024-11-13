@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { Button, ButtonProps, Form, Input, message } from 'antd';
-import { nodeApi } from '@apis';
+import { nodeApi } from '@apis/tenant';
 import DrawerForm from '@components/drawer-form';
 
 type NodeFormBtnProps = {

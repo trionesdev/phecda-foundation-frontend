@@ -1,4 +1,4 @@
-import { assetsApi } from '@/apis';
+import { assetsApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
 import { useMemo } from 'react';
 

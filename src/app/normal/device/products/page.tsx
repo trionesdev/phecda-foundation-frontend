@@ -7,8 +7,8 @@ import {
 import { Button, Input, message, Popconfirm, Select, Space, Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 import ProductForm from './product-form';
-import { deviceApi } from '@apis';
-import { ProductRep } from '@apis/device/device.rep';
+import { deviceApi } from '@apis/tenant';
+import { ProductRep } from '@apis/tenant/device/device.rep';
 import { useNavigate } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import styles from './products.module.less';

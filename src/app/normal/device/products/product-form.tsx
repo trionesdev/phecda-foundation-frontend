@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Form, Input, message, Radio, Select } from 'antd';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import _ from 'lodash';
 import { DrawerForm } from '@trionesdev/antd-react-ext';
 import {

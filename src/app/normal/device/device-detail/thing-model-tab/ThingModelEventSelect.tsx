@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Select, SelectProps } from 'antd';
 import { useRequest } from 'ahooks';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 
 type ThingModelEventsSelectProps = {
     productId: string;

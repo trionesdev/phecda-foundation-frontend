@@ -1,7 +1,7 @@
 import { Form, FormInstance, Select } from 'antd';
 import { FC, useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 
 type DeviceFormItemProps = {
     productKey?: string;

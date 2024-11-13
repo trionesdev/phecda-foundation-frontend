@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { Select, SelectProps } from 'antd';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import _ from 'lodash';
 
 type ProductSelectProps = {

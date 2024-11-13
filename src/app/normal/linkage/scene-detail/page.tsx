@@ -3,7 +3,7 @@ import styles from './linkage-edit.module.less';
 import { Layout, PageHeader } from '@trionesdev/antd-react-ext';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Form, notification, Space, Tooltip } from 'antd';
-import { operationApi } from '@apis';
+import { operationApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
 import _ from 'lodash';
 import { RoutesConstants } from '@/router/routes.constants';

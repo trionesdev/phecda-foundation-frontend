@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { GridTable, TableToolbar } from '@trionesdev/antd-react-ext';
 import { Button, message, Popconfirm, Space } from 'antd';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
+import { messageForwardingApi } from '@apis/tenant';
 import _ from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';

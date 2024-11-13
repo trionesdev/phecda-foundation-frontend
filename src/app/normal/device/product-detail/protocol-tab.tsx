@@ -3,7 +3,7 @@ import { Button, Form, Input, message, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Layout, PageHeader } from '@trionesdev/antd-react-ext';
 import styles from './product-detail.module.less';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import _ from 'lodash';
 
 type ProtocolTabProps = {

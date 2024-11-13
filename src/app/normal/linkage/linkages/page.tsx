@@ -7,7 +7,7 @@ import {
     TableToolbar,
 } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
-import { operationApi } from '@apis';
+import { operationApi } from '@apis/tenant';
 import { Button, Divider, Input, Popconfirm, Space, Switch } from 'antd';
 import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
@@ -17,7 +17,6 @@ import qs from 'qs';
 import { LinkageForm } from './LinkageForm';
 import { PlusCircleOutlined } from '@ant-design/icons';
 
-const { TextArea } = Input;
 export const LinkagesPage: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
@@ -25,9 +24,6 @@ export const LinkagesPage: React.FC = () => {
     });
     const [drawerOpen, setDrawerOpen] = useState(false);
 
-    const [drawerFormeValue, setDrawerFormeValue] = useState<
-        Record<string, any> | undefined
-    >({});
     /** 请求表格 */
     const {
         data: tableData,

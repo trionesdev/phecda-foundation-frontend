@@ -16,7 +16,7 @@ import {
     Switch,
 } from 'antd';
 import DeviceForm from './device-form';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import { useRequest } from 'ahooks';
