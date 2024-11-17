@@ -4,7 +4,7 @@ import {
     MESSAGE_SOURCE_TOPICS,
 } from './message-forwarding.enums';
 
-export const MessageSourceTopicTypeOptions = [
+export const MessageSourceTypeOptions = [
     {
         label: '物模型数据上报',
         value: MESSAGE_SOURCE_TOPIC_TYPE.THING_PROPERTY_REPORT,

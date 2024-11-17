@@ -5,7 +5,9 @@ import { ModalForm } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis/tenant';
 import { MESSAGE_SOURCE_TOPIC_TYPE } from '@/app/normal/message-forwarding/internal/message-forwarding.enums';
-import { MessageSourceTopicTypeOptions } from '@/app/normal/message-forwarding/internal/message-forwarding.constants';
+import {
+    MessageSourceTypeOptions,
+} from '@/app/normal/message-forwarding/internal/message-forwarding.constants';
 import { ThingPropertyReport } from '@/app/normal/message-forwarding/source-detail/topic-form/ThingPropertyReport';
 
 type TopicFormProps = {
@@ -14,10 +16,10 @@ type TopicFormProps = {
     onRefresh?: () => void;
 };
 export const TopicForm: FC<TopicFormProps> = ({
-    children,
-    sourceId,
-    onRefresh,
-}) => {
+                                                  children,
+                                                  sourceId,
+                                                  onRefresh,
+                                              }) => {
     const [open, setOpen] = React.useState(false);
     const [form] = Form.useForm();
     const type = Form.useWatch('type', form);
@@ -36,7 +38,7 @@ export const TopicForm: FC<TopicFormProps> = ({
             onError: async (error) => {
                 message.error(error.message);
             },
-        }
+        },
     );
 
     return (
@@ -54,11 +56,11 @@ export const TopicForm: FC<TopicFormProps> = ({
                 name={`type`}
                 initialValue={MESSAGE_SOURCE_TOPIC_TYPE.THING_PROPERTY_REPORT}
             >
-                <Select options={MessageSourceTopicTypeOptions} />
+                <Select options={MessageSourceTypeOptions} />
             </Form.Item>
             {_.isEqual(
                 type,
-                MESSAGE_SOURCE_TOPIC_TYPE.THING_PROPERTY_REPORT
+                MESSAGE_SOURCE_TOPIC_TYPE.THING_PROPERTY_REPORT,
             ) && <ThingPropertyReport type={type} />}
         </ModalForm>
     );
