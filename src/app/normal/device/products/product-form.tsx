@@ -97,7 +97,7 @@ const ProductForm: FC<ProductFormBtnProps> = ({
                 name={`key`}
                 rules={[
                     {
-                        validator: (rule, value) => {
+                        validator: (_rule, value) => {
                             if (value && !/^[a-zA-Z]/.test(value)) {
                                 return Promise.reject(
                                     'DeviceName必须英文字母开头'
@@ -122,7 +122,7 @@ const ProductForm: FC<ProductFormBtnProps> = ({
                 rules={[{ required: true }]}
             >
                 <Radio.Group>
-                    {_.map(DeviceNodeTypeOptions, (nodeType, key) => (
+                    {_.map(DeviceNodeTypeOptions, (nodeType, _key) => (
                         <Radio.Button
                             key={nodeType.value}
                             value={nodeType.value}

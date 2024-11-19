@@ -1,6 +1,5 @@
-import { FC, useEffect, useState } from 'react';
+import {FC, useEffect, useState} from 'react';
 import {
-    Button,
     ButtonProps,
     Form,
     Radio,
@@ -9,11 +8,11 @@ import {
 } from 'antd';
 import ThingModelPropertyForm from './thing-model-property-form';
 import _ from 'lodash';
-import { deviceApi } from '@apis/tenant';
+import {deviceApi} from '@apis/tenant';
 import ThingModelCommandForm from './thing-model-command-form';
 import ThingModelEventForm from './thing-model-event-form';
 import DrawerForm from '@components/drawer-form';
-import { AbilityType } from '../../internal/device.enum';
+import {AbilityType} from '../../internal/device.enum';
 
 type ThingsModelAbilityEditBtnProps = {
     children?: React.ReactElement;
@@ -24,19 +23,18 @@ type ThingsModelAbilityEditBtnProps = {
 } & ButtonProps;
 
 const ABILITY_TYPE_CONFIG = {
-    [AbilityType.PROPERTY]: <ThingModelPropertyForm />,
-    [AbilityType.COMMAND]: <ThingModelCommandForm />,
-    [AbilityType.EVENT]: <ThingModelEventForm />,
+    [AbilityType.PROPERTY]: <ThingModelPropertyForm/>,
+    [AbilityType.COMMAND]: <ThingModelCommandForm/>,
+    [AbilityType.EVENT]: <ThingModelEventForm/>,
 };
 
 const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
-    children,
-    productId,
-    editAbilityType,
-    identifier,
-    onSuccess,
-    ...rest
-}) => {
+                                                                       children,
+                                                                       productId,
+                                                                       editAbilityType,
+                                                                       identifier,
+                                                                       onSuccess
+                                                                   }) => {
     const [open, setOpen] = useState(false);
     const [abilityType, setAbilityType] = useState(
         editAbilityType || AbilityType.PROPERTY
@@ -48,7 +46,7 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
     };
 
     const handleSubmit = (values: any) => {
-        let data = _.assign(values, { identifier: identifier });
+        let data = _.assign(values, {identifier: identifier});
         deviceApi
             .upsertThingModelDraft(productId, data)
             .then(async () => {
@@ -56,7 +54,8 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
                 onSuccess?.();
                 message.success('保存成功');
             })
-            .catch(() => {});
+            .catch(() => {
+            });
     };
 
     const handleQueryThingModel = () => {
@@ -69,19 +68,19 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
             let typeAbility = {};
             switch (abilityType) {
                 case AbilityType.PROPERTY:
-                    typeAbility = { property: ability };
+                    typeAbility = {property: ability};
                     break;
                 case AbilityType.EVENT:
-                    typeAbility = { event: ability };
+                    typeAbility = {event: ability};
                     break;
                 case AbilityType.COMMAND:
-                    typeAbility = { command: ability };
+                    typeAbility = {command: ability};
                     break;
                 default:
                     break;
             }
             setFormValues(
-                _.assign({}, typeAbility, { abilityType: abilityType })
+                _.assign({}, typeAbility, {abilityType: abilityType})
             );
         });
     };
@@ -99,14 +98,14 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
             trigger={children}
             open={open}
             onOpenChange={(open) => setOpen(open)}
-            initialValues={{ abilityType: abilityType }}
+            initialValues={{abilityType: abilityType}}
             formValues={formValues}
             onSubmit={handleSubmit}
         >
             <Form.Item
                 label={`功能类型`}
                 name={`abilityType`}
-                rules={[{ required: true }]}
+                rules={[{required: true}]}
             >
                 <Radio.Group
                     onChange={handleAbilityTypeChange}
@@ -125,9 +124,9 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
             <Form.Item
                 noStyle
                 dependencies={['abilityType']}
-                rules={[{ required: true }]}
+                rules={[{required: true}]}
             >
-                {({ getFieldValue }) => {
+                {({getFieldValue}) => {
                     const abilityType = getFieldValue(
                         'abilityType'
                     ) as AbilityType;

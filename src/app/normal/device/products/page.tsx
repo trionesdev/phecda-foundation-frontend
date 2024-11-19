@@ -5,7 +5,7 @@ import {
     TableToolbar,
 } from '@trionesdev/antd-react-ext';
 import { Button, Input, message, Popconfirm, Select, Space, Tag } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProductForm from './product-form';
 import { deviceApi } from '@apis/tenant';
 import { ProductRep } from '@apis/tenant/device/device.rep';
@@ -208,7 +208,7 @@ export const ProductsPage = () => {
                     onSearchParamsChange={(values: any) => {
                         setSearchParams(values);
                     }}
-                    onSearch={(values: any) => {
+                    onSearch={() => {
                         handleQueryProductPage();
                     }}
                 />

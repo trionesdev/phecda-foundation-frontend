@@ -112,7 +112,7 @@ export const SceneDetailPage: React.FC = () => {
                     ]}
                 />
             </Layout.Item>
-            <Layout.Item auto={true} style={{ overflowY: 'auto', padding: 8 }}>
+            <Layout.Item auto={true} style={{ overflowY: 'auto', padding: 8 ,backgroundColor: '#ffffff'}}>
                 <Form layout={`vertical`} form={form} disabled={!editing}>
                     <div>
                         <div className={styles.linkageEditTitle}>场景定义</div>
@@ -218,7 +218,7 @@ export const SceneDetailPage: React.FC = () => {
                     )}
                 </Form>
             </Layout.Item>
-            <Layout.Item style={{ padding: 8 }}>
+            <Layout.Item style={{ padding: 8,backgroundColor: 'white' }}>
                 {editing ? (
                     <Space>
                         <Button type={`primary`} onClick={handleSaveRules}>

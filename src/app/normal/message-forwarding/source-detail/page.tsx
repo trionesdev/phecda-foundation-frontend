@@ -15,7 +15,6 @@ import {
     MESSAGE_TYPE
 } from '@/app/normal/message-forwarding/internal/message-forwarding.enums';
 import {TopicForm} from '@/app/normal/message-forwarding/source-detail/topic-form';
-import {ConditionForm} from "@/app/normal/message-forwarding/source-detail/condition-form";
 
 export const MessageSourceDetailPage = () => {
     const navigate = useNavigate();
@@ -122,14 +121,12 @@ export const MessageSourceDetailPage = () => {
                     toolbar={
                         <TableToolbar
                             extra={<Space>
-                                {/*<TopicForm*/}
-                                {/*    key={`create-btn`}*/}
-                                {/*    sourceId={id!}*/}
-                                {/*    onRefresh={handleRefreshTopics}*/}
-                                {/*>*/}
-                                {/*    <Button type={`primary`}>创建Topic</Button>*/}
-                                {/*</TopicForm>*/}
-                                <ConditionForm sourceId={id!}><Button type={`primary`}>创建条件</Button></ConditionForm>
+                                <TopicForm
+                                    sourceId={id!}
+                                    onRefresh={handleRefreshTopics}
+                                >
+                                    <Button type={`primary`}>创建Topic</Button>
+                                </TopicForm>
                             </Space>}
                         />
                     }

@@ -1,5 +1,4 @@
 import { Form, Select } from 'antd';
-import ValueTypeSelect from '@/app/normal/device/components/ValueTypeSelect';
 import { FC } from 'react';
 import _ from 'lodash';
 import ValueTypeBool from './value-type-bool';

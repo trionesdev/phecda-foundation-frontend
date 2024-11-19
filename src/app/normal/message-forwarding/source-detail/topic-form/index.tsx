@@ -4,9 +4,9 @@ import _ from 'lodash';
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis/tenant';
-import { MESSAGE_SOURCE_TOPIC_TYPE } from '@/app/normal/message-forwarding/internal/message-forwarding.enums';
+import { MESSAGE_TYPE } from '@/app/normal/message-forwarding/internal/message-forwarding.enums';
 import {
-    MessageSourceTypeOptions,
+    MessageTypeOptions,
 } from '@/app/normal/message-forwarding/internal/message-forwarding.constants';
 import { ThingPropertyReport } from '@/app/normal/message-forwarding/source-detail/topic-form/ThingPropertyReport';
 
@@ -54,13 +54,13 @@ export const TopicForm: FC<TopicFormProps> = ({
             <Form.Item
                 label={`消息类型`}
                 name={`type`}
-                initialValue={MESSAGE_SOURCE_TOPIC_TYPE.THING_PROPERTY_REPORT}
+                initialValue={MESSAGE_TYPE.THING_PROPERTY_REPORT}
             >
-                <Select options={MessageSourceTypeOptions} />
+                <Select options={MessageTypeOptions} />
             </Form.Item>
             {_.isEqual(
                 type,
-                MESSAGE_SOURCE_TOPIC_TYPE.THING_PROPERTY_REPORT,
+                MESSAGE_TYPE.THING_PROPERTY_REPORT,
             ) && <ThingPropertyReport type={type} />}
         </ModalForm>
     );
