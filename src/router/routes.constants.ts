@@ -63,10 +63,6 @@ export const RoutesConstants = {
         key: 'monitor-trends',
         path: () => `/alarm-management/monitor-trends`,
     }, //监控趋势
-    MONITOR_VIEW: {
-        key: 'monitor-view',
-        path: () => `/alarm-management/monitor-view`,
-    }, //监控画面
 
     // /** --------资产管理------- */
     // PRODUCTION_DEVICE: {

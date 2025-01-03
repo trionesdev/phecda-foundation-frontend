@@ -26,7 +26,6 @@ import { EdgeNodePage } from '@/app/normal/edge/node/page';
 import { LinkagesPage } from '@/app/normal/linkage/linkages/page';
 import { SceneDetailPage } from '@/app/normal/linkage/scene-detail/page';
 import { DriversPage } from '@/app/normal/device/drivers/page';
-import MonitorView from "@views/alarm/monitor-view";
 
 export const routes: RouteObject[] = [
     {
@@ -64,32 +63,6 @@ export const routes: RouteObject[] = [
                         element: <NotificationTemplatesPage />,
                     },
 
-                    // //------告警管理-----
-                    // {
-                    //     path: RoutesConstants.ALARM_RULES.path(),
-                    //     element: <AlarmRules />, //告警配置
-                    // },
-                    // {
-                    //     path: RoutesConstants.ALARM_LOG.path(),
-                    //     element: <AlarmLog />, //告警日志
-                    // },
-                    // {
-                    //     path: RoutesConstants.MONITOR_TRENDS.path(),
-                    //     element: <MonitorTrends />, //监控趋势
-                    // },
-                    // {
-                    //     path: RoutesConstants.DEVICE_DATA.path(),
-                    //     element: <DeviceData />, //设备数据
-                    // },
-                    {
-                        path: RoutesConstants.MONITOR_VIEW.path(),
-                        element: <MonitorView />, //监控画面
-                    },
-
-                    //------设备管理-----
-                    // {
-                    //     element: <ProductsView />,
-                    // },
                     {
                         path: RoutesConstants.PRODUCTS.path(),
                         element: <ProductsPage />,

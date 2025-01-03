@@ -152,7 +152,7 @@ export const CoreLayoutView = () => {
                     selectedKeys={selectedKeys}
                 />
             </Layout.Sider>
-            <Layout.Item auto={true} style={{ padding: 8 }}>
+            <Layout.Item auto={true} style={{ padding: 4 }}>
                 <div style={{ height: '100%' }}>
                     <Outlet />
                 </div>
