@@ -14,6 +14,7 @@ export default defineConfig({
       '@icons': resolve('src/icons'),
       '@commons': resolve('src/commons'),
       '@apis': resolve('src/apis'),
+      '@app': path.resolve(__dirname, './src/app'),
       '@views': resolve('src/views'),
       '@components': resolve('src/components'),
     }

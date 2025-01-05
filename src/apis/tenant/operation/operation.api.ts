@@ -1,7 +1,7 @@
 import {BaseTenantApi} from "@apis/tenant/base-tenant.api.ts";
 
 export default class OperationApi extends BaseTenantApi {
-    private baseUri = '/be/linkage/scenes';
+    private baseUri = '/linkage/scenes';
 
     //字典
     /** 根据id查询场景 */

@@ -3,10 +3,10 @@ import { GridTable, TableToolbar } from '@trionesdev/antd-react-ext';
 import { Button, message, Popconfirm, Space, Tooltip } from 'antd';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis/tenant';
-import { useNavigate } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import { PlusCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import { MessageSourceForm } from './MessageSourceForm';
+import {useNavigate} from "@trionesdev/commons-react";
 
 type MessageSourceTabProps = {};
 export const MessageSourceTab: FC<MessageSourceTabProps> = ({}) => {

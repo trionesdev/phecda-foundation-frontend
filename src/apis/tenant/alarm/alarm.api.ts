@@ -1,7 +1,7 @@
 import {BaseTenantApi} from "@apis/tenant/base-tenant.api.ts";
 
 export default class AlarmApi extends BaseTenantApi {
-    private baseUri = '/be/alarm';
+    private baseUri = '/alarm';
 
     //报警记录
     /** 根据id查询报警记录 */

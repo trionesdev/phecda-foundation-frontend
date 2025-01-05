@@ -1,132 +1,114 @@
-import {
-    createHashRouter,
-    RouteObject,
-    RouterProvider,
-} from 'react-router-dom';
-import MainLayoutView from '../app/layout';
-import { RoutesConstants } from './routes.constants';
-import { CoreLayoutView } from '@/app/layout/CoreLayoutView';
-import { DashboardPage } from '@/app/normal/dashboard/page';
-import { AlarmTypesPage } from '@/app/normal/alarm/alarm-types/page';
-import { AlarmLevelsPage } from '@/app/normal/alarm/alarm-levels/page';
-import { AlarmsPage } from '@/app/normal/alarm/alarms/page';
-import { ContactPage } from '@/app/normal/notification/contact/page';
-import { NotificationTemplatesPage } from '@/app/normal/notification/templates/page';
-import { ProductsPage } from '@/app/normal/device/products/page';
-import { ProductDetailPage } from '@/app/normal/device/product-detail/page';
-import ProductThingModelDraftPage from '@/app/normal/device/product-things-model-draft/page';
-import { DevicesPage } from '@/app/normal/device/devices/page';
-import { DeviceDetailPage } from '@/app/normal/device/device-detail/page';
-
-import { ForwardingRuleDetailPage } from '@/app/normal/message-forwarding/rule-detail/page';
-import { MessageSourceDetailPage } from '@/app/normal/message-forwarding/source-detail/page';
-import { ForwardingRulePage } from '@/app/normal/message-forwarding/rule/page';
-import NodeDetailView from '@/app/normal/edge/node-detail';
-import { EdgeNodePage } from '@/app/normal/edge/node/page';
-import { LinkagesPage } from '@/app/normal/linkage/linkages/page';
-import { SceneDetailPage } from '@/app/normal/linkage/scene-detail/page';
-import { DriversPage } from '@/app/normal/device/drivers/page';
+import {RouteConstants} from './routes.constants';
+import {SignInPage} from "@/app/account/sign-in/page.tsx";
+import {createHashRouter, RouteObject, RouterProvider} from "@trionesdev/commons-react";
+import {AppLayout} from "@/app/layout";
+import {UserCenterLayout} from "@/app/user-center/UserCenterLayout.tsx";
+import {UserProfilePage} from "@/app/user-center/profile/page.tsx";
+import {ChangePasswordPage} from "@/app/user-center/change-password/page.tsx";
+import {NormalLayout} from "@/app/normal/layout";
+import { DepartmentsPage } from '@/app/normal/org/departments/page';
+import {OrgStructurePage} from "@/app/normal/org/org-structure/page.tsx";
+import {TenantMembersPage} from "@/app/normal/org/members/page.tsx";
+import {RolesPage} from "@/app/normal/org/roles/page.tsx";
+import {FunctionalResourcesPage} from "@/app/boss/perm/functional-resources/page.tsx";
+import {DictionariesPage} from "@/app/boss/dic/dictionaries/page.tsx";
+import {DistrictsPage} from "@/app/boss/dic/districts/page.tsx";
+import {CountriesPage} from "@/app/boss/dic/countries/page.tsx";
+import {OperationLogsPage} from "@/app/normal/log/operation/page.tsx";
+import {CodeFormatRulesPage} from "@/app/normal/base/code-format-rules/page.tsx";
+import {DashboardPage} from "@app/normal/dashboard/page.tsx";
+import {ProductsPage} from "@app/normal/device/products/page.tsx";
+import {ProductDetailPage} from "@app/normal/device/product-detail/page.tsx";
+import {DriversPage} from "@app/normal/device/drivers/page.tsx";
+import {DevicesPage} from "@app/normal/device/devices/page.tsx";
+import {ForwardingRulePage} from "@app/normal/message-forwarding/rule/page.tsx";
+import {ForwardingRuleDetailPage} from "@app/normal/message-forwarding/rule-detail/page.tsx";
+import {MessageSourceDetailPage} from "@app/normal/message-forwarding/source-detail/page.tsx";
+import {LinkagesPage} from "@app/normal/linkage/linkages/page.tsx";
+import {SceneDetailPage} from "@app/normal/linkage/scene-detail/page.tsx";
+import {AlarmsPage} from "@app/normal/alarm/alarms/page.tsx";
+import {AlarmTypesPage} from "@app/normal/alarm/alarm-types/page.tsx";
+import {AlarmLevelsPage} from "@app/normal/alarm/alarm-levels/page.tsx";
+import {ContactPage} from "@app/normal/notification/contact/page.tsx";
+import {NotificationTemplatesPage} from "@app/normal/notification/templates/page.tsx";
 
 export const routes: RouteObject[] = [
+    {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
+
     {
-        path: '/',
-        element: <MainLayoutView />,
-        children: [
+        path: () => '/', anonymous: false, element: <AppLayout/>, children: [
             {
-                path: '/',
-                element: <CoreLayoutView />,
-                children: [
-                    {
-                        index: true,
-                        // path: RoutesConstants.PRODUCTS.path(),
-                        element: <DashboardPage />,
-                    },
-                    {
-                        path: RoutesConstants.ALARM_TYPES.path(),
-                        element: <AlarmTypesPage />,
-                    },
-                    {
-                        path: RoutesConstants.ALARM_LEVELS.path(),
-                        element: <AlarmLevelsPage />,
-                    },
-                    {
-                        path: RoutesConstants.ALARMS.path(),
-                        element: <AlarmsPage />,
-                    },
-
-                    {
-                        path: RoutesConstants.NOTIFICATION_CONTACTS.path(),
-                        element: <ContactPage />,
-                    },
-                    {
-                        path: RoutesConstants.NOTIFICATION_TEMPLATES.path(),
-                        element: <NotificationTemplatesPage />,
-                    },
-
-                    {
-                        path: RoutesConstants.PRODUCTS.path(),
-                        element: <ProductsPage />,
-                    },
-                    {
-                        path: RoutesConstants.PRODUCT_DETAIL.path(),
-                        element: <ProductDetailPage />,
-                    },
-                    {
-                        path: RoutesConstants.PRODUCT_THINGS_MODEL_DRAFT.path(),
-                        element: <ProductThingModelDraftPage />,
-                    },
-                    {
-                        path: RoutesConstants.DEVICES.path(),
-                        element: <DevicesPage />,
-                    },
-                    {
-                        path: RoutesConstants.DEVICE_DETAIL.path(),
-                        element: <DeviceDetailPage />,
-                    },
-                    {
-                        path: RoutesConstants.DRIVERS.path(),
-                        element: <DriversPage />,
-                    },
-                    //------监控运维------
-                    {
-                        path: RoutesConstants.LINKAGE.path(),
-                        element: <LinkagesPage />, //事件响应
-                    },
-                    {
-                        path: RoutesConstants.SCENE_DETAIL.path(),
-                        element: <SceneDetailPage />, //场景详情
-                    },
-                    //------边缘计算-----
-                    {
-                        path: RoutesConstants.EDGE_NODE.path(),
-                        element: <EdgeNodePage />,
-                    },
-                    {
-                        path: RoutesConstants.EDGE_NODE_DETAIL.path(),
-                        element: <NodeDetailView />,
-                    },
-                    //region 消息流转
-                    {
-                        path: RoutesConstants.MESSAGE_FORWARDING_RULES.path(),
-                        element: <ForwardingRulePage />,
-                    },
-                    {
-                        path: RoutesConstants.MESSAGE_SOURCE_DETAIL.path(),
-                        element: <MessageSourceDetailPage />,
-                    },
-                    {
-                        path: RoutesConstants.MESSAGE_FORWARDING_RULE_DETAIL.path(),
-                        element: <ForwardingRuleDetailPage />,
-                    },
-                    //endregion
-                ],
+                path: () => '/user-center', anonymous: false, element: <UserCenterLayout/>, children: [
+                    {...RouteConstants.USER_CENTER.PROFILE, element: <UserProfilePage/>},
+                    {...RouteConstants.USER_CENTER.PASSWORD, element: <ChangePasswordPage/>},
+                ]
             },
-        ],
+            {
+                path: () => '/', anonymous: false, element: <NormalLayout/>, children: [
+                    {
+                        ...RouteConstants.DASHBOARD, element: <DashboardPage/>
+                    },
+
+                    {...RouteConstants.DEVICE.PRODUCTS,element: <ProductsPage/>},
+                    {...RouteConstants.DEVICE.PRODUCT_DETAIL,element: <ProductDetailPage/>},
+                    {...RouteConstants.DEVICE.DEVICES,element: <DevicesPage/>},
+                    {...RouteConstants.DEVICE.DRIVERS,element: <DriversPage/>},
+
+                    {...RouteConstants.MESSAGE_FORWARDING.MESSAGE_FORWARDING_RULES,element: <ForwardingRulePage/>},
+                    {...RouteConstants.MESSAGE_FORWARDING.MESSAGE_FORWARDING_RULE_DETAIL,element: <ForwardingRuleDetailPage/>},
+                    {...RouteConstants.MESSAGE_FORWARDING.MESSAGE_SOURCE_DETAIL,element: <MessageSourceDetailPage/>},
+
+                    {...RouteConstants.MONITORING_OPERATION.LINKAGE,element: <LinkagesPage/>},
+                    {...RouteConstants.MONITORING_OPERATION.SCENE_DETAIL,element: <SceneDetailPage/>},
+
+                    {...RouteConstants.ALARM.ALARMS,element: <AlarmsPage/>},
+                    {...RouteConstants.ALARM.ALARM_TYPES,element: <AlarmTypesPage/>},
+                    {...RouteConstants.ALARM.ALARM_LEVELS,element: <AlarmLevelsPage/>},
+
+                    {...RouteConstants.NOTIFICATION.NOTIFICATION_CONTACTS,element: <ContactPage/>},
+                    {...RouteConstants.NOTIFICATION.NOTIFICATION_TEMPLATES,element: <NotificationTemplatesPage/>},
+
+                    {...RouteConstants.ORG.DEPARTMENTS, element: <DepartmentsPage/>},
+                    {...RouteConstants.ORG.ORG_STRUCTURE, element: <OrgStructurePage/>},
+                    {...RouteConstants.ORG.MEMBERS, element: <TenantMembersPage/>},
+                    {...RouteConstants.ORG.ROLES, element: <RolesPage/>},
+
+                    {...RouteConstants.DIC.DICTIONARIES, element: <DictionariesPage/>},
+                    {...RouteConstants.DIC.DISTRICTS, element: <DistrictsPage/>},
+                    {...RouteConstants.DIC.COUNTRIES, element: <CountriesPage/>},
+
+                    {...RouteConstants.LOG.OPERATION_LOGS, element: <OperationLogsPage/>},
+                    {...RouteConstants.BASE.CODE_FORMAT_RULES, element: <CodeFormatRulesPage/>},
+
+                    {...RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES, element: <FunctionalResourcesPage/>},
+                ]
+            },
+        ]
     },
+
+
 ];
 
 // 生成路由
 
+export const routeMatch = (id: string): RouteObject | undefined => {
+    const match = (id: string, routes: RouteObject[]): RouteObject | undefined => {
+        for (let i = 0; i < routes.length; i++) {
+            if (routes[i].id === id) {
+                return routes[i]
+            }
+            const children = routes[i].children
+            if (children) {
+                const result = match(id, children)
+                if (result) {
+                    return result
+                }
+            }
+        }
+    }
+    return match(id, routes)
+}
+
 export const AppRouter = () => {
-    return <RouterProvider router={createHashRouter(routes)} />;
+    return <RouterProvider router={createHashRouter(routes)}/>;
 };

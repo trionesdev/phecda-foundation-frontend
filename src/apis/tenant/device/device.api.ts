@@ -2,7 +2,7 @@ import {ProductPageRep, ProductRep} from './device.rep.ts';
 import {BaseTenantApi} from "@apis/tenant/base-tenant.api.ts";
 
 export default class DeviceApi extends BaseTenantApi {
-    private baseUri = '/be/device';
+    private baseUri = '/device';
 
     //region product
     valueTypeOptions(): Promise<{ value: string; label: string }> {

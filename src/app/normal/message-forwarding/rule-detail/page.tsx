@@ -3,12 +3,12 @@ import styles from './rule-detail.module.less';
 import { Button, Space, Steps } from 'antd';
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
-import { useNavigate, useParams } from 'react-router-dom';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis/tenant';
 import { SourceStep } from './SourceStep';
 import { SinkStep } from './SinkStep';
 import { ForwardingRuleForm } from '../rule/forwarding-rule-tab/ForwardingRuleForm';
+import {useNavigate, useParams} from "@trionesdev/commons-react";
 
 export const ForwardingRuleDetailPage = () => {
     const navigate = useNavigate();

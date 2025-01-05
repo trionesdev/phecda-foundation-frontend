@@ -4,9 +4,9 @@ import { Button, message, Popconfirm, Space } from 'antd';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis/tenant';
 import _ from 'lodash';
-import { useNavigate } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import { SourceLinkForm } from './SourceLinkForm';
+import {useNavigate} from "@trionesdev/commons-react";
 
 type SourceStepProps = {
     ruleId: string;

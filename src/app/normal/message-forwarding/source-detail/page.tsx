@@ -7,7 +7,6 @@ import {
 import {useEffect, useState} from 'react';
 import {Button, Popconfirm, Space} from 'antd';
 import styles from './source-detail.module.less';
-import {useNavigate, useParams} from 'react-router-dom';
 import {useRequest} from 'ahooks';
 import {messageForwardingApi} from '@apis/tenant';
 import _ from 'lodash';
@@ -15,6 +14,7 @@ import {
     MESSAGE_TYPE
 } from '@/app/normal/message-forwarding/internal/message-forwarding.enums';
 import {TopicForm} from '@/app/normal/message-forwarding/source-detail/topic-form';
+import {useNavigate, useParams} from "@trionesdev/commons-react";
 
 export const MessageSourceDetailPage = () => {
     const navigate = useNavigate();

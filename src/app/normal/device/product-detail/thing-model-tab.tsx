@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
 import styles from './product-detail.module.less';
 import { FC, useEffect, useState } from 'react';
 import { RoutesConstants } from '@/router/routes.constants';
 import { GridTable, Layout, TableToolbar } from '@trionesdev/antd-react-ext';
 import { deviceApi } from '@apis/tenant';
 import _ from 'lodash';
-import { Alert, Button, Space } from 'antd';
+import { Alert, Space } from 'antd';
 import { AbilityType } from '../internal/device.enum';
 import { useRequest } from 'ahooks';
 import { ThingModelProfileModal } from '@/app/normal/device/product-detail/ThingModelProfileModal';
+import {Link} from "@trionesdev/commons-react";
 
 type ThingsModelTabProps = {
     product: any;

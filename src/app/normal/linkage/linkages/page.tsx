@@ -11,11 +11,11 @@ import { operationApi } from '@apis/tenant';
 import { Button, Divider, Input, Popconfirm, Space, Switch } from 'antd';
 import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
-import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import qs from 'qs';
 import { LinkageForm } from './LinkageForm';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { Link } from '@trionesdev/commons-react';
 
 export const LinkagesPage: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({

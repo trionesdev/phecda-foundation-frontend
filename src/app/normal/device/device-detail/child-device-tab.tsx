@@ -1,11 +1,11 @@
 import {FC, useEffect, useState} from 'react';
 import {deviceApi} from '@apis/tenant';
 import {Button, Divider, notification, Popconfirm, Space, Switch} from 'antd';
-import {Link} from 'react-router-dom';
 import {RoutesConstants} from '@/router/routes.constants';
 import {GridTable, Layout, TableToolbar} from '@trionesdev/antd-react-ext';
 import _ from 'lodash';
 import ChildDeviceForm from './child-device-form';
+import {Link} from "@trionesdev/commons-react";
 
 type ChildDeviceTabProps = {
     device: any;

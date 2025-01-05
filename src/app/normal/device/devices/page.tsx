@@ -17,10 +17,10 @@ import {
 } from 'antd';
 import DeviceForm from './device-form';
 import { deviceApi } from '@apis/tenant';
-import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import { useRequest } from 'ahooks';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { Link } from '@trionesdev/commons-react';
 
 export const DevicesPage = () => {
     const [pageNum, setPageNum] = useState(1);

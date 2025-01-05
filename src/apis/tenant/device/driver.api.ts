@@ -2,7 +2,7 @@ import {PageQueryParams} from '@apis/types.ts';
 import {BaseTenantApi} from "@apis/tenant/base-tenant.api.ts";
 
 export class DriverApi extends BaseTenantApi {
-    private baseUri = '/be/device';
+    private baseUri = '/device';
 
     //region drivers
     createDriver(data: any) {

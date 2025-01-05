@@ -4,11 +4,11 @@ import { Button, Divider, message, Popconfirm, Space, Tooltip } from 'antd';
 import { PlusCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis/tenant';
-import { useNavigate } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import styles from '../messag-forwarding-rule.module.less';
 import classNames from 'classnames';
 import { ForwardingRuleForm } from './ForwardingRuleForm';
+import {useNavigate} from "@trionesdev/commons-react";
 
 export const ForwardingRuleTab = () => {
     const navigate = useNavigate();

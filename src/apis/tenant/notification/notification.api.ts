@@ -1,7 +1,7 @@
 import {BaseTenantApi} from "@apis/tenant/base-tenant.api.ts";
 
 export class NotificationApi extends BaseTenantApi {
-    private baseUri = '/be/notification';
+    private baseUri = '/notification';
 
     //region contact
     createContact(data: any) {

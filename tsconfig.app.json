@@ -27,6 +27,8 @@
       "@icons": ["src/icons"],
       "@commons/*": ["src/commons/*"],
       "@general/*": ["src/general/*"],
+      "@app": [ "src/app"],
+      "@app/*": ["src/app/*"],
       "@apis": ["src/apis"],
       "@apis/*": ["src/apis/*"],
       "@components": ["src/components"],

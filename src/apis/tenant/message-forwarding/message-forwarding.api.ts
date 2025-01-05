@@ -1,7 +1,7 @@
 import {BaseTenantApi} from "@apis/tenant/base-tenant.api.ts";
 
 export default class MessageForwardingApi extends BaseTenantApi {
-    private baseUri = '/be/message-forwarding';
+    private baseUri = '/message-forwarding';
 
     //region message source
     createSource(data: any) {

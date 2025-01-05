@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './linkage-edit.module.less';
 import { Layout, PageHeader } from '@trionesdev/antd-react-ext';
-import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Form, notification, Space, Tooltip } from 'antd';
 import { operationApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
@@ -11,6 +10,7 @@ import { QuestionCircleOutlined } from '@ant-design/icons';
 import { ActionDefinition } from './components/action-definition';
 import { SceneDefinition } from './components/scene-definition';
 import { ActionTrigger } from './components/action-trigger';
+import {useNavigate, useParams} from "@trionesdev/commons-react";
 
 export const SceneDetailPage: React.FC = () => {
     const navigate = useNavigate();
