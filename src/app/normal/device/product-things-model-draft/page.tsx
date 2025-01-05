@@ -156,9 +156,7 @@ const ProductThingModelDraftPage = () => {
                     title={`编辑功能定义草稿`}
                     onBack={() =>
                         navigate(
-                            `${RouteConstants.DEVICE.PRODUCT_DETAIL.path(
-                                id!
-                            )}?tab=thing-model`
+                            `${RouteConstants.DEVICE.PRODUCT_DETAIL.path(id!)}?tab=thing-model`
                         )
                     }
                 >

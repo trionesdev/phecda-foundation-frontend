@@ -82,6 +82,15 @@ export const ForwardingRuleForm: FC<ForwardingRuleFormProps> = ({
     return (
         <ModalForm
             trigger={children}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             title={`${id ? '修改' : '创建'}消息流转规则`}
             open={open}
             afterOpenChange={setOpen}

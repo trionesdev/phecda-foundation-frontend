@@ -1,7 +1,7 @@
 import { Layout, PageHeader } from '@trionesdev/antd-react-ext';
 import styles from './rule-detail.module.less';
 import { Button, Space, Steps } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis/tenant';

@@ -54,6 +54,15 @@ export const DriverForm: FC<DriverFormProps> = ({
         <ModalForm
             form={form}
             trigger={children}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             open={open}
             afterOpenChange={(open) => {
                 setOpen(open);

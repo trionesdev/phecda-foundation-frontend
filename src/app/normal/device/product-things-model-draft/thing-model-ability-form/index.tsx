@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {
     ButtonProps,
     Form,
@@ -96,11 +96,10 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
             title={`${identifier ? '编辑' : '新建'}功能定义`}
             trigger={children}
             open={open}
-            // onOpenChange={(open) => setOpen(open)}
-            // initialValues={{abilityType: abilityType}}
             onTriggerClick={()=>setOpen(true)}
             onCancel={()=>setOpen(false)}
             onClose={()=>setOpen(false)}
+            formProps={{layout: 'vertical',initialValues:{abilityType: abilityType}}}
             formValues={formValues}
             onSubmit={handleSubmit}
         >

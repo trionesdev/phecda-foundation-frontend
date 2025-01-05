@@ -14,7 +14,7 @@ export const DistrictsPage = () => {
         return districtApi.queryDistrictList(queryParams)
     }, {
         onSuccess: (res: any) => {
-            if (res) {
+            if (_.isPlainObject(res)) {
                 setRows(res || [])
             }
         }

@@ -35,6 +35,10 @@ export const AlarmLevelForm: FC<AlarmTypeFormProps> = ({
             });
     };
 
+    const handleQueryById = () => {
+      
+    }
+    
     return (
         <ModalForm
             trigger={children}

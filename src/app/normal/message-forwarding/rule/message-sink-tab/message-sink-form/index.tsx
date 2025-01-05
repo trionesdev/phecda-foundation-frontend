@@ -93,6 +93,15 @@ export const MessageSinkForm: FC<MessageSinkFormProps> = ({
         <ModalForm
             title={`${id ? '修改' : '创建'}数据目的`}
             trigger={children}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             open={open}
             afterOpenChange={setOpen}
             formProps={{ layout: 'vertical' }}

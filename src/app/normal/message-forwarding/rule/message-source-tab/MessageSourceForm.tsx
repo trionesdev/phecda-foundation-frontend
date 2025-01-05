@@ -38,6 +38,15 @@ export const MessageSourceForm: FC<MessageSourceFormProps> = ({
     return (
         <ModalForm
             open={open}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             afterOpenChange={setOpen}
             trigger={children}
             formProps={{ layout: 'vertical' }}

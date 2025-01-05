@@ -12,12 +12,12 @@ type DeviceFormProps = {
 };
 
 const DeviceForm: FC<DeviceFormProps> = ({
-    children,
-    id,
-    onSuccess,
-    isEdit,
-    ...rest
-}) => {
+                                             children,
+                                             id,
+                                             onSuccess,
+                                             isEdit,
+                                             ...rest
+                                         }) => {
     const [open, setOpen] = useState(false);
     const [formValues, setFormValues] = useState({});
 
@@ -64,6 +64,15 @@ const DeviceForm: FC<DeviceFormProps> = ({
             open={open}
             title={`${isEdit ? '编辑' : '新建'}设备`}
             trigger={children}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             formProps={{ layout: 'vertical' }}
             afterOpenChange={(op: boolean) => setOpen(op)}
             onSubmit={handleSubmit}
@@ -92,7 +101,7 @@ const DeviceForm: FC<DeviceFormProps> = ({
                         validator: (rule, value) => {
                             if (value && !/^[a-zA-Z]/.test(value)) {
                                 return Promise.reject(
-                                    'DeviceName必须英文字母开头'
+                                    'DeviceName必须英文字母开头',
                                 );
                             }
                             return Promise.resolve();

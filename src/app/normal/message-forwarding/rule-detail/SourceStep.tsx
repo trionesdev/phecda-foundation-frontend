@@ -102,7 +102,7 @@ export const SourceStep: FC<SourceStepProps> = ({ ruleId, rule }) => {
             <GridTable
                 toolbar={
                     <TableToolbar
-                        extra={[
+                        extra={<Space>
                             <SourceLinkForm
                                 key={`link-btn`}
                                 ruleId={ruleId}
@@ -111,8 +111,8 @@ export const SourceStep: FC<SourceStepProps> = ({ ruleId, rule }) => {
                                 <Button type={`primary`} disabled={disabled}>
                                     关联数据源
                                 </Button>
-                            </SourceLinkForm>,
-                        ]}
+                            </SourceLinkForm>
+                        </Space>}
                     />
                 }
                 fit={true}

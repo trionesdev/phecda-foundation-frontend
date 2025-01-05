@@ -36,6 +36,15 @@ export const SinkLinkForm: FC<SinkLinkFormProps> = ({
     return (
         <ModalForm
             trigger={children}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             title={`关联数据目的`}
             open={open}
             afterOpenChange={setOpen}

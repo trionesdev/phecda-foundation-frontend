@@ -44,6 +44,15 @@ export const TopicForm: FC<TopicFormProps> = ({
     return (
         <ModalForm
             trigger={children}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             form={form}
             open={open}
             afterOpenChange={setOpen}

@@ -80,6 +80,10 @@ export default class AlarmApi extends BaseTenantApi {
         return this.request.put(`${this.baseUri}/levels/${id}`, data);
     }
 
+    queryAlarmLevelById(id: string) {
+        return this.request.get(`${this.baseUri}/levels/${id}`);
+    }
+
     queryAlarmLevels(params?: any) {
         return this.request.get(`${this.baseUri}/levels/list`, { params });
     }

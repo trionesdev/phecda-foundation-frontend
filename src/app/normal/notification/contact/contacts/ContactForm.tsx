@@ -50,6 +50,15 @@ export const ContactForm: FC<ContactFormProps> = ({
     return (
         <ModalForm
             trigger={children}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             title={`${id ? '编辑' : '新建'}联系人`}
             open={open}
             afterOpenChange={setOpen}

@@ -37,6 +37,15 @@ export const SourceLinkForm: FC<SourceLinkFormProps> = ({
     return (
         <ModalForm
             trigger={children}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             title={`关联数据源`}
             open={open}
             afterOpenChange={setOpen}

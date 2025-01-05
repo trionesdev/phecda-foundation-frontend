@@ -5,7 +5,7 @@ import {
     TableToolbar,
 } from '@trionesdev/antd-react-ext';
 import styles from './device.module.less';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     Button,
     Divider,
@@ -15,7 +15,7 @@ import {
     Space,
     Switch,
 } from 'antd';
-import DeviceForm from './device-form';
+import DeviceForm from './DeviceForm.tsx';
 import { deviceApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
 import { PlusCircleOutlined } from '@ant-design/icons';

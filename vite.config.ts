@@ -28,6 +28,12 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      "/boss-api": {
+        target: "http://localhost:8200/",
+        // target: "http://dubhe-gateway.moensun.cn/",
+        changeOrigin: true,
+        secure: false
+      },
     }
   }
 })

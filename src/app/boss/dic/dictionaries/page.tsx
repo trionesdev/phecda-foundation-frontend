@@ -18,7 +18,9 @@ export const DictionariesPage = () => {
     }, {
         manual: true,
         onSuccess: (res: any) => {
-            setRows(res || [])
+            if (_.isPlainObject(res)){
+                setRows(res || [])
+            }
         }
     })
 

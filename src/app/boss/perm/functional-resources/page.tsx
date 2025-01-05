@@ -24,7 +24,7 @@ export const FunctionalResourcesPage = () => {
         })
     }, {
         onSuccess: (res: any) => {
-            if (res) {
+            if (_.isPlainObject(res)) {
                 setTreeData(res || [])
             }
         }

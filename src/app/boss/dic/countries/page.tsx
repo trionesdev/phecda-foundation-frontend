@@ -3,6 +3,7 @@ import {GridTable, Layout, SearchToolbar} from "@trionesdev/antd-react-ext";
 import {useRequest} from "ahooks";
 import {countryApi} from "@apis/boss";
 import {Input} from "antd";
+import _ from 'lodash';
 
 export const CountriesPage = () => {
     const [searchParams, setSearchParams] = useState<any>()
@@ -14,7 +15,7 @@ export const CountriesPage = () => {
         return countryApi.queryCountryList(params)
     }, {
         onSuccess: (res: any) => {
-            if (res) {
+            if (_.isPlainObject(res)) {
                 setRows(res || [])
             }
         }
