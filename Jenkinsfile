@@ -57,8 +57,8 @@ pipeline{
        node { label env.NODE }
    }
     environment {
-        IMAGE_NAME_DEFAULT =  "registry.cn-shanghai.aliyuncs.com/jscoe/dubhe.dubhe-foundation-ui"
-        APP_NAME = "phecda-frontend"
+        IMAGE_NAME_DEFAULT =  "registry-vpc.cn-shanghai.aliyuncs.com/epiboly/demo"
+        APP_NAME = "phecda-foundation-frontend"
         HELM_NAME = "${APP_NAME}"
         DING_DING_TOKEN_DEFAULT = "11c11816930d227dea96f6c159065e586c995c0c25412512e919206e870be527"
         DOCKER_REPOSITORY_URL_DEFAULT = 'registry.cn-shanghai.aliyuncs.com'
