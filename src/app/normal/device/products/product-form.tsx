@@ -32,7 +32,6 @@ const ProductForm: FC<ProductFormBtnProps> = ({
 
     const nodeType = Form.useWatch('nodeType', form);
     const accessChannel = Form.useWatch('accessChannel', form);
-    console.log(accessChannel);
 
     const handleSubmit = (values: any) => {
         let request: Promise<any>;
@@ -69,6 +68,9 @@ const ProductForm: FC<ProductFormBtnProps> = ({
             form={form}
             open={open}
             trigger={children}
+            onTriggerClick={() => setOpen(true)}
+            onClose={() => setOpen(false)}
+            onCancel={() => setOpen(false)}
             title={`${isEdit ? '编辑' : '新建'}产品`}
             width={600}
             afterOpenChange={(op: boolean) => setOpen(op)}

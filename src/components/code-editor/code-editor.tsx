@@ -6,7 +6,7 @@ const OriginalResizeObserver = window.ResizeObserver;
 
 // Create a new ResizeObserver constructor
 // @ts-ignore
-window.ResizeObserver = function (callback: any) {
+window.ResizeObserver = function(callback: any) {
     const wrappedCallback = (entries: any, observer: any) => {
         window.requestAnimationFrame(() => {
             callback(entries, observer);
@@ -34,10 +34,10 @@ type CodeEditorProps = {
     onChange?: (text?: string) => void;
 };
 export const CodeEditor: FC<CodeEditorProps> = ({
-    minimapEnabled = false,
-    value,
-    onChange,
-}) => {
+                                                    minimapEnabled = false,
+                                                    value,
+                                                    onChange,
+                                                }) => {
     const [editor, setEditor] = useState<any>();
     const monacoEditorRef = useRef<any>();
 
@@ -55,6 +55,7 @@ export const CodeEditor: FC<CodeEditorProps> = ({
         setEditor(editorInstance);
     };
 
+
     useEffect(() => {
         if (editor && !_.isEqual(value, editor.getValue())) {
             editor.setValue(value || '');
@@ -62,7 +63,10 @@ export const CodeEditor: FC<CodeEditorProps> = ({
     }, [editor, value]);
 
     useEffect(() => {
-        handleEditorInit();
+        if (!editor && !monacoEditorRef.current.innerHTML) {
+            handleEditorInit();
+        }
+
         return () => {
             if (editor) {
                 editor.dispose();

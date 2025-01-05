@@ -1,15 +1,23 @@
 import {AppToolbar, Layout} from "@trionesdev/antd-react-ext";
 import {Outlet, useAuth, useNavigate} from "@trionesdev/commons-react";
 import {Avatar, Dropdown, Space} from "antd";
-import {LogoutOutlined, UserOutlined} from "@ant-design/icons";
+import Icon, {LogoutOutlined, UserOutlined} from "@ant-design/icons";
 import {RouteConstants} from "@/router/routes.constants.ts";
+import PhecdaSvg from './assests/phecda.svg?react';
 
 export const TrionesLayout = () => {
     const navigate = useNavigate()
     const {actor, signOut} = useAuth()
     return <Layout direction={`vertical`}>
         <Layout.Item>
-            <AppToolbar title={<Space style={{cursor: "pointer"}} onClick={() => {
+            <AppToolbar
+                avatar={{
+                    icon: (
+                        <Icon component={PhecdaSvg} style={{ width: 40 }} />
+                    ),
+                    style: { fontSize: 40 },
+                }}
+                title={<Space style={{cursor: "pointer"}} onClick={() => {
                 navigate('/')
             }}>TrionesDev</Space>} extra={<Space>
                 <Dropdown menu={{
