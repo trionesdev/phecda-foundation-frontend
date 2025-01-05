@@ -38,6 +38,13 @@ export const AlarmLevelForm: FC<AlarmTypeFormProps> = ({
     return (
         <ModalForm
             trigger={children}
+            onTriggerClick={() => setOpen(true)}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             open={open}
             title={`${id ? `编辑` : `新增`}报警级别`}
             formProps={{ layout: 'vertical' }}

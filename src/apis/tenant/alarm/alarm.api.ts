@@ -51,6 +51,10 @@ export default class AlarmApi extends BaseTenantApi {
         return this.request.put(`${this.baseUri}/types/${id}`, data);
     }
 
+    queryAlarmTypeById(id: string) {
+        return this.request.get(`${this.baseUri}/types/${id}`);
+    }
+
     queryAlarmTypes(params?: any) {
         return this.request.get(`${this.baseUri}/types/list`, { params });
     }

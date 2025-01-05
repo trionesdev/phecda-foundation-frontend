@@ -10,10 +10,10 @@ type LinkageFormProps = {
     onRefresh?: () => void;
 };
 export const LinkageForm: FC<LinkageFormProps> = ({
-    children,
-    id,
-    onRefresh,
-}) => {
+                                                      children,
+                                                      id,
+                                                      onRefresh,
+                                                  }) => {
     const [open, setOpen] = React.useState(false);
     const [formValues, setFormValues] = React.useState({});
 
@@ -33,6 +33,13 @@ export const LinkageForm: FC<LinkageFormProps> = ({
     return (
         <ModalForm
             trigger={children}
+            onTriggerClick={() => setOpen(true)}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             open={open}
             title={`${id ? '编辑' : '新建'}场景`}
             formProps={{ layout: 'vertical' }}
