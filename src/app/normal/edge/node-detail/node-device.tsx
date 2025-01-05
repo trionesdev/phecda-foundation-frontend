@@ -1,16 +1,16 @@
-import { FC, useEffect, useState } from 'react';
-import { deviceApi, nodeApi } from '@apis';
-import { Button, Divider, notification, Popconfirm, Space, Switch } from 'antd';
-import { Link } from 'react-router-dom';
-import { RoutesConstants } from '@/router/routes.constants';
-import { GridTable, TableToolbar, VPanel } from '@trionesdev/antd-react-ext';
+import {FC, useEffect, useState} from 'react';
+import {deviceApi, nodeApi} from '@apis/tenant';
+import {Button, Divider, notification, Popconfirm, Space, Switch} from 'antd';
+import {Link} from 'react-router-dom';
+import {RoutesConstants} from '@/router/routes.constants';
+import {GridTable, Layout, TableToolbar} from '@trionesdev/antd-react-ext';
 import NodeDeviceForm from './node-device-form';
 
 type NodeDeviceProps = {
     node: any;
 };
 
-const NodeDevice: FC<NodeDeviceProps> = ({ node }) => {
+const NodeDevice: FC<NodeDeviceProps> = ({node}) => {
     const [querySeq, setQuerySeq] = useState(0);
     const [loading, setLoading] = useState(false);
     const [pageNum, setPageNum] = useState(1);
@@ -40,10 +40,10 @@ const NodeDevice: FC<NodeDeviceProps> = ({ node }) => {
             .removeDevice(node.id, [id])
             .then(() => {
                 handleRefresh();
-                notification.success({ message: '子设备删除成功' });
+                notification.success({message: '子设备删除成功'});
             })
             .catch((e) => {
-                notification.error({ message: `${e.message}` });
+                notification.error({message: `${e.message}`});
             });
     };
 
@@ -100,7 +100,7 @@ const NodeDevice: FC<NodeDeviceProps> = ({ node }) => {
             width: 150,
             render: (text: string, record: any) => {
                 return (
-                    <Space split={<Divider type={`vertical`} />}>
+                    <Space split={<Divider type={`vertical`}/>}>
                         <Button key={`view-btn`} size={`small`} type={`link`}>
                             <Link to={RoutesConstants.DEVICE_DETAIL.path(text)}>
                                 查看
@@ -138,19 +138,21 @@ const NodeDevice: FC<NodeDeviceProps> = ({ node }) => {
 
     return (
         <>
-            <VPanel>
-                <GridTable
-                    style={{ padding: '8px', backgroundColor: 'white' }}
-                    fit={true}
-                    size={`small`}
-                    toolbar={tableBar}
-                    columns={columns}
-                    scroll={{ y: 'max-content' }}
-                    dataSource={row}
-                    rowKey={`id`}
-                    loading={loading}
-                />
-            </VPanel>
+            <Layout>
+                <Layout.Item auto={true}>
+                    <GridTable
+                        style={{padding: '8px', backgroundColor: 'white'}}
+                        fit={true}
+                        size={`small`}
+                        toolbar={tableBar}
+                        columns={columns}
+                        scroll={{y: 'max-content'}}
+                        dataSource={row}
+                        rowKey={`id`}
+                        loading={loading}
+                    />
+                </Layout.Item>
+            </Layout>
         </>
     );
 };

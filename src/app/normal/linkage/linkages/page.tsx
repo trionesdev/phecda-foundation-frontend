@@ -7,27 +7,22 @@ import {
     TableToolbar,
 } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
-import { operationApi } from '@apis';
+import { operationApi } from '@apis/tenant';
 import { Button, Divider, Input, Popconfirm, Space, Switch } from 'antd';
 import { TableParams } from '@/constants/types';
 import { formatDateTime } from '@/commons/util/date.utils';
-import { Link } from 'react-router-dom';
-import { RoutesConstants } from '@/router/routes.constants';
 import qs from 'qs';
 import { LinkageForm } from './LinkageForm';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { Link } from '@trionesdev/commons-react';
+import {RouteConstants} from "@/router/routes.constants.ts";
 
-const { TextArea } = Input;
 export const LinkagesPage: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({
         pageSize: 10,
         pageNum: 1,
     });
-    const [drawerOpen, setDrawerOpen] = useState(false);
 
-    const [drawerFormeValue, setDrawerFormeValue] = useState<
-        Record<string, any> | undefined
-    >({});
     /** 请求表格 */
     const {
         data: tableData,
@@ -107,7 +102,7 @@ export const LinkagesPage: React.FC = () => {
                         <Button key={`view-btn`} size={`small`} type={`link`}>
                             <Link
                                 to={{
-                                    pathname: RoutesConstants.SCENE_DETAIL.path(
+                                    pathname: RouteConstants.MONITORING_OPERATION.SCENE_DETAIL.path(
                                         record?.id
                                     ),
                                     search: qs.stringify({

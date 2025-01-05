@@ -1,7 +1,7 @@
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import React, { FC, useEffect, useState } from 'react';
 import { Form, Input, message } from 'antd';
-import { notificationApi } from '@apis';
+import { notificationApi } from '@apis/tenant';
 
 type ContactFormProps = {
     children?: React.ReactElement;
@@ -50,6 +50,15 @@ export const ContactForm: FC<ContactFormProps> = ({
     return (
         <ModalForm
             trigger={children}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             title={`${id ? '编辑' : '新建'}联系人`}
             open={open}
             afterOpenChange={setOpen}

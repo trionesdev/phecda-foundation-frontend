@@ -1,7 +1,7 @@
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import React, { FC, useEffect, useState } from 'react';
 import { Form, Input, message, Space, Spin } from 'antd';
-import { notificationApi } from '@apis';
+import { notificationApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
 
 type TemplateFormProps = {
@@ -10,10 +10,10 @@ type TemplateFormProps = {
     onRefresh?: () => void;
 };
 export const TemplateForm: FC<TemplateFormProps> = ({
-    children,
-    id,
-    onRefresh,
-}) => {
+                                                        children,
+                                                        id,
+                                                        onRefresh,
+                                                    }) => {
     const [open, setOpen] = useState(false);
     const [formValues, setFormValues] = useState({});
 
@@ -42,7 +42,7 @@ export const TemplateForm: FC<TemplateFormProps> = ({
             onError: async (err: any) => {
                 message.error(err.message);
             },
-        }
+        },
     );
 
     useEffect(() => {
@@ -54,6 +54,15 @@ export const TemplateForm: FC<TemplateFormProps> = ({
     return (
         <ModalForm
             trigger={children}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             title={`${id ? '编辑' : '新建'}通知模板`}
             open={open}
             destroyOnClose={true}
@@ -72,7 +81,7 @@ export const TemplateForm: FC<TemplateFormProps> = ({
                     required={true}
                     extra={
                         <div
-                            style={{ backgroundColor: '#d7d7d7', marginTop: 4 }}
+                            style={{ backgroundColor: '#d7d7d7', marginTop: 4, padding: 4, fontSize: 12 }}
                         >
                             <strong>可用变量：</strong>
                             <span

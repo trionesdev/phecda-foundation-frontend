@@ -1,0 +1,48 @@
+.standaloneLayout {
+  height: 100%;
+  background-color: rgb(48, 65, 86);
+
+  &SiderWraper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(48, 65, 86);
+
+    .logo {
+      height: 60px;
+      flex-shrink: 0;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 4px;
+    }
+
+    .menu {
+      flex: auto;
+      overflow-y: auto;
+      background-color: rgb(48, 65, 86);
+
+      :global {
+        .ant-menu-dark {
+          background-color: rgb(48, 65, 86);
+
+          .ant-menu-sub.ant-menu-inline {
+            background-color: #1f2d3d;
+          }
+        }
+      }
+    }
+  }
+
+  &Header {
+    background-color: white;
+    height: 60px;
+    padding: 8px;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #0000000d;
+  }
+
+}

@@ -3,9 +3,11 @@ import { Form, message, Select } from 'antd';
 import _ from 'lodash';
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
-import { MESSAGE_SOURCE_TOPIC_TYPE } from '@/app/normal/message-forwarding/internal/message-forwarding.enums';
-import { MessageSourceTopicTypeOptions } from '@/app/normal/message-forwarding/internal/message-forwarding.constants';
+import { messageForwardingApi } from '@apis/tenant';
+import { MESSAGE_TYPE } from '@/app/normal/message-forwarding/internal/message-forwarding.enums';
+import {
+    MessageTypeOptions,
+} from '@/app/normal/message-forwarding/internal/message-forwarding.constants';
 import { ThingPropertyReport } from '@/app/normal/message-forwarding/source-detail/topic-form/ThingPropertyReport';
 
 type TopicFormProps = {
@@ -14,10 +16,10 @@ type TopicFormProps = {
     onRefresh?: () => void;
 };
 export const TopicForm: FC<TopicFormProps> = ({
-    children,
-    sourceId,
-    onRefresh,
-}) => {
+                                                  children,
+                                                  sourceId,
+                                                  onRefresh,
+                                              }) => {
     const [open, setOpen] = React.useState(false);
     const [form] = Form.useForm();
     const type = Form.useWatch('type', form);
@@ -36,12 +38,21 @@ export const TopicForm: FC<TopicFormProps> = ({
             onError: async (error) => {
                 message.error(error.message);
             },
-        }
+        },
     );
 
     return (
         <ModalForm
             trigger={children}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             form={form}
             open={open}
             afterOpenChange={setOpen}
@@ -52,13 +63,13 @@ export const TopicForm: FC<TopicFormProps> = ({
             <Form.Item
                 label={`消息类型`}
                 name={`type`}
-                initialValue={MESSAGE_SOURCE_TOPIC_TYPE.THING_PROPERTY_REPORT}
+                initialValue={MESSAGE_TYPE.THING_PROPERTY_REPORT}
             >
-                <Select options={MessageSourceTopicTypeOptions} />
+                <Select options={MessageTypeOptions} />
             </Form.Item>
             {_.isEqual(
                 type,
-                MESSAGE_SOURCE_TOPIC_TYPE.THING_PROPERTY_REPORT
+                MESSAGE_TYPE.THING_PROPERTY_REPORT,
             ) && <ThingPropertyReport type={type} />}
         </ModalForm>
     );

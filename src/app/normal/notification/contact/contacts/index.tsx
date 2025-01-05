@@ -2,7 +2,7 @@ import { GridTable, Layout, TableToolbar } from '@trionesdev/antd-react-ext';
 import { useEffect, useState } from 'react';
 import { Button, message, Popconfirm, Space } from 'antd';
 import { useRequest } from 'ahooks';
-import { notificationApi } from '@apis';
+import { notificationApi } from '@apis/tenant';
 import { ContactForm } from './ContactForm';
 import { PlusCircleOutlined } from '@ant-design/icons';
 

@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
+import { messageForwardingApi } from '@apis/tenant';
 import { Button, message, Popconfirm, Space } from 'antd';
 import { GridTable, TableToolbar } from '@trionesdev/antd-react-ext';
 import _ from 'lodash';

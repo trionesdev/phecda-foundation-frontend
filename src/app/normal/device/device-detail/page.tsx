@@ -2,8 +2,7 @@ import { Layout, PageHeader } from '@trionesdev/antd-react-ext';
 import { Tabs, TabsProps } from 'antd';
 import InfoTab from './info-tab';
 import { useEffect } from 'react';
-import { deviceApi } from '@apis';
-import { useNavigate, useParams } from 'react-router-dom';
+import { deviceApi } from '@apis/tenant';
 import styles from './device-detail.module.less';
 import ThingModelDataTab from './thing-model-tab';
 import _ from 'lodash';
@@ -12,6 +11,7 @@ import { isNilEmpty } from '@/commons/util/isNilEmpty';
 import { useRequest } from 'ahooks';
 import ChildDeviceTab from './child-device-tab';
 import { CameraFrameTab } from './camera-frame-tab';
+import {useNavigate, useParams} from "@trionesdev/commons-react";
 
 export const DeviceDetailPage = () => {
     const { id } = useParams();

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styles from './linkage-edit.module.less';
 import { Layout, PageHeader } from '@trionesdev/antd-react-ext';
-import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Form, notification, Space, Tooltip } from 'antd';
-import { operationApi } from '@apis';
+import { operationApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
 import _ from 'lodash';
-import { RoutesConstants } from '@/router/routes.constants';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { ActionDefinition } from './components/action-definition';
 import { SceneDefinition } from './components/scene-definition';
 import { ActionTrigger } from './components/action-trigger';
+import {useNavigate, useParams} from "@trionesdev/commons-react";
+import {RouteConstants} from "@/router/routes.constants.ts";
 
 export const SceneDetailPage: React.FC = () => {
     const navigate = useNavigate();
@@ -98,7 +98,7 @@ export const SceneDetailPage: React.FC = () => {
         <Layout direction={`vertical`} className={styles.linkageEdit}>
             <Layout.Item>
                 <PageHeader
-                    onBack={() => navigate(RoutesConstants.LINKAGE.path())}
+                    onBack={() => navigate(RouteConstants.MONITORING_OPERATION.LINKAGE.path())}
                     title={linkScene?.name}
                     extra={[
                         <Button
@@ -112,7 +112,7 @@ export const SceneDetailPage: React.FC = () => {
                     ]}
                 />
             </Layout.Item>
-            <Layout.Item auto={true} style={{ overflowY: 'auto', padding: 8 }}>
+            <Layout.Item auto={true} style={{ overflowY: 'auto', padding: 8 ,backgroundColor: '#ffffff'}}>
                 <Form layout={`vertical`} form={form} disabled={!editing}>
                     <div>
                         <div className={styles.linkageEditTitle}>场景定义</div>
@@ -218,7 +218,7 @@ export const SceneDetailPage: React.FC = () => {
                     )}
                 </Form>
             </Layout.Item>
-            <Layout.Item style={{ padding: 8 }}>
+            <Layout.Item style={{ padding: 8,backgroundColor: 'white' }}>
                 {editing ? (
                     <Space>
                         <Button type={`primary`} onClick={handleSaveRules}>
@@ -237,7 +237,7 @@ export const SceneDetailPage: React.FC = () => {
                         <Button type={`primary`}>运行</Button>
                         <Button
                             onClick={() =>
-                                navigate(RoutesConstants.LINKAGE.path())
+                                navigate(RouteConstants.MONITORING_OPERATION.LINKAGE.path())
                             }
                         >
                             返回

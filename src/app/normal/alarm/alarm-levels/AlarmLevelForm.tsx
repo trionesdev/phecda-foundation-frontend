@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import { Form, Input, message } from 'antd';
-import { alarmApi } from '@apis';
+import { alarmApi } from '@apis/tenant';
 
 type AlarmTypeFormProps = {
     children?: React.ReactElement;
@@ -35,9 +35,20 @@ export const AlarmLevelForm: FC<AlarmTypeFormProps> = ({
             });
     };
 
+    const handleQueryById = () => {
+      
+    }
+    
     return (
         <ModalForm
             trigger={children}
+            onTriggerClick={() => setOpen(true)}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             open={open}
             title={`${id ? `编辑` : `新增`}报警级别`}
             formProps={{ layout: 'vertical' }}

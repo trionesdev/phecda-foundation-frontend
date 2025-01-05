@@ -2,16 +2,16 @@ import { Layout, PageHeader } from '@trionesdev/antd-react-ext';
 import { Button, message, Tabs, TabsProps } from 'antd';
 import { useEffect, useState } from 'react';
 import styles from './product-detail.module.less';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import ThingModelTab from './thing-model-tab';
-import { deviceApi } from '@apis';
-import { ProductRep } from '@apis/device/device.rep';
+import { deviceApi } from '@apis/tenant';
+import { ProductRep } from '@apis/tenant/device/device.rep';
 import InfoTab from './info-tab';
 import ProtocolTab from './protocol-tab';
-import { RoutesConstants } from '@/router/routes.constants';
 import _ from 'lodash';
 import confirm from 'antd/es/modal/confirm';
 import { ExclamationCircleFilled } from '@ant-design/icons';
+import {useNavigate, useParams, useSearchParams} from "@trionesdev/commons-react";
+import {RouteConstants} from "@/router/routes.constants.ts";
 
 export const ProductDetailPage = () => {
     const { id } = useParams();
@@ -137,7 +137,7 @@ export const ProductDetailPage = () => {
                             ),
                         ]}
                         onBack={() => {
-                            navigate(RoutesConstants.PRODUCTS.path(), {
+                            navigate(RouteConstants.DEVICE.PRODUCTS.path(), {
                                 replace: true,
                             });
                         }}

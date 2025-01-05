@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import { Select, SelectProps } from 'antd';
 
 type ThingModelCommandSelectProps = {

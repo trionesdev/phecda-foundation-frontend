@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import styles from '../device-detail.module.less';
 import { Tabs, TabsProps } from 'antd';
 import ThingModelDataPropertiesTab from './thing-model-data-properties-tab';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import _ from 'lodash';
 import ThingModelDataEvent from './thing-model-data-event';
 import ThingModelDataService from './thing-model-data-service';

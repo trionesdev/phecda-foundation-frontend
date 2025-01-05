@@ -5,12 +5,10 @@ import {
     TableToolbar,
 } from '@trionesdev/antd-react-ext';
 import { Button, Input, message, Popconfirm, Select, Space, Tag } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProductForm from './product-form';
-import { deviceApi } from '@apis';
-import { ProductRep } from '@apis/device/device.rep';
-import { useNavigate } from 'react-router-dom';
-import { RoutesConstants } from '@/router/routes.constants';
+import { deviceApi } from '@apis/tenant';
+import { ProductRep } from '@apis/tenant/device/device.rep';
 import styles from './products.module.less';
 import { formatDateTime } from '@commons/util/date.utils';
 import { useRequest } from 'ahooks';
@@ -18,6 +16,8 @@ import { OptionsType } from '@/constants/types';
 import _ from 'lodash';
 import { DeviceNodeTypeOptions } from '../internal/device.constants';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import {useNavigate} from "@trionesdev/commons-react";
+import {RouteConstants} from "@/router/routes.constants.ts";
 
 export const ProductsPage = () => {
     const navigate = useNavigate();
@@ -160,7 +160,7 @@ export const ProductsPage = () => {
                             type={`link`}
                             onClick={() =>
                                 navigate(
-                                    RoutesConstants.PRODUCT_DETAIL.path(text)
+                                    RouteConstants.DEVICE.PRODUCT_DETAIL.path(text)
                                 )
                             }
                         >
@@ -208,7 +208,7 @@ export const ProductsPage = () => {
                     onSearchParamsChange={(values: any) => {
                         setSearchParams(values);
                     }}
-                    onSearch={(values: any) => {
+                    onSearch={() => {
                         handleQueryProductPage();
                     }}
                 />

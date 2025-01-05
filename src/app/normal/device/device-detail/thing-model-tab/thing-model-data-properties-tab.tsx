@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { Row } from 'antd';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import styles from '../device-detail.module.less';
 import PropertyDataCard from './property-data-card';
 

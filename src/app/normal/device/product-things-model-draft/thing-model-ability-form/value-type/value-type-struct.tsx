@@ -10,7 +10,7 @@ const ValueTypeStruct: FC<ValueTypeProps> = ({ group = 'valueSpecs' }) => {
     return (
         <>
             <Form.List name={group}>
-                {(fields, { add, remove }, { errors }) => {
+                {(fields, { add, remove }, { }) => {
                     return (
                         <>
                             {fields?.map((field, index) => {

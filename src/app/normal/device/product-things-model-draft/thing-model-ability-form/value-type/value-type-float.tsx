@@ -1,4 +1,4 @@
-import { Col, Form, Input, Row } from 'antd';
+import { Col, Form, InputNumber, Row } from 'antd';
 import { FC } from 'react';
 import { ValueTypeProps } from './index';
 import _ from 'lodash';
@@ -23,20 +23,20 @@ const ValueTypeFloat: FC<ValueTypeProps> = ({ group }) => {
                             name={_.concat(group, `min`)}
                             rules={[]}
                         >
-                            <Input />
+                            <InputNumber style={{ width: '100%' }} />
                         </Form.Item>
                     </Col>
                     <Col flex={'none'}>~</Col>
                     <Col flex={'1 auto'}>
                         {' '}
                         <Form.Item noStyle={true} name={_.concat(group, `max`)}>
-                            <Input />
+                            <InputNumber style={{ width: '100%' }} />
                         </Form.Item>
                     </Col>
                 </Row>
             </Form.Item>
             <Form.Item label={`步长`} name={_.concat(group, `step`)}>
-                <Input />
+                <InputNumber style={{ width: '100%' }} />
             </Form.Item>
         </>
     );

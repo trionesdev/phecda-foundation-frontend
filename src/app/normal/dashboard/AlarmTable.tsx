@@ -1,7 +1,7 @@
 import { Button, Card, Space, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { alarmApi } from '@apis';
+import { alarmApi } from '@apis/tenant';
 import _ from 'lodash';
 import { formatDateTimeSeconds } from '@commons/util/date.utils';
 import { ALARM_STATUS } from '../alarm/internal/alarm.enums';

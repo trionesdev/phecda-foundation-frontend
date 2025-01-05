@@ -6,7 +6,7 @@ import {
 } from '@trionesdev/antd-react-ext';
 import React, { FC, useEffect, useState } from 'react';
 import { Button, Divider, Input, message, Popconfirm, Space } from 'antd';
-import { nodeApi } from '@apis';
+import { nodeApi } from '@apis/tenant';
 import { Link } from 'react-router-dom';
 import { RoutesConstants } from '@/router/routes.constants';
 import styles from './edge-node.module.less';

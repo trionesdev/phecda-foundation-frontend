@@ -1,7 +1,7 @@
 import { Select, SelectProps } from 'antd';
 import { FC, useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
+import { messageForwardingApi } from '@apis/tenant';
 
 type SinksSelectProps = Omit<SelectProps, 'options'>;
 

@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import { Form, Input, message, Spin } from 'antd';
-import { driverApi } from '@apis';
+import { driverApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
 
 type DriverFormProps = {
@@ -54,6 +54,15 @@ export const DriverForm: FC<DriverFormProps> = ({
         <ModalForm
             form={form}
             trigger={children}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             open={open}
             afterOpenChange={(open) => {
                 setOpen(open);

@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Button, message, Modal, Tabs } from 'antd';
 import { useRequest } from 'ahooks';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import { CodeEditor } from '@components';
 
 type ThingModelProfileModalProps = {

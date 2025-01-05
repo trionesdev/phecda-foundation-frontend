@@ -1,3 +1,34 @@
+main,div{
+    &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f0f0f0;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #b4b4b4;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #b4b4b4;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+        background: #b4b4b4;
+        border-radius: 10px;
+    }
+}
+
+.ant-app{
+    height: 100%;
+}
+
 .ant-tabs {
     height: 100%;
 
@@ -21,34 +52,59 @@
     }
 }
 
-.ant-table {
-    scrollbar-color: inherit !important;
-    .ant-table-body {
-        overflow-y: auto !important;
+.ant-list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .ant-list-header {
+        //padding-block: 4px
+    }
+
+    .ant-spin-nested-loading {
+        flex: 1 auto;
+        overflow-y: auto;
     }
 }
 
-::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+.ant-tree-list {
+    .ant-tree-list-holder {
+        .ant-tree-treenode {
+            width: 100%;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.04);
+            }
+
+            &.ant-tree-treenode-selected {
+                background-color: rgba(0, 0, 0, 0.04);
+            }
+
+            .ant-tree-node-content-wrapper {
+                width: 100%;
+
+                &.ant-tree-node-selected {
+                    background-color: initial;
+                }
+
+                &:hover {
+                    background-color: initial;
+                }
+            }
+        }
+    }
+
 }
 
-::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 10px;
-}
+.ant-table {
+    scrollbar-color: inherit !important;
 
-::-webkit-scrollbar-thumb {
-    background: #b4b4b4;
-    border-radius: 10px;
-}
+    .ant-table-content {
+        .ant-table-tbody {
 
-::-webkit-scrollbar-thumb:hover {
-    background: #b4b4b4;
-    border-radius: 10px;
-}
+        }
 
-::-webkit-scrollbar-thumb:active {
-    background: #b4b4b4;
-    border-radius: 10px;
+    }
+
+
 }

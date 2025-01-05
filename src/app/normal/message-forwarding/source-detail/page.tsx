@@ -4,23 +4,25 @@ import {
     PageHeader,
     TableToolbar,
 } from '@trionesdev/antd-react-ext';
-import { useEffect, useState } from 'react';
-import { Button, Popconfirm, Space } from 'antd';
+import {useEffect, useState} from 'react';
+import {Button, Popconfirm, Space} from 'antd';
 import styles from './source-detail.module.less';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
+import {useRequest} from 'ahooks';
+import {messageForwardingApi} from '@apis/tenant';
 import _ from 'lodash';
-import { MESSAGE_SOURCE_TOPIC_TYPE } from '@/app/normal/message-forwarding/internal/message-forwarding.enums';
-import { TopicForm } from '@/app/normal/message-forwarding/source-detail/topic-form';
+import {
+    MESSAGE_TYPE
+} from '@/app/normal/message-forwarding/internal/message-forwarding.enums';
+import {TopicForm} from '@/app/normal/message-forwarding/source-detail/topic-form';
+import {useNavigate, useParams} from "@trionesdev/commons-react";
 
 export const MessageSourceDetailPage = () => {
     const navigate = useNavigate();
-    const { id } = useParams();
+    const {id} = useParams();
     const [source, setSource] = useState<any>();
     const [rows, setRows] = useState([]);
 
-    const { run: handleQuerySourceById } = useRequest(
+    const {run: handleQuerySourceById} = useRequest(
         () => messageForwardingApi.querySourceById(id!),
         {
             manual: true,
@@ -48,7 +50,7 @@ export const MessageSourceDetailPage = () => {
             width: 150,
             render: (text: string) => {
                 switch (text) {
-                    case MESSAGE_SOURCE_TOPIC_TYPE.THING_PROPERTY_REPORT:
+                    case MESSAGE_TYPE.THING_PROPERTY_REPORT:
                         return '物模型属性上报';
                     default:
                         return '未知';
@@ -112,21 +114,20 @@ export const MessageSourceDetailPage = () => {
     return (
         <Layout direction={`vertical`} className={styles.sourceDetail}>
             <Layout.Item>
-                <PageHeader title={source?.name} onBack={() => navigate(-1)} />
+                <PageHeader title={source?.name} onBack={() => navigate(-1)}/>
             </Layout.Item>
             <Layout.Item auto={true}>
                 <GridTable
                     toolbar={
                         <TableToolbar
-                            extra={[
+                            extra={<Space>
                                 <TopicForm
-                                    key={`create-btn`}
                                     sourceId={id!}
                                     onRefresh={handleRefreshTopics}
                                 >
                                     <Button type={`primary`}>创建Topic</Button>
-                                </TopicForm>,
-                            ]}
+                                </TopicForm>
+                            </Space>}
                         />
                     }
                     fit={true}

@@ -3,7 +3,7 @@ import { Button, message, Popconfirm, Space } from 'antd';
 import { useEffect, useState } from 'react';
 import styles from './template.module.less';
 import { useRequest } from 'ahooks';
-import { notificationApi } from '@apis';
+import { notificationApi } from '@apis/tenant';
 import { TemplateForm } from './TemplateForm';
 import { PlusCircleOutlined } from '@ant-design/icons';
 

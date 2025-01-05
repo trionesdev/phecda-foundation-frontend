@@ -1,7 +1,7 @@
 import { Select, SelectProps } from 'antd';
 import { FC, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { alarmApi } from '@apis';
+import { alarmApi } from '@apis/tenant';
 
 type AlarmLevelSelectProps = Omit<SelectProps, 'options'>;
 export const AlarmLevelSelect: FC<AlarmLevelSelectProps> = ({ ...rest }) => {

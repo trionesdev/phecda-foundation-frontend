@@ -1,5 +1,5 @@
-import React, { FC, useMemo, useState } from 'react';
-import { Button, message, Upload } from 'antd';
+import React, { FC, useState } from 'react';
+import { Upload } from 'antd';
 
 import { UploadFile, UploadProps } from 'antd/lib/upload/interface';
 

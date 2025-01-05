@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Button, ButtonProps, Form, notification, Select } from 'antd';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import _ from 'lodash';
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import { ProductKeySelect } from '../components';

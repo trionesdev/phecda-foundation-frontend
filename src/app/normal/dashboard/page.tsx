@@ -11,7 +11,7 @@ import { AlarmStatistics1 } from './AlarmStatistics1';
 export const DashboardPage = () => {
     return (
         <div className={styles.dashboardPage}>
-            <Row gutter={[8, 8]} wrap={false}>
+            <Row gutter={[4, 4]} wrap={false}>
                 <Col span={6}>
                     <ProductStatistics />
                 </Col>
@@ -25,7 +25,7 @@ export const DashboardPage = () => {
                     <DeviceAlarmStatistics />
                 </Col>
             </Row>
-            <Row gutter={[8, 8]} style={{ marginTop: 8 }} wrap={false}>
+            <Row gutter={[4, 4]} style={{ marginTop: 4 }} wrap={false}>
                 <Col flex={`auto`}>
                     <AlarmStatistics1 />
                 </Col>
@@ -33,7 +33,7 @@ export const DashboardPage = () => {
                     <AlarmLevelStatistics />
                 </Col>
             </Row>
-            <Row gutter={[8, 8]} style={{ marginTop: 8 }} wrap={false}>
+            <Row gutter={[4, 4]} style={{ marginTop: 4 }} wrap={false}>
                 <Col span={24}>
                     <AlarmTable />
                 </Col>

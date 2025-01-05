@@ -2,11 +2,11 @@ import { FC, useEffect, useState } from 'react';
 import { GridTable, TableToolbar } from '@trionesdev/antd-react-ext';
 import { Button, message, Popconfirm, Space, Tooltip } from 'antd';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
-import { useNavigate } from 'react-router-dom';
-import { RoutesConstants } from '@/router/routes.constants';
+import { messageForwardingApi } from '@apis/tenant';
 import { PlusCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import { MessageSourceForm } from './MessageSourceForm';
+import {useNavigate} from "@trionesdev/commons-react";
+import {RouteConstants} from "@/router/routes.constants.ts";
 
 type MessageSourceTabProps = {};
 export const MessageSourceTab: FC<MessageSourceTabProps> = ({}) => {
@@ -44,7 +44,7 @@ export const MessageSourceTab: FC<MessageSourceTabProps> = ({}) => {
                             type={`link`}
                             onClick={() =>
                                 navigate(
-                                    RoutesConstants.MESSAGE_SOURCE_DETAIL.path(
+                                    RouteConstants.MESSAGE_FORWARDING.MESSAGE_SOURCE_DETAIL.path(
                                         text
                                     )
                                 )

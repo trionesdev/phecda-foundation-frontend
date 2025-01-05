@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Form, Input, message, Radio, Select } from 'antd';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import _ from 'lodash';
 import { DrawerForm } from '@trionesdev/antd-react-ext';
 import {
@@ -32,7 +32,6 @@ const ProductForm: FC<ProductFormBtnProps> = ({
 
     const nodeType = Form.useWatch('nodeType', form);
     const accessChannel = Form.useWatch('accessChannel', form);
-    console.log(accessChannel);
 
     const handleSubmit = (values: any) => {
         let request: Promise<any>;
@@ -69,6 +68,9 @@ const ProductForm: FC<ProductFormBtnProps> = ({
             form={form}
             open={open}
             trigger={children}
+            onTriggerClick={() => setOpen(true)}
+            onClose={() => setOpen(false)}
+            onCancel={() => setOpen(false)}
             title={`${isEdit ? '编辑' : '新建'}产品`}
             width={600}
             afterOpenChange={(op: boolean) => setOpen(op)}
@@ -97,7 +99,7 @@ const ProductForm: FC<ProductFormBtnProps> = ({
                 name={`key`}
                 rules={[
                     {
-                        validator: (rule, value) => {
+                        validator: (_rule, value) => {
                             if (value && !/^[a-zA-Z]/.test(value)) {
                                 return Promise.reject(
                                     'DeviceName必须英文字母开头'
@@ -122,7 +124,7 @@ const ProductForm: FC<ProductFormBtnProps> = ({
                 rules={[{ required: true }]}
             >
                 <Radio.Group>
-                    {_.map(DeviceNodeTypeOptions, (nodeType, key) => (
+                    {_.map(DeviceNodeTypeOptions, (nodeType, _key) => (
                         <Radio.Button
                             key={nodeType.value}
                             value={nodeType.value}

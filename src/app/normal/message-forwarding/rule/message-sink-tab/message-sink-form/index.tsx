@@ -3,7 +3,7 @@ import React, { FC, useEffect } from 'react';
 import { Form, Input, message, Select } from 'antd';
 import _ from 'lodash';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
+import { messageForwardingApi } from '@apis/tenant';
 import { MESSAGE_SINK_TYPE } from '../../../internal/message-forwarding.enums';
 import { KafkaSinkAction } from './KafkaSinkAction';
 import { MessageSinkTypeOptions } from '../../../internal/message-forwarding.constants';
@@ -93,6 +93,15 @@ export const MessageSinkForm: FC<MessageSinkFormProps> = ({
         <ModalForm
             title={`${id ? '修改' : '创建'}数据目的`}
             trigger={children}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             open={open}
             afterOpenChange={setOpen}
             formProps={{ layout: 'vertical' }}

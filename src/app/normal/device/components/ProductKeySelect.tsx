@@ -1,38 +1,21 @@
-import { FC, useEffect, useState } from 'react';
-import { Select, SelectProps } from 'antd';
-import { deviceApi } from '@apis';
-import _ from 'lodash';
+import {FC} from 'react';
+import {SelectProps} from 'antd';
+import {deviceApi} from '@apis/tenant';
+import {FetchSelect} from "@trionesdev/antd-react-ext";
 
 type ProductSelectProps = {
     allOption?: boolean;
 } & SelectProps;
 export const ProductKeySelect: FC<ProductSelectProps> = ({
-    allOption,
-    ...rest
-}) => {
-    const [options, setOptions] = useState<any>([]);
+                                                             allOption,
+                                                             ...rest
+                                                         }) => {
 
-    const handleQuery = () => {
-        deviceApi.queryProductList().then((res: any) => {
-            setOptions(
-                _.concat(
-                    allOption ? { value: null, name: '全部产品' } : [],
-                    res || []
-                )
-            );
-        });
-    };
-
-    useEffect(() => {
-        handleQuery();
-    }, []);
 
     return (
-        <Select
-            {...rest}
-            fieldNames={{ value: 'key', label: 'name' }}
-            placeholder={`请选择产品`}
-            options={options}
-        />
+        <FetchSelect {...rest} fieldNames={{value: 'key', label: 'name'}}
+                     fixedOptions={allOption ? [{key: '+', name: '全部产品（+）'}] : []} fetchRequest={() => {
+            return deviceApi.queryProductList()
+        }}/>
     );
 };

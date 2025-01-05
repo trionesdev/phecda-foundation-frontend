@@ -1,17 +1,17 @@
-import { FC, useEffect, useState } from 'react';
-import { deviceApi } from '@apis';
-import { Button, Divider, notification, Popconfirm, Space, Switch } from 'antd';
-import { Link } from 'react-router-dom';
-import { RoutesConstants } from '@/router/routes.constants';
-import { GridTable, TableToolbar, VPanel } from '@trionesdev/antd-react-ext';
+import {FC, useEffect, useState} from 'react';
+import {deviceApi} from '@apis/tenant';
+import {Button, Divider, notification, Popconfirm, Space, Switch} from 'antd';
+import {GridTable, Layout, TableToolbar} from '@trionesdev/antd-react-ext';
 import _ from 'lodash';
 import ChildDeviceForm from './child-device-form';
+import {Link} from "@trionesdev/commons-react";
+import {RouteConstants} from "@/router/routes.constants.ts";
 
 type ChildDeviceTabProps = {
     device: any;
 };
 
-const ChildDeviceTab: FC<ChildDeviceTabProps> = ({ device }) => {
+const ChildDeviceTab: FC<ChildDeviceTabProps> = ({device}) => {
     const [querySeq, setQuerySeq] = useState(0);
     const [loading, setLoading] = useState(false);
     const [pageNum, setPageNum] = useState(1);
@@ -41,10 +41,10 @@ const ChildDeviceTab: FC<ChildDeviceTabProps> = ({ device }) => {
             .removeChildDevice(device.id, [id])
             .then(() => {
                 handleRefresh();
-                notification.success({ message: '子设备删除成功' });
+                notification.success({message: '子设备删除成功'});
             })
             .catch((e) => {
-                notification.error({ message: `${e.message}` });
+                notification.error({message: `${e.message}`});
             });
     };
 
@@ -101,9 +101,9 @@ const ChildDeviceTab: FC<ChildDeviceTabProps> = ({ device }) => {
             width: 150,
             render: (text: string, record: any) => {
                 return (
-                    <Space split={<Divider type={`vertical`} />}>
+                    <Space split={<Divider type={`vertical`}/>}>
                         <Button key={`view-btn`} size={`small`} type={`link`}>
-                            <Link to={RoutesConstants.DEVICE_DETAIL.path(text)}>
+                            <Link to={RouteConstants.DEVICE.DEVICE_DETAIL.path(text)}>
                                 查看
                             </Link>
                         </Button>
@@ -139,19 +139,21 @@ const ChildDeviceTab: FC<ChildDeviceTabProps> = ({ device }) => {
 
     return (
         <>
-            <VPanel>
-                <GridTable
-                    style={{ padding: '8px', backgroundColor: 'white' }}
-                    fit={true}
-                    size={`small`}
-                    toolbar={tableBar}
-                    columns={columns}
-                    scroll={{ y: 'max-content' }}
-                    dataSource={devices}
-                    rowKey={`id`}
-                    loading={loading}
-                />
-            </VPanel>
+            <Layout>
+                <Layout.Item auto={true}>
+                    <GridTable
+                        style={{padding: '8px', backgroundColor: 'white'}}
+                        fit={true}
+                        size={`small`}
+                        toolbar={tableBar}
+                        columns={columns}
+                        scroll={{y: 'max-content'}}
+                        dataSource={devices}
+                        rowKey={`id`}
+                        loading={loading}
+                    />
+                </Layout.Item>
+            </Layout>
         </>
     );
 };

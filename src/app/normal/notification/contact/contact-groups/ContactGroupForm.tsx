@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { ModalForm } from '@trionesdev/antd-react-ext';
 import { Form, Input, message, Transfer } from 'antd';
-import { notificationApi } from '@apis';
+import { notificationApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
 
 type ContactGroupFormProps = {

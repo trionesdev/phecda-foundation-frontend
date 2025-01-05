@@ -2,11 +2,11 @@ import { FC, useEffect, useState } from 'react';
 import { GridTable, TableToolbar } from '@trionesdev/antd-react-ext';
 import { Button, message, Popconfirm, Space } from 'antd';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
+import { messageForwardingApi } from '@apis/tenant';
 import _ from 'lodash';
-import { useNavigate } from 'react-router-dom';
-import { RoutesConstants } from '@/router/routes.constants';
 import { SourceLinkForm } from './SourceLinkForm';
+import {useNavigate} from "@trionesdev/commons-react";
+import {RouteConstants} from "@/router/routes.constants.ts";
 
 type SourceStepProps = {
     ruleId: string;
@@ -65,7 +65,7 @@ export const SourceStep: FC<SourceStepProps> = ({ ruleId, rule }) => {
                             type={`link`}
                             onClick={() =>
                                 navigate(
-                                    RoutesConstants.MESSAGE_SOURCE_DETAIL.path(
+                                    RouteConstants.MESSAGE_FORWARDING.MESSAGE_SOURCE_DETAIL.path(
                                         text
                                     )
                                 )
@@ -102,7 +102,7 @@ export const SourceStep: FC<SourceStepProps> = ({ ruleId, rule }) => {
             <GridTable
                 toolbar={
                     <TableToolbar
-                        extra={[
+                        extra={<Space>
                             <SourceLinkForm
                                 key={`link-btn`}
                                 ruleId={ruleId}
@@ -111,8 +111,8 @@ export const SourceStep: FC<SourceStepProps> = ({ ruleId, rule }) => {
                                 <Button type={`primary`} disabled={disabled}>
                                     关联数据源
                                 </Button>
-                            </SourceLinkForm>,
-                        ]}
+                            </SourceLinkForm>
+                        </Space>}
                     />
                 }
                 fit={true}

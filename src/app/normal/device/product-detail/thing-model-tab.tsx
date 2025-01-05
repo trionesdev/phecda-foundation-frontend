@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
 import styles from './product-detail.module.less';
 import { FC, useEffect, useState } from 'react';
-import { RoutesConstants } from '@/router/routes.constants';
 import { GridTable, Layout, TableToolbar } from '@trionesdev/antd-react-ext';
-import { deviceApi } from '@apis';
+import { deviceApi } from '@apis/tenant';
 import _ from 'lodash';
-import { Alert, Button, Space } from 'antd';
+import { Alert, Space } from 'antd';
 import { AbilityType } from '../internal/device.enum';
 import { useRequest } from 'ahooks';
 import { ThingModelProfileModal } from '@/app/normal/device/product-detail/ThingModelProfileModal';
+import {Link} from "@trionesdev/commons-react";
+import {RouteConstants} from "@/router/routes.constants.ts";
 
 type ThingsModelTabProps = {
     product: any;
@@ -91,7 +91,7 @@ const ThingModelTab: FC<ThingsModelTabProps> = ({ product }) => {
                         <>
                             当前展示的是已发布到线上的功能定义，如需修改，
                             <Link
-                                to={RoutesConstants.PRODUCT_THINGS_MODEL_DRAFT.path(
+                                to={RouteConstants.DEVICE.PRODUCT_THINGS_MODEL_DRAFT.path(
                                     product?.id
                                 )}
                             >

@@ -1,7 +1,7 @@
 import { Card, Space, Spin, Statistic } from 'antd';
 import { useState } from 'react';
 import { useRequest } from 'ahooks';
-import { alarmApi, deviceDataApi } from '@apis';
+import { alarmApi, deviceDataApi } from '@apis/tenant';
 
 export const DeviceAlarmStatistics = () => {
     const [alarmStatistics, setAlarmStatistics] = useState<{

@@ -2,7 +2,7 @@ import { ModalForm } from '@trionesdev/antd-react-ext';
 import React, { FC, useEffect, useState } from 'react';
 import { Form, Input, message } from 'antd';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
+import { messageForwardingApi } from '@apis/tenant';
 
 type ForwardingRuleFormInnerProps = {
     ruleId?: string;
@@ -82,6 +82,15 @@ export const ForwardingRuleForm: FC<ForwardingRuleFormProps> = ({
     return (
         <ModalForm
             trigger={children}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             title={`${id ? '修改' : '创建'}消息流转规则`}
             open={open}
             afterOpenChange={setOpen}

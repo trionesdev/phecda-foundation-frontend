@@ -1,11 +1,10 @@
-import { GridTable, Layout } from '@trionesdev/antd-react-ext';
+import {GridTable, Layout, SearchToolbar} from '@trionesdev/antd-react-ext';
 import React, { useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { alarmApi } from '@apis';
+import { alarmApi } from '@apis/tenant';
 import styles from './alarms.module.less';
 import { dateParse, formatDateTimeSeconds } from '@/commons/util/date.utils';
 import { Button, DatePicker, Input, Select, Space } from 'antd';
-import SearchToolbar from '@components/search-toolbar/index';
 import _ from 'lodash';
 import { ALARM_STATUS } from '@/app/normal/alarm/internal/alarm.enums';
 import { AlarmStatusOptions } from '@/app/normal/alarm/internal/alarm.constants';

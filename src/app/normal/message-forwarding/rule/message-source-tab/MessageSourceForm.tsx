@@ -2,7 +2,7 @@ import { ModalForm } from '@trionesdev/antd-react-ext';
 import { Form, Input, notification } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { messageForwardingApi } from '@apis';
+import { messageForwardingApi } from '@apis/tenant';
 
 type MessageSourceFormProps = {
     children?: React.ReactElement;
@@ -38,6 +38,15 @@ export const MessageSourceForm: FC<MessageSourceFormProps> = ({
     return (
         <ModalForm
             open={open}
+            onTriggerClick={() => {
+                setOpen(true);
+            }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            onCancel={() => {
+                setOpen(false);
+            }}
             afterOpenChange={setOpen}
             trigger={children}
             formProps={{ layout: 'vertical' }}
