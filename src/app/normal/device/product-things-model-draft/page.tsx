@@ -15,12 +15,12 @@ import {
 } from 'antd';
 import { useEffect, useState } from 'react';
 import ThingsModelAbilityForm from './thing-model-ability-form';
-import { useNavigate, useParams } from 'react-router-dom';
 import { deviceApi } from '@apis/tenant';
 import _ from 'lodash';
-import { RoutesConstants } from '@/router/routes.constants';
 import { useRequest } from 'ahooks';
 import { AbilityType } from '../internal/device.enum';
+import {useNavigate, useParams} from "@trionesdev/commons-react";
+import {RouteConstants} from "@/router/routes.constants.ts";
 
 const ProductThingModelDraftPage = () => {
     const navigate = useNavigate();
@@ -156,7 +156,7 @@ const ProductThingModelDraftPage = () => {
                     title={`编辑功能定义草稿`}
                     onBack={() =>
                         navigate(
-                            `${RoutesConstants.PRODUCT_DETAIL.path(
+                            `${RouteConstants.DEVICE.PRODUCT_DETAIL.path(
                                 id!
                             )}?tab=thing-model`
                         )

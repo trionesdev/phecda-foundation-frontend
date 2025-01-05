@@ -31,6 +31,8 @@ import {AlarmTypesPage} from "@app/normal/alarm/alarm-types/page.tsx";
 import {AlarmLevelsPage} from "@app/normal/alarm/alarm-levels/page.tsx";
 import {ContactPage} from "@app/normal/notification/contact/page.tsx";
 import {NotificationTemplatesPage} from "@app/normal/notification/templates/page.tsx";
+import {DeviceDetailPage} from "@app/normal/device/device-detail/page.tsx";
+import ProductThingModelDraftPage from "@app/normal/device/product-things-model-draft/page.tsx";
 
 export const routes: RouteObject[] = [
     {...RouteConstants.ACCOUNT.SIGN_IN, element: <SignInPage/>},
@@ -51,7 +53,9 @@ export const routes: RouteObject[] = [
 
                     {...RouteConstants.DEVICE.PRODUCTS,element: <ProductsPage/>},
                     {...RouteConstants.DEVICE.PRODUCT_DETAIL,element: <ProductDetailPage/>},
+                    {...RouteConstants.DEVICE.PRODUCT_THINGS_MODEL_DRAFT,element: <ProductThingModelDraftPage/>},
                     {...RouteConstants.DEVICE.DEVICES,element: <DevicesPage/>},
+                    {...RouteConstants.DEVICE.DEVICE_DETAIL,element: <DeviceDetailPage/>},
                     {...RouteConstants.DEVICE.DRIVERS,element: <DriversPage/>},
 
                     {...RouteConstants.MESSAGE_FORWARDING.MESSAGE_FORWARDING_RULES,element: <ForwardingRulePage/>},

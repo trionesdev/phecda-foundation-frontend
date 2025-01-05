@@ -4,11 +4,11 @@ import { Button, Divider, message, Popconfirm, Space, Tooltip } from 'antd';
 import { PlusCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis/tenant';
-import { RoutesConstants } from '@/router/routes.constants';
 import styles from '../messag-forwarding-rule.module.less';
 import classNames from 'classnames';
 import { ForwardingRuleForm } from './ForwardingRuleForm';
 import {useNavigate} from "@trionesdev/commons-react";
+import {RouteConstants} from "@/router/routes.constants.ts";
 
 export const ForwardingRuleTab = () => {
     const navigate = useNavigate();
@@ -89,7 +89,7 @@ export const ForwardingRuleTab = () => {
                             type={`link`}
                             onClick={() =>
                                 navigate(
-                                    RoutesConstants.MESSAGE_FORWARDING_RULE_DETAIL.path(
+                                    RouteConstants.MESSAGE_FORWARDING.MESSAGE_FORWARDING_RULE_DETAIL.path(
                                         text
                                     )
                                 )

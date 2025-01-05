@@ -17,10 +17,10 @@ import {
 } from 'antd';
 import DeviceForm from './device-form';
 import { deviceApi } from '@apis/tenant';
-import { RoutesConstants } from '@/router/routes.constants';
 import { useRequest } from 'ahooks';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { Link } from '@trionesdev/commons-react';
+import {RouteConstants} from "@/router/routes.constants.ts";
 
 export const DevicesPage = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -124,7 +124,7 @@ export const DevicesPage = () => {
                             </Button>
                         </DeviceForm>
                         <Button key={`view-btn`} size={`small`} type={`link`}>
-                            <Link to={RoutesConstants.DEVICE_DETAIL.path(text)}>
+                            <Link to={RouteConstants.DEVICE.DEVICE_DETAIL.path(text)}>
                                 查看
                             </Link>
                         </Button>

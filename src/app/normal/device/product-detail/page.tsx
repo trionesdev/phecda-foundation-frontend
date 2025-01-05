@@ -7,11 +7,11 @@ import { deviceApi } from '@apis/tenant';
 import { ProductRep } from '@apis/tenant/device/device.rep';
 import InfoTab from './info-tab';
 import ProtocolTab from './protocol-tab';
-import { RoutesConstants } from '@/router/routes.constants';
 import _ from 'lodash';
 import confirm from 'antd/es/modal/confirm';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import {useNavigate, useParams, useSearchParams} from "@trionesdev/commons-react";
+import {RouteConstants} from "@/router/routes.constants.ts";
 
 export const ProductDetailPage = () => {
     const { id } = useParams();
@@ -137,7 +137,7 @@ export const ProductDetailPage = () => {
                             ),
                         ]}
                         onBack={() => {
-                            navigate(RoutesConstants.PRODUCTS.path(), {
+                            navigate(RouteConstants.DEVICE.PRODUCTS.path(), {
                                 replace: true,
                             });
                         }}

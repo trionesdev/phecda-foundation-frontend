@@ -1,11 +1,11 @@
 import {FC, useEffect, useState} from 'react';
 import {deviceApi} from '@apis/tenant';
 import {Button, Divider, notification, Popconfirm, Space, Switch} from 'antd';
-import {RoutesConstants} from '@/router/routes.constants';
 import {GridTable, Layout, TableToolbar} from '@trionesdev/antd-react-ext';
 import _ from 'lodash';
 import ChildDeviceForm from './child-device-form';
 import {Link} from "@trionesdev/commons-react";
+import {RouteConstants} from "@/router/routes.constants.ts";
 
 type ChildDeviceTabProps = {
     device: any;
@@ -103,7 +103,7 @@ const ChildDeviceTab: FC<ChildDeviceTabProps> = ({device}) => {
                 return (
                     <Space split={<Divider type={`vertical`}/>}>
                         <Button key={`view-btn`} size={`small`} type={`link`}>
-                            <Link to={RoutesConstants.DEVICE_DETAIL.path(text)}>
+                            <Link to={RouteConstants.DEVICE.DEVICE_DETAIL.path(text)}>
                                 查看
                             </Link>
                         </Button>

@@ -4,9 +4,9 @@ import { Button, message, Popconfirm, Space } from 'antd';
 import { useRequest } from 'ahooks';
 import { messageForwardingApi } from '@apis/tenant';
 import _ from 'lodash';
-import { RoutesConstants } from '@/router/routes.constants';
 import { SourceLinkForm } from './SourceLinkForm';
 import {useNavigate} from "@trionesdev/commons-react";
+import {RouteConstants} from "@/router/routes.constants.ts";
 
 type SourceStepProps = {
     ruleId: string;
@@ -65,7 +65,7 @@ export const SourceStep: FC<SourceStepProps> = ({ ruleId, rule }) => {
                             type={`link`}
                             onClick={() =>
                                 navigate(
-                                    RoutesConstants.MESSAGE_SOURCE_DETAIL.path(
+                                    RouteConstants.MESSAGE_FORWARDING.MESSAGE_SOURCE_DETAIL.path(
                                         text
                                     )
                                 )

@@ -11,8 +11,8 @@ import _ from 'lodash';
 import {deviceApi} from '@apis/tenant';
 import ThingModelCommandForm from './thing-model-command-form';
 import ThingModelEventForm from './thing-model-event-form';
-import DrawerForm from '@components/drawer-form';
 import {AbilityType} from '../../internal/device.enum';
+import {DrawerForm} from "@trionesdev/antd-react-ext";
 
 type ThingsModelAbilityEditBtnProps = {
     children?: React.ReactElement;
@@ -94,11 +94,13 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
     return (
         <DrawerForm
             title={`${identifier ? '编辑' : '新建'}功能定义`}
-            layout={`vertical`}
             trigger={children}
             open={open}
-            onOpenChange={(open) => setOpen(open)}
-            initialValues={{abilityType: abilityType}}
+            // onOpenChange={(open) => setOpen(open)}
+            // initialValues={{abilityType: abilityType}}
+            onTriggerClick={()=>setOpen(true)}
+            onCancel={()=>setOpen(false)}
+            onClose={()=>setOpen(false)}
             formValues={formValues}
             onSubmit={handleSubmit}
         >
