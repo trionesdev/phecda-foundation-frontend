@@ -11,6 +11,6 @@ ADD container /
 
 WORKDIR /workspace
 
-ADD ./build /workspace
+ADD ./dist /workspace
 CMD envsubst '$SERVER_PROXY_PASS' < "/workspace/app.conf.template" > "/etc/nginx/conf.d/app.conf" && nginx -g 'daemon off;'
 EXPOSE 80 3000 3200
