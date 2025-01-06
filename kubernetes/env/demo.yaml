@@ -62,7 +62,7 @@ ingress:
      kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: dubhe-portal-ui.moensun.cn
+    - host: demo.phecda-foundation-frontend.moensun.cn
       paths:
         - path: /
           pathType: ImplementationSpecific
