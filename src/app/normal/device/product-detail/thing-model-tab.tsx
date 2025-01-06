@@ -8,7 +8,7 @@ import { AbilityType } from '../internal/device.enum';
 import { useRequest } from 'ahooks';
 import { ThingModelProfileModal } from '@/app/normal/device/product-detail/ThingModelProfileModal';
 import {Link} from "@trionesdev/commons-react";
-import {RouteConstants} from "@/router/routes.constants.ts";
+import {RouteConstants} from "@/router/route.constants.ts";
 
 type ThingsModelTabProps = {
     product: any;

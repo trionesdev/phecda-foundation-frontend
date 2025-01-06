@@ -17,7 +17,7 @@ import _ from 'lodash';
 import { DeviceNodeTypeOptions } from '../internal/device.constants';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import {useNavigate} from "@trionesdev/commons-react";
-import {RouteConstants} from "@/router/routes.constants.ts";
+import {RouteConstants} from "@/router/route.constants.ts";
 
 export const ProductsPage = () => {
     const navigate = useNavigate();

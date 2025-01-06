@@ -7,11 +7,11 @@ import {Empty, Splitter} from "antd";
 export const RolesPage = () => {
     const [selectedRole, setSelectedRole] = useState<any | undefined>()
 
-    return <Splitter  className={styles.orgStructure}>
-        <Splitter.Panel className={styles.departmentPanel} defaultSize={250} min={200} max={300} >
+    return <Splitter  className={styles.rolesPage}>
+        <Splitter.Panel className={styles.rolesPanel} defaultSize={250} min={200} max={300} >
             <RolesPanel onRoleChange={setSelectedRole}/>
         </Splitter.Panel>
-        <Splitter.Panel className={styles.membersPanel}>
+        <Splitter.Panel className={styles.roleMembersPanel}>
             {selectedRole ? <RoleMembersPanel role={selectedRole}/> : <Empty style={{padding: 20}}/>}
         </Splitter.Panel>
     </Splitter>

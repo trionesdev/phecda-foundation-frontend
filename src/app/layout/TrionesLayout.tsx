@@ -2,7 +2,7 @@ import {AppToolbar, Layout} from "@trionesdev/antd-react-ext";
 import {Outlet, useAuth, useNavigate} from "@trionesdev/commons-react";
 import {Avatar, Dropdown, Space} from "antd";
 import Icon, {LogoutOutlined, UserOutlined} from "@ant-design/icons";
-import {RouteConstants} from "@/router/routes.constants.ts";
+import {RouteConstants} from "@/router/route.constants.ts";
 import PhecdaSvg from './assests/phecda.svg?react';
 
 export const TrionesLayout = () => {

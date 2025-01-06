@@ -6,7 +6,7 @@ import {Outlet, useMatches, useNavigate} from "@trionesdev/commons-react";
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
 import { AvatarEditor } from "@trionesdev/antd-react-ext";
 import {ossApi, tenantApi} from "@apis/tenant";
-import {RouteConstants} from "@/router/routes.constants.ts";
+import {RouteConstants} from "@/router/route.constants.ts";
 
 export const UserCenterLayout = () => {
     const navigate = useNavigate()

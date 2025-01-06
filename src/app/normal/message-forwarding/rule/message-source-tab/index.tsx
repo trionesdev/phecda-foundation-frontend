@@ -6,7 +6,7 @@ import { messageForwardingApi } from '@apis/tenant';
 import { PlusCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import { MessageSourceForm } from './MessageSourceForm';
 import {useNavigate} from "@trionesdev/commons-react";
-import {RouteConstants} from "@/router/routes.constants.ts";
+import {RouteConstants} from "@/router/route.constants.ts";
 
 type MessageSourceTabProps = {};
 export const MessageSourceTab: FC<MessageSourceTabProps> = ({}) => {

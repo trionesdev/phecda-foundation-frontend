@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { GridTable, SearchToolbar, VPanel } from '@trionesdev/antd-react-ext';
+import { GridTable, SearchToolbar } from '@trionesdev/antd-react-ext';
 import { useRequest } from 'ahooks';
 import { deviceDataApi } from '@apis/tenant';
 import { DatePicker, Form, Select } from 'antd';

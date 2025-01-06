@@ -7,8 +7,9 @@ export const SignInPage = () => {
     return <div className={styles.signInPage} style={{backgroundImage: `url(${BgImage})`}}>
         <div className={styles.main}>
             <div className={styles.left}>
-                <div>
+                <div style={{transform: 'translateY(-200%) translateX(-50%)'}}>
                     <div className={styles.title}>天玑·物联网平台</div>
+                    <div>万物互联，由此而始</div>
                 </div>
             </div>
             <div className={styles.formContainer}>

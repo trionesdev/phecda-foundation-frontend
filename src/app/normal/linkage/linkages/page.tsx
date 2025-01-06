@@ -15,7 +15,7 @@ import qs from 'qs';
 import { LinkageForm } from './LinkageForm';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { Link } from '@trionesdev/commons-react';
-import {RouteConstants} from "@/router/routes.constants.ts";
+import {RouteConstants} from "@/router/route.constants.ts";
 
 export const LinkagesPage: React.FC = () => {
     const [tableParams, setTableParams] = useState<TableParams>({

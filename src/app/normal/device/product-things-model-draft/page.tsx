@@ -20,7 +20,7 @@ import _ from 'lodash';
 import { useRequest } from 'ahooks';
 import { AbilityType } from '../internal/device.enum';
 import {useNavigate, useParams} from "@trionesdev/commons-react";
-import {RouteConstants} from "@/router/routes.constants.ts";
+import {RouteConstants} from "@/router/route.constants.ts";
 
 const ProductThingModelDraftPage = () => {
     const navigate = useNavigate();

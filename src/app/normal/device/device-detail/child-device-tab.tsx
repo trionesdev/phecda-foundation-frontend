@@ -5,7 +5,7 @@ import {GridTable, Layout, TableToolbar} from '@trionesdev/antd-react-ext';
 import _ from 'lodash';
 import ChildDeviceForm from './child-device-form';
 import {Link} from "@trionesdev/commons-react";
-import {RouteConstants} from "@/router/routes.constants.ts";
+import {RouteConstants} from "@/router/route.constants.ts";
 
 type ChildDeviceTabProps = {
     device: any;

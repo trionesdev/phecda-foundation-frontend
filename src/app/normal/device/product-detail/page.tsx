@@ -11,7 +11,7 @@ import _ from 'lodash';
 import confirm from 'antd/es/modal/confirm';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import {useNavigate, useParams, useSearchParams} from "@trionesdev/commons-react";
-import {RouteConstants} from "@/router/routes.constants.ts";
+import {RouteConstants} from "@/router/route.constants.ts";
 
 export const ProductDetailPage = () => {
     const { id } = useParams();

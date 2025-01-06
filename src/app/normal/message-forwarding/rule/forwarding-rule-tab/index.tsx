@@ -8,7 +8,7 @@ import styles from '../messag-forwarding-rule.module.less';
 import classNames from 'classnames';
 import { ForwardingRuleForm } from './ForwardingRuleForm';
 import {useNavigate} from "@trionesdev/commons-react";
-import {RouteConstants} from "@/router/routes.constants.ts";
+import {RouteConstants} from "@/router/route.constants.ts";
 
 export const ForwardingRuleTab = () => {
     const navigate = useNavigate();

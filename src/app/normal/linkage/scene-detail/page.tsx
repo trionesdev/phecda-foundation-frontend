@@ -10,7 +10,7 @@ import { ActionDefinition } from './components/action-definition';
 import { SceneDefinition } from './components/scene-definition';
 import { ActionTrigger } from './components/action-trigger';
 import {useNavigate, useParams} from "@trionesdev/commons-react";
-import {RouteConstants} from "@/router/routes.constants.ts";
+import {RouteConstants} from "@/router/route.constants.ts";
 
 export const SceneDetailPage: React.FC = () => {
     const navigate = useNavigate();

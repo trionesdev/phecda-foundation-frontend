@@ -121,7 +121,11 @@ export const RolePermissionSettings: FC<RolePermissionSettingsProps> = ({childre
     ]
 
 
-    return <DrawerForm title="权限配置" open={open} trigger={children} width={1000} afterOpenChange={setOpen}
+    return <DrawerForm title="权限配置" open={open} trigger={children}
+                       onTriggerClick={() => setOpen(true)}
+                       onClose={() => setOpen(false)}
+                       onCancel={() => setOpen(false)}
+                       width={1000} afterOpenChange={setOpen}
                        form={form} formProps={{disabled: !editable}} onOk={handleSubmit}>
         <GridTable fit={true} size={`small`} columns={columns} dataSource={treeData} rowKey={`id`} loading={loading}
                    pagination={false}/>

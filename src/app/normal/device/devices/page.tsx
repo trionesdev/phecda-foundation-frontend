@@ -20,7 +20,7 @@ import { deviceApi } from '@apis/tenant';
 import { useRequest } from 'ahooks';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { Link } from '@trionesdev/commons-react';
-import {RouteConstants} from "@/router/routes.constants.ts";
+import {RouteConstants} from "@/router/route.constants.ts";
 
 export const DevicesPage = () => {
     const [pageNum, setPageNum] = useState(1);

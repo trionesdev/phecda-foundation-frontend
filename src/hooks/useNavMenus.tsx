@@ -1,5 +1,5 @@
 import { useNavigate } from '@trionesdev/commons-react';
-import { RouteConstants } from '@/router/routes.constants.ts';
+import { RouteConstants } from '@/router/route.constants.ts';
 import { AlarmIcon, DashboardIcon, DeviceIcon, MessageForwardingIcon, MonitoringIcon, NotificationIcon } from '@icons';
 import { ApartmentOutlined, DatabaseOutlined, DesktopOutlined } from '@ant-design/icons';
 
