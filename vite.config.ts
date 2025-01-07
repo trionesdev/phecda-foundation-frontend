@@ -22,14 +22,14 @@ export default defineConfig({
     port: 3200,
     proxy: {
       '/tenant-api': {
-        target: 'http://localhost:8200/',
-        // target: "http://dubhe-gateway.moensun.cn/",
+        // target: 'http://localhost:8200/',
+        target: 'http://demo.phecda-foundation-backend.moensun.net/',
         changeOrigin: true,
         secure: false,
       },
       "/boss-api": {
-        target: "http://localhost:8200/",
-        // target: "http://dubhe-gateway.moensun.cn/",
+        // target: "http://localhost:8200/",
+        target: 'http://demo.phecda-foundation-backend.moensun.net/',
         changeOrigin: true,
         secure: false
       },
