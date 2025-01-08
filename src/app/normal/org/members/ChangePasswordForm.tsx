@@ -24,7 +24,15 @@ export const ChangePasswordForm: FC<ChangePasswordFormProps> = ({children, id}) 
         })
     }
 
-    return <DrawerForm trigger={children} open={open} title={`修改密码`} form={form} formProps={{layout: 'vertical'}}
+    return <DrawerForm trigger={children}
+                       onTriggerClick={() => setOpen(true)}
+                       onClose={() => {
+                           setOpen(false)
+                       }}
+                       onCancel={() => {
+                           setOpen(false)
+                       }}
+                       open={open} title={`修改密码`} form={form} formProps={{layout: 'vertical'}}
                        afterOpenChange={(o) => setOpen(o)} onOk={handleSubmit}>
         <Form.Item name={"password"} label={"新密码"} rules={[{required: true}]}><Input.Password/></Form.Item>
     </DrawerForm>
