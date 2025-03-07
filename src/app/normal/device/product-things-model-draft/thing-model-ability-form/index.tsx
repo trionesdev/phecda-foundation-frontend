@@ -35,27 +35,29 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
                                                                        identifier,
                                                                        onSuccess
                                                                    }) => {
+    const [form] = Form.useForm();
     const [open, setOpen] = useState(false);
     const [abilityType, setAbilityType] = useState(
         editAbilityType || AbilityType.PROPERTY
     );
-    const [formValues, setFormValues] = useState<any>();
 
     const handleAbilityTypeChange = (e: RadioChangeEvent) => {
         setAbilityType(e.target.value);
     };
 
-    const handleSubmit = (values: any) => {
-        let data = _.assign(values, {identifier: identifier});
-        deviceApi
-            .upsertThingModelDraft(productId, data)
-            .then(async () => {
-                setOpen(false);
-                onSuccess?.();
-                message.success('保存成功');
-            })
-            .catch(() => {
-            });
+    const handleSubmit = () => {
+        form.validateFields().then((values) => {
+            let data = _.assign(values, {identifier: identifier});
+            deviceApi
+                .upsertThingModelDraft(productId, data)
+                .then(async () => {
+                    setOpen(false);
+                    onSuccess?.();
+                    message.success('保存成功');
+                })
+                .catch(() => {
+                });
+        })
     };
 
     const handleQueryThingModel = () => {
@@ -79,9 +81,7 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
                 default:
                     break;
             }
-            setFormValues(
-                _.assign({}, typeAbility, {abilityType: abilityType})
-            );
+            form.setFieldsValue(_.assign({}, typeAbility, {abilityType: abilityType}))
         });
     };
 
@@ -96,11 +96,17 @@ const ThingModelAbilityForm: FC<ThingsModelAbilityEditBtnProps> = ({
             title={`${identifier ? '编辑' : '新建'}功能定义`}
             trigger={children}
             open={open}
-            onTriggerClick={()=>setOpen(true)}
-            onCancel={()=>setOpen(false)}
-            onClose={()=>setOpen(false)}
-            formProps={{layout: 'vertical',initialValues:{abilityType: abilityType}}}
-            formValues={formValues}
+            onTriggerClick={() => setOpen(true)}
+            onCancel={() => setOpen(false)}
+            onClose={() => setOpen(false)}
+            destroyOnClose={true}
+            afterOpenChange={(o)=>{
+                if (!o){
+                    form.resetFields();
+                }
+            }}
+            form={form}
+            formProps={{layout: 'vertical', initialValues: {abilityType: abilityType}}}
             onSubmit={handleSubmit}
         >
             <Form.Item

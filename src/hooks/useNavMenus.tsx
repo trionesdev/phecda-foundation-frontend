@@ -166,11 +166,6 @@ export const useNavMenus = () => {
                     onClick: () => navigate(RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES.path!()),
                 },
                 {
-                    key: RouteConstants.BASE.CODE_FORMAT_RULES,
-                    label: RouteConstants.BASE.CODE_FORMAT_RULES.label,
-                    onClick: () => navigate(RouteConstants.BASE.CODE_FORMAT_RULES.path!()),
-                },
-                {
                     key: RouteConstants.LOG.OPERATION_LOGS.id,
                     label: RouteConstants.LOG.OPERATION_LOGS.label,
                     onClick: () => navigate(RouteConstants.LOG.OPERATION_LOGS.path!()),

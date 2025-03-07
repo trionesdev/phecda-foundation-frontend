@@ -1,8 +1,8 @@
-import { Form, Input, message } from 'antd';
-import React, { FC, useEffect, useState } from 'react';
-import { deviceApi } from '@apis/tenant';
-import { ModalForm } from '@trionesdev/antd-react-ext';
-import { ProductSelect } from '../components';
+import {Form, Input, message} from 'antd';
+import React, {FC, useEffect, useState} from 'react';
+import {deviceApi} from '@apis/tenant';
+import {ModalForm} from '@trionesdev/antd-react-ext';
+import {ProductKeySelect} from '../components';
 
 type DeviceFormProps = {
     children: React.ReactElement;
@@ -83,7 +83,7 @@ const DeviceForm: FC<DeviceFormProps> = ({
                 name={`productKey`}
                 rules={[{ required: true }]}
             >
-                <ProductSelect disabled={!!id} />
+                <ProductKeySelect disabled={!!id} />
             </Form.Item>
             <Form.Item
                 label={

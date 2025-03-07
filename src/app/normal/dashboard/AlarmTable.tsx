@@ -73,6 +73,7 @@ export const AlarmTable = () => {
         {
             title: '描述',
             dataIndex: 'description',
+            width: 300
         },
         {
             title: '状态',

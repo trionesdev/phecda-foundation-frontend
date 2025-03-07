@@ -1,5 +1,5 @@
 import {FC, useEffect} from 'react';
-import {Form, Input, Space, Button, message} from 'antd';
+import {Form, Input, Space, Button, message, Row, Col} from 'antd';
 import styles from './device-detail.module.less';
 import {Layout, PageHeader} from '@trionesdev/antd-react-ext';
 import {useRequest} from 'ahooks';
@@ -34,7 +34,7 @@ const ProtocolTab: FC<ProtocolTabProps> = ({device, afterChange}) => {
 
 
     return (
-        <Layout className={styles.ProtocolTab}>
+        <Layout direction={`vertical`} className={styles.ProtocolTab}>
             <Layout.Item>
                 <PageHeader
                     title={`设备连接协议`}
@@ -57,23 +57,25 @@ const ProtocolTab: FC<ProtocolTabProps> = ({device, afterChange}) => {
                 />
             </Layout.Item>
             <Layout.Item auto={true}>
-                <Form form={form}>
-                    <Space wrap>
+                <Form form={form} style={{maxWidth:600,marginLeft:'auto',marginRight:'auto'}}  >
+                    <Row gutter={[8,8]}>
                         {protocolProperties?.map(
                             (item: { label: string; name: string }) => {
                                 return (
-                                    <Form.Item
-                                        key={item.name}
-                                        name={item.name}
-                                        label={item.label}
-                                        rules={[{required: true}]}
-                                    >
-                                        <Input/>
-                                    </Form.Item>
+                                    <Col span={12}>
+                                        <Form.Item
+                                            key={item.name}
+                                            name={item.name}
+                                            label={item.label}
+                                            rules={[{required: true}]}
+                                        >
+                                            <Input/>
+                                        </Form.Item>
+                                    </Col>
                                 );
                             }
                         )}
-                    </Space>{' '}
+                    </Row>
                 </Form>
             </Layout.Item>
         </Layout>

@@ -1,8 +1,8 @@
 import { Card } from 'antd';
-import React, { useEffect } from 'react';
+import React, {memo, useEffect} from 'react';
 import { Chart } from '@antv/g2';
 
-export const AlarmLevelStatistics = () => {
+export const AlarmLevelStatistics = memo(() => {
     const containerRef = React.createRef<any>();
 
     const handleRender = async () => {
@@ -52,4 +52,4 @@ export const AlarmLevelStatistics = () => {
             <div ref={containerRef} />
         </Card>
     );
-};
+})

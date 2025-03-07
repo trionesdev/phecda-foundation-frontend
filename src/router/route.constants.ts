@@ -202,15 +202,6 @@ export namespace RouteConstants {
     }
 
 
-    export const BASE = {
-        CODE_FORMAT_RULES:{
-            ...baseConfig,
-            id: 'code-format-rules',
-            label: '编码规则',
-            path: () => "/base/code-format-rules",
-        }
-    }
-
     export namespace BOSS {
         export const PERM = {
             FUNCTIONAL_RESOURCES: {

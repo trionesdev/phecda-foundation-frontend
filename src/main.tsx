@@ -14,38 +14,37 @@ import {DubheApp} from "@trionesdev/dubhe-react";
 
 DubheApp.render({
     root: createRoot(document.getElementById('root')!),
-    unmount:true,
+    unmount: true,
     render: () => {
-        return <StrictMode>
-            <StyleProvider transformers={[legacyLogicalPropertiesTransformer]}>
-                <ConfigProvider locale={zhCN}>
-                    <AppConfigProvider subApp={DubheApp.isSubApp()}
-                                       defaultConfig={{multiTenant: false, selfHost: true}}>
-                        <AuthProvider authRequest={async () => {
-                            if (StorageUtils.getTrionesUserToken()) {
-                                return tenantApi.queryActorMember().then((actor: any) => {
-                                    return actor;
-                                });
-                            } else {
-                                return Promise.reject(null);
-                            }
-                        }} onUnAuthenticated={() => {
-                            window.location.href = '/#/sign-in';
-                        }} onSignOut={() => {
-                            StorageUtils.removeTenantUserToken();
-                            window.location.href = '/#/sign-in';
-                        }}>
-                            <PermissionProvider
-                                policyRequest={async () => {
-                                    console.log('permissionRequest');
-                                    return {};
-                                }}>
-                                <AppRouter/>
-                            </PermissionProvider>
-                        </AuthProvider>
-                    </AppConfigProvider>
-                </ConfigProvider>
-            </StyleProvider>
-        </StrictMode>
+        return <StyleProvider transformers={[legacyLogicalPropertiesTransformer]}>
+            <ConfigProvider locale={zhCN}>
+                <AppConfigProvider subApp={DubheApp.isSubApp()}
+                                   defaultConfig={{multiTenant: false, selfHost: true}}>
+                    <AuthProvider authRequest={async () => {
+                        if (StorageUtils.getTrionesUserToken()) {
+                            return tenantApi.queryActorMember().then((actor: any) => {
+                                return actor;
+                            });
+                        } else {
+                            return Promise.reject(null);
+                        }
+                    }} onUnAuthenticated={() => {
+                        window.location.href = '/#/sign-in';
+                    }} onSignOut={() => {
+                        StorageUtils.removeTenantUserToken();
+                        window.location.href = '/#/sign-in';
+                    }}>
+                        <PermissionProvider
+                            policyRequest={async () => {
+                                console.log('permissionRequest');
+                                return {};
+                            }}>
+                            <AppRouter/>
+                        </PermissionProvider>
+                    </AuthProvider>
+                </AppConfigProvider>
+            </ConfigProvider>
+        </StyleProvider>
+
     }
 })

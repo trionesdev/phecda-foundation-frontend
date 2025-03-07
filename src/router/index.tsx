@@ -15,7 +15,6 @@ import {DictionariesPage} from "@/app/boss/dic/dictionaries/page.tsx";
 import {DistrictsPage} from "@/app/boss/dic/districts/page.tsx";
 import {CountriesPage} from "@/app/boss/dic/countries/page.tsx";
 import {OperationLogsPage} from "@/app/normal/log/operation/page.tsx";
-import {CodeFormatRulesPage} from "@/app/normal/base/code-format-rules/page.tsx";
 import {DashboardPage} from "@app/normal/dashboard/page.tsx";
 import {ProductsPage} from "@app/normal/device/products/page.tsx";
 import {ProductDetailPage} from "@app/normal/device/product-detail/page.tsx";
@@ -82,7 +81,6 @@ export const routes: RouteObject[] = [
                     {...RouteConstants.DIC.COUNTRIES, element: <CountriesPage/>},
 
                     {...RouteConstants.LOG.OPERATION_LOGS, element: <OperationLogsPage/>},
-                    {...RouteConstants.BASE.CODE_FORMAT_RULES, element: <CodeFormatRulesPage/>},
 
                     {...RouteConstants.BOSS.PERM.FUNCTIONAL_RESOURCES, element: <FunctionalResourcesPage/>},
                 ]
