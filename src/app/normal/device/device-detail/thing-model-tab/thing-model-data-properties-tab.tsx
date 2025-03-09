@@ -1,6 +1,6 @@
-import { FC, useEffect, useState } from 'react';
-import { Row } from 'antd';
-import { deviceApi } from '@apis/tenant';
+import {FC, useEffect, useState} from 'react';
+import {Col, Row} from 'antd';
+import {deviceApi} from '@apis/tenant';
 import styles from '../device-detail.module.less';
 import PropertyDataCard from './property-data-card';
 
@@ -10,9 +10,9 @@ type ThingModelDataPropertiesTabProps = {
 };
 
 const ThingModelDataPropertiesTab: FC<ThingModelDataPropertiesTabProps> = ({
-    device,
-    properties,
-}) => {
+                                                                               device,
+                                                                               properties,
+                                                                           }) => {
     const [rows, setRows] = useState<any>([]);
     const handleQueryPropertiesData = () => {
         deviceApi.queryDevicePropertiesData(device?.id).then((res: any) => {
@@ -25,16 +25,18 @@ const ThingModelDataPropertiesTab: FC<ThingModelDataPropertiesTabProps> = ({
             handleQueryPropertiesData();
         }
     }, [device]);
-    console.log(rows);
+
     return (
         <div className={styles.thingModelPropertiesDataTab}>
             <Row gutter={[16, 16]}>
                 {rows.map((propertyData: any) => (
-                    <PropertyDataCard
-                        key={propertyData?.name}
-                        device={device}
-                        propertyData={propertyData}
-                    />
+                    <Col key={propertyData?.name} span={6} xs={12}>
+                        <PropertyDataCard
+                            key={propertyData?.name}
+                            device={device}
+                            propertyData={propertyData}
+                        />
+                    </Col>
                 ))}
             </Row>
         </div>

@@ -104,7 +104,7 @@ const PropertyDataModal: React.FC<PropertyDataModalType> = ({
                 open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
-                footer={<Button onClick={handleCancel}>关闭</Button>}
+                footer={null}
             >
                 <div className={styles.operateWrapper}>
                     <DatePicker.RangePicker

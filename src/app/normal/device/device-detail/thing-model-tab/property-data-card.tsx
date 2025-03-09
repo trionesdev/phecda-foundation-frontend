@@ -1,52 +1,37 @@
-import { FC, useState } from 'react';
-import { Card, Col, Space, Typography } from 'antd';
-import { formatDateTime } from '@/commons/util/date.utils';
+import {FC} from 'react';
+import {Card, Space} from 'antd';
 import PropertyDataModal from './property-data-modal';
+import {DateUtils} from "@trionesdev/commons";
 
-type ThingModelDataPropertiesTabProps = {
+type PropertyDataCardProps = {
     device: any;
     propertyData: any;
 };
 
-const PropertyDataCard: FC<ThingModelDataPropertiesTabProps> = ({
-    device,
-    propertyData,
-}) => {
-    const [latestData, setLatestData] = useState<any>({});
-    // const { data: latestData, run: queryDeviceDataListLatest } = useRequest(
-    //     (params: any) => {
-    //         return deviceDataApi.queryDeviceDataListLatest(params);
-    //     },
-    //     { manual: true }
-    // );
-    // useEffect(() => {
-    //     if (isNilEmpty(propertyData) || isNilEmpty(device)) return;
-    //     queryDeviceDataListLatest({
-    //         deviceName: device?.name,
-    //         propertyIdentifier: propertyData?.identifier,
-    //     });
-    // }, [device, propertyData, queryDeviceDataListLatest]);
+const PropertyDataCard: FC<PropertyDataCardProps> = ({
+                                                         device,
+                                                         propertyData,
+                                                     }) => {
+
     return (
-        <Col key={propertyData?.name} span={6}>
-            <Card
-                key={propertyData.identifier}
-                size={`small`}
-                title={propertyData.name}
-                extra={[
-                    <PropertyDataModal
-                        propertyData={propertyData}
-                        deviceData={device}
-                    />,
-                ]}
-            >
-                <Space>
-                    <Typography.Paragraph>
-                        {latestData?.value ?? '--'}
-                    </Typography.Paragraph>
-                </Space>
-                <div>{formatDateTime(latestData?.ts) ?? '--'}</div>
-            </Card>
-        </Col>
+
+        <Card
+            key={propertyData?.identifier}
+            size={`small`}
+            title={propertyData?.name}
+            extra={[
+                <PropertyDataModal
+                    propertyData={propertyData}
+                    deviceData={device}
+                />,
+            ]}
+        >
+            <Space direction={`vertical`}>
+                <div style={{fontSize: 24}}>{propertyData.value ?? '--'}</div>
+                <div>{DateUtils.formatDateTime(propertyData?.ts) ?? '--'}</div>
+            </Space>
+
+        </Card>
     );
 };
 export default PropertyDataCard;

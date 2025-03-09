@@ -22,7 +22,7 @@ export const ThingModelPropertyFormItem: FC<
         {
             manual: true,
             onSuccess: (data, params) => {
-                setOptions(data?.thingModel?.properties || []);
+                setOptions(data?.properties || []);
             },
         }
     );

@@ -1,20 +1,20 @@
-import { Layout, PageHeader } from '@trionesdev/antd-react-ext';
-import { Button, message, Tabs, TabsProps } from 'antd';
-import { useEffect, useState } from 'react';
+import {Layout, PageHeader} from '@trionesdev/antd-react-ext';
+import {Button, message, Tabs, TabsProps} from 'antd';
+import {useEffect, useState} from 'react';
 import styles from './product-detail.module.less';
 import ThingModelTab from './thing-model-tab';
-import { deviceApi } from '@apis/tenant';
-import { ProductRep } from '@apis/tenant/device/device.rep';
+import {deviceApi} from '@apis/tenant';
+import {ProductRep} from '@apis/tenant/device/device.rep';
 import InfoTab from './info-tab';
 import ProtocolTab from './protocol-tab';
 import _ from 'lodash';
 import confirm from 'antd/es/modal/confirm';
-import { ExclamationCircleFilled } from '@ant-design/icons';
+import {ExclamationCircleFilled} from '@ant-design/icons';
 import {useNavigate, useParams, useSearchParams} from "@trionesdev/commons-react";
 import {RouteConstants} from "@/router/route.constants.ts";
 
 export const ProductDetailPage = () => {
-    const { id } = useParams();
+    const {id} = useParams();
     const navigate = useNavigate();
 
     const [searchParams, setSearchParams] = useSearchParams();
@@ -30,24 +30,24 @@ export const ProductDetailPage = () => {
 
     const handlePublishProduct = () => {
         deviceApi
-            .publishProduct(id!)
+            .releaseProduct(id!)
             .then(async () => {
                 message.success('产品发布成功');
                 setQueryProductSeq(queryProductSeq + 1);
             })
-            .catch((e) => {
+            .catch(async (e) => {
                 message.success(`${e.message}`);
             });
     };
 
     const handleRevokePublishProduct = () => {
         deviceApi
-            .revokePublishProduct(id!)
+            .revokeProduct(id!)
             .then(async () => {
                 message.success('产品撤销发布成功');
                 setQueryProductSeq(queryProductSeq + 1);
             })
-            .catch((e) => {
+            .catch(async (e) => {
                 message.success(`${e.message}`);
             });
     };
@@ -67,7 +67,7 @@ export const ProductDetailPage = () => {
     const handleShowPublishProductConfirm = () => {
         confirm({
             title: '确认发布产品',
-            icon: <ExclamationCircleFilled />,
+            icon: <ExclamationCircleFilled/>,
             content: `即将发布产品：${product?.name}`,
             okText: '发布',
             type: 'confirm',
@@ -80,7 +80,7 @@ export const ProductDetailPage = () => {
     const handleShowRevokePublishProductConfirm = () => {
         confirm({
             title: '确认撤销发布的产品',
-            icon: <ExclamationCircleFilled />,
+            icon: <ExclamationCircleFilled/>,
             content: `即将撤销发布的产品：${product?.name}`,
             okText: '撤销',
             type: 'confirm',
@@ -94,17 +94,17 @@ export const ProductDetailPage = () => {
         {
             key: 'info',
             label: `产品信息`,
-            children: <InfoTab product={product} />,
+            children: <InfoTab product={product}/>,
         },
         {
             key: 'thing-model',
             label: `功能定义`,
-            children: <ThingModelTab product={product} />,
+            children: <ThingModelTab product={product}/>,
         },
         {
             key: `protocol`,
             label: `协议`,
-            children: <ProtocolTab product={product} />,
+            children: <ProtocolTab product={product}/>,
         },
     ];
     return (
@@ -112,7 +112,7 @@ export const ProductDetailPage = () => {
             <Layout.Item>
                 <div className={styles.productDetailViewHeader}>
                     <PageHeader
-                        breadcrumb={{ items: [{ title: '设备管理' }] }}
+                        breadcrumb={{items: [{title: '设备管理'}]}}
                         title={product?.name}
                         extra={[
                             product && _.eq(product?.status, 'RELEASE') && (
@@ -146,7 +146,7 @@ export const ProductDetailPage = () => {
             </Layout.Item>
             <Layout.Item
                 auto={true}
-                style={{ padding: 8, backgroundColor: 'white' }}
+                style={{padding: 8, backgroundColor: 'white'}}
             >
                 <Tabs
                     defaultActiveKey={`info`}

@@ -5,7 +5,7 @@ import ThingModelDataPropertiesTab from './thing-model-data-properties-tab';
 import { deviceApi } from '@apis/tenant';
 import _ from 'lodash';
 import ThingModelDataEvent from './thing-model-data-event';
-import ThingModelDataService from './thing-model-data-service';
+import ThingModelDataCommand from './ThingModelDataCommand.tsx';
 
 type ThingModelDataTabProps = {
     device: any;
@@ -50,7 +50,7 @@ const ThingModelDataTab: FC<ThingModelDataTabProps> = ({ device }) => {
         {
             key: 'commands',
             label: `指令调用`,
-            children: <ThingModelDataService deviceData={device} />,
+            children: <ThingModelDataCommand deviceData={device} />,
         },
     ];
     return (

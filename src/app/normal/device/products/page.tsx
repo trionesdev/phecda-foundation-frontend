@@ -82,6 +82,7 @@ export const ProductsPage = () => {
         {
             title: '产品名称',
             dataIndex: 'name',
+            width: 200
         },
         {
             title: `ProductKey`,
@@ -137,7 +138,7 @@ export const ProductsPage = () => {
         {
             title: '操作',
             dataIndex: 'id',
-            width: 230,
+            width: 180,
             fixed: 'right',
             render: (text: string, record: any) => {
                 return (

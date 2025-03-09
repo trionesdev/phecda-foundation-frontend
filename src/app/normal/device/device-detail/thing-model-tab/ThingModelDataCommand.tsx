@@ -6,7 +6,7 @@ import { formatDateTime } from '@/commons/util/date.utils';
 import dayjs from 'dayjs';
 import { ThingModelCommandSelect } from './ThingModelCommandSelect';
 
-const ThingModelDataService: React.FC<{
+const ThingModelDataCommand: React.FC<{
     deviceData: Record<string, any>;
 }> = ({ deviceData }) => {
     const initDateValue = [dayjs().add(-1, 'h'), dayjs()];
@@ -26,7 +26,7 @@ const ThingModelDataService: React.FC<{
     /** 请求表格 */
     const { loading: tableDataLoading, run: fetchServiceData } = useRequest(
         () => {
-            return deviceDataApi.queryServiceLogsPage(params);
+            return deviceDataApi.queryCommandLogsPage(params);
         },
         {
             manual: true,
@@ -80,7 +80,7 @@ const ThingModelDataService: React.FC<{
                 <SearchToolbar
                     items={[
                         {
-                            label: '服务',
+                            label: '指令',
                             name: 'serviceIdentifier',
                             children: (
                                 <ThingModelCommandSelect
@@ -111,4 +111,4 @@ const ThingModelDataService: React.FC<{
     );
 };
 
-export default ThingModelDataService;
+export default ThingModelDataCommand;

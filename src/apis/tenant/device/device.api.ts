@@ -41,15 +41,15 @@ export default class DeviceApi extends BaseTenantApi {
         return this.request.get(`${this.baseUri}/products/page`, { params });
     }
 
-    publishProduct(productId: string) {
+    releaseProduct(productId: string) {
         return this.request.put(
-            `${this.baseUri}/products/${productId}/publish`
+            `${this.baseUri}/products/${productId}/release`
         );
     }
 
-    revokePublishProduct(productId: string) {
+    revokeProduct(productId: string) {
         return this.request.put(
-            `${this.baseUri}/products/${productId}/unpublish`
+            `${this.baseUri}/products/${productId}/revoke`
         );
     }
 

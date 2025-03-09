@@ -24,15 +24,15 @@ export class DeviceDataApi extends BaseTenantApi {
         pageSize: number;
         [key: string]: any;
     }) {
-        return this.request.get(`${this.baseUri}/event/logs/page`, { params });
+        return this.request.get(`${this.baseUri}/event/log/page`, { params });
     }
 
-    queryServiceLogsPage(params: {
+    queryCommandLogsPage(params: {
         pageNum: number;
         pageSize: number;
         [key: string]: any;
     }) {
-        return this.request.get(`${this.baseUri}/service/logs/page`, {
+        return this.request.get(`${this.baseUri}/command/log/page`, {
             params,
         });
     }
