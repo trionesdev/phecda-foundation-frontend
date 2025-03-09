@@ -17,6 +17,6 @@ export const DeviceSelect: FC<DeviceSelectProps> = ({
         <FetchSelect {...props} fixedOptions={allOption ? [{name: '全部设备（+）', deviceName: '+'}] : []}
                      fetchRequest={() => {
                          return deviceApi.queryDeviceByParams({productKey})
-                     }} fieldNames={{label: 'name', value: 'deviceName'}}/>
+                     }} fieldNames={{label: 'name', value: 'name'}}/>
     );
 };

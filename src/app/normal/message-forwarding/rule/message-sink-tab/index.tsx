@@ -63,7 +63,7 @@ export const MessageSinkTab = () => {
             render: (text: any, record: any) => {
                 return (
                     <Space>
-                        <MessageSinkForm id={text}>
+                        <MessageSinkForm id={text} onRefresh={handleQuerySinks}>
                             <Button size={`small`} type={`link`}>
                                 编辑
                             </Button>
@@ -92,7 +92,7 @@ export const MessageSinkTab = () => {
                 toolbar={
                     <TableToolbar
                         extra={[
-                            <MessageSinkForm key={`create-btn`}>
+                            <MessageSinkForm key={`create-btn`} onRefresh={handleQuerySinks}>
                                 <Button
                                     type={`primary`}
                                     icon={<PlusCircleOutlined />}

@@ -33,7 +33,7 @@ const ForwardingRuleFormInner: FC<ForwardingRuleFormInnerProps> = ({
             <Form.Item label={`规则名称`} name={`name`} required={true}>
                 <Input placeholder={`请输入规则名称`} />
             </Form.Item>
-            <Form.Item label={`规则名称`} name={`description`}>
+            <Form.Item label={`规则描述`} name={`description`}>
                 <Input.TextArea
                     placeholder={`请输入规则描述`}
                     autoSize={{ maxRows: 4 }}
