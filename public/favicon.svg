@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="700px" height="700px" viewBox="0 0 700 700" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>phecda_round</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="phecda_round">
+            <rect id="矩形" fill="#180083" x="0" y="0" width="700" height="700" rx="150"></rect>
+            <g id="编组" transform="translate(61.000000, 229.000000)">
+                <circle id="椭圆形" fill="#FFFFFF" cx="18" cy="129" r="18"></circle>
+                <circle id="椭圆形备份" fill="#FFFFFF" cx="132" cy="63" r="18"></circle>
+                <circle id="椭圆形备份-2" fill="#FFFFFF" cx="224" cy="81" r="18"></circle>
+                <circle id="椭圆形备份-3" fill="#FFFFFF" cx="338" cy="95" r="18"></circle>
+                <circle id="椭圆形备份-5" fill="#FFFFFF" cx="535" cy="141" r="18"></circle>
+                <circle id="椭圆形备份-6" fill="#FFFFFF" cx="535" cy="18" r="18"></circle>
+                <polyline id="路径-2" stroke="#FFFFFF" stroke-width="6" opacity="0.45" points="18 129.058325 132.888889 62.8247455 223.731266 80.8884489 338.620155 95.6070221 381.515451 176 535 141.100794 535 18"></polyline>
+                <path d="M381.365187,128 C383.874432,144.959172 387.65329,156.062597 392.70176,161.310275 C397.750229,166.557953 408.849643,170.919882 426,174.396063 C415.797718,174.421053 406.177601,176.544881 397.139648,180.767545 C388.101695,184.99021 382.843542,205.401028 381.365187,242 C380.364231,207.060109 375.326517,186.649291 366.252045,180.767545 C357.177573,174.8858 348.093558,172.001428 339,172.114432 C353.936502,171.009485 364.332769,167.4081 370.1888,161.310275 C376.044831,155.212451 379.770293,144.109026 381.365187,128 Z" id="路径" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
